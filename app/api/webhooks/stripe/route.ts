@@ -19,48 +19,25 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const body = await req.text();
-  console.log("Webhook recibido:", body);
-
-  // Usa esto para depuración
-  const generatedSignature = stripe.webhooks.generateTestHeaderString({
-    payload: body,
-    secret: env.STRIPE_WEBHOOK_SECRET,
-  });
-
-  console.log("Firma generada:", generatedSignature);
-
-  const signature = headers().get("Stripe-Signature") || "";
-  console.log("Firma recibida:", signature);
-
-  if (!signature) {
-    return new Response("No se proporcionó firma del webhook", { status: 400 });
-  }
-
+  const signature = (headers().get("Stripe-Signature") ||
+    headers().get("stripe-signature")) as string;
+  // const signature = stripe.webhooks.generateTestHeaderString({
+  //   payload: body,
+  //   secret: env.STRIPE_WEBHOOK_SECRET,
+  // });
   let event: Stripe.Event;
   try {
-    // Intenta primero con la firma recibida
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      env.STRIPE_WEBHOOK_SECRET
+      env.STRIPE_WEBHOOK_SECRET,
+      // env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (error) {
-    console.log(`❌ Error con la firma recibida: ${error.message}`);
-    
-    // Si falla, intenta con la firma generada
-    try {
-      event = stripe.webhooks.constructEvent(
-        body,
-        generatedSignature,
-        env.STRIPE_WEBHOOK_SECRET
-      );
-      console.log("Éxito usando la firma generada");
-    } catch (secondError) {
-      console.log(`❌ Error también con la firma generada: ${secondError.message}`);
-      return new Response(`Error en el webhook de Stripe: ${error.message}`, {
-        status: 400,
-      });
-    }
+    console.log(`❌ Error message: ${error.message}`);
+    return new Response(`Stripe Webhook Error: ${error.message}`, {
+      status: 400,
+    });
   }
 
   const session = event.data.object as Stripe.Checkout.Session;
@@ -191,9 +168,7 @@ export async function POST(req: Request) {
     }
     const account = await getUserCredit(userId);
     await prisma.$transaction(async (tx) => {
-      console.log("Iniciando transacción para actualizar créditos");
       const addCredit = product.credit;
-      console.log("Créditos a agregar:", addCredit);
       await tx.chargeOrder.update({
         where: {
           id: order.id,
@@ -223,7 +198,6 @@ export async function POST(req: Request) {
           type: "Charge",
         },
       });
-      console.log("Transacción completada");
     });
     const price = formatPrice(product.amount)
     await logsnag.track({
