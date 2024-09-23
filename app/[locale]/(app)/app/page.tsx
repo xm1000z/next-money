@@ -12,8 +12,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Billings" });
 
   return {
-    title: t("page.title"),
-    description: t("page.description"),
+    title: "NotasAI",
+    description: "Inteligencia Artificial potenciada para el español.",
   };
 }
 export default async function DashboardPage({ params: { locale } }: PageProps) {
