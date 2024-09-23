@@ -72,14 +72,14 @@
     }
   },
   "IndexPage": {
-    "intro": "Introducing Flux AI Image Generator",
-    "description": "Revolutionizing Next-Generation Advanced Text-to-Image open model, support flux.1 pro/dev and flux.1 schnell models.",
-    "title": "Flux AI Image Generator",
-    "subtitle": "Advanced Text-to-Image",
+    "intro": "Introducing NotasAI",
+    "description": "Artificial Intelligence powered for Spanish.",
+    "title": "NotasAI",
+    "subtitle": "Artificial Intelligence powered for Spanish.",
     "examples": {
       "label": "Example",
-      "title": "Flux AI Image Examples",
-      "subtitle": "Generate images from text prompts."
+      "title": "AI Image Examples in Spanish",
+      "subtitle": "Generate images from texts."
     },
     "features": {
       "title": "Features",

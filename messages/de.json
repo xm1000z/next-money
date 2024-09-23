@@ -63,7 +63,7 @@
       },
       "item5": {
         "question": "Kann ich Flux AI für mehrere Projekte verwenden?",
-        "answer": "Absolut! Der Flux AI Prompt Generator ist vielseitig und unterstützt eine breite Palette von Projekten. Egal, ob Sie Blog-Beiträge, Social-Media-Inhalte oder Ideen für kreatives Schreiben erstellen, Sie können das Tool mehrmals verwenden, um einzigartige Prompts für verschiedene Bedürfnisse zu generieren."
+        "answer": "Absolut! Der Flux AI Prompt Generator ist vielseitig und unterstützt eine breite Palette von Projekten. Egal, ob Sie Blog-Beiträge, Social-Media-Inhalte oder Ideen für kreatives Schreiben erstellen, können Sie das Tool mehrmals verwenden, um einzigartige Prompts für verschiedene Bedürfnisse zu generieren."
       },
       "item6": {
         "question": "Gibt es Kosten für die Nutzung des Flux AI Prompt Generators?",
@@ -72,14 +72,14 @@
     }
   },
   "IndexPage": {
-    "intro": "Einführung des Flux AI Image Generators",
-    "description": "Revolutionäres Next-Generation-Advanced-Text-to-Image-Open-Modell, unterstützt flux.1 pro/dev und flux.1 schnell Modelle.",
-    "title": "Flux AI Image Generator",
-    "subtitle": "Advanced Text-to-Image",
+    "intro": "Vorstellung von NotasAI",
+    "description": "Künstliche Intelligenz für Spanisch.",
+    "title": "NotasAI",
+    "subtitle": "Künstliche Intelligenz für Spanisch.",
     "examples": {
       "label": "Beispiel",
-      "title": "Flux AI Image Beispiele",
-      "subtitle": "Bilder aus Textprompts generieren."
+      "title": "KI-Bildbeispiele auf Spanisch",
+      "subtitle": "Bilder aus Texten generieren."
     },
     "features": {
       "title": "Funktionen",

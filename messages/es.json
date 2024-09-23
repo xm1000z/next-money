@@ -4,13 +4,13 @@
     "title": "¡Algo salió mal!"
   },
   "IndexPage": {
-    "intro": "Presentamos el Generador de Imágenes Flux AI",
-    "description": "Revolutionando el modelo avanzado de texto a imagen de próxima generación, compatible con los modelos flux.1 pro/dev y flux.1 schnell.",
-    "title": "Generador de Imágenes Flux AI",
-    "subtitle": "Texto a Imagen Avanzado",
+    "intro": "Presentamos el NotasAI",
+    "description": "Inteligencia Artificial potenciada para el español.",
+    "title": "NotasAI",
+    "subtitle": "Inteligencia Artificial potenciada para el español.",
     "examples": {
       "label": "Ejemplo",
-      "title": "Ejemplos de Imágenes Flux AI",
+      "title": "Ejemplos de Imágenes IA en español",
       "subtitle": "Generar imágenes a partir de textos."
     },
     "features": {
