@@ -313,7 +313,7 @@
   },
   "Billings": {
     "page": {
-      "title": "App – Generador de Imágenes Flux AI",
+      "title": "App – NotasAI",
       "description": "Ver tus predicciones recientes"
     },
     "title": "Predicciones Recientes",
@@ -368,7 +368,7 @@
   },
   "LocaleLayout": {
     "title": "App | NotasAI",
-    "description": "Inteligencia Artificial potenciada para el español.",
+    "description": "Inteligencia Artificial en español.",
     "keywords": "inteligencia artificial, ia, Flux, FluxAI,tecnología, AI, aprendizaje automático, herramientas Flux AI, aplicaciones AI, soluciones de inteligencia artificial, análisis de datos, innovación AI, análisis predictivo Flux, aprendizaje automático, desarrollo AI, próxima generación AI"
   },
   "LocaleSwitcher": {
@@ -389,7 +389,7 @@
     "pricing": "Precios",
     "schnell": "Flux Schnell",
     "explore": "Explorar",
-    "title": "Generador de Imágenes Flux AI",
+    "title": "NotasAI",
     "blog": "Blog",
     "prompt": "Generador de Prompts de Flux AI",
     "dashboard": "Panel de Control",
@@ -403,7 +403,7 @@
   },
   "PageLayout": {
     "footer": {
-      "title": "Generador de Imágenes Flux AI",
+      "title": "NotasAI",
       "term": "Términos",
       "privacy": "Privacidad",
       "contact": "Contacto"
