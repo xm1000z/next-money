@@ -368,15 +368,15 @@
   },
   "LocaleLayout": {
     "title": "Generador de Imágenes en Línea Flux AI - Flux AI",
-    "description": "Transforma tus imágenes con las herramientas avanzadas de Flux.1 AI: Flux Schnell para creaciones rápidas, Flux Dev para personalización detallada y Flux Pro para una calidad profesional insuperable.",
-    "keywords": "Flux AI, AI Flux, inteligencia artificial Flux, tecnología AI, aprendizaje automático Flux, herramientas Flux AI, aplicaciones AI, soluciones de inteligencia artificial, análisis de datos Flux, innovación AI, análisis predictivo Flux, aprendizaje automático Flux, desarrollo AI, próxima generación AI"
+    "description": "Inteligencia Artificial potenciada para el español.",
+    "keywords": "inteligencia artificial, ia, Flux, FluxAI,tecnología, AI, aprendizaje automático, herramientas Flux AI, aplicaciones AI, soluciones de inteligencia artificial, análisis de datos, innovación AI, análisis predictivo Flux, aprendizaje automático, desarrollo AI, próxima generación AI"
   },
   "LocaleSwitcher": {
     "label": "Cambiar idioma",
     "locale": "{locale, select, zh {🇨🇳 简体中文} tw {🇭🇰 繁體中文} en {🇺🇸 English} fr {🇫🇷 Français} ja {🇯🇵 日本語} ko {🇰🇷 한국어} de {🇩🇪 Deutsch} es {🇪🇸 Español} pt {🇧🇷 Português} ar {🇦🇪 العربية} other {Unknown}}"
   },
   "Manifest": {
-    "name": "Generador de Imágenes Flux AI"
+    "name": "NotasAI"
   },
   "AppNavigation": {
     "Index": "Inicio",
