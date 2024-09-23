@@ -26,7 +26,7 @@ export default async function HeroLanding() {
             <span className="mr-3">🎉</span>
             <span
               className={cn(
-                `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
+                `inline animate-gradient bg-gradient-to-r from-[#b0b0af] via-[#d1d1d1] to-[#ffffff] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
               )}
             >
               {t("intro")}
@@ -38,7 +38,7 @@ export default async function HeroLanding() {
         <h1 className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
           <span>{t("subtitle")}</span>
           <br />
-          <span className="text-gradient_indigo-purple font-extrabold">
+          <span className="text-white font-extrabold font-apple-garamond">
             {t("title")}
           </span>
         </h1>
