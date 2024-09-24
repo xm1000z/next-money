@@ -82,14 +82,6 @@ const config = {
         'apple-garamond': ['Apple Garamond'],
       },
       keyframes: {
-        "led-border": {
-          "0%": {
-            backgroundPosition: "0 0",
-          },
-          "100%": {
-            backgroundPosition: "100% 0",
-          },
-        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -197,7 +189,7 @@ const config = {
 
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         slide: "slide var(--speed) ease-in-out infinite alternate",
-        'led-border': 'led-border 3s linear infinite',
+        'border-glow': 'border-glow 4s linear infinite',
       },
     },
   },
