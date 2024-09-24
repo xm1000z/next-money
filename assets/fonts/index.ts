@@ -23,3 +23,24 @@ export const fontSatoshi = localFont({
   display: "swap",
   style: "normal",
 });
+
+export const appleGaramond = localFont({
+  src: [
+    {
+      path: './AppleGaramond.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './AppleGaramond-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './AppleGaramond-Italic.ttf',
+      weight: '400',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-apple-garamond',
+})
