@@ -129,7 +129,7 @@ export async function POST(req: NextRequest, { params }: Params) {
         aspect_ratio: aspectRatio,
         is_private: isPrivate,
         user_id: userId,
-        lora_name: loraName,
+        lora_name: loraName, 
         locale,
       }),
     }).then((res) => res.json());
