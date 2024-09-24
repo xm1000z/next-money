@@ -8,6 +8,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { Link } from "@/lib/navigation";
 import { cn, nFormatter } from "@/lib/utils";
+import { appleGaramond } from '@/assets/fonts';
 
 import ShimmerButton from "../forms/shimmer-button";
 import AnimatedGradientText from "../magicui/animated-gradient-text";
@@ -16,17 +17,17 @@ export default async function HeroLanding() {
   const t = await getTranslations({ namespace: "IndexPage" });
 
   return (
-    <section className="space-y-6 py-12 sm:py-20 lg:py-20">
+    <section className={`${appleGaramond.variable} space-y-6 py-12 sm:py-20 lg:py-20`}>
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
         <Link
           href="https://x.com/koyaguo/status/1825891501639086219"
           target="_blank"
         >
           <AnimatedGradientText>
-            <span className="mr-3">🎉</span>
+            <span className="mr-3">🍓</span>
             <span
               className={cn(
-                `inline animate-gradient bg-gradient-to-r from-[#b0b0af] via-[#d1d1d1] to-[#ffffff] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
+                `inline animate-gradient bg-gradient-to-r from-[#ffffff] via-[#ffffff] to-[#ffffff] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
               )}
             >
               {t("intro")}
