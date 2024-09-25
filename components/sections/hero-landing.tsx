@@ -20,7 +20,7 @@ export default async function HeroLanding() {
     <section className={`${appleGaramond.variable} space-y-6 py-12 sm:py-20 lg:py-20`}>
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
         <Link
-          href="https://x.com/koyaguo/status/1825891501639086219"
+          href="https://x.com/notas_ia"
           target="_blank"
         >
           <AnimatedGradientText>
@@ -39,7 +39,7 @@ export default async function HeroLanding() {
         <h1 style={{ fontFamily: 'Apple Garamond' }} className="text-balance font-urban text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
           <span>{t("subtitle")}</span>
           <br />
-          <span style={{ fontFamily: 'Apple Garamond' }} className="text-white font-apple-garamond">
+          <span style={{ fontFamily: 'Apple Garamond' }}>
             {t("title")}
           </span>
         </h1>

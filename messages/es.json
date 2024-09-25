@@ -69,9 +69,9 @@
     }
   },
   "PricingPage": {
-    "title": "Elige un plan para comprar créditos",
-    "description": "Sin recargas",
-    "worth": "Crédito",
+    "title": "Elige un plan ajustado a tus necesidades",
+    "description": "Sin extras",
+    "worth": "créditos",
     "label": "Precios",
     "action": {
       "signin": "Iniciar Sesión",
@@ -79,7 +79,7 @@
     },
     "contact": {
       "title": "Contáctanos",
-      "description": "Si tienes alguna pregunta, no dudes en contactarnos."
+      "description": "para planes personalizados de empresas y startups."
     },
     "faq": {
       "label": "FAQ",
@@ -111,8 +111,8 @@
       }
     },
     "tip": {
-      "title": "💳 Consejo de Pago: Si encuentras algún problema durante el proceso de pago, no dudes en contactarnos! 😉",
-      "subtitle": "¿Preguntas?",
+      "title": "💳 BETA: Necesitas un plan personalizado?",
+      "subtitle": "",
       "contact": "contáctanos"
     }
   },

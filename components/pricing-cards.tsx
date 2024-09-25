@@ -211,26 +211,27 @@ export function PricingCards({
         reward();
       }, 1000);
     } else if (searchParams.get("success") === "false") {
-      console.log("支付失败");
+      console.log("Pago fallido");
     }
   }, [searchParams]);
 
   return (
     <MaxWidthWrapper>
       <section className="flex flex-col items-center text-center">
-        <HeaderSection label={t("label")} title={t("title")} />
+        <HeaderSection 
+          label={t("label")} 
+          title={t("title")}
+        />
         <div className="mt-4">
-          <p className="mb-7 inline-flex items-center justify-between rounded-xl bg-blue-100 px-2 py-2 pe-4 text-sm text-blue-700 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800 md:rounded-full md:px-1 md:py-1">
+          <p className="mb-7 inline-flex items-center justify-between rounded-lg bg-gray-100 px-2 py-2 pe-4 text-sm text-black hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800 md:rounded-md md:px-1 md:py-1">
             <span className="text-sm font-medium">
-              {t("tip.title")}&nbsp;(
-              {t("tip.subtitle")}&nbsp;
+              {t("tip.title")}(
               <a
-                href="mailto:support@fluxaipro.art"
+                href="mailto:support@notas.ai"
                 className="font-semibold text-blue-700 underline decoration-blue-500 dark:text-white dark:decoration-white"
               >
                 {t("tip.contact")}
-              </a>
-              &nbsp;)
+              </a>)
             </span>
           </p>
         </div>
@@ -267,16 +268,15 @@ export function PricingCards({
         </div>
 
         <p className="mt-3 text-balance text-center text-base text-muted-foreground">
-          {t("contact.title")}
           <br />
           <a
             className="font-medium text-primary hover:underline"
-            href="mailto:support@fluxaipro.art"
+            href="mailto:sales@notas.ai"
           >
-            support@fluxaipro.art
+            sales@notas.ai
           </a>{" "}
           {t("contact.description")}
-          <br />
+          <br/>
           {/* <strong>
             You can test the subscriptions and won&apos;t be charged.
           </strong> */}

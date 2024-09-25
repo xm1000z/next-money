@@ -58,7 +58,7 @@ export default async function ExplorePage({
         style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
       >
         <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
-          <h1 className="text-balance font-urban text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-[56px]">
+          <h1 className="text-balance font-urban text-3xl  tracking-tight sm:text-4xl md:text-5xl lg:text-[56px]">
             {t("title")}
           </h1>
 
