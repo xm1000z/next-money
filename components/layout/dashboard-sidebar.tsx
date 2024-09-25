@@ -31,35 +31,34 @@ interface DashboardSidebarProps {
 export function DashboardSidebar({ links }: DashboardSidebarProps) {
   const path = usePathname();
   const t = useTranslations("AppNavigation");
-  // NOTE: Use this if you want save in local storage -- Credits: Hosna Qasmei
-  //
-  // const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => {
-  //   if (typeof window !== "undefined") {
-  //     const saved = window.localStorage.getItem("sidebarExpanded");
-  //     return saved !== null ? JSON.parse(saved) : true;
-  //   }
-  //   return true;
-  // });
+  // Inicializa el estado de expansión de la barra lateral
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = window.localStorage.getItem("sidebarExpanded");
+      return saved !== null ? JSON.parse(saved) : true;
+    }
+    return true;
+  });
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     window.localStorage.setItem(
-  //       "sidebarExpanded",
-  //       JSON.stringify(isSidebarExpanded),
-  //     );
-  //   }
-  // }, [isSidebarExpanded]);
+  // Guarda el estado de expansión en el almacenamiento local cuando cambia
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(
+        "sidebarExpanded",
+        JSON.stringify(isSidebarExpanded),
+      );
+    }
+  }, [isSidebarExpanded]);
 
   const { isTablet } = useMediaQuery();
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(!isTablet);
-
-  const toggleSidebar = () => {
-    setIsSidebarExpanded(!isSidebarExpanded);
-  };
 
   useEffect(() => {
     setIsSidebarExpanded(!isTablet);
   }, [isTablet]);
+
+  const toggleSidebar = () => {
+    setIsSidebarExpanded(!isSidebarExpanded);
+  };
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -73,7 +72,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
           >
             <div className="flex h-full max-h-screen flex-1 flex-col gap-2">
               <div className="flex h-14 items-center p-4 lg:h-[60px]">
-                {isSidebarExpanded ? <NavbarLogo size="sm" /> : null}
+                {isSidebarExpanded ? <NavbarLogo size="md" /> : null}
 
                 <Button
                   variant="ghost"
@@ -169,7 +168,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
               </nav>
 
               <div className="mt-auto xl:p-4">
-                {/* {isSidebarExpanded ? <UpgradeCard /> : null} */}
+                {isSidebarExpanded ? <UpgradeCard /> : null}
               </div>
             </div>
           </aside>
@@ -248,7 +247,7 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
                   </section>
                 ))}
 
-                <div className="mt-auto">{/* <UpgradeCard /> */}</div>
+                <div className="mt-auto">{<UpgradeCard />}</div>
               </nav>
             </div>
           </ScrollArea>

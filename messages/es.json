@@ -10,8 +10,8 @@
     "subtitle": "Redefiniendo tu forma de trabajar",
     "examples": {
       "label": "Ejemplo",
-      "title": "Ejemplos de Imágenes IA en español",
-      "subtitle": "Generar imágenes a partir de textos."
+      "title": "Ejemplos de imágenes generadas",
+      "subtitle": "Crea imágenes a partir de textos en español."
     },
     "features": {
       "title": "Aplicaciones",
@@ -208,8 +208,8 @@
       "keywords": "generador de imágenes flux.1, generador de imágenes modelo flux.1, generador de imágenes gratis, generador de imágenes IA, herramienta de generación de imágenes, crear imágenes con IA, generar imágenes en línea, software de creación de imágenes, herramienta de diseño de imágenes, plataforma de generación de imágenes"
     },
     "page": {
-      "title": "Generador de Imágenes Gratuito Flux.1 {model}",
-      "subtitle": "Modelos de IA asombrosos para generar imágenes a partir de indicaciones de texto."
+      "title": "Generador de Imágenes",
+      "subtitle": "Generar imágenes a partir de textos en español."
     },
     "settings": {
       "display": "Mostrar {mode}",
@@ -220,7 +220,7 @@
     "schnell_faq": {
       "label": "Preguntas Frecuentes",
       "title": "Preguntas frecuentes",
-      "subtitle": "Explora nuestras preguntas frecuentes para encontrar respuestas rápidas a consultas comunes. Si necesitas más ayuda, no dudes en contactarnos para obtener asistencia personalizada.",
+      "subtitle": "Explora nuestras preguntas frecuentes para encontrar respuestas rápidas a consultas comunes.",
       "item1": {
         "question": "¿Qué es Flux.1 Schnell?",
         "answer": "Flux.1 Schnell es el modelo de generación de imágenes más rápido, diseñado para desarrollo local y uso personal."
@@ -318,7 +318,7 @@
     },
     "title": "Predicciones Recientes",
     "empty": {
-      "title": "Reciente Vacío",
+      "title": "Vacío",
       "description": "Aún no hay registros."
     },
     "table": {
@@ -387,12 +387,12 @@
   },
   "Navigation": {
     "pricing": "Precios",
-    "schnell": "Flux Schnell",
-    "explore": "Explorar",
+    "schnell": "Escritor",
+    "explore": "Chat",
     "title": "NotasAI",
     "blog": "Blog",
-    "prompt": "Generador de Prompts de Flux AI",
-    "dashboard": "Panel de Control",
+    "prompt": "Generador de Prompts",
+    "dashboard": "Spaces",
     "tooltip": {
       "login": "Iniciar Sesión"
     }
