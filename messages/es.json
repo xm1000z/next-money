@@ -14,10 +14,10 @@
       "subtitle": "Generar imágenes a partir de textos."
     },
     "features": {
-      "title": "Características",
-      "description": "El Generador de Imágenes Flux AI es una herramienta poderosa que te permite generar imágenes a partir de textos. Utiliza modelos avanzados de IA para crear imágenes impresionantes perfectas para cualquier proyecto.",
+      "title": "Aplicaciones",
+      "description": "Un gran número de herramientas diseñadas para potenciar el uso de la Inteligencia Artificial en español.",
       "action": {
-        "visit": "Generar"
+        "visit": "Probar ahora"
       },
       "item1": {
         "title": "FLUX.1 [pro]",
@@ -58,10 +58,10 @@
       "action": "Pruébalo ahora"
     },
     "action": {
-      "pricing": "Comprar Créditos",
+      "pricing": "Ver planes",
       "login": "Iniciar Sesión",
       "dashboard": "Panel de Control",
-      "generate": "Generar",
+      "generate": "Empezar",
       "github": {
         "sm": "Dar Estrella en",
         "normal": "Github"
@@ -75,7 +75,7 @@
     "label": "Precios",
     "action": {
       "signin": "Iniciar Sesión",
-      "buy": "Pago único"
+      "buy": "Suscribirse"
     },
     "contact": {
       "title": "Contáctanos",
@@ -107,7 +107,7 @@
       },
       "item6": {
         "question": "¿Cómo puedo obtener soporte en línea?",
-        "answer": "Puedes contactarnos en support@fluxaipro.art."
+        "answer": "Puedes contactarnos en soporte@notas.ai."
       }
     },
     "tip": {
@@ -243,7 +243,7 @@
       },
       "item6": {
         "question": "¿Cómo puedo obtener soporte en línea?",
-        "answer": "Puedes contactarnos en support@fluxaipro.art."
+        "answer": "Puedes contactarnos en soporte@notas.ai."
       }
     },
     "title": "Generador de Imágenes Flux AI",

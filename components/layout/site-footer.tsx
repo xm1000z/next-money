@@ -49,57 +49,57 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-between gap-4 text-sm md:flex-row">
         <div className="flex items-center gap-2">
           <Icons.logo className="h-6 w-6" />
-          <span className="font-medium">Fluxaipro.Art Inc.</span>
+          <span className="font-medium">NotasAI.</span>
         </div>
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link
-            href="https://tap4.ai/"
-            title="Tap4 AI Tools Directory"
+            href="https://chat.notas.ai/"
+            title="NotasAI Chat"
             className="underline-offset-4 hover:underline"
             prefetch={false}
             target="_blank"
           >
-            Tap4 AI
+            Chat
           </Link>
           <Link
-            href="https://aiwith.me/"
-            title="Discover thousands of AI tools"
+            href="https://chat.notas.ai/"
+            title="NotasAI Browser"
             className="underline-offset-4 hover:underline"
             prefetch={false}
             target="_blank"
           >
-            AIWITH.ME
+            Search
           </Link>
           <Link
-            href="https://woy.ai/"
+            href="https://lisa.notas.ai/"
             className="underline-offset-4 hover:underline"
             title="Woy AI Tools Directory"
             prefetch={false}
             target="_blank"
           >
-            Woy AI
+            Lisa
           </Link>
           <Link
-            href="https://aipure.ai/"
+            href="https://seo.notas.ai/"
             prefetch={false}
             target="_blank"
             className="underline-offset-4 hover:underline"
           >
-            AIPURE AI
+            SEO
           </Link>
           <Link
-            href="https://www.toolify.ai/"
+            href="https://www.notas.ai/"
             prefetch={false}
             target="_blank"
             className="underline-offset-4 hover:underline"
           >
-            Toolify AI
+            notas.ai
           </Link>
         </div>
       </div>
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-center gap-4 text-sm md:flex-row">
         <p className="text-muted-foreground">
-          &copy; 2024 fluxaipro.Art. All rights reserved.
+          &copy; 2024 NotasAI. All rights reserved.
         </p>
       </div>
     </footer>
