@@ -31,15 +31,15 @@ export default async function HeroLanding() {
               )}
             >
               {t("intro")}
-            </span> 
+            </span>
             <Icons.twitter className="ml-2 size-3.5" />
           </AnimatedGradientText>
         </Link>
 
-        <h1 style={{ fontFamily: 'Apple Garamond' }} className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
+        <h1 style={{ fontFamily: 'Apple Garamond' }} className="text-balance font-urban text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
           <span>{t("subtitle")}</span>
           <br />
-          <span style={{ fontFamily: 'Apple Garamond' }} className="text-white font-extrabold font-apple-garamond">
+          <span style={{ fontFamily: 'Apple Garamond' }} className="text-white font-apple-garamond">
             {t("title")}
           </span>
         </h1>
