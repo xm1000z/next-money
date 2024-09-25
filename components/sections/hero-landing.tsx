@@ -31,7 +31,7 @@ export default async function HeroLanding() {
               )}
             >
               {t("intro")}
-            </span>
+            </span> 
             <Icons.twitter className="ml-2 size-3.5" />
           </AnimatedGradientText>
         </Link>
