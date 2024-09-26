@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export enum Currency {
   CNY = "CNY",
   USD = "USD",
+  EUR = "EUR"
 }
 
 export enum OrderPhase {
