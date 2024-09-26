@@ -246,10 +246,10 @@
         "answer": "Puedes contactarnos en soporte@notas.ai."
       }
     },
-    "title": "Generador de Imágenes Flux AI",
-    "description": "Modelos de IA asombrosos para generar imágenes a partir de textos.",
+    "title": "Studio",
+    "description": "Modelos de IA para generar imágenes a partir de textos en español.",
     "empty": {
-      "title": "Error del Generador",
+      "title": "Error al generar",
       "description": "Información del Error: {error}",
       "errorPlaceholder": "Ocurrió un error"
     },
