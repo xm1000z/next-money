@@ -136,7 +136,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     {item.badge}
                                   </Badge>
                                 )}
-                                {RightIcon && <RightIcon className="size-4 ml-2" />}
+                                {item.external && <ExternalLink className="size-4 ml-2" />}
                               </Link>
                             ) : (
                               <Tooltip key={`tooltip-${item.title}`}>

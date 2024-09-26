@@ -383,7 +383,13 @@
     "Generate": "Generar",
     "History": "Historial",
     "GiftCode": "Código de Regalo",
-    "ChargeOrder": "Orden de Carga"
+    "ChargeOrder": "Orden de Carga",
+    "Notas": "Notas",
+    "Chat": "Chat",
+    "Search": "Search",
+    "SEO": "SEO",
+    "LISA": "LISA",
+    "Studio": "Studio"
   },
   "Navigation": {
     "pricing": "Precios",
