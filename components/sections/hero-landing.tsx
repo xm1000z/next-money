@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import { Eraser } from "lucide-react";
+import { CornerDownRight } from "lucidCornerDownRighte-react";
 import { getTranslations } from "next-intl/server";
 
 import { DashboardIcon, UserArrowLeftIcon } from "@/assets";
@@ -65,7 +65,7 @@ export default async function HeroLanding() {
             >
               <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
               <div className="flex items-center">
-                <Eraser className="mr-2 size-4" />
+                <CornerDownRight className="mr-2 size-4" />
                 <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 dark:text-slate-900">
                   {t("action.generate")}
                 </span>

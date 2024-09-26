@@ -28,7 +28,7 @@ export function NavbarLogo(props: { size?: "sm" | "md" | "lg" | "xl" }) {
   const { size = "xl" } = props;
   return (
     <Link href="/" className="flex items-center space-x-2">
-      <span className={cn("font-heading", `text-sm md:text-${size}`)}>
+      <span className={cn("font-heading", `text-lg md:text-${size}`)}>
         {t("title")}
       </span>
     </Link>
