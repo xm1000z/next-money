@@ -50,13 +50,13 @@ export function constructMetadata({
     ],
     authors: [
       {
-        name: "koyaguo",
+        name: "notasai",
       },
     ],
-    creator: "koyaguo",
+    creator: "notasai",
     openGraph: {
       type: "website",
-      locale: "en_US",
+      locale: "es_ES",
       url: siteConfig.url,
       title,
       description,
@@ -67,7 +67,7 @@ export function constructMetadata({
       title,
       description,
       images: [image],
-      creator: "@koyaguo",
+      creator: "@notas_ia",
     },
     icons,
     metadataBase: new URL(siteConfig.url),
@@ -83,7 +83,7 @@ export function constructMetadata({
 
 export function formatDate(input: Date | string): string {
   const date = typeof input === "string" ? new Date(input) : input;
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("es-ES", {
     month: "long",
     day: "numeric",
     year: "numeric",
