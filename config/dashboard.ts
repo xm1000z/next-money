@@ -58,17 +58,17 @@ export const dashboardConfig: DashboardConfig = {
           icon: "Eraser"
         },
         {
-          title: "History",
+          title: "Historial",
           href: "/app/history",
           icon: "History",
         },
         {
-          title: "GiftCode",
+          title: "Canjear Código",
           href: "/app/giftcode",
           icon: "Gift",
         },
         {
-          title: "ChargeOrder",
+          title: "Facturación",
           href: "/app/order",
           icon: "billing",
         },

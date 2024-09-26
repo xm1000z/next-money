@@ -45,16 +45,16 @@ export function SearchCommand({ links }: { links: SidebarNavItem[] }) {
         )}
         onClick={() => setOpen(true)}
       >
-        <span className="inline-flex">Search documentation...</span>
+        <span className="inline-flex">Buscar apps...</span>
         <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.45rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder="Notas..." />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>Sin resultados.</CommandEmpty>
           {links.map((section) => (
             <CommandGroup
               key={section.title}
