@@ -316,6 +316,7 @@ export function PricingCardDialog({
       }}
     >
       <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px]">
+        <DialogTitle className="sr-only">Pricing Card Dialog</DialogTitle>
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
           <div className="grid grid-cols-1 gap-5 bg-inherit py-5 lg:grid-cols-3">
