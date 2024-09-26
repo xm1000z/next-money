@@ -33,7 +33,7 @@ export const updateSchema = z.object({
   credit: z.number().optional(),
   title: z.string().optional(),
   originalAmount: z.number(),
-  currency: z.enum(["CNY", "USD"]).optional(),
+  currency: z.enum(["CNY", "USD", "EUR"]).optional(),
   locale: z.enum(locales).optional(),
   message: z.string().optional(),
   state: z.enum(["enable", "disabled"]).optional(),
