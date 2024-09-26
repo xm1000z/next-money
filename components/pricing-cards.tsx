@@ -63,12 +63,12 @@ const PricingCard = ({
               {offer.originalAmount && offer.originalAmount > 0 ? (
                 <>
                   <span className="mr-2 text-base text-muted-foreground/80 line-through">
-                    {formatPrice(offer.originalAmount, "$")}
+                    {formatPrice(offer.originalAmount, "€")}
                   </span>
-                  <span>{formatPrice(offer.amount, "$")}</span>
+                  <span>{formatPrice(offer.amount, "€")}</span>
                 </>
               ) : (
-                `${formatPrice(offer.amount, "$")}`
+                `${formatPrice(offer.amount, "€")}`
               )}
             </div>
             <div className="-mb-1 ml-2 text-left text-sm font-medium text-muted-foreground">
