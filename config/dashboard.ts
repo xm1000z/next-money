@@ -18,7 +18,42 @@ export const dashboardConfig: DashboardConfig = {
           icon: "HomeIcon",
         },
         {
-          title: "Generate",
+          title: "Notas",
+          href: "https://writer.notas.ai",
+          icon: "SquarePen",
+          rightIcon: "ExternalLink",
+          external: true 
+        },
+        {
+          title: "Chat",
+          href: "https://chat.notas.ai",
+          icon: "MessageSquare",
+          rightIcon: "ExternalLink",
+          external: true 
+        },
+        {
+          title: "Search",
+          href: "https://search.notas.ai",
+          icon: "TrendingUp",
+          rightIcon: "ExternalLink",
+          external: true 
+        },
+        {
+          title: "SEO",
+          href: "https://seo.notas.ai",
+          icon: "TextSearch",
+          rightIcon: "ExternalLink",
+          external: true 
+        },
+        {
+          title: "LISA",
+          href: "https://lisa.notas.ai",
+          icon: "Users",
+          rightIcon: "ExternalLink",
+          external: true 
+        },
+        {
+          title: "Studio",
           href: "/app/generate",
           icon: "Eraser"
         },

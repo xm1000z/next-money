@@ -3,11 +3,15 @@ import type { Icon } from "lucide-react";
 import { Icons } from "@/components/shared/icons";
 import type { UserPaymentInfoDto } from "@/db/dto/user-payment.dto";
 
-export type NavItem = {
+export interface NavItem {
   title: string;
   href: string;
   disabled?: boolean;
-};
+  external?: boolean;
+  icon?: string;
+  rightIcon?: string;
+  badge?: string;
+}
 
 export type MainNavItem = NavItem;
 

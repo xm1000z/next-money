@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useState } from "react";
 
-import { Menu, PanelLeftClose, PanelRightClose } from "lucide-react";
+import { Menu, PanelLeftClose, PanelRightClose, ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Icons } from "@/components/shared/icons";
@@ -110,6 +110,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                     )}
                     {section?.items?.map((item) => {
                       const Icon = Icons[item.icon || "arrowRight"];
+                      const RightIcon = item.rightIcon ? Icons[item.rightIcon] : null;
                       return (
                         item.href && (
                           <Fragment key={`link-fragment-${item.title}`}>
@@ -117,6 +118,8 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                               <Link
                                 key={`link-${item.title}`}
                                 href={item.disabled ? "#" : item.href}
+                                target={item.external ? "_blank" : undefined}
+                                rel={item.external ? "noopener noreferrer" : undefined}
                                 className={cn(
                                   "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-muted",
                                   path === item.href
@@ -127,12 +130,13 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                 )}
                               >
                                 <Icon className="size-5" />
-                                {t(item.title)}
+                                <span className="flex-grow">{t(item.title)}</span>
                                 {item.badge && (
                                   <Badge className="ml-auto flex size-5 shrink-0 items-center justify-center rounded-full">
                                     {item.badge}
                                   </Badge>
                                 )}
+                                {RightIcon && <RightIcon className="size-4 ml-2" />}
                               </Link>
                             ) : (
                               <Tooltip key={`tooltip-${item.title}`}>
@@ -140,6 +144,8 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                   <Link
                                     key={`link-tooltip-${item.title}`}
                                     href={item.disabled ? "#" : item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
                                     className={cn(
                                       "flex items-center gap-3 rounded-md py-2 text-sm font-medium hover:bg-muted",
                                       path === item.href

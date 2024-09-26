@@ -31,6 +31,11 @@ import {
   Trash,
   User,
   X,
+  TextSearch,
+  Users,
+  TrendingUp,
+  MessageSquare,
+  SquarePen,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
