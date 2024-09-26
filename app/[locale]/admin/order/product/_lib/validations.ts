@@ -18,7 +18,7 @@ export const createSchema = z.object({
   amount: z.number().min(100),
   credit: z.number().min(0),
   originalAmount: z.number(),
-  currency: z.enum(["CNY", "USD"]),
+  currency: z.enum(["CNY", "USD", "EUR"]),
   message: z.string().optional(),
   state: z.enum(["enable", "disabled"]),
   locale: z.enum(locales),
