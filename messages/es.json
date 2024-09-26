@@ -126,7 +126,7 @@
       "title": "¡Felicitaciones! Ha recibido un 20% de puntos extra en su compra."
     },
     "action": {
-      "claim": "Activar Sus Puntos",
+      "claim": "Activar créditos",
       "close": "Cerrar"
     }
   },
@@ -270,7 +270,7 @@
       "inputImagePlaceholder": "Subir imagen de entrada"
     },
     "error": {
-      "insufficientCredits": "Puntos insuficientes, ¡recarga por favor!",
+      "insufficientCredits": "Créditos insuficientes, ¡recarga por favor!",
       "limitInsufficient": "Has alcanzado el límite de uso gratuito. Por favor, actualiza a un plan pagado para continuar usando nuestros servicios."
     },
     "action": {
@@ -333,18 +333,18 @@
   },
   "Orders": {
     "title": "Órdenes",
-    "description": "Ver tu historial de facturación.",
+    "description": "Historial de facturación.",
     "empty": {
-      "title": "Órdenes Vacías",
+      "title": "Vacío",
       "description": "Aún no hay registros de pago."
     },
     "table": {
-      "customer": "Cliente",
+      "customer": "Datos",
       "amount": "Precio",
       "status": "Estado",
-      "credit": "Puntos",
+      "credit": "Créditos",
       "channel": "Canal",
-      "createdAt": "Creado En",
+      "createdAt": "Creado el",
       "total": "Total",
       "records": "Órdenes"
     },
@@ -357,26 +357,26 @@
     }
   },
   "NewsLetter": {
-    "title": "Únete a nuestro Boletín",
-    "subtitle": "¡Suscríbete para recibir actualizaciones!",
+    "title": "Únete a nuestra Newsletter",
+    "subtitle": "¡Suscríbete para recibir updates!",
     "form": {
-      "placeholder": "Introduce tu dirección de correo electrónico",
+      "placeholder": "Introduce tu correo electrónico",
       "aria_label": "Correo Electrónico",
       "confirm": "Por favor, revisa el correo de confirmación de suscripción.",
       "button": "Suscribirse"
     }
   },
   "LocaleLayout": {
-    "title": "App | NotasAI",
+    "title": "App - NotasAI",
     "description": "Inteligencia Artificial en español.",
-    "keywords": "inteligencia artificial, ia, Flux, FluxAI,tecnología, AI, aprendizaje automático, herramientas Flux AI, aplicaciones AI, soluciones de inteligencia artificial, análisis de datos, innovación AI, análisis predictivo Flux, aprendizaje automático, desarrollo AI, próxima generación AI"
+    "keywords": "inteligencia artificial, NotasAI, Notas IA, notas, notasai, notasia, ia, Flux, FluxAI, tecnología, AI, aprendizaje automático, herramientas Flux AI, aplicaciones AI, soluciones de inteligencia artificial, análisis de datos, innovación AI, análisis predictivo Flux, aprendizaje automático, desarrollo AI, próxima generación AI"
   },
   "LocaleSwitcher": {
     "label": "Cambiar idioma",
     "locale": "{locale, select, zh {🇨🇳 简体中文} tw {🇭🇰 繁體中文} en {🇺🇸 English} fr {🇫🇷 Français} ja {🇯🇵 日本語} ko {🇰🇷 한국어} de {🇩🇪 Deutsch} es {🇪🇸 Español} pt {🇧🇷 Português} ar {🇦🇪 العربية} other {Unknown}}"
   },
   "Manifest": {
-    "name": "NotasAI"
+    "name": "App - NotasAI"
   },
   "AppNavigation": {
     "Support": "Soporte",
