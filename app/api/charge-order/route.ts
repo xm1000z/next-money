@@ -98,7 +98,7 @@ export async function POST(req: NextRequest) {
         line_items: [
           {
             price_data: {
-              currency: "usd",
+              currency: "eur",
               product_data: {
                 name: "Charge Order",
               },
