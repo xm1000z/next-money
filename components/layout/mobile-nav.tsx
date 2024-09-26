@@ -72,14 +72,12 @@ export function NavMobile() {
               </Link>
             </li>
           ))}
-
-          <UserInfo />
         </ul>
 
         <div className="mt-5 flex items-center justify-end space-x-4">
-          <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
-            <Icons.gitHub className="size-6" />
-            <span className="sr-only">GitHub</span>
+          <Link href={siteConfig.links.twitter} target="_blank" rel="noreferrer">
+            <Icons.twitter className="size-6" />
+            <span className="sr-only">X</span>
           </Link>
           <ModeToggle />
         </div>

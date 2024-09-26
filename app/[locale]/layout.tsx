@@ -52,14 +52,14 @@ export async function generateMetadata({
     title: t("title"),
     metadataBase: siteConfig.url,
     alternates: {
-      canonical: `/${locale === "en" ? "" : locale}`,
+      canonical: `/${locale === "es" ? "" : locale}`,
       languages: {
         "x-default": "/",
         zh: "/zh",
         tw: "/tw",
         ja: "/ja",
         fr: "/fr",
-        es: "/es",
+        en: "/en",
         de: "/de",
         ko: "/ko",
         pt: "/pt",
