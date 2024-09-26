@@ -117,7 +117,12 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                             {isSidebarExpanded ? (
                               <Link
                                 key={`link-${item.title}`}
+                                onClick={() => {
+                                  if (!item.disabled) setOpen(false);
+                                }}
                                 href={item.disabled ? "#" : item.href}
+                                target={item.external ? "_blank" : undefined}
+                                rel={item.external ? "noopener noreferrer" : undefined}
                                 className={cn(
                                   "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-muted",
                                   path === item.href
@@ -142,6 +147,8 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                   <Link
                                     key={`link-tooltip-${item.title}`}
                                     href={item.disabled ? "#" : item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
                                     className={cn(
                                       "flex items-center gap-3 rounded-md py-2 text-sm font-medium hover:bg-muted",
                                       path === item.href

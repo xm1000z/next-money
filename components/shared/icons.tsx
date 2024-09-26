@@ -36,6 +36,7 @@ import {
   TrendingUp,
   MessageSquare,
   SquarePen,
+  ExternalLink,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
