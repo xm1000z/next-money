@@ -52,14 +52,14 @@ export async function generateMetadata({
     title: t("title"),
     metadataBase: siteConfig.url,
     alternates: {
-      canonical: `/${locale === "es" ? "" : locale}`,
+      canonical: `/${locale === "en" ? "" : locale}`,
       languages: {
         "x-default": "/",
         zh: "/zh",
         tw: "/tw",
         ja: "/ja",
         fr: "/fr",
-        en: "/en",
+        es: "/es",
         de: "/de",
         ko: "/ko",
         pt: "/pt",
@@ -116,7 +116,7 @@ export default async function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
               attribute="class"
-              defaultTheme="dark"
+              defaultTheme="system"
               enableSystem
               disableTransitionOnChange
             >
