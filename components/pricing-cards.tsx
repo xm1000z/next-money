@@ -291,13 +291,13 @@ export function PricingCards({
 }
 
 export function PricingCardDialog({
-  isOpen,
   onClose,
+  isOpen,
   chargeProduct,
 }: {
   isOpen: boolean;
-  onClose: (value: boolean) => void;
   chargeProduct?: ChargeProductSelectDto[];
+  onClose: (isOpen: boolean) => void;
 }) {
   const t = useTranslations("PricingPage");
   const { isSm, isMobile } = useMediaQuery();
@@ -316,9 +316,6 @@ export function PricingCardDialog({
       }}
     >
       <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px]">
-        <VisuallyHidden>
-          <DialogTitle>Pricing Options</DialogTitle>
-        </VisuallyHidden>
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
           <div className="grid grid-cols-1 gap-5 bg-inherit py-5 lg:grid-cols-3">

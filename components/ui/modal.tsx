@@ -92,6 +92,7 @@ export function Modal({
           className,
         )}
       >
+        <DialogTitle className="sr-only">Modal Dialog</DialogTitle>
         {children}
       </DialogContent>
     </Dialog>
