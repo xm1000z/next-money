@@ -54,7 +54,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link
             href="https://chat.notas.ai/"
-            title="NotasAI Chat"
+            title=" Chat"
             className="underline-offset-4 hover:underline"
             prefetch={false}
             target="_blank"
@@ -62,8 +62,8 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             Chat
           </Link>
           <Link
-            href="https://chat.notas.ai/"
-            title="NotasAI Browser"
+            href="https://search.notas.ai/"
+            title="Notas Search"
             className="underline-offset-4 hover:underline"
             prefetch={false}
             target="_blank"
@@ -77,7 +77,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             prefetch={false}
             target="_blank"
           >
-            Lisa
+            LISA
           </Link>
           <Link
             href="https://seo.notas.ai/"

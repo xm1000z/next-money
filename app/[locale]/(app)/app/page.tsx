@@ -12,7 +12,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Billings" });
 
   return {
-    title: "NotasAI",
+    title: "App - NotasAI",
     description: "Inteligencia Artificial potenciada para el español.",
   };
 }
