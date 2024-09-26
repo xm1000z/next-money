@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
             email: user.primaryEmailAddress?.emailAddress,
             username: user.username,
           },
-          currency: Currency.USD,
+          currency: Currency.EUR,
           amount: 0,
           credit: giftCodeData.creditAmount,
           channel: "GiftCode",

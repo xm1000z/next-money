@@ -116,6 +116,10 @@ export function UpdateDialog(props: { detail: ChargeProductSelectDto }) {
                   label: "USD",
                   value: "USD",
                 },
+                {
+                  label: "EUR",
+                  value: "EUR",
+                },
               ]}
             />
           </FormItem>

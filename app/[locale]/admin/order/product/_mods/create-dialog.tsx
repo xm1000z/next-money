@@ -117,6 +117,10 @@ export function CreateDialog() {
                   label: "USD",
                   value: "USD",
                 },
+                {
+                  label: "EUR",
+                  value: "EUR",
+                },
               ]}
             />
           </FormItem>
@@ -124,11 +128,11 @@ export function CreateDialog() {
             <Select
               options={[
                 {
-                  label: "启用",
+                  label: "ENABLE",
                   value: "enable",
                 },
                 {
-                  label: "禁用",
+                  label: "DISABLE",
                   value: "disabled",
                 },
               ]}

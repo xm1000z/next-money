@@ -14,7 +14,7 @@ import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
 
 const CreateChargeOrderSchema = z.object({
-  currency: z.enum(["CNY", "USD"]).default("USD"),
+  currency: z.enum(["CNY", "USD", "EUR"]).default("EUR"),
   productId: z.string(),
   amount: z.number().min(100).max(1000000000),
   channel: z.enum(["GiftCode", "Stripe"]).default("Stripe"),
