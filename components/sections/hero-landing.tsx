@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import { CornerDownRight } from "lucidCornerDownRighte-react";
+import { CornerDownRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { DashboardIcon, UserArrowLeftIcon } from "@/assets";
