@@ -133,7 +133,9 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                 )}
                               >
                                 <Icon className="size-5" />
-                                <span className="flex-grow">{t(item.title)}</span>
+                                <span className="flex-grow">
+                                  {t(item.title, { fallback: item.title })}
+                                </span>
                                 {item.badge && (
                                   <Badge className="ml-auto flex size-5 shrink-0 items-center justify-center rounded-full">
                                     {item.badge}
