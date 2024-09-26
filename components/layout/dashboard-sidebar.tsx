@@ -117,9 +117,6 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                             {isSidebarExpanded ? (
                               <Link
                                 key={`link-${item.title}`}
-                                onClick={() => {
-                                  if (!item.disabled) setOpen(false);
-                                }}
                                 href={item.disabled ? "#" : item.href}
                                 target={item.external ? "_blank" : undefined}
                                 rel={item.external ? "noopener noreferrer" : undefined}
@@ -141,7 +138,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     {item.badge}
                                   </Badge>
                                 )}
-                                {RightIcon && <RightIcon className="size-4 ml-2" />}
+                                {item.external && <Icons.externalLink className="size-4 ml-2" />}
                               </Link>
                             ) : (
                               <Tooltip key={`tooltip-${item.title}`}>
@@ -229,10 +226,7 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
                         item.href && (
                           <Fragment key={`link-fragment-${item.title}`}>
                             <Link
-                              key={`link-${item.title}`}
-                              onClick={() => {
-                                if (!item.disabled) setOpen(false);
-                              }}
+                              key={item.title}
                               href={item.disabled ? "#" : item.href}
                               className={cn(
                                 "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-muted",
