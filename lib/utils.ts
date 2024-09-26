@@ -156,8 +156,9 @@ export const truncate = (str: string, length: number) => {
   return `${str.slice(0, length)}...`;
 };
 
-export function formatPrice(price?: number, currency = "$") {
-  return price ? currency + (price / 100).toFixed(2) : `${currency}0.00`;
+export function formatPrice(price: number, currency: string = '€'): string {
+  const formattedPrice = Math.round(price / 100).toString();
+  return `${currency}${formattedPrice}`;
 }
 
 export function formatOriginalPrice(
