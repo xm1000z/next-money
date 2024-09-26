@@ -19,10 +19,10 @@ export default function IndexPage({ params: { locale } }: Props) {
   return (
     <>
       <HeroLanding />
-      <Powered />
-      <BentoGrid />
-      <InfoLanding data={infos[0]} reverse={true} />
-      <InfoLanding data={infos[1]} />
+      {/* <Powered />
+      {/* <BentoGrid /> */}
+      {/* <InfoLanding data={infos[0]} reverse={true} /> */}
+      {/* <InfoLanding data={infos[1]} /> */}
       <Features />
       <Examples />
       <SchnellIntro />

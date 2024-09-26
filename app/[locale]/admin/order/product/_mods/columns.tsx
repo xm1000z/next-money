@@ -49,12 +49,12 @@ export function getColumns(): TableColumnsType<ChargeProductSelectDto> {
     {
       title: "充值金额",
       dataIndex: "amount",
-      render: (price) => formatPrice(price, "$"),
+      render: (price) => formatPrice(price, "€"),
     },
     {
       title: "原价",
       dataIndex: "originalAmount",
-      render: (price) => formatPrice(price, "$"),
+      render: (price) => formatPrice(price, "€"),
     },
     {
       title: "赠送积分",
