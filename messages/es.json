@@ -385,7 +385,7 @@
     "Historial": "Historial",
     "Canjear Código": "Canjear Código",
     "Facturación": "Facturación",
-    "Notas": "Notas",
+    "Notas": "Copywriter",
     "Chat": "Chat",
     "Search": "Search",
     "SEO": "SEO",
@@ -394,11 +394,10 @@
   },
   "Navigation": {
     "pricing": "Precios",
-    "schnell": "Escritor",
-    "explore": "Chat",
+    "Notas": "Copywriter",
+    "Chat": "Chat",
     "title": "NotasAI",
     "blog": "Blog",
-    "prompt": "Generador de Prompts",
     "dashboard": "Espacios",
     "tooltip": {
       "login": "Iniciar Sesión"
