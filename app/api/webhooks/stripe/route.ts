@@ -199,7 +199,7 @@ export async function POST(req: Request) {
           id: order.id,
         },
         data: {
-          phase: "Paid",
+          phase: "Pagado",
           paymentAt: new Date(),
           result: session as unknown as Prisma.JsonObject,
         },

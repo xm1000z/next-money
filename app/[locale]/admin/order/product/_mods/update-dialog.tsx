@@ -144,7 +144,15 @@ export function UpdateDialog(props: { detail: ChargeProductSelectDto }) {
               placeholder="Por favor, ingrese..."
             />
           </FormItem>
-          <FormItem {...inputField} label="Etiqueta" name="tag">
+          <FormItem {...inputField} label="Locale" name="locale">
+            <Select
+              options={locales.map((item) => ({
+                value: item,
+                label: t("locale", { locale: item }),
+              }))}
+            />
+          </FormItem>
+          <FormItem {...inputField} label="Tag" name="tag">
             <Select
               mode="tags"
               className="!w-full"

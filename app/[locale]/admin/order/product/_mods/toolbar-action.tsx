@@ -11,7 +11,7 @@ export function TableToolbarActions({
     <div className="flex items-center gap-2">
       {children}
       <CreateDialog />
-      {/* <Button
+      <Button
         variant="outline"
         size="sm"
         onClick={() =>
@@ -23,11 +23,7 @@ export function TableToolbarActions({
       >
         <DownloadIcon className="mr-2 size-4" aria-hidden="true" />
         Export
-      </Button> */}
-      {/**
-       * Other actions can be added here.
-       * For example, export, import, etc.
-       */}
+      </Button>
     </div>
   );
 }
