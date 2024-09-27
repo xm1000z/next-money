@@ -133,19 +133,24 @@ export async function POST(req: NextRequest, { params }: Params) {
         locale,
       }),
     }).then((res) => res.json());
-    if (!res?.replicate_id && res.error) {
-      return NextResponse.json(
-        { error: res.error || "Create Generator Error" },
-        { status: 400 },
-      );
+    console.log("Respuesta de FLUX_CREATE_URL:", res);
+
+    let fluxData;
+    try {
+      fluxData = await prisma.fluxData.create({
+        data: {
+          replicateId: res.replicate_id,
+          // Añadir aquí otros campos necesarios
+        }
+      });
+    } catch (error) {
+      console.error("Error al crear fluxData:", error);
+      return NextResponse.json({ error: "Create Task Error: " + error.message }, { status: 400 });
     }
-    const fluxData = await prisma.fluxData.findFirst({
-      where: {
-        replicateId: res.replicate_id,
-      },
-    });
+
     if (!fluxData) {
-      return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
+      console.error("fluxData es null después de la creación");
+      return NextResponse.json({ error: "Create Task Error: fluxData is null" }, { status: 400 });
     }
 
     await prisma.$transaction(async (tx) => {
