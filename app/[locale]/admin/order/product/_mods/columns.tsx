@@ -47,30 +47,30 @@ export function getColumns(): TableColumnsType<ChargeProductSelectDto> {
       dataIndex: "id",
     },
     {
-      title: "充值金额",
+      title: "Precio",
       dataIndex: "amount",
       render: (price) => formatPrice(price, "€"),
     },
     {
-      title: "原价",
+      title: "Precio original",
       dataIndex: "originalAmount",
       render: (price) => formatPrice(price, "€"),
     },
     {
-      title: "赠送积分",
+      title: "Créditos",
       dataIndex: "credit",
     },
     {
-      title: "币种",
+      title: "Moneda",
       dataIndex: "currency",
     },
     {
-      title: "Created At",
+      title: "Creado el",
       dataIndex: "createdAt",
       render: (date) => new Date(date).toLocaleString(),
     },
     {
-      title: "Action",
+      title: "Acción",
       dataIndex: "actions",
       render: (_date, row: ChargeProductSelectDto) => {
         return (

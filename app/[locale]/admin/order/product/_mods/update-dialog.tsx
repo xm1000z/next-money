@@ -31,11 +31,11 @@ export function UpdateDialog(props: { detail: ChargeProductSelectDto }) {
     }
     startCreateTransition(() => {
       toast.promise(updateAction({ ...input, id: detail.id }), {
-        loading: "Update...",
+        loading: "Actualizando...",
         success: () => {
           formField.form.resetFields();
           setOpen(false);
-          return "Updated";
+          return "Actualizado";
         },
         error: (error) => {
           setOpen(false);
@@ -63,49 +63,49 @@ export function UpdateDialog(props: { detail: ChargeProductSelectDto }) {
   return (
     <>
       <Button type="default" onClick={() => setOpen(true)}>
-        Edit
+        Editar
       </Button>
       <Drawer
         open={open}
         onClose={() => setOpen(false)}
-        title="Update Charge Product"
+        title="Actualizar Producto de Recarga"
         size="large"
         footer={
           <Space className="flex w-full justify-end gap-2 pt-2 sm:space-x-0">
             <Button type="default" onClick={() => setOpen(false)}>
-              Cancel
+              Cancelar
             </Button>
             <Button
               type="primary"
               disabled={isCreatePending}
               onClick={formField.form.submit}
             >
-              Submit
+              Enviar
             </Button>
           </Space>
         }
       >
         <Form layout="vertical" {...formField}>
-          <FormItem {...inputField} label="Title" name="title">
-            <Input className="!w-full" placeholder="Please input..." />
+          <FormItem {...inputField} label="Título" name="title">
+            <Input className="!w-full" placeholder="Por favor, ingrese..." />
           </FormItem>
-          <FormItem {...inputField} label="Amount" name="amount">
-            <InputNumber className="!w-full" placeholder="Please input..." />
+          <FormItem {...inputField} label="Cantidad" name="amount">
+            <InputNumber className="!w-full" placeholder="Por favor, ingrese..." />
           </FormItem>
 
           <FormItem
             {...inputField}
-            label="Original Amount"
+            label="Cantidad Original"
             name="originalAmount"
           >
-            <InputNumber className="!w-full" placeholder="Please input..." />
+            <InputNumber className="!w-full" placeholder="Por favor, ingrese..." />
           </FormItem>
 
-          <FormItem {...inputField} label="Credit" name="credit">
-            <InputNumber className="!w-full" placeholder="Please input..." />
+          <FormItem {...inputField} label="Crédito" name="credit">
+            <InputNumber className="!w-full" placeholder="Por favor, ingrese..." />
           </FormItem>
 
-          <FormItem {...inputField} label="Currency" name="currency">
+          <FormItem {...inputField} label="Moneda" name="currency">
             <Select
               options={[
                 {
@@ -123,40 +123,32 @@ export function UpdateDialog(props: { detail: ChargeProductSelectDto }) {
               ]}
             />
           </FormItem>
-          <FormItem {...inputField} label="State" name="state">
+          <FormItem {...inputField} label="Estado" name="state">
             <Select
               options={[
                 {
-                  label: "启用",
+                  label: "Activar",
                   value: "enable",
                 },
                 {
-                  label: "禁用",
+                  label: "Desactivar",
                   value: "disabled",
                 },
               ]}
             />
           </FormItem>
-          <FormItem {...inputField} label="Message" name="message">
+          <FormItem {...inputField} label="Mensaje" name="message">
             <Input.TextArea
               rows={3}
               className="!w-full"
-              placeholder="Please input..."
+              placeholder="Por favor, ingrese..."
             />
           </FormItem>
-          <FormItem {...inputField} label="Locale" name="locale">
-            <Select
-              options={locales.map((item) => ({
-                value: item,
-                label: t("locale", { locale: item }),
-              }))}
-            />
-          </FormItem>
-          <FormItem {...inputField} label="Tag" name="tag">
+          <FormItem {...inputField} label="Etiqueta" name="tag">
             <Select
               mode="tags"
               className="!w-full"
-              placeholder="Please input..."
+              placeholder="Por favor, ingrese..."
             />
           </FormItem>
         </Form>

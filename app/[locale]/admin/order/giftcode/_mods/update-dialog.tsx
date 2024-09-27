@@ -22,7 +22,7 @@ export function UpdateDialog(props: { detail: GiftCodeSelectDto }) {
 
   function onSubmit(input: UpdateSchema, error: FormListFieldData | null) {
     if (detail.used) {
-      return toast.error("已使用不允许修改");
+      return toast.error("No se permite modificar un código ya utilizado");
     }
     if (error) {
       const err = getErrorMessage(error);
@@ -32,11 +32,11 @@ export function UpdateDialog(props: { detail: GiftCodeSelectDto }) {
     }
     startCreateTransition(() => {
       toast.promise(updateAction({ ...input, id: detail.id }), {
-        loading: "Update...",
+        loading: "Actualizando...",
         success: () => {
           formField.form.resetFields();
           setOpen(false);
-          return "Updated";
+          return "Actualizado";
         },
         error: (error) => {
           setOpen(false);
@@ -60,44 +60,44 @@ export function UpdateDialog(props: { detail: GiftCodeSelectDto }) {
   return (
     <>
       <Button type="default" onClick={() => setOpen(true)}>
-        Edit
+        Editar
       </Button>
       <Drawer
         open={open}
         onClose={() => setOpen(false)}
-        title="Update GiftCode"
+        title="Actualizar Código de Regalo"
         size="large"
         footer={
           <Space className="flex w-full justify-end gap-2 pt-2 sm:space-x-0">
             <Button type="default" onClick={() => setOpen(false)}>
-              Cancel
+              Cancelar
             </Button>
             <Button
               type="primary"
               disabled={isCreatePending}
               onClick={formField.form.submit}
             >
-              Submit
+              Enviar
             </Button>
           </Space>
         }
       >
         <Form layout="vertical" {...formField} disabled={!!detail?.used}>
-          <FormItem {...inputField} label="礼品码积分" name="creditAmount">
+          <FormItem {...inputField} label="Puntos del Código de Regalo" name="creditAmount">
             <InputNumber
               className="!w-full"
-              placeholder="Please input creditAmount..."
+              placeholder="Por favor, ingrese la cantidad de crédito..."
             />
           </FormItem>
           <FormItem
             {...inputField}
             className="!w-full"
-            label="礼品码代码"
+            label="Código del Regalo"
             name="code"
           >
             <Input.Search
               className="!w-full"
-              placeholder="Please input..."
+              placeholder="Por favor, ingrese..."
               enterButton={
                 <Button
                   type="default"
@@ -106,7 +106,7 @@ export function UpdateDialog(props: { detail: GiftCodeSelectDto }) {
                     formField.form.setFieldValue("code", generateGifCode(10));
                   }}
                 >
-                  生成
+                  Generar
                 </Button>
               }
             />

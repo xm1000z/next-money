@@ -47,25 +47,25 @@ export function getColumns(): TableColumnsType<GiftCodeSelectDto> {
       dataIndex: "id",
     },
     {
-      title: "充值积分",
+      title: "Créditos",
       dataIndex: "creditAmount",
     },
     {
-      title: "礼品码",
+      title: "Código",
       dataIndex: "code",
     },
     {
-      title: "状态",
+      title: "Estado",
       dataIndex: "used",
-      render: (used) => (used ? "已使用" : "未使用"),
+      render: (used) => (used ? "Usado" : "Sin usar"),
     },
     {
-      title: "Created At",
+      title: "Creado el",
       dataIndex: "createdAt",
       render: (date) => new Date(date).toLocaleString(),
     },
     {
-      title: "Action",
+      title: "Acción",
       dataIndex: "actions",
       render: (_date, row: GiftCodeSelectDto) => {
         return (
