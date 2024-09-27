@@ -139,32 +139,13 @@ export async function POST(req: NextRequest, { params }: Params) {
         { status: 400 },
       );
     }
-
-    let fluxData;
-    try {
-      fluxData = await prisma.fluxData.create({
-        data: {
-          replicateId: res.replicate_id,
-          userId: userId,
-          model: input.model,
-          aspectRatio: input.aspectRatio,
-          taskStatus: FluxTaskStatus.Pending, // Asumiendo que el estado inicial es Pending
-          inputPrompt: input.inputPrompt,
-          isPrivate: input.isPrivate,
-          locale: input.locale,
-          loraName: input.loraName,
-          inputImageUrl: input.inputImageUrl,
-          // Añade cualquier otro campo requerido por el modelo FluxData
-        }
-      });
-    } catch (error) {
-      console.error("Error al crear fluxData:", error);
-      return NextResponse.json({ error: "Create Task Error: " + error.message }, { status: 400 });
-    }
-
+    const fluxData = await prisma.fluxData.findFirst({
+      where: {
+        replicateId: res.replicate_id,
+      },
+    });
     if (!fluxData) {
-      console.error("fluxData es null después de la creación");
-      return NextResponse.json({ error: "Create Task Error: fluxData is null" }, { status: 400 });
+      return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
     }
 
     await prisma.$transaction(async (tx) => {
