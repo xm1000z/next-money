@@ -133,14 +133,28 @@ export async function POST(req: NextRequest, { params }: Params) {
         locale,
       }),
     }).then((res) => res.json());
-    console.log("Respuesta de FLUX_CREATE_URL:", res);
+    if (!res?.replicate_id && res.error) {
+      return NextResponse.json(
+        { error: res.error || "Create Generator Error" },
+        { status: 400 },
+      );
+    }
 
     let fluxData;
     try {
       fluxData = await prisma.fluxData.create({
         data: {
           replicateId: res.replicate_id,
-          // Añadir aquí otros campos necesarios
+          userId: userId,
+          model: input.model,
+          aspectRatio: input.aspectRatio,
+          taskStatus: FluxTaskStatus.Pending, // Asumiendo que el estado inicial es Pending
+          inputPrompt: input.inputPrompt,
+          isPrivate: input.isPrivate,
+          locale: input.locale,
+          loraName: input.loraName,
+          inputImageUrl: input.inputImageUrl,
+          // Añade cualquier otro campo requerido por el modelo FluxData
         }
       });
     } catch (error) {
