@@ -7,10 +7,10 @@ export enum Currency {
 }
 
 export enum OrderPhase {
-  Pending = "Pending",
-  Paid = "Paid",
-  Canceled = "Canceled",
-  Failed = "Failed",
+  Pending = "Pendiente",
+  Paid = "Pagado",
+  Canceled = "Cancelado",
+  Failed = "Fallido",
 }
 
 export enum PaymentChannelType {
