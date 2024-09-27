@@ -8,12 +8,12 @@ export default async function AdminPage() {
   return (
     <>
       <div className="flex flex-col">
-         <div className="border-b">
+        {/* <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <div className="ml-auto flex items-center space-x-4">
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex-1 space-y-4 p-4">
           <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-3">
             {/* {count && "subscribers" in count && (
