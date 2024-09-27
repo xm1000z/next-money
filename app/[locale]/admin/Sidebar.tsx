@@ -50,22 +50,22 @@ const variants = {
   },
 };
 export const menus = [
-  { name: "仪表盘", href: "/admin", icon: DashboardIcon },
+  { name: "Panel", href: "/admin", icon: DashboardIcon },
   {
-    name: "订单管理",
+    name: "Gestión de Pedidos",
     icon: Receipt,
     children: [
       {
-        name: "充值产品管理",
+        name: "Gestión de Productos",
         href: "/admin/order/product",
       },
       {
-        name: "礼品码管理",
+        name: "Gestión de Códigos de Regalo",
         href: "/admin/order/giftcode",
       },
     ],
   },
-  { name: "订阅", href: "/admin/subscribers", icon: SubscriberIcon },
+  { name: "Suscripciones", href: "/admin/subscribers", icon: SubscriberIcon },
   { name: "Newsletters", href: "/admin/newsletters", icon: TiltedSendIcon },
 ];
 
@@ -249,7 +249,7 @@ export function Sidebar() {
                 className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50 dark:text-slate-50 dark:hover:bg-slate-800"
               >
                 <HomeIcon className="h-5 w-5" aria-hidden="true" />
-                返回前台
+                Volver al Inicio
               </Link>
             </div>
           </div>
