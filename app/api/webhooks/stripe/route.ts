@@ -228,7 +228,7 @@ export async function POST(req: Request) {
     const price = formatPrice(product.amount)
     await logsnag.track({
       channel: "payments",
-      event: "Successful Payment",
+      event: "Pago exitoso!",
       user_id: userId,
       description: `用户购买积分：${product.title} - ${price}`,
       icon: "💰",
