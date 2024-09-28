@@ -27,7 +27,7 @@ export default async function HeroLanding() {
             <span className="mr-3">🍓</span>
             <span
               className={cn(
-                `inline animate-gradient bg-clip-text text-transparent`,
+                `inline animate-gradient bg-gradient-to-r from-[#ffffff] via-[#ffffff] to-[#ffffff] bg-[length:var(--bg-size)_100%] bg-clip-text`,
               )}
             >
               {t("intro")}
