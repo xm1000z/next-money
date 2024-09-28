@@ -313,8 +313,8 @@
   },
   "Billings": {
     "page": {
-      "title": "App – NotasAI",
-      "description": "Ver tus predicciones recientes"
+      "title": "Facturación – NotasAI",
+      "description": "Pagos y suscripciones"
     },
     "title": "Predicciones Recientes",
     "empty": {
@@ -332,7 +332,7 @@
     }
   },
   "Orders": {
-    "title": "Órdenes",
+    "title": "Facturación",
     "description": "Historial de facturación.",
     "empty": {
       "title": "Vacío",
