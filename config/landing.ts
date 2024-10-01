@@ -54,37 +54,37 @@ export const infos: InfoLdg[] = [
 
 export const features = [
   {
-    title: "Notas",
+    title: "item1.title",
     description: "item1.description",
     link: "https://chat.notas.ai",
     icon: "SquarePen",
   },
   {
-    title: "Chat",
+    title: "item2.title",
     description: "item2.description",
     link: "https://chat.notas.ai",
     icon: "MessageSquare",
   },
   {
-    title: "Notas Search",
+    title: "item3.title",
     description: "item3.description",
     link: "https://search.notas.ai",
     icon: "TrendingUp",
   },
   {
-    title: "Studio",
+    title: "item4.title",
     description: "item4.description",
     link: "/app/generate",
     icon: "Eraser",
   },
   {
-    title: "SEO",
+    title: "item5.title",
     description: "item5.description",
     link: "https://seo.notas.ai",
     icon: "TextSearch",
   },
   {
-    title: "LISA",
+    title: "item6.title",
     description: "item6.description",
     link: "https://lisa.notas.ai",
     icon: "Users",
