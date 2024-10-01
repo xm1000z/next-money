@@ -20,28 +20,28 @@
         "visit": "Probar ahora"
       },
       "item1": {
-        "title": "Copywriter",
-        "description": "Lo mejor de NotasAI, una app de notas de libre acceso potenciada con Inteligencia Artificial."
+        "title": "Notas",
+        "description": "Herramienta de escritura potenciada con Inteligencia Artificial, abierta al público general con acceso limitado."
       },
       "item2": {
-        "title": "FLUX.1 [dev]",
-        "description": "Destilado directamente de FLUX.1 [pro], FLUX.1 [dev] obtiene una calidad similar y capacidades de adherencia a avisos, siendo más eficiente que un modelo estándar del mismo tamaño."
+        "title": "Chat",
+        "description": "Un chat como los que ya conoces pero con las capacidades de todos aquellos que conoces en un mismo lugar y potenciado siempre para el español."
       },
       "item3": {
-        "title": "FLUX.1 [schnell]",
-        "description": "El modelo de generación de imágenes más rápido, diseñado para desarrollo local y uso personal."
+        "title": "Search",
+        "description": "Un modelo de IA diseñado para ser tu googlero personal, busca, pregunta y conversa sobre los resultados obtenidos."
       },
       "item4": {
-        "title": "Rápido como un rayo",
-        "description": "Flux AI genera imágenes de alta calidad en segundos, significativamente más rápido que Stable Diffusion 3 y Midjourney. Con su capacidad de generación de imágenes ultrarrápida, Flux AI asegura resultados rápidos y eficientes, ahorrándote tiempo y recursos valiosos."
+        "title": "Studio",
+        "description": "Una herramienta de creación de imágenes de lo más seria a la altura de los grandes modelos, y ahora en español sin perder nada de calidad."
       },
       "item5": {
-        "title": "Personalizable",
-        "description": "El modelo avanzado Flux.1 produce imágenes más detalladas y coherentes que los competidores. Con sus características personalizables y una interfaz de usuario amigable, el Generador de Imágenes Flux AI es la herramienta definitiva para generar imágenes impresionantes a partir de textos. Ya seas un principiante o un profesional, Flux AI te tiene cubierto. ¡Experimenta el poder de la IA y revoluciona tu proceso de generación de imágenes hoy!"
+        "title": "SEO",
+        "description": "El Marketing es cosa de los marketers, por eso esta herramienta es complementaria y no sustitutoria. Si no eres productivo, te sustituirán, pero por otra persona que sí lo sea."
       },
       "item6": {
-        "title": "Interfaz de Usuario Amigable",
-        "description": "Más fácil de usar que ComfyUI, perfecto para principiantes y profesionales por igual. El Generador de Imágenes Flux AI es la herramienta definitiva para generar imágenes impresionantes a partir de textos. Con su interfaz de usuario amigable y potentes modelos de IA, Flux AI facilita la creación de increíbles visuales tanto para principiantes como para profesionales."
+        "title": "LISA",
+        "description": "El primer paso hacia la asistencia de voz inteligente, completamente en español, todavía en desarrollo y uso experimental."
       }
     },
     "powered": {
