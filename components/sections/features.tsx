@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslations } from "next-intl";
 
 import { HeaderSection } from "@/components/shared/header-section";
@@ -27,7 +28,7 @@ export default function Features() {
                 <div className="relative">
                   <h3 className="text-lg font-semibold mb-4">{t(`features.${feature.title}`)}</h3>
                   <div className="relative flex size-12 rounded-2xl border border-border shadow-sm *:relative *:m-auto *:size-6">
-                    {Icons[feature.icon as keyof typeof Icons]}
+                    {React.createElement(Icons[feature.icon as keyof typeof Icons])}
                   </div>
 
                   <p className="mt-6 pb-6 text-muted-foreground">
