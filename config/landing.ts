@@ -56,7 +56,7 @@ export const features = [
   {
     title: "item1.title",
     description: "item1.description",
-    link: "/",
+    link: "https://chat.notas.ai",
     icon: "nextjs",
   },
   {
