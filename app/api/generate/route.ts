@@ -82,46 +82,68 @@ export async function POST(req: NextRequest, { params }: Params) {
       loraName,
       inputImageUrl,
     } = CreateGenerateSchema.parse(data);
-    const headers = {
-      Authorization: `Token ${env.REPLICATE_API_TOKEN}`,
-      "Content-Type": "application/json",
-    };
-
-    const res = await fetch("https://api.replicate.com/v1/predictions", {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        version: modelName, // Asumiendo que modelName es el ID de la versión del modelo en Replicate
-        input: {
-          prompt: inputPrompt,
-          image: inputImageUrl,
-          aspect_ratio: aspectRatio,
-          // Otros parámetros necesarios para el modelo
+    const headers = new Headers();
+    if (modelName === model.freeSchnell) {
+      const thisMonthStart = dayjs().startOf("M");
+      const thisMonthEnd = dayjs().endOf("M");
+      const freeSchnellCount = await prisma.fluxData.count({
+        where: {
+          model: model.freeSchnell,
+          userId,
+          createdAt: {
+            gte: thisMonthStart.toDate(),
+            lte: thisMonthEnd.toDate(),
+          },
         },
-      }),
-    });
-
-    const data = await res.json();
-
-    if (res.status !== 201) {
+      });
+      // 5 free schnell generate per month
+      if (freeSchnellCount >= 5 && !user.publicMetadata.siteOwner) {
+        return NextResponse.json(
+          { error: "Insufficient credit", code: 1000403 },
+          { status: 400 },
+        );
+      }
+    }
+    const account = await getUserCredit(userId);
+    const needCredit = Credits[modelName];
+    if (
+      (!account.credit && modelName !== model.freeSchnell) ||
+      account.credit < needCredit
+    ) {
       return NextResponse.json(
-        { error: data.error || "Create Generator Error" },
+        { error: "Insufficient credit", code: 1000402 },
         { status: 400 },
       );
     }
 
-    const fluxData = await prisma.fluxData.create({
-      data: {
-        replicateId: data.id,
-        userId,
+    headers.append("Content-Type", "application/json");
+    headers.append("API-TOKEN", env.FLUX_HEADER_KEY);
+
+    const res = await fetch(`${env.FLUX_CREATE_URL}/flux/create`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
         model: modelName,
-        inputPrompt,
-        aspectRatio,
-        isPrivate,
-        // Otros campos necesarios
+        input_image_url: inputImageUrl,
+        input_prompt: inputPrompt,
+        aspect_ratio: aspectRatio,
+        is_private: isPrivate,
+        user_id: userId,
+        lora_name: loraName, 
+        locale,
+      }),
+    }).then((res) => res.json());
+    if (!res?.replicate_id && res.error) {
+      return NextResponse.json(
+        { error: res.error || "Create Generator Error" },
+        { status: 400 },
+      );
+    }
+    const fluxData = await prisma.fluxData.findFirst({
+      where: {
+        replicateId: res.replicate_id,
       },
     });
-
     if (!fluxData) {
       return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
     }
