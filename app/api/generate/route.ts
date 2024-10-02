@@ -139,20 +139,11 @@ export async function POST(req: NextRequest, { params }: Params) {
         { status: 400 },
       );
     }
-
-    // Crear el registro en la base de datos local
-    const fluxData = await prisma.fluxData.create({
-      data: {
+    const fluxData = await prisma.fluxData.findFirst({
+      where: {
         replicateId: res.replicate_id,
-        userId,
-        model: modelName,
-        inputPrompt,
-        aspectRatio,
-        isPrivate,
-        // ... otros campos necesarios
       },
     });
-
     if (!fluxData) {
       return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
     }
