@@ -51,8 +51,8 @@ export async function generateMetadata({
       title: newsletter.subject ?? "",
       description: newsletter.subject ?? "",
       images: imageUrl ? [{ url: imageUrl }] : undefined,
-      site: "@koyaguo",
-      creator: "@koyaguo",
+      site: "@notas_ia",
+      creator: "@notas_ia",
     },
   } satisfies Metadata;
 }

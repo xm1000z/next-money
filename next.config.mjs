@@ -39,12 +39,12 @@ const nextConfig = {
     return [
       {
         source: "/twitter",
-        destination: "https://x.com/koyaguo",
+        destination: "https://x.com/notas_ia",
         permanent: true,
       },
       {
         source: "/x",
-        destination: "https://x.com/koyaguo",
+        destination: "https://x.com/notas_ia",
         permanent: true,
       },
     ];
@@ -88,8 +88,8 @@ const nextConfig = {
 // }
 
 export default withSentryConfig(withNextIntl()(withContentlayer(nextConfig)), {
-  org: "koya",
-  project: "fluxaiproart",
+  org: "notas",
+  project: "javascript-nextjs",
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
