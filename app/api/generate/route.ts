@@ -119,43 +119,27 @@ export async function POST(req: NextRequest, { params }: Params) {
     headers.append("Content-Type", "application/json");
     headers.append("API-TOKEN", env.FLUX_HEADER_KEY);
 
-    const res = await fetch("https://api.replicate.com/v1/models", {
+    const res = await fetch(`https://app.notas.ai/flux/create`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Token ${env.REPLICATE_API_TOKEN}`,
-      },
+      headers,
       body: JSON.stringify({
-        version: modelName,
-        input: {
-          prompt: inputPrompt,
-          image: inputImageUrl,
-          aspect_ratio: aspectRatio,
-          is_private: isPrivate,
-          user_id: userId,
-          lora_name: loraName,
-          locale,
-        },
+        model: modelName,
+        input_image_url: inputImageUrl,
+        input_prompt: inputPrompt,
+        aspect_ratio: aspectRatio,
+        is_private: isPrivate,
+        user_id: userId,
+        lora_name: loraName, 
+        locale,
       }),
-    });
-
-    const responseData = await res.json();
-
-    if (!responseData.id) {
+    }).then((res) => res.json());
+    if (!res?.replicate_id && res.error) {
       return NextResponse.json(
-        { error: "Create Generator Error" },
+        { error: res.error || "Create Generator Error" },
         { status: 400 },
       );
     }
 
-    const fluxData = await prisma.fluxData.findFirst({
-      where: {
-        replicateId: responseData.id,
-      },
-    });
-    if (!fluxData) {
-      return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
-    }
 
     await prisma.$transaction(async (tx) => {
       const newAccount = await tx.userCredit.update({
