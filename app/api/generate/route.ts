@@ -139,20 +139,37 @@ export async function POST(req: NextRequest, { params }: Params) {
       }),
     });
 
-    const responseData = await res.json();
-
-    if (!responseData.id) {
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Replicate API error:", res.status, errorText);
       return NextResponse.json(
-        { error: "Create Generator Error" },
-        { status: 400 },
+        { error: `Replicate API error: ${res.status} ${errorText}` },
+        { status: res.status }
       );
     }
 
-    const fluxData = await prisma.fluxData.findFirst({
-      where: {
+    const responseData = await res.json();
+
+    if (!responseData.id) {
+      console.error("Invalid response from Replicate API:", responseData);
+      return NextResponse.json(
+        { error: "Invalid response from Replicate API" },
+        { status: 500 }
+      );
+    }
+
+    const fluxData = await prisma.fluxData.create({
+      data: {
         replicateId: responseData.id,
+        userId,
+        model: modelName,
+        inputPrompt,
+        aspectRatio,
+        isPrivate,
+        // Otros campos necesarios
       },
     });
+
     if (!fluxData) {
       return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
     }
@@ -189,10 +206,10 @@ export async function POST(req: NextRequest, { params }: Params) {
     });
     return NextResponse.json({ id: FluxHashids.encode(fluxData.id) });
   } catch (error) {
-    console.log("error-->", error);
+    console.error("Unexpected error:", error);
     return NextResponse.json(
-      { error: getErrorMessage(error) },
-      { status: 400 },
+      { error: "An unexpected error occurred: " + getErrorMessage(error) },
+      { status: 500 }
     );
   }
 }
