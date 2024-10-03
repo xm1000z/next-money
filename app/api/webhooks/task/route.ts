@@ -130,7 +130,7 @@ export async function POST(req: Request) {
       channel: "refund",
       event: "Refund points",
       user_id: fluxData.userId,
-      description: `用户绘画任务执行失败`,
+      description: `El usuario falló en la tarea de dibujo`,
       icon: "💰",
     });
   } catch (error) {

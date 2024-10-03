@@ -119,7 +119,7 @@ export async function POST(req: NextRequest, { params }: Params) {
     headers.append("Content-Type", "application/json");
     headers.append("API-TOKEN", env.FLUX_HEADER_KEY);
 
-    const res = await fetch(`https://app.notas.ai/flux/create`, {
+    const res = await fetch(`${env.FLUX_CREATE_URL}/flux/create`, {
       method: "POST",
       headers,
       body: JSON.stringify({
@@ -139,7 +139,14 @@ export async function POST(req: NextRequest, { params }: Params) {
         { status: 400 },
       );
     }
-
+    const fluxData = await prisma.fluxData.findFirst({
+      where: {
+        replicateId: res.replicate_id,
+      },
+    });
+    if (!fluxData) {
+      return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
+    }
 
     await prisma.$transaction(async (tx) => {
       const newAccount = await tx.userCredit.update({
