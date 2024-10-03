@@ -119,29 +119,38 @@ export async function POST(req: NextRequest, { params }: Params) {
     headers.append("Content-Type", "application/json");
     headers.append("API-TOKEN", env.FLUX_HEADER_KEY);
 
-    const res = await fetch(`${env.FLUX_CREATE_URL}/flux/create`, {
+    const res = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
-      headers,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${env.REPLICATE_API_TOKEN}`,
+      },
       body: JSON.stringify({
-        model: modelName,
-        input_image_url: inputImageUrl,
-        input_prompt: inputPrompt,
-        aspect_ratio: aspectRatio,
-        is_private: isPrivate,
-        user_id: userId,
-        lora_name: loraName, 
-        locale,
+        version: modelName,
+        input: {
+          prompt: inputPrompt,
+          image: inputImageUrl,
+          aspect_ratio: aspectRatio,
+          is_private: isPrivate,
+          user_id: userId,
+          lora_name: loraName,
+          locale,
+        },
       }),
-    }).then((res) => res.json());
-    if (!res?.replicate_id && res.error) {
+    });
+
+    const responseData = await res.json();
+
+    if (!responseData.id) {
       return NextResponse.json(
-        { error: res.error || "Create Generator Error" },
+        { error: "Create Generator Error" },
         { status: 400 },
       );
     }
+
     const fluxData = await prisma.fluxData.findFirst({
       where: {
-        replicateId: res.replicate_id,
+        replicateId: responseData.id,
       },
     });
     if (!fluxData) {
