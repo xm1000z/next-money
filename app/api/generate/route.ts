@@ -132,18 +132,51 @@ export async function POST(req: NextRequest, { params }: Params) {
         lora_name: loraName, 
         locale,
       }),
-    }).then((res) => res.json());
-    if (!res?.replicate_id && res.error) {
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Flux API error:", res.status, errorText);
       return NextResponse.json(
-        { error: res.error || "Create Generator Error" },
-        { status: 400 },
+        { error: `Flux API error: ${res.status} ${errorText}` },
+        { status: res.status }
       );
     }
-    const fluxData = await prisma.fluxData.findFirst({
-      where: {
-        replicateId: res.replicate_id,
-      },
-    });
+
+    const responseData = await res.json();
+    console.log("Flux API response:", responseData);
+
+    if (!responseData?.replicate_id) {
+      console.error("Invalid response from Flux API:", responseData);
+      return NextResponse.json(
+        { error: "Invalid response from Flux API" },
+        { status: 500 }
+      );
+    }
+
+    let fluxData;
+    try {
+      fluxData = await prisma.fluxData.create({
+        data: {
+          replicateId: responseData.replicate_id,
+          userId,
+          model: modelName,
+          inputPrompt,
+          aspectRatio,
+          isPrivate: Boolean(isPrivate), // Convertimos isPrivate a booleano
+          loraName,
+          locale,
+          // Añade aquí otros campos necesarios
+        },
+      });
+    } catch (dbError) {
+      console.error("Database error:", dbError);
+      return NextResponse.json(
+        { error: "Database error: " + getErrorMessage(dbError) },
+        { status: 500 }
+      );
+    }
+
     if (!fluxData) {
       return NextResponse.json({ error: "Create Task Error" }, { status: 400 });
     }
@@ -153,16 +186,17 @@ export async function POST(req: NextRequest, { params }: Params) {
         where: { id: account.id },
         data: {
           credit: {
-            decrement: needCredit,
+            decrement: Credits[modelName],
           },
         },
       });
+
       const billing = await tx.userBilling.create({
         data: {
           userId,
           fluxId: fluxData.id,
           state: "Done",
-          amount: -needCredit,
+          amount: -Credits[modelName],
           type: BillingType.Withdraw,
           description: `Generate ${modelName} - ${aspectRatio} Withdraw`,
         },
@@ -171,13 +205,14 @@ export async function POST(req: NextRequest, { params }: Params) {
       await tx.userCreditTransaction.create({
         data: {
           userId,
-          credit: -needCredit,
+          credit: -Credits[modelName],
           balance: newAccount.credit,
           billingId: billing.id,
           type: "Generate",
         },
       });
     });
+
     return NextResponse.json({ id: FluxHashids.encode(fluxData.id) });
   } catch (error) {
     console.log("error-->", error);
