@@ -12,6 +12,7 @@ import { env } from "@/env.mjs";
 import { logsnag } from "@/lib/log-snag";
 import { stripe } from "@/lib/stripe";
 import { formatPrice } from "@/lib/utils";
+import { db } from "@/db";
 
 export async function GET() {
   return new Response("OK", { status: 200 });
