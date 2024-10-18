@@ -65,12 +65,12 @@ const PricingCard = ({
             {offer.originalAmount && offer.originalAmount > 0 ? (
               <>
                 <span className="text-xl text-muted-foreground/70 line-through">
-                  {formatPrice(offer.originalAmount, "$")}
+                  {formatPrice(offer.originalAmount, "€")}
                 </span>
-                <span>{formatPrice(offer.amount, "$")}</span>
+                <span>{formatPrice(offer.amount, "€")}</span>
               </>
             ) : (
-              `${formatPrice(offer.amount, "$")}`
+              `€{formatPrice(offer.amount, "€")}`
             )}
             <div className="text-base font-medium text-muted-foreground">
               / {offer.credit} {t("worth")}
@@ -134,7 +134,7 @@ export function FreeCard() {
 
         <div className="flex flex-col items-start">
           <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-            {`${formatPrice(0, "$")}`}
+            {`€{formatPrice(0, "€")}`}
             <div className="text-base font-medium text-muted-foreground">
               / 5 {t("worth")}
             </div>
@@ -220,7 +220,7 @@ export function PricingCards({
               {t("tip.title")}&nbsp;(
               {t("tip.subtitle")}&nbsp;
               <a
-                href="mailto:support@fluxaipro.art"
+                href="mailto:soporte@notas.ai"
                 className="font-semibold underline decoration-primary/70 hover:decoration-primary"
               >
                 {t("tip.contact")}
@@ -241,9 +241,9 @@ export function PricingCards({
           <br />
           <a
             className="font-medium text-primary hover:underline"
-            href="mailto:support@fluxaipro.art"
+            href="mailto:soporte@notas.ai"
           >
-            support@fluxaipro.art
+            soporte@notas.ai
           </a>{" "}
           {t("contact.description")}
         </p>
