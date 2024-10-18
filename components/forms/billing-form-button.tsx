@@ -15,6 +15,7 @@ import { SubscriptionPlan, UserSubscriptionPlan } from "@/types";
 interface BillingFormButtonProps {
   offer: ChargeProductSelectDto;
   btnText?: string;
+  className?: string;
 }
 
 export function BillingFormButton({

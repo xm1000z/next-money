@@ -2,6 +2,7 @@ interface HeaderSectionProps {
   label?: string;
   title: string;
   subtitle?: string;
+  className?: string;
 }
 
 export function HeaderSection({ label, title, subtitle }: HeaderSectionProps) {

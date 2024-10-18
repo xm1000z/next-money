@@ -47,65 +47,57 @@ const PricingCard = ({
   return (
     <div
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-3xl border shadow-sm",
-        offer.amount === 1990 ? "-m-0.5 border-2 border-purple-400" : "",
+        "relative flex flex-col overflow-hidden rounded-3xl border shadow-lg transition-all duration-300",
+        "backdrop-blur-md bg-background/50 dark:bg-background/30",
+        offer.amount === 1990 
+          ? "border-primary/50 dark:border-primary/30 scale-105" 
+          : "hover:scale-102.5 hover:shadow-xl",
       )}
       key={offer.title}
     >
-      <div className="min-h-[150px] items-start space-y-4 bg-muted/50 p-6">
-        <p className="flex font-urban text-sm font-bold uppercase tracking-wider text-muted-foreground">
+      <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
+        <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
           {offer.title}
         </p>
 
-        <div className="flex flex-row">
-          <div className="flex items-end">
-            <div className="flex text-left text-3xl font-semibold leading-6">
-              {offer.originalAmount && offer.originalAmount > 0 ? (
-                <>
-                  <span className="mr-2 text-base text-muted-foreground/80 line-through">
-                    {formatPrice(offer.originalAmount, "€")}
-                  </span>
-                  <span>{formatPrice(offer.amount, "€")}</span>
-                </>
-              ) : (
-                `${formatPrice(offer.amount, "€")}`
-              )}
-            </div>
-            <div className="-mb-1 ml-2 text-left text-sm font-medium text-muted-foreground">
-              <div>
-                {offer.credit} {t("worth")}
-              </div>
+        <div className="flex flex-col items-start">
+          <div className="flex items-baseline space-x-2 text-4xl font-semibold">
+            {offer.originalAmount && offer.originalAmount > 0 ? (
+              <>
+                <span className="text-xl text-muted-foreground/70 line-through">
+                  {formatPrice(offer.originalAmount, "$")}
+                </span>
+                <span>{formatPrice(offer.amount, "$")}</span>
+              </>
+            ) : (
+              `${formatPrice(offer.amount, "$")}`
+            )}
+            <div className="text-base font-medium text-muted-foreground">
+              / {offer.credit} {t("worth")}
             </div>
           </div>
         </div>
-        <div className="text-left text-sm text-muted-foreground">
+        <div className="text-left text-sm text-muted-foreground/90">
           <div>{t("description")}</div>
         </div>
       </div>
 
-      <div className="flex h-full flex-col justify-between gap-16 p-6">
-        <ul className="space-y-2 text-left text-sm font-medium leading-normal">
+      <div className="flex h-full flex-col justify-between gap-8 p-8">
+        <ul className="space-y-3 text-left text-sm font-medium leading-normal">
           {offer.message &&
             offer.message.split(",")?.map((feature) => (
               <li className="flex items-start gap-x-3" key={feature}>
-                <Icons.check className="size-5 shrink-0 text-purple-500" />
+                <Icons.check className="size-5 shrink-0 text-primary" />
                 <p>{feature}</p>
               </li>
             ))}
-
-          {/* {offer.limitations.length > 0 &&
-            offer.limitations.map((feature) => (
-              <li
-                className="flex items-start text-muted-foreground"
-                key={feature}
-              >
-                <Icons.close className="mr-3 size-5 shrink-0" />
-                <p>{feature}</p>
-              </li>
-            ))} */}
         </ul>
         <SignedIn>
-          <BillingFormButton offer={offer} btnText={t("action.buy")} />
+          <BillingFormButton 
+            offer={offer} 
+            btnText={t("action.buy")} 
+            className="w-full transition-all duration-300 hover:brightness-110"
+          />
         </SignedIn>
 
         <SignedOut>
@@ -113,8 +105,7 @@ const PricingCard = ({
             <SignInButton mode="modal" forceRedirectUrl={url(pathname).href}>
               <Button
                 variant={offer.amount === 1990 ? "default" : "outline"}
-                className="w-full"
-                // onClick={() => setShowSignInModal(true)}
+                className="w-full transition-all duration-300 hover:brightness-110"
               >
                 {t("action.signin")}
               </Button>
@@ -132,32 +123,31 @@ export function FreeCard() {
   return (
     <div
       className={cn(
-        "relative col-span-3 flex flex-col overflow-hidden rounded-3xl border shadow-sm lg:col-span-3",
+        "relative col-span-3 flex flex-col overflow-hidden rounded-3xl border shadow-lg transition-all duration-300 hover:shadow-xl",
+        "backdrop-blur-md bg-background/50 dark:bg-background/30 hover:scale-102.5",
       )}
     >
-      <div className="min-h-[150px] items-start space-y-4 bg-muted/50 p-6">
-        <p className="flex font-urban text-sm font-bold uppercase tracking-wider text-muted-foreground">
+      <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
+        <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
           Free
         </p>
 
-        <div className="flex flex-row">
-          <div className="flex items-end">
-            <div className="flex text-left text-3xl font-semibold leading-6">
-              {`${formatPrice(0, "$")}`}
-            </div>
-            <div className="-mb-1 ml-2 text-left text-sm font-medium text-muted-foreground">
-              <div>5 {t("worth")}</div>
+        <div className="flex flex-col items-start">
+          <div className="flex items-baseline space-x-2 text-4xl font-semibold">
+            {`${formatPrice(0, "$")}`}
+            <div className="text-base font-medium text-muted-foreground">
+              / 5 {t("worth")}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex h-full flex-col justify-between gap-16 p-6">
-        <ul className="space-y-2 text-left text-sm font-medium leading-normal">
+      <div className="flex h-full flex-col justify-between gap-8 p-8">
+        <ul className="space-y-3 text-left text-sm font-medium leading-normal">
           {["Limited models", "Max 5/month Flux.1 Schnell Images"]?.map(
             (feature) => (
               <li className="flex items-start gap-x-3" key={feature}>
-                <Icons.check className="size-5 shrink-0 text-purple-500" />
+                <Icons.check className="size-5 shrink-0 text-primary" />
                 <p>{feature}</p>
               </li>
             ),
@@ -174,12 +164,13 @@ export function FreeCard() {
           ))}
         </ul>
         <SignBox>
-          <Button>Try Out</Button>
+          <Button className="w-full transition-all duration-300 hover:brightness-110">Try Out</Button>
         </SignBox>
       </div>
     </div>
   );
 }
+
 export function PricingCards({
   userId,
   chargeProduct,
@@ -211,75 +202,50 @@ export function PricingCards({
         reward();
       }, 1000);
     } else if (searchParams.get("success") === "false") {
-      console.log("Pago fallido");
+      console.log("Payment failed");
     }
   }, [searchParams]);
 
   return (
-    <MaxWidthWrapper>
-      <section className="flex flex-col items-center text-center">
+    <MaxWidthWrapper className="py-20">
+      <section className="flex flex-col items-center text-center space-y-12">
         <HeaderSection 
           label={t("label")} 
-          title={t("title")}
+          title={t("title")} 
+          className="text-4xl font-bold tracking-tight"
         />
-        <div className="mt-4">
-          <p className="mb-7 inline-flex items-center justify-between rounded-lg bg-gray-100 px-2 py-2 pe-4 text-sm text-black hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800 md:rounded-md md:px-1 md:py-1">
-            <span className="text-sm font-medium">
-              {t("tip.title")}(
+        <div className="w-full">
+          <p className="mb-8 inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-2 text-sm text-primary dark:bg-primary/20">
+            <span className="font-medium">
+              {t("tip.title")}&nbsp;(
+              {t("tip.subtitle")}&nbsp;
               <a
-                href="mailto:support@notas.ai"
-                className="font-semibold text-blue-700 underline decoration-blue-500 dark:text-white dark:decoration-white"
+                href="mailto:support@fluxaipro.art"
+                className="font-semibold underline decoration-primary/70 hover:decoration-primary"
               >
                 {t("tip.contact")}
-              </a>)
+              </a>
+              &nbsp;)
             </span>
           </p>
         </div>
-        {/* <div className="mb-4 mt-10 flex items-center gap-5">
-          <ToggleGroup
-            type="single"
-            size="sm"
-            defaultValue={isYearly ? "yearly" : "monthly"}
-            onValueChange={toggleBilling}
-            aria-label="toggle-year"
-            className="h-9 overflow-hidden rounded-full border bg-background p-1 *:h-7 *:text-muted-foreground"
-          >
-            <ToggleGroupItem
-              value="yearly"
-              className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
-              aria-label="Toggle yearly billing"
-            >
-              Yearly (-20%)
-            </ToggleGroupItem>
-            <ToggleGroupItem
-              value="monthly"
-              className="rounded-full px-5 data-[state=on]:!bg-primary data-[state=on]:!text-primary-foreground"
-              aria-label="Toggle monthly billing"
-            >
-              Monthly
-            </ToggleGroupItem>
-          </ToggleGroup>
-        </div> */}
 
-        <div className="grid gap-5 bg-inherit py-5 md:grid-cols-3">
+        <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
           {chargeProduct?.map((offer) => (
             <PricingCard offer={offer} key={offer.id} />
           ))}
         </div>
 
-        <p className="mt-3 text-balance text-center text-base text-muted-foreground">
+        <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
+          {t("contact.title")}
           <br />
           <a
             className="font-medium text-primary hover:underline"
-            href="mailto:sales@notas.ai"
+            href="mailto:support@fluxaipro.art"
           >
-            sales@notas.ai
+            support@fluxaipro.art
           </a>{" "}
           {t("contact.description")}
-          <br/>
-          {/* <strong>
-            You can test the subscriptions and won&apos;t be charged.
-          </strong> */}
         </p>
       </section>
       <div
@@ -315,11 +281,10 @@ export function PricingCardDialog({
         onClose(open);
       }}
     >
-      <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px]">
-        <DialogTitle className="sr-only">Pricing Card Dialog</DialogTitle>
+      <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px] bg-background/80 backdrop-blur-md">
         <DialogHeader>
-          <DialogTitle>{t("title")}</DialogTitle>
-          <div className="grid grid-cols-1 gap-5 bg-inherit py-5 lg:grid-cols-3">
+          <DialogTitle className="text-2xl font-bold mb-6">{t("title")}</DialogTitle>
+          <div className="grid grid-cols-1 gap-8 bg-inherit py-5 lg:grid-cols-3">
             {product?.map((offer) => (
               <PricingCard offer={offer} key={offer.id} />
             ))}

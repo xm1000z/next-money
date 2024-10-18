@@ -7,7 +7,7 @@ function snakeToCamelCase(str: string): string {
   return str.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
 }
 
-// 转换整个对象的键为驼峰命名
+// Convertir todas las claves del objeto a notación camelCase
 function convertKeysToCamelCase(obj: Record<string, any>): Record<string, any> {
   const newObj: Record<string, any> = {};
   for (const key in obj) {
