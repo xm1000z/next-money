@@ -39,38 +39,64 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
 
   if (event.type === "checkout.session.completed") {
-    const subscriptionId = session.subscription as string;
     const userId = session.metadata?.userId;
 
     if (!userId) {
       return new Response("User ID not found", { status: 400 });
     }
 
-    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-    const priceId = subscription.items.data[0].price.id;
+    if (session.mode === "subscription") {
+      // Manejo de suscripciones
+      const subscriptionId = session.subscription as string;
+      const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+      const priceId = subscription.items.data[0].price.id;
 
-    await prisma.userSubscription.upsert({
-      where: { userId: userId },
-      update: {
-        stripeSubscriptionId: subscriptionId,
-        stripePriceId: priceId,
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      },
-      create: {
-        userId: userId,
-        stripeSubscriptionId: subscriptionId,
-        stripePriceId: priceId,
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      },
-    });
+      await prisma.userSubscription.upsert({
+        where: { userId: userId },
+        update: {
+          stripeSubscriptionId: subscriptionId,
+          stripePriceId: priceId,
+          stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        },
+        create: {
+          userId: userId,
+          stripeSubscriptionId: subscriptionId,
+          stripePriceId: priceId,
+          stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        },
+      });
 
-    await logsnag.track({
-      channel: "subscriptions",
-      event: "Suscripción iniciada",
-      user_id: userId,
-      description: `Nueva suscripción: ${priceId}`,
-      icon: "🎉",
-    });
+      await logsnag.track({
+        channel: "subscriptions",
+        event: "Suscripción iniciada",
+        user_id: userId,
+        description: `Nueva suscripción: ${priceId}`,
+        icon: "🎉",
+      });
+    } else {
+      // Manejo de pagos únicos
+      const amount = session.amount_total;
+      const currency = session.currency;
+
+      await prisma.chargeOrder.create({
+        data: {
+          userId: userId,
+          amount: amount || 0,
+          currency: currency || 'usd',
+          phase: 'Paid',
+          channel: 'Stripe',
+          // Añade aquí otros campos necesarios para ChargeOrder
+        },
+      });
+
+      await logsnag.track({
+        channel: "payments",
+        event: "Pago único completado",
+        user_id: userId,
+        description: `Pago de ${formatPrice(amount || 0, currency || 'usd')}`,
+        icon: "💳",
+      });
+    }
   }
 
   if (event.type === "invoice.payment_succeeded") {

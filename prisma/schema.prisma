@@ -48,6 +48,7 @@ model ChargeProduct {
   tag            Json?    @db.Json
   message        String?
   state          String   @db.VarChar
+  isSubscription Boolean  @default(false) @map(name: "is_subscription")
   createdAt      DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
   updatedAt      DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
@@ -220,3 +221,4 @@ model UserSubscription {
   @@index([userId])
   @@index([stripeSubscriptionId])
 }
+
