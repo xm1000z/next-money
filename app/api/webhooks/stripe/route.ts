@@ -85,7 +85,7 @@ export async function POST(req: Request) {
           currency: currency || 'usd',
           phase: 'Paid',
           channel: 'Stripe',
-          // Añade aquí otros campos necesarios para ChargeOrder
+          credit: 0, 
         },
       });
 
