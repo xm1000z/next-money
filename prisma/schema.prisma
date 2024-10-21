@@ -48,7 +48,6 @@ model ChargeProduct {
   tag            Json?    @db.Json
   message        String?
   state          String   @db.VarChar
-  isSubscription Boolean  @default(false) @map(name: "is_subscription")
   createdAt      DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
   updatedAt      DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
@@ -207,18 +206,3 @@ model UserPaymentInfo {
 
   @@map(name: "user_payment_info")
 }
-
-model UserSubscription {
-  id                     String   @id @default(cuid())
-  userId                 String   @unique
-  stripeCustomerId       String?
-  stripeSubscriptionId   String?  @unique
-  stripePriceId          String?
-  stripeCurrentPeriodEnd DateTime?
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
-
-  @@index([userId])
-  @@index([stripeSubscriptionId])
-}
-
