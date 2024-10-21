@@ -7,7 +7,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { stripe } from "@/lib/stripe";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { absoluteUrl } from "@/lib/utils";
-import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 
 export type responseAction = {
   status: "success" | "error";
