@@ -40,8 +40,8 @@
         "description": "El Marketing es cosa de los marketers, por eso esta herramienta es complementaria y no sustitutoria. Si no eres productivo, te sustituirán, pero por otra persona que sí lo sea."
       },
       "item6": {
-        "title": "LISA",
-        "description": "El primer paso hacia la asistencia de voz inteligente, completamente en español, todavía en desarrollo y uso experimental."
+        "title": "PDF",
+        "description": "Sube tus documentos en una variedad de formatos para que la Inteligencia Artificial los analice por ti. Aumenta tu productividad y saca conclusiones rápidamente."
       }
     },
     "powered": {
@@ -389,7 +389,7 @@
     "Chat": "Chat",
     "Search": "Search",
     "SEO": "SEO",
-    "LISA": "LISA", 
+    "PDF": "PDF", 
     "Studio": "Studio"
   },
   "Navigation": {

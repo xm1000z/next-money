@@ -71,13 +71,13 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             Search
           </Link>
           <Link
-            href="https://lisa.notas.ai/"
+            href="https://pdf.notas.ai/"
             className="underline-offset-4 hover:underline"
             title="Woy AI Tools Directory"
             prefetch={false}
             target="_blank"
           >
-            LISA
+            PDF
           </Link>
           <Link
             href="https://seo.notas.ai/"
