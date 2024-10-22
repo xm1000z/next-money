@@ -177,7 +177,7 @@ model UserBilling {
 
 model UserCredit {
   id        Int      @id @default(autoincrement())
-  userId    String   @map(name: "user_id") @db.VarChar(200)
+  userId    String   @unique @map(name: "user_id") @db.VarChar(200)
   credit    Int
   createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
   updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
