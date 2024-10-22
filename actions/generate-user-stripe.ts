@@ -7,7 +7,6 @@ import { currentUser } from "@clerk/nextjs/server";
 import { stripe } from "@/lib/stripe";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { absoluteUrl } from "@/lib/utils";
-import { prisma } from "@/db/prisma";
 
 export type responseAction = {
   status: "success" | "error";
@@ -18,7 +17,7 @@ export type responseAction = {
 const billingUrl = absoluteUrl("/pricing");
 
 export async function generateUserStripe(
-  productId: string
+  priceId: string,
 ): Promise<responseAction> {
   let redirectUrl: string = "";
 
@@ -31,17 +30,8 @@ export async function generateUserStripe(
 
     const subscriptionPlan = await getUserSubscriptionPlan(user.id);
 
-    // Obtener el producto de la base de datos
-    const product = await prisma.chargeProduct.findUnique({
-      where: { id: parseInt(productId) }
-    });
-
-    if (!product) {
-      throw new Error("Product not found");
-    }
-
     if (subscriptionPlan.isPaid && subscriptionPlan.stripeCustomerId) {
-      // Usuario con plan pagado - Crear una sesión del portal para gestionar la suscripción.
+      // User on Paid Plan - Create a portal session to manage subscription.
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: subscriptionPlan.stripeCustomerId,
         return_url: billingUrl,
@@ -49,30 +39,22 @@ export async function generateUserStripe(
 
       redirectUrl = stripeSession.url as string;
     } else {
-      // Usuario con plan gratuito - Crear una sesión de checkout para actualizar.
+      // User on Free Plan - Create a checkout session to upgrade.
       const stripeSession = await stripe.checkout.sessions.create({
         success_url: billingUrl,
         cancel_url: billingUrl,
         payment_method_types: ["card"],
-        mode: product.isSubscription ? "subscription" : "payment",
+        mode: "payment",
         billing_address_collection: "auto",
         customer_email: user.primaryEmailAddress.emailAddress,
         line_items: [
           {
-            price_data: {
-              currency: product.currency,
-              product_data: {
-                name: product.title,
-              },
-              unit_amount: product.amount,
-              recurring: product.isSubscription ? { interval: "month" } : undefined,
-            },
+            price: priceId,
             quantity: 1,
           },
         ],
         metadata: {
           userId: user.id,
-          productId: product.id.toString(),
         },
       });
 
