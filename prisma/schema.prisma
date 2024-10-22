@@ -8,21 +8,18 @@ datasource db {
 }
 
 model ChargeOrder {
-  id                   Int       @id @default(autoincrement())
-  userId               String    @map(name: "user_id") @db.VarChar(200)
-  userInfo             Json?     @map(name: "user_info") @db.Json
-  amount               Int
-  credit               Int
-  phase                String    @db.VarChar
-  channel              String    @db.VarChar
-  currency             String    @db.VarChar
-  paymentAt            DateTime? @map(name: "payment_at") @db.Timestamp(6)
-  result               Json?     @db.Json
-  isSubscription       Boolean   @default(false) @map(name: "is_subscription")
-  subscriptionPeriodStart DateTime? @map(name: "subscription_period_start") @db.Timestamp(6)
-  subscriptionPeriodEnd   DateTime? @map(name: "subscription_period_end") @db.Timestamp(6)
-  createdAt            DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt            DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  id        Int       @id @default(autoincrement())
+  userId    String    @map(name: "user_id") @db.VarChar(200)
+  userInfo  Json?     @map(name: "user_info") @db.Json
+  amount    Int
+  credit    Int
+  phase     String    @db.VarChar
+  channel   String    @db.VarChar
+  currency  String    @db.VarChar
+  paymentAt DateTime? @map(name: "payment_at") @db.Timestamp(6)
+  result    Json?     @db.Json
+  createdAt DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
+  updatedAt DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
   @@map(name: "charge_order")
 }
@@ -51,8 +48,6 @@ model ChargeProduct {
   tag            Json?    @db.Json
   message        String?
   state          String   @db.VarChar
-  isSubscription Boolean  @default(false) @map(name: "is_subscription")
-  interval       String?  @db.VarChar // 'month', 'year', etc.
   createdAt      DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
   updatedAt      DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
@@ -177,7 +172,7 @@ model UserBilling {
 
 model UserCredit {
   id        Int      @id @default(autoincrement())
-  userId    String   @unique @map(name: "user_id") @db.VarChar(200)
+  userId    String   @map(name: "user_id") @db.VarChar(200)
   credit    Int
   createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
   updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
@@ -200,16 +195,15 @@ model UserCreditTransaction {
 
 model UserPaymentInfo {
   id                     Int       @id @default(autoincrement())
-  userId                 String    @unique @map(name: "user_id") @db.VarChar(200)
+  userId                 String    @map(name: "user_id") @db.VarChar(200)
   userInfo               Json?     @map(name: "user_info") @db.Json
   stripeCustomerId       String?   @map(name: "stripe_customer_id") @db.VarChar
-  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id") @db.VarChar
+  stripeSubscriptionId   String?   @map(name: "stripe_subscription_id") @db.VarChar
   stripePriceId          String?   @map(name: "stripe_price_id") @db.VarChar
   stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end") @db.Timestamp(6)
-  subscriptionStatus     String?   @map(name: "subscription_status") @db.VarChar
-  cancelAtPeriodEnd      Boolean?  @default(false) @map(name: "cancel_at_period_end")
   createdAt              DateTime  @default(now()) @map(name: "created_at") @db.Timestamp(6)
   updatedAt              DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
   @@map(name: "user_payment_info")
+  @@index([stripeSubscriptionId])
 }

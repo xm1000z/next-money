@@ -18,8 +18,6 @@ const billingUrl = absoluteUrl("/pricing");
 
 export async function generateUserStripe(
   priceId: string,
-  productId: string,
-  amount: number
 ): Promise<responseAction> {
   let redirectUrl: string = "";
 
@@ -43,10 +41,10 @@ export async function generateUserStripe(
     } else {
       // User on Free Plan - Create a checkout session to upgrade.
       const stripeSession = await stripe.checkout.sessions.create({
-        success_url: `${billingUrl}?success=true`,
-        cancel_url: `${billingUrl}?success=false`,
+        success_url: billingUrl,
+        cancel_url: billingUrl,
         payment_method_types: ["card"],
-        mode: "subscription",
+        mode: "payment",
         billing_address_collection: "auto",
         customer_email: user.primaryEmailAddress.emailAddress,
         line_items: [
@@ -57,16 +55,15 @@ export async function generateUserStripe(
         ],
         metadata: {
           userId: user.id,
-          productId: productId,
         },
       });
 
       redirectUrl = stripeSession.url as string;
     }
-
-    return { status: "success", stripeUrl: redirectUrl };
   } catch (error) {
-    console.error("Error generating Stripe session:", error);
-    return { status: "error" };
+    throw new Error("Failed to generate user stripe session");
   }
+
+  // no revalidatePath because redirect
+  redirect(redirectUrl);
 }

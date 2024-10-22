@@ -65,88 +65,45 @@ export async function POST(req: Request) {
 
   const session = event.data.object as Stripe.Checkout.Session;
 
-   if (event.type === "checkout.session.completed") {
-  // Retrieve the subscription details from Stripe.
-  const subscription = await stripe.subscriptions.retrieve(
-    session.subscription as string,
-  );
+  // if (event.type === "checkout.session.completed") {
+  //   // Retrieve the subscription details from Stripe.
+  //   const subscription = await stripe.subscriptions.retrieve(
+  //     session.subscription as string,
+  //   );
 
-  const userId = session.metadata?.userId;
-  if (!userId) {
-    console.error("No se encontró userId en los metadatos de la sesión");
-    return new Response("UserId no encontrado", { status: 400 });
-  }
+  //   // Update the user stripe into in our database.
+  //   // Since this is the initial subscription, we need to update
+  //   // the subscription id and customer id.
+  //   await db
+  //     .update(userPaymentInfo)
+  //     .set({
+  //       stripeSubscriptionId: subscription.id,
+  //       stripeCustomerId: subscription.customer as string,
+  //       stripePriceId: subscription.items.data[0].price.id,
+  //       stripeCurrentPeriodEnd: new Date(
+  //         subscription.current_period_end * 1000,
+  //       ),
+  //     })
+  //     .where(eq(userPaymentInfo.userId, session?.metadata?.userId as string));
+  // }
 
-  // Buscar el UserPaymentInfo existente
-  const existingPaymentInfo = await prisma.userPaymentInfo.findFirst({
-    where: {
-      userId: userId,
-    },
-  });
+  // if (event.type === "invoice.payment_succeeded") {
+  //   // Retrieve the subscription details from Stripe.
+  //   const subscription = await stripe.subscriptions.retrieve(
+  //     session.subscription as string,
+  //   );
 
-  if (existingPaymentInfo) {
-    // Actualizar el registro existente
-    await prisma.userPaymentInfo.update({
-      where: {
-        id: existingPaymentInfo.id,
-      },
-      data: {
-        stripeSubscriptionId: subscription.id,
-        stripeCustomerId: subscription.customer as string,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(
-          subscription.current_period_end * 1000
-        ),
-      },
-    });
-  } else {
-    // Crear un nuevo registro
-    await prisma.userPaymentInfo.create({
-      data: {
-        userId: userId,
-        stripeSubscriptionId: subscription.id,
-        stripeCustomerId: subscription.customer as string,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(
-          subscription.current_period_end * 1000
-        ),
-      },
-    });
-  }
-   }
-
-   if (event.type === "invoice.payment_succeeded") {
-  // Retrieve the subscription details from Stripe.
-  const subscription = await stripe.subscriptions.retrieve(
-    session.subscription as string,
-  );
-
-  // Primero, encuentra el UserPaymentInfo correcto
-  const userPaymentInfo = await prisma.userPaymentInfo.findFirst({
-    where: {
-      stripeSubscriptionId: subscription.id,
-    },
-  });
-
-  if (!userPaymentInfo) {
-    console.error(`No se encontró UserPaymentInfo para la suscripción ${subscription.id}`);
-    return new Response("UserPaymentInfo no encontrado", { status: 400 });
-  }
-
-  // Ahora actualiza usando el id
-  await prisma.userPaymentInfo.update({
-    where: {
-      id: userPaymentInfo.id,
-    },
-    data: {
-      stripePriceId: subscription.items.data[0].price.id,
-      stripeCurrentPeriodEnd: new Date(
-        subscription.current_period_end * 1000
-      ),
-    },
-  });
-  }
-
+  //   // Update the price id and set the new period end.
+  //   await db
+  //     .update(userPaymentInfo)
+  //     .set({
+  //       stripePriceId: subscription.items.data[0].price.id,
+  //       stripeCurrentPeriodEnd: new Date(
+  //         subscription.current_period_end * 1000,
+  //       ),
+  //     })
+  //     .where(eq(userPaymentInfo.stripeSubscriptionId, subscription.id));
+  // }
   if (event.type === "payment_intent.payment_failed") {
     const metaOrderId = session?.metadata?.orderId as string;
     const [orderId] = ChargeOrderHashids.decode(metaOrderId);
@@ -278,87 +235,6 @@ export async function POST(req: Request) {
       tags: {
         title: product.title,
         amount: price,
-      },
-    });
-  }
-
-  if (event.type === "customer.subscription.created" || event.type === "customer.subscription.updated") {
-    const subscription = event.data.object as Stripe.Subscription;
-    const userId = subscription.metadata.userId;
-
-    await prisma.userPaymentInfo.upsert({
-      where: { userId: userId },
-      update: {
-        stripeSubscriptionId: subscription.id,
-        stripeCustomerId: subscription.customer as string,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      },
-      create: {
-        userId: userId,
-        stripeSubscriptionId: subscription.id,
-        stripeCustomerId: subscription.customer as string,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      },
-    });
-
-    // Aquí puedes añadir lógica para actualizar los créditos del usuario
-    // basado en el plan de suscripción
-  }
-
-  if (event.type === "invoice.payment_succeeded") {
-    const invoice = event.data.object as Stripe.Invoice;
-    const subscriptionId = invoice.subscription;
-    const customerId = invoice.customer;
-
-    const subscription = await stripe.subscriptions.retrieve(subscriptionId as string);
-    const userId = subscription.metadata.userId;
-
-    // Actualizar la información de pago del usuario
-    await prisma.userPaymentInfo.update({
-      where: { userId: userId },
-      data: {
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      },
-    });
-
-    // Añadir créditos al usuario basado en su plan de suscripción
-    // Esto dependerá de cómo quieras estructurar tus planes
-    const creditAmount = 100; // Ejemplo: 100 créditos por mes
-
-    // Primero, busca el UserCredit existente
-    const userCredit = await prisma.userCredit.findUnique({
-      where: { userId: userId },
-    });
-
-    if (userCredit) {
-      // Si existe, actualízalo
-      await prisma.userCredit.update({
-        where: { id: userCredit.id },
-        data: {
-          credit: {
-            increment: creditAmount,
-          },
-        },
-      });
-    } else {
-      // Si no existe, créalo
-      await prisma.userCredit.create({
-        data: {
-          userId: userId,
-          credit: creditAmount,
-        },
-      });
-    }
-
-    // Registrar la transacción
-    await prisma.userCreditTransaction.create({
-      data: {
-        userId: userId,
-        credit: creditAmount,
-        balance: (userCredit?.credit ?? 0) + creditAmount,
-        type: "Subscription",
       },
     });
   }
