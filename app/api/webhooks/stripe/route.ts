@@ -72,19 +72,40 @@ export async function POST(req: Request) {
      );
 
     // Update the user stripe info
-    await prisma.userPaymentInfo.update({
+    const userPaymentInfo = await prisma.userPaymentInfo.findUnique({
       where: {
         userId: session.metadata?.userId,
       },
-      data: {
-        stripeSubscriptionId: subscription.id,
-        stripeCustomerId: subscription.customer as string,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(
-          subscription.current_period_end * 1000
-        ),
-      },
     });
+
+    if (userPaymentInfo) {
+      await prisma.userPaymentInfo.update({
+        where: {
+          id: userPaymentInfo.id,
+        },
+        data: {
+          stripeSubscriptionId: subscription.id,
+          stripeCustomerId: subscription.customer as string,
+          stripePriceId: subscription.items.data[0].price.id,
+          stripeCurrentPeriodEnd: new Date(
+            subscription.current_period_end * 1000
+          ),
+        },
+      });
+    } else {
+      // Si no existe, créalo
+      await prisma.userPaymentInfo.create({
+        data: {
+          userId: session.metadata?.userId,
+          stripeSubscriptionId: subscription.id,
+          stripeCustomerId: subscription.customer as string,
+          stripePriceId: subscription.items.data[0].price.id,
+          stripeCurrentPeriodEnd: new Date(
+            subscription.current_period_end * 1000
+          ),
+        },
+      });
+    }
   }
 
    if (event.type === "invoice.payment_succeeded") {
