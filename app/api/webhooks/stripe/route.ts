@@ -116,23 +116,35 @@ export async function POST(req: Request) {
    }
 
    if (event.type === "invoice.payment_succeeded") {
-  //   // Retrieve the subscription details from Stripe.
-     const subscription = await stripe.subscriptions.retrieve(
-       session.subscription as string,
-     );
+  // Retrieve the subscription details from Stripe.
+  const subscription = await stripe.subscriptions.retrieve(
+    session.subscription as string,
+  );
 
-    // Update the price id and set the new period end.
-    await prisma.userPaymentInfo.update({
-      where: {
-        stripeSubscriptionId: subscription.id,
-      },
-      data: {
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(
-          subscription.current_period_end * 1000
-        ),
-      },
-    });
+  // Primero, encuentra el UserPaymentInfo correcto
+  const userPaymentInfo = await prisma.userPaymentInfo.findFirst({
+    where: {
+      stripeSubscriptionId: subscription.id,
+    },
+  });
+
+  if (!userPaymentInfo) {
+    console.error(`No se encontró UserPaymentInfo para la suscripción ${subscription.id}`);
+    return new Response("UserPaymentInfo no encontrado", { status: 400 });
+  }
+
+  // Ahora actualiza usando el id
+  await prisma.userPaymentInfo.update({
+    where: {
+      id: userPaymentInfo.id,
+    },
+    data: {
+      stripePriceId: subscription.items.data[0].price.id,
+      stripeCurrentPeriodEnd: new Date(
+        subscription.current_period_end * 1000
+      ),
+    },
+  });
   }
 
   if (event.type === "payment_intent.payment_failed") {
