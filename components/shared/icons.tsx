@@ -37,6 +37,7 @@ import {
   MessageSquare,
   SquarePen,
   ExternalLink,
+  FolderUp,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -55,6 +56,7 @@ export const Icons = {
   lineChart: LineChart,
   externalLink: ExternalLink,
   TextSearch,
+  FolderUp,
   Users,
   TrendingUp,
   MessageSquare,

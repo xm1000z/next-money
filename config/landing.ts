@@ -86,7 +86,7 @@ export const features = [
   {
     title: "item6.title",
     description: "item6.description",
-    link: "https://lisa.notas.ai",
-    icon: "Users",
+    link: "https://pdf.notas.ai",
+    icon: "FolderUp",
   },
 ];
