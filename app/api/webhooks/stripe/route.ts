@@ -326,20 +326,38 @@ export async function POST(req: Request) {
     // Añadir créditos al usuario basado en su plan de suscripción
     // Esto dependerá de cómo quieras estructurar tus planes
     const creditAmount = 100; // Ejemplo: 100 créditos por mes
-    await prisma.userCredit.update({
+
+    // Primero, busca el UserCredit existente
+    const userCredit = await prisma.userCredit.findUnique({
       where: { userId: userId },
-      data: {
-        credit: {
-          increment: creditAmount,
-        },
-      },
     });
+
+    if (userCredit) {
+      // Si existe, actualízalo
+      await prisma.userCredit.update({
+        where: { id: userCredit.id },
+        data: {
+          credit: {
+            increment: creditAmount,
+          },
+        },
+      });
+    } else {
+      // Si no existe, créalo
+      await prisma.userCredit.create({
+        data: {
+          userId: userId,
+          credit: creditAmount,
+        },
+      });
+    }
 
     // Registrar la transacción
     await prisma.userCreditTransaction.create({
       data: {
         userId: userId,
         credit: creditAmount,
+        balance: (userCredit?.credit ?? 0) + creditAmount,
         type: "Subscription",
       },
     });
