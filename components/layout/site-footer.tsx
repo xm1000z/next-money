@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 import NewsletterForm from "../forms/newsletter-form";
 import { Icons } from "../shared/icons";
+import Image from 'next/image';
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   const t = useTranslations("PageLayout");
@@ -48,7 +49,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
       </div>
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-between gap-4 text-sm md:flex-row">
         <div className="flex items-center gap-2">
-          <Image className="h-6 w-6" src="/public/apple-touch-icon.png" />
+          <Image className="h-6 w-6" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
           <span style={{ fontFamily: 'Apple Garamond' }} className="font-medium">NotasAI</span>
         </div>
         <div className="flex flex-col items-center gap-4 md:flex-row">
