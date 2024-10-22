@@ -212,5 +212,4 @@ model UserPaymentInfo {
   updatedAt              DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
   @@map(name: "user_payment_info")
-  @@index([stripeSubscriptionId])
 }
