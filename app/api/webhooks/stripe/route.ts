@@ -71,21 +71,21 @@ export async function POST(req: Request) {
        session.subscription as string,
      );
 
-  //   // Update the user stripe into in our database.
-  //   // Since this is the initial subscription, we need to update
-  //   // the subscription id and customer id.
-     await db
-       .update(userPaymentInfo)
-       .set({
-         stripeSubscriptionId: subscription.id,
-         stripeCustomerId: subscription.customer as string,
-         stripePriceId: subscription.items.data[0].price.id,
-         stripeCurrentPeriodEnd: new Date(
-           subscription.current_period_end * 1000,
-         ),
-       })
-       .where(eq(userPaymentInfo.userId, session?.metadata?.userId as string));
-   }
+    // Update the user stripe info
+    await prisma.userPaymentInfo.update({
+      where: {
+        userId: session.metadata?.userId,
+      },
+      data: {
+        stripeSubscriptionId: subscription.id,
+        stripeCustomerId: subscription.customer as string,
+        stripePriceId: subscription.items.data[0].price.id,
+        stripeCurrentPeriodEnd: new Date(
+          subscription.current_period_end * 1000
+        ),
+      },
+    });
+  }
 
    if (event.type === "invoice.payment_succeeded") {
   //   // Retrieve the subscription details from Stripe.
@@ -93,17 +93,20 @@ export async function POST(req: Request) {
        session.subscription as string,
      );
 
-  //   // Update the price id and set the new period end.
-     await db
-       .update(userPaymentInfo)
-       .set({
-         stripePriceId: subscription.items.data[0].price.id,
-         stripeCurrentPeriodEnd: new Date(
-           subscription.current_period_end * 1000,
-         ),
-       })
-       .where(eq(userPaymentInfo.stripeSubscriptionId, subscription.id));
-   }
+    // Update the price id and set the new period end.
+    await prisma.userPaymentInfo.update({
+      where: {
+        stripeSubscriptionId: subscription.id,
+      },
+      data: {
+        stripePriceId: subscription.items.data[0].price.id,
+        stripeCurrentPeriodEnd: new Date(
+          subscription.current_period_end * 1000
+        ),
+      },
+    });
+  }
+
   if (event.type === "payment_intent.payment_failed") {
     const metaOrderId = session?.metadata?.orderId as string;
     const [orderId] = ChargeOrderHashids.decode(metaOrderId);
