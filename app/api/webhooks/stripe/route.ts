@@ -66,47 +66,54 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
 
    if (event.type === "checkout.session.completed") {
-  //    Retrieve the subscription details from Stripe.
-     const subscription = await stripe.subscriptions.retrieve(
-       session.subscription as string,
-     );
+  // Retrieve the subscription details from Stripe.
+  const subscription = await stripe.subscriptions.retrieve(
+    session.subscription as string,
+  );
 
-    // Update the user stripe info
-    const userPaymentInfo = await prisma.userPaymentInfo.findUnique({
+  const userId = session.metadata?.userId;
+  if (!userId) {
+    console.error("No se encontró userId en los metadatos de la sesión");
+    return new Response("UserId no encontrado", { status: 400 });
+  }
+
+  // Buscar el UserPaymentInfo existente
+  const existingPaymentInfo = await prisma.userPaymentInfo.findFirst({
+    where: {
+      userId: userId,
+    },
+  });
+
+  if (existingPaymentInfo) {
+    // Actualizar el registro existente
+    await prisma.userPaymentInfo.update({
       where: {
-        userId: session.metadata?.userId,
+        id: existingPaymentInfo.id,
+      },
+      data: {
+        stripeSubscriptionId: subscription.id,
+        stripeCustomerId: subscription.customer as string,
+        stripePriceId: subscription.items.data[0].price.id,
+        stripeCurrentPeriodEnd: new Date(
+          subscription.current_period_end * 1000
+        ),
       },
     });
-
-    if (userPaymentInfo) {
-      await prisma.userPaymentInfo.update({
-        where: {
-          id: userPaymentInfo.id,
-        },
-        data: {
-          stripeSubscriptionId: subscription.id,
-          stripeCustomerId: subscription.customer as string,
-          stripePriceId: subscription.items.data[0].price.id,
-          stripeCurrentPeriodEnd: new Date(
-            subscription.current_period_end * 1000
-          ),
-        },
-      });
-    } else {
-      // Si no existe, créalo
-      await prisma.userPaymentInfo.create({
-        data: {
-          userId: session.metadata?.userId,
-          stripeSubscriptionId: subscription.id,
-          stripeCustomerId: subscription.customer as string,
-          stripePriceId: subscription.items.data[0].price.id,
-          stripeCurrentPeriodEnd: new Date(
-            subscription.current_period_end * 1000
-          ),
-        },
-      });
-    }
+  } else {
+    // Crear un nuevo registro
+    await prisma.userPaymentInfo.create({
+      data: {
+        userId: userId,
+        stripeSubscriptionId: subscription.id,
+        stripeCustomerId: subscription.customer as string,
+        stripePriceId: subscription.items.data[0].price.id,
+        stripeCurrentPeriodEnd: new Date(
+          subscription.current_period_end * 1000
+        ),
+      },
+    });
   }
+   }
 
    if (event.type === "invoice.payment_succeeded") {
   //   // Retrieve the subscription details from Stripe.
