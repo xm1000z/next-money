@@ -41,20 +41,32 @@ export async function generateUserStripe(
     } else {
       // User on Free Plan - Create a checkout session to upgrade.
       const stripeSession = await stripe.checkout.sessions.create({
-        success_url: billingUrl,
-        cancel_url: billingUrl,
+        success_url: `${nextUrl ?? billingUrl}&success=true`,
+        cancel_url: `${nextUrl ?? billingUrl}&success=false`,
         payment_method_types: ["card"],
-        mode: "payment",
+        mode: "subscription",
         billing_address_collection: "auto",
         customer_email: user.primaryEmailAddress.emailAddress,
         line_items: [
           {
-            price: priceId,
+            price_data: {
+              currency: "eur",
+              product_data: {
+                name: "Suscripción mensual",
+                description: "Acceso a créditos mensuales",
+              },
+              unit_amount: amount,
+              recurring: {
+                interval: "month",
+              },
+            },
             quantity: 1,
           },
         ],
         metadata: {
+          orderId,
           userId: user.id,
+          chargeProductId: productId,
         },
       });
 

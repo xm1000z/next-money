@@ -282,5 +282,68 @@ export async function POST(req: Request) {
     });
   }
 
+  if (event.type === "customer.subscription.created" || event.type === "customer.subscription.updated") {
+    const subscription = event.data.object as Stripe.Subscription;
+    const userId = subscription.metadata.userId;
+
+    await prisma.userPaymentInfo.upsert({
+      where: { userId: userId },
+      update: {
+        stripeSubscriptionId: subscription.id,
+        stripeCustomerId: subscription.customer as string,
+        stripePriceId: subscription.items.data[0].price.id,
+        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      },
+      create: {
+        userId: userId,
+        stripeSubscriptionId: subscription.id,
+        stripeCustomerId: subscription.customer as string,
+        stripePriceId: subscription.items.data[0].price.id,
+        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      },
+    });
+
+    // Aquí puedes añadir lógica para actualizar los créditos del usuario
+    // basado en el plan de suscripción
+  }
+
+  if (event.type === "invoice.payment_succeeded") {
+    const invoice = event.data.object as Stripe.Invoice;
+    const subscriptionId = invoice.subscription;
+    const customerId = invoice.customer;
+
+    const subscription = await stripe.subscriptions.retrieve(subscriptionId as string);
+    const userId = subscription.metadata.userId;
+
+    // Actualizar la información de pago del usuario
+    await prisma.userPaymentInfo.update({
+      where: { userId: userId },
+      data: {
+        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      },
+    });
+
+    // Añadir créditos al usuario basado en su plan de suscripción
+    // Esto dependerá de cómo quieras estructurar tus planes
+    const creditAmount = 100; // Ejemplo: 100 créditos por mes
+    await prisma.userCredit.update({
+      where: { userId: userId },
+      data: {
+        credit: {
+          increment: creditAmount,
+        },
+      },
+    });
+
+    // Registrar la transacción
+    await prisma.userCreditTransaction.create({
+      data: {
+        userId: userId,
+        credit: creditAmount,
+        type: "Subscription",
+      },
+    });
+  }
+
   return new Response(null, { status: 200 });
 }
