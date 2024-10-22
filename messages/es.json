@@ -367,7 +367,7 @@
     }
   },
   "LocaleLayout": {
-    "title": "App - NotasAI",
+    "title": "NotasAI",
     "description": "Inteligencia Artificial en español.",
     "keywords": "inteligencia artificial, NotasAI, Notas IA, notas, notasai, notasia, ia, Flux, FluxAI, tecnología, AI, aprendizaje automático, herramientas Flux AI, aplicaciones AI, soluciones de inteligencia artificial, análisis de datos, innovación AI, análisis predictivo Flux, aprendizaje automático, desarrollo AI, próxima generación AI"
   },
@@ -376,7 +376,7 @@
     "locale": "{locale, select, zh {🇨🇳 简体中文} tw {🇭🇰 繁體中文} en {🇺🇸 English} fr {🇫🇷 Français} ja {🇯🇵 日本語} ko {🇰🇷 한국어} de {🇩🇪 Deutsch} es {🇪🇸 Español} pt {🇧🇷 Português} ar {🇦🇪 العربية} other {Unknown}}"
   },
   "Manifest": {
-    "name": "App - NotasAI"
+    "name": "NotasAI"
   },
   "AppNavigation": {
     "Support": "Soporte",
