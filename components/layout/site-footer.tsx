@@ -50,7 +50,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-between gap-4 text-sm md:flex-row">
         <div className="flex items-center gap-2">
           <Image className="h-6 w-6" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
-          <span style={{ fontFamily: 'Apple Garamond' }} className="font-medium">NotasAI</span>
+          <span style={{ fontFamily: 'Apple Garamond', fontSize: 'larger' }}>NotasAI</span>
         </div>
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link
