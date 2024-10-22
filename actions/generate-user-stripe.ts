@@ -14,7 +14,7 @@ export type responseAction = {
 };
 
 const billingUrl = absoluteUrl("/dashboard/billing")
-const billingUrl = absoluteUrl("/pricing");
+//const billingUrl = absoluteUrl("/pricing");
 
 export async function generateUserStripe(
   priceId: string,
