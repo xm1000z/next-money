@@ -23,17 +23,23 @@ export default async function HeroLanding() {
           href="https://x.com/notas_ia"
           target="_blank"
         >
-          <AnimatedGradientText>
-            <span className="mr-3">🍓</span>
-            <span
-              className={cn(
-                `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#ff4040] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
-              )}
+          <Button
+            variant="outline"
+            className="rounded-full border-border flex space-x-2 items-center"
+          >
+            <span className="font-mono text-xs">Introducimos BETA</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={12}
+              height={12}
+              fill="none"
             >
-              {t("intro")}
-            </span>
-            <Icons.twitter className="ml-2 size-3.5" />
-          </AnimatedGradientText>
+              <path
+                fill="currentColor"
+                d="M8.783 6.667H.667V5.333h8.116L5.05 1.6 6 .667 11.333 6 6 11.333l-.95-.933 3.733-3.733Z"
+              />
+            </svg>
+          </Button>
         </Link>
 
         <h1 style={{ fontFamily: 'Apple Garamond' }} className="text-balance font-urban text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
@@ -59,7 +65,7 @@ export default async function HeroLanding() {
             <Link
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "group relative w-full max-w-52 items-center justify-center gap-2 overflow-hidden whitespace-pre rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 ease-out hover:bg-primary/90 hover:ring-2 hover:ring-primary hover:ring-offset-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 md:flex",
+                "group relative w-full max-w-52 items-center justify-center gap-2 overflow-hidden whitespace-pre  bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 ease-out hover:bg-primary/90 hover:ring-2 hover:ring-primary hover:ring-offset-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 md:flex",
               )}
               href="/app"
             >
@@ -78,7 +84,7 @@ export default async function HeroLanding() {
               <Button
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "min-w-34 gap-2 rounded-full",
+                  "min-w-34 gap-2 ",
                 )}
               >
                 <UserArrowLeftIcon className="mr-2 size-4" />
@@ -94,7 +100,7 @@ export default async function HeroLanding() {
                 variant: "outline",
                 size: "lg",
               }),
-              "min-w-34 rounded-full px-5",
+              "min-w-34  px-5",
             )}
           >
             <p>{t("action.pricing")}</p>
