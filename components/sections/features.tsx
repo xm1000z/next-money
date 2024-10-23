@@ -22,12 +22,12 @@ export default function Features() {
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
               <div
-                className="group relative overflow-hidden rounded-2xl border bg-background p-5 md:p-8"
+                className="group relative overflow-hidden  border bg-background p-5 md:p-8"
                 key={t(`features.${feature.title}`)}
               >
                 <div className="relative">
                   <h3 className="text-lg font-semibold mb-4">{t(`features.${feature.title}`)}</h3>
-                  <div className="relative flex size-12 rounded-2xl border border-border shadow-sm *:relative *:m-auto *:size-6">
+                  <div className="relative flex size-12  border border-border shadow-sm *:relative *:m-auto *:size-6">
                     {React.createElement(Icons[feature.icon as keyof typeof Icons])}
                   </div>
 
