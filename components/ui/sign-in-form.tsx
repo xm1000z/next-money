@@ -55,7 +55,7 @@ export default function SignInForm() {
           <div className="pointer-events-auto mt-6 flex flex-col mb-6">
               <Accordion type="single" collapsible className="pt-2 mt-6">
                 <AccordionItem value="item-1" className="border-0">
-                  <AccordionTrigger className="justify-center space-x-2 flex text-sm">
+                  <AccordionTrigger className="justify-center space-x-2 flex text-sm no-underline">
                     <span>Novedades</span>
                   </AccordionTrigger>
                   <AccordionContent className="mt-4">
@@ -75,7 +75,7 @@ export default function SignInForm() {
               Mejorando por tí, <br />
               600 millones y subiendo.
             </p>
-            <div className="border-t-[1px] pointer-events-auto mt-6 flex flex-col mb-6">
+            <div className="pointer-events-auto mt-6 flex flex-col mb-6">
               {preferredSignInOption}
             </div>
             <p className="text-xs text-[#878787]">
