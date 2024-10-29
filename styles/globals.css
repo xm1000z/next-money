@@ -186,4 +186,6 @@
 
 .cl-signIn-start {
   box-shadow: none !important;
+  padding-left: 1px;
+/*margin-right: 50px;*/
 }
