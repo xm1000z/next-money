@@ -29,7 +29,7 @@ export function NavbarLogo(props: { size?: "sm" | "md" | "lg" | "xl" }) {
   return (
     <Link href="/" className="flex items-center space-x-2">
       <img 
-        src="/white.png"
+        src="https://notas.ai/white.png"
         alt="Logo"
         className="h-10 w-auto brightness-0 dark:brightness-200"
       />
@@ -61,42 +61,44 @@ export function NavBar({ scroll = false }: NavBarProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80",
-        scroll ? (scrolled ? "border-b" : "bg-transparent") : "border-b"
+        "sticky top-0 z-40 flex w-full justify-center",
+        scroll ? (scrolled ? "" : "bg-transparent") : ""
       )}
     >
-      <MaxWidthWrapper
-        className="flex h-16 items-center justify-between px-4"
-        large={documentation}
-      >
-        <div className="flex items-center gap-8">
-          <NavbarLogo />
+      <div className="w-[90%] max-w-[1200px] border-b border-zinc-200 bg-white/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80 md:w-[80%] md:rounded-full">
+        <MaxWidthWrapper
+          className="flex h-16 items-center justify-between px-4"
+          large={documentation}
+        >
+          <div className="flex items-center gap-8">
+            <NavbarLogo />
 
-          {links && links.length > 0 ? (
-            <nav className="hidden items-center space-x-6 md:flex">
-              {links.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.disabled ? "#" : item.href}
-                  prefetch={true}
-                  className={cn(
-                    "text-sm transition-colors",
-                    item.href.startsWith(`/${selectedLayout}`) ||
-                      (item.href === "/blog" && blog)
-                      ? "text-zinc-900 dark:text-zinc-100"
-                      : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100",
-                    item.disabled && "cursor-not-allowed opacity-80"
-                  )}
-                >
-                  {t(item.title)}
-                </Link>
-              ))}
-            </nav>
-          ) : null}
-        </div>
+            {links && links.length > 0 ? (
+              <nav className="hidden items-center space-x-6 md:flex">
+                {links.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.disabled ? "#" : item.href}
+                    prefetch={true}
+                    className={cn(
+                      "text-sm transition-colors",
+                      item.href.startsWith(`/${selectedLayout}`) ||
+                        (item.href === "/blog" && blog)
+                        ? "text-zinc-900 dark:text-zinc-100"
+                        : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100",
+                      item.disabled && "cursor-not-allowed opacity-80"
+                    )}
+                  >
+                    {t(item.title)}
+                  </Link>
+                ))}
+              </nav>
+            ) : null}
+          </div>
 
-        <NavbarUserInfo />
-      </MaxWidthWrapper>
+          <NavbarUserInfo />
+        </MaxWidthWrapper>
+      </div>
     </header>
   );
 }
