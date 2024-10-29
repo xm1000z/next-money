@@ -13,13 +13,17 @@ export default function SignInForm() {
     <SignIn
   appearance={{
     elements: {
-      card: 'tu-clase-personalizada',
+      card: 'bg-transparent shadow-none',
       form: 'tu-clase-personalizada',
+      header: 'hidden',
       formFieldLabelRow : 'hidden',
       formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-0 dark:border-zinc-700 dark:placeholder:text-zinc-400',
           formButtonPrimary: 'h-12 w-full bg-black text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200',
       footerAction: 'hidden', // Oculta elementos del footer
       footer: 'hidden' // Oculta el footer completo
+    },
+    variables: {
+        borderRadius: '0px',
     },
   }}
 />
