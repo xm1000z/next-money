@@ -61,11 +61,11 @@ export function NavBar({ scroll = false }: NavBarProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 flex w-full justify-center",
+        "sticky top-0 z-40 flex w-full justify-center pt-4",
         scroll ? (scrolled ? "" : "bg-transparent") : ""
       )}
     >
-      <div className="w-[90%] max-w-[1200px] border-b border-zinc-200 bg-white/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80 md:w-[80%] md:rounded-full">
+      <div className="border-b border-zinc-800 bg-white/80 backdrop-blur-sm dark:border-zinc-400 dark:bg-zinc-900/80">
         <MaxWidthWrapper
           className="flex h-16 items-center justify-between px-4"
           large={documentation}
