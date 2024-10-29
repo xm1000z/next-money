@@ -42,6 +42,8 @@ export async function POST(req: NextRequest) {
 
     // generate a random one-time token
     const token = crypto.randomUUID();
+
+    if (env.NODE_ENV === "production") {
       await resend.emails.send({
         from: emailConfig.from,
         to: parsed.email,
