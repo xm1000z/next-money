@@ -78,6 +78,13 @@ export function UserInfo() {
                 <SignInButton
                   mode="modal"
                   forceRedirectUrl={url(pathname).href}
+                  appearance={{
+                    elements: {
+                      footer: "hidden",
+                      footerAction: "hidden",
+                      card: "py-4"
+                    }
+                  }}
                 >
                   <TooltipTrigger asChild>
                     <button
