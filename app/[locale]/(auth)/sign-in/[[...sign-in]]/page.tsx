@@ -10,6 +10,12 @@ import {
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/container";
 
+// Definir la interfaz Props
+interface Props {
+  params: {
+    locale: string;
+  };
+}
 
 export default function Page({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
