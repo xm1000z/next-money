@@ -11,38 +11,18 @@ import {
 export default function SignInForm() {
   const preferredSignInOption = (
     <SignIn
-      appearance={{
-        elements: {
-          card: 'shadow-none',
-          form: 'gap-4',
-          header: 'hidden',
-          logoBox: 'hidden',
-          formFieldLabelRow: 'hidden',
-          formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-0 dark:border-zinc-700 dark:placeholder:text-zinc-400',
+  appearance={{
+    elements: {
+      card: 'tu-clase-personalizada',
+      form: 'tu-clase-personalizada',
+      formFieldLabelRow : 'hidden',
+      formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-0 dark:border-zinc-700 dark:placeholder:text-zinc-400',
           formButtonPrimary: 'h-12 w-full bg-black text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200',
-          footerAction: 'hidden',
-          footer: 'hidden',
-          formFieldInputShowPasswordButton: 'right-3',
-          formFieldInputShowPasswordIcon: 'h-4 w-4 dark:text-zinc-400',
-          identityPreviewEditButton: 'text-sm text-zinc-500 dark:text-zinc-400',
-          formFieldWarning: 'text-sm text-yellow-600 dark:text-yellow-400',
-          formFieldError: 'text-sm text-red-500 dark:text-red-400',
-          otpCodeFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-0 dark:border-zinc-700',
-        },
-        variables: {
-          borderRadius: '0px',
-          colorBackground: 'transparent',
-          colorInputBackground: 'transparent',
-          colorText: 'inherit',
-          colorTextSecondary: '#71717a',
-          colorPrimary: '#000000',
-          colorDanger: '#ef4444',
-          colorSuccess: '#22c55e',
-          colorWarning: '#f59e0b',
-          spacingUnit: '4px',
-        },
-      }}
-    />
+      footerAction: 'hidden', // Oculta elementos del footer
+      footer: 'hidden' // Oculta el footer completo
+    },
+  }}
+/>
   );
 
   const News = (
