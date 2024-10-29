@@ -14,15 +14,6 @@ import { Container } from "@/components/layout/container";
 export default function Page({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
 
-export const metadata: Metadata = {
-  title: "Login - NotasAI",
-};
-
-export default async function Page(params) {
-  if (params?.searchParams?.return_to === "desktop/command") {
-    return <DesktopCommandMenuSignIn />;
-  }
-
   return (
     <div>
       <header className="w-full fixed left-0 right-0">
@@ -88,5 +79,4 @@ export default async function Page(params) {
       {showTrackingConsent && <ConsentBanner />}
     </div>
   );
-}
 }
