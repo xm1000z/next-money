@@ -53,10 +53,10 @@ export default function SignInForm() {
         <div className="relative z-20 m-auto flex w-full max-w-[380px] flex-col py-8">
           <div className="flex w-full flex-col relative">
           <div className="pointer-events-auto mt-6 flex flex-col mb-6">
-              <Accordion type="single" collapsible className="border-t-[1px] pt-2 mt-6">
+              <Accordion type="single" collapsible className="pt-2 mt-6">
                 <AccordionItem value="item-1" className="border-0">
                   <AccordionTrigger className="justify-center space-x-2 flex text-sm">
-                    <span>More options</span>
+                    <span>Novedades</span>
                   </AccordionTrigger>
                   <AccordionContent className="mt-4">
                     <div className="flex flex-col space-y-4">
@@ -75,7 +75,7 @@ export default function SignInForm() {
               Mejorando por tí, <br />
               600 millones y subiendo.
             </p>
-            <div className="pointer-events-auto mt-6 flex flex-col mb-6">
+            <div className="border-t-[1px] pointer-events-auto mt-6 flex flex-col mb-6">
               {preferredSignInOption}
             </div>
             <p className="text-xs text-[#878787]">
