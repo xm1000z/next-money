@@ -69,13 +69,13 @@
     }
   },
   "PricingPage": {
-    "title": "Elige un plan ajustado a tus necesidades",
+    "title": "Elige un paquete ajustado a tus necesidades",
     "description": "Compra de créditos disponible",
     "worth": "créditos",
     "label": "Precios",
     "action": {
       "signin": "Iniciar Sesión",
-      "buy": "Suscribirse"
+      "buy": "Comprar ahora"
     },
     "contact": {
       "title": "Contáctanos",
@@ -111,9 +111,9 @@
       }
     },
     "tip": {
-      "title": "💳 BETA: Necesitas un plan personalizado?",
-      "subtitle": "",
-      "contact": "contáctanos"
+      "title": "💳 Recuerda: Si no estás suscrito, puedes hacerlo ",
+      "subtitle": "PACKS PARA SUSCRIPTORES",
+      "contact": "aquí"
     }
   },
   "Promotion": {

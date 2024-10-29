@@ -217,7 +217,7 @@ export function PricingCards({
         <div className="w-full">
           <p className="mb-8 inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-2 text-sm text-primary dark:bg-primary/20">
             <span className="font-medium">
-              {t("tip.title")}&nbsp;(
+              {t("tip.title")}&nbsp;
               {t("tip.subtitle")}&nbsp;
               <a
                 href="mailto:soporte@notas.ai"
@@ -225,7 +225,6 @@ export function PricingCards({
               >
                 {t("tip.contact")}
               </a>
-              &nbsp;)
             </span>
           </p>
         </div>

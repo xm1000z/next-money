@@ -6,7 +6,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { Icons } from "@/components/shared/icons";
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
+import MaxWidthWrapper2 from "@/components/shared/max-width-wrapper-2";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { dashboardConfig } from "@/config/dashboard";
@@ -66,7 +66,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
       )}
     >
       <div className="border border-zinc-800 bg-white/80 backdrop-blur-sm dark:border-zinc-400 dark:bg-zinc-900/80">
-        <MaxWidthWrapper
+        <MaxWidthWrapper2
           className="flex h-16 items-center justify-between px-4"
           large={documentation}
         >
@@ -96,7 +96,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
             ) : null}
           </div>
           <NavbarUserInfo />
-        </MaxWidthWrapper>
+        </MaxWidthWrapper2>
       </div>
     </header>
   );
