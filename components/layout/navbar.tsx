@@ -95,6 +95,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
               </nav>
             ) : null}
           </div>
+          <NavbarUserInfo />
         </MaxWidthWrapper>
       </div>
     </header>
