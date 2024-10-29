@@ -102,7 +102,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <ClerkProvider localization={localeMap[locale] ?? enUS}>
+    <ClerkProvider localization={localeMap[locale] ?? esES}>
       <html lang={locale} suppressHydrationWarning>
         <head />
         <body

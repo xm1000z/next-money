@@ -1,6 +1,6 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 import Link from "next/link";
-import { SignIn } from "@clerk/nextjs";
+import { SignInButton, SignIn } from "@clerk/nextjs";
 import {
   Accordion,
   AccordionContent,
@@ -20,32 +20,29 @@ interface Props {
 export default function Page({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
 
-  const appearance = {
-    elements: {
-      rootBox: "w-full",
-      card: "w-full shadow-none p-0",
-      header: "hidden",
-      footer: "hidden",
-      mainHeader: "hidden",
-      alternativeSection: "hidden",
-      formButtonPrimary: 
-        "w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary",
-      formFieldInput:
-        "w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700",
-      socialButtonsIconButton:
-        "w-full flex items-center justify-center space-x-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700",
-      socialButtonsProviderIcon: "h-5 w-5",
-      formFieldLabel: "block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1",
-      dividerLine: "bg-gray-300 dark:bg-gray-600",
-      dividerText: "text-gray-500 dark:text-gray-400 text-sm",
-    },
-    layout: {
-      socialButtonsPlacement: "top",
-      helpPageURL: "https://app.notas.ai/help",
-      privacyPageURL: "https://app.notas.ai/privacy",
-      termsPageURL: "https://app.notas.ai/terms",
-    },
-  };
+  const preferredSignInOption = (
+    <SignInButton mode="modal">
+      <button className="w-full flex items-center justify-center space-x-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700">
+        <svg className="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+        </svg>
+        <span>Continuar con Apple</span>
+      </button>
+    </SignInButton>
+  );
+
+  const moreSignInOptions = (
+    <SignIn.Root>
+      <SignIn.EmailField
+        className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+      />
+      <SignIn.Submit
+        className="w-full mt-4 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        Continuar con correo
+      </SignIn.Submit>
+    </SignIn.Root>
+  );
 
   return (
     <div>
@@ -77,12 +74,20 @@ export default function Page({ params: { locale } }: Props) {
             </p>
 
             <div className="pointer-events-auto mt-6 flex flex-col mb-6">
-              <SignIn
-                appearance={appearance}
-                afterSignInUrl="/dashboard"
-                signUpUrl="/sign-up"
-                path="/sign-in"
-              />
+              {preferredSignInOption}
+
+              <Accordion type="single" collapsible className="border-t-[1px] pt-2 mt-6">
+                <AccordionItem value="item-1" className="border-0">
+                  <AccordionTrigger className="justify-center space-x-2 flex text-sm">
+                    <span>More options</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="mt-4">
+                    <div className="flex flex-col space-y-4">
+                      {moreSignInOptions}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
 
             <p className="text-xs text-[#878787]">
