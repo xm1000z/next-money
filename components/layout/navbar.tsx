@@ -8,6 +8,7 @@ import { Link } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 import { UserInfo } from "../user-info";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
+import { useScroll } from "@/hooks/use-scroll";
 
 interface NavBarProps {
   scroll?: boolean;
