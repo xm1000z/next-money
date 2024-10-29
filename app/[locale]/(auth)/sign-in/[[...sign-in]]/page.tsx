@@ -79,8 +79,6 @@ export default function Page({ params: { locale } }: Props) {
           </div>
         </div>
       </div>
-
-      {showTrackingConsent && <ConsentBanner />}
     </div>
   );
 }
