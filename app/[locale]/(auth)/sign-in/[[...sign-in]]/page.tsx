@@ -47,7 +47,6 @@ export default function Page({ params: { locale } }: Props) {
             </p>
 
             <div className="pointer-events-auto mt-6 flex flex-col mb-6">
-              {preferredSignInOption}
 
               <Accordion
                 type="single"
@@ -60,7 +59,6 @@ export default function Page({ params: { locale } }: Props) {
                   </AccordionTrigger>
                   <AccordionContent className="mt-4">
                     <div className="flex flex-col space-y-4">
-                      {moreSignInOptions}
                     </div>
                   </AccordionContent>
                 </AccordionItem>
