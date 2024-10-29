@@ -159,3 +159,15 @@
     @apply text-zinc-200;
   }
 }
+
+/* Añade esto al final del archivo */
+.cl-footer,
+[class*="cl-footer"] {
+  display: none !important;
+}
+
+/* También puedes ocultar otros elementos de Clerk que no necesites */
+.cl-footerAction,
+.cl-footerActionLink {
+  display: none !important;
+}
