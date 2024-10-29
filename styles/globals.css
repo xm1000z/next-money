@@ -182,3 +182,8 @@
   font-weight: normal;
   font-style: italic;
 }
+
+
+.cl-signIn-start {
+  box-shadow: none !important;
+}
