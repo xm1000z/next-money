@@ -52,7 +52,7 @@ export function SearchCommand({ links }: { links: SidebarNavItem[] }) {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Notas..." />
+        <CommandInput placeholder="Chat..." />
         <CommandList>
           <CommandEmpty>Sin resultados.</CommandEmpty>
           {links.map((section) => (

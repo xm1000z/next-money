@@ -3,16 +3,16 @@ import { MarketingConfig } from "types";
 export const marketingConfig: MarketingConfig = {
   mainNav: [
     {
-      title: "Notas",
-      href: "https://writer.notas.ai",
-    },
-    {
       title: "Chat",
       href: "https://chat.notas.ai",
     },
     {
+      title: "Search",
+      href: "https://search.notas.ai",
+    },
+    {
       title: "pricing",
-      href: "/pricing",
+      href: "https://notas.ai/pricing",
     },
     {
       title: "blog",

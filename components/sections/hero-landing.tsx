@@ -94,7 +94,7 @@ export default async function HeroLanding() {
           </SignedOut>
 
           <Link
-            href="/pricing"
+            href="https://notas.ai/pricing"
             className={cn(
               buttonVariants({
                 variant: "outline",
