@@ -23,7 +23,7 @@ export async function GET() {
 
   const user = await currentUser();
   if (!userId || !user || !user.primaryEmailAddress) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    return NextResponse.json({ error: "Se requiere inicio de sesión" }, { status: 401 });
   }
   const targetDate = new Date("2024-08-20T20:20:00+08:00");
   const oneMonthLater = new Date(
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
 
   const user = await currentUser();
   if (!userId || !user || !user.primaryEmailAddress) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    return NextResponse.json({ error: "Se requiere inicio de sesión" }, { status: 401 });
   }
 
   const { success } = await ratelimit.limit(

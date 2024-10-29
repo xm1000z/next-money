@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
   const user = await currentUser();
   if (!userId || !user) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    return NextResponse.json({ error: "Se requiere inicio de sesión" }, { status: 401 });
   }
   const { success } = await ratelimit.limit(
     getKey(userId) + `_${req.ip ?? ""}`,

@@ -56,7 +56,7 @@ export async function POST(req: NextRequest, { params }: Params) {
 
   const user = await currentUser();
   if (!userId || !user) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    return NextResponse.json({ error: "Se requiere inicio de sesión" }, { status: 401 });
   }
   if (env.APP_ENV !== "production" && !user.publicMetadata.siteOwner) {
     return NextResponse.json({ error: "no permission" }, { status: 403 });

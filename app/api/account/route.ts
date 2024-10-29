@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   console.time("stat");
   const user = await currentUser();
   if (!user) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    return NextResponse.json({ error: "Se requiere inicio de sesión" }, { status: 401 });
   }
   // console.timeLog("stat");
 
