@@ -31,7 +31,6 @@ export default function SignInForm() {
           borderRadius: '0px',
           colorBackground: 'transparent',
           colorInputBackground: 'transparent',
-          colorAlphaShade: 'transparent',
           colorText: 'inherit',
           colorTextSecondary: '#71717a',
           colorPrimary: '#000000',
