@@ -1,5 +1,5 @@
 'use client';
-
+import Link from 'next/link';
 import { SignIn } from '@clerk/nextjs';
 import {
   Accordion,
