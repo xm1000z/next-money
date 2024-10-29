@@ -1,29 +1,19 @@
-import { unstable_setRequestLocale } from "next-intl/server";
-import Link from "next/link";
+// SignInForm.tsx - Componente Cliente
+"use client";
+
 import { SignInButton, useSignIn } from "@clerk/nextjs";
+import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { Metadata } from "next";
-import { Container } from "@/components/layout/container";
-import { useState } from "react";
 
-// Definir la interfaz Props
-interface Props {
-  params: {
-    locale: string;
-  };
-}
-
-export default function Page({ params: { locale } }: Props) {
-  unstable_setRequestLocale(locale);
+export function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn();
   const [email, setEmail] = useState("");
 
-  // Manejador para el submit del formulario
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isLoaded) return;
@@ -35,7 +25,6 @@ export default function Page({ params: { locale } }: Props) {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
-        // Redirigir a la página después del login
         window.location.href = "/dashboard";
       }
     } catch (err) {
@@ -74,6 +63,42 @@ export default function Page({ params: { locale } }: Props) {
   );
 
   return (
+    <div className="pointer-events-auto mt-6 flex flex-col mb-6">
+      {preferredSignInOption}
+
+      <Accordion type="single" collapsible className="border-t-[1px] pt-2 mt-6">
+        <AccordionItem value="item-1" className="border-0">
+          <AccordionTrigger className="justify-center space-x-2 flex text-sm">
+            <span>More options</span>
+          </AccordionTrigger>
+          <AccordionContent className="mt-4">
+            <div className="flex flex-col space-y-4">
+              {moreSignInOptions}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+}
+
+// page.tsx - Componente Servidor
+import { unstable_setRequestLocale } from "next-intl/server";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { Container } from "@/components/layout/container";
+import { SignInForm } from "./SignInForm";
+
+interface Props {
+  params: {
+    locale: string;
+  };
+}
+
+export default function Page({ params: { locale } }: Props) {
+  unstable_setRequestLocale(locale);
+
+  return (
     <div>
       <header className="w-full fixed left-0 right-0">
         <div className="ml-5 mt-4 md:ml-10 md:mt-10">
@@ -102,22 +127,7 @@ export default function Page({ params: { locale } }: Props) {
               effortlessly.
             </p>
 
-            <div className="pointer-events-auto mt-6 flex flex-col mb-6">
-              {preferredSignInOption}
-
-              <Accordion type="single" collapsible className="border-t-[1px] pt-2 mt-6">
-                <AccordionItem value="item-1" className="border-0">
-                  <AccordionTrigger className="justify-center space-x-2 flex text-sm">
-                    <span>More options</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="mt-4">
-                    <div className="flex flex-col space-y-4">
-                      {moreSignInOptions}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
+            <SignInForm />
 
             <p className="text-xs text-[#878787]">
               Al hacer clic en continuar, reconoces que has leído y aceptas los{" "}
