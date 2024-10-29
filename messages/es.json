@@ -400,7 +400,8 @@
     "blog": "Blog",
     "dashboard": "Dashboard",
     "tooltip": {
-      "login": "Iniciar Sesión"
+      "login": "Iniciar Sesión",
+      "dashboard": "Dashboard"
     }
   },
   "NotFoundPage": {
