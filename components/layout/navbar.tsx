@@ -81,7 +81,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
                     href={item.disabled ? "#" : item.href}
                     prefetch={true}
                     className={cn(
-                      "text-sm transition-colors",
+                      "text-sm transition-colors font-bold",
                       item.href.startsWith(`/${selectedLayout}`) ||
                         (item.href === "/blog" && blog)
                         ? "text-zinc-900 dark:text-zinc-100"
