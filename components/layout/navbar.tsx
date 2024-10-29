@@ -65,7 +65,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
         scroll ? (scrolled ? "" : "bg-transparent") : ""
       )}
     >
-      <div className="border-b border-zinc-800 bg-white/80 backdrop-blur-sm dark:border-zinc-400 dark:bg-zinc-900/80">
+      <div className="border border-zinc-800 bg-white/80 backdrop-blur-sm dark:border-zinc-400 dark:bg-zinc-900/80">
         <MaxWidthWrapper
           className="flex h-16 items-center justify-between px-4"
           large={documentation}
