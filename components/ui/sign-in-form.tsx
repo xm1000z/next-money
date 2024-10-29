@@ -1,9 +1,6 @@
 'use client';
 
-import Link from "next/link";
-import * as Clerk from '@clerk/elements/common';
-import * as SignIn from '@clerk/elements/sign-in'
-
+import { SignIn } from '@clerk/nextjs';
 import {
   Accordion,
   AccordionContent,
@@ -13,23 +10,13 @@ import {
 
 export default function SignInForm() {
   const preferredSignInOption = (
-    <SignIn.Root>
-      <SignIn.Step name="start">
-        <Clerk.Connection name="apple">Continuar con Apple</Clerk.Connection>
-      </SignIn.Step>
-    </SignIn.Root>
+    <SignIn/>
   );
 
   const News = (
-    <Clerk.Field name="identifier">
-      <Clerk.Label>Email</Clerk.Label>
-      <Clerk.Input type="email" />
-      <SignIn.Action submit>
-        <Clerk.Loading>
-          {(isLoading) => (isLoading ? 'Loading...' : 'Submit')}
-        </Clerk.Loading>
-      </SignIn.Action>
-    </Clerk.Field>
+    <Link href="https://notas.ai/news">
+      <span>- Planes de ampliación de créditos para suscriptores.</span>
+    </Link>
   );
 
   return (
