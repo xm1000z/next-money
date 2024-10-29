@@ -2,97 +2,79 @@
 
 import { useContext } from "react";
 import { useSelectedLayoutSegment } from "next/navigation";
-
 import { useTranslations } from "next-intl";
-
-import { Icons } from "@/components/shared/icons";
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { dashboardConfig } from "@/config/dashboard";
-import { docsConfig } from "@/config/docs";
-import { marketingConfig } from "@/config/marketing";
-import { useScroll } from "@/hooks/use-scroll";
+import Image from "next/image";
 import { Link } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
-
 import { UserInfo } from "../user-info";
+import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 
-interface NavBarProps {
-  scroll?: boolean;
-  large?: boolean;
-}
-
-export function NavbarLogo(props: { size?: "sm" | "md" | "lg" | "xl" }) {
-  const t = useTranslations("Navigation");
-  const { size = "xl" } = props;
-  return (
-    <Link href="/" className="flex items-center space-x-2">
-      <span className={cn("font-heading", `text-lg md:text-${size}`)}>
-        {t("title")}
-      </span>
-    </Link>
-  );
-}
-
-export function NavbarUserInfo() {
-  return (
-    <div className="flex items-center space-x-3">
-      <UserInfo />
-    </div>
-  );
-}
-
-export function NavBar({ scroll = false }: NavBarProps) {
-  const scrolled = useScroll(50);
+export function NavBar({ scroll = false }: { scroll?: boolean }) {
   const t = useTranslations("Navigation");
   const selectedLayout = useSelectedLayoutSegment();
-  const dashBoard = selectedLayout === "app";
-  const blog = selectedLayout === "(blog)";
-  const documentation = selectedLayout === "docs";
-  const links = documentation
-    ? docsConfig.mainNav
-    : dashBoard
-      ? dashboardConfig.mainNav
-      : marketingConfig.mainNav;
 
   return (
-    <header
-      className={`sticky top-0 z-40 flex w-full justify-center bg-background/60 pr-9 backdrop-blur-xl transition-all md:pr-0 ${
-        scroll ? (scrolled ? "border-b" : "bg-transparent") : "border-b"
-      }`}
-    >
-      <MaxWidthWrapper
-        className="flex h-14 items-center justify-between py-4"
-        large={documentation}
-      >
-        <div className="flex gap-6 md:gap-10">
-          <NavbarLogo />
-
-          {links && links.length > 0 ? (
-            <nav className="hidden gap-6 md:flex">
-              {links.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.disabled ? "#" : item.href}
-                  prefetch={true}
-                  className={cn(
-                    "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                    item.href.startsWith(`/${selectedLayout}`) ||
-                      (item.href === "/blog" && blog)
-                      ? "text-foreground"
-                      : "text-foreground/60",
-                    item.disabled && "cursor-not-allowed opacity-80",
-                  )}
-                >
-                  {t(item.title)}
-                </Link>
-              ))}
-            </nav>
-          ) : null}
+    <header className="sticky top-0 z-40 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-sm transition-colors dark:border-zinc-800 dark:bg-zinc-900/80">
+      <MaxWidthWrapper className="flex h-16 items-center justify-between px-4">
+        <div className="flex items-center gap-8">
+          <Link href="/" className="flex items-center space-x-2">
+            <Image 
+              src="https://notas.ai/white.png" 
+              alt="Logo" 
+              width={40} 
+              height={40} 
+              className="h-10 w-auto brightness-0 dark:brightness-200"
+            />
+          </Link>
+          
+          <nav className="hidden items-center space-x-6 md:flex">
+            <Link 
+              href="/product" 
+              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            >
+              Producto
+            </Link>
+            <Link 
+              href="/pricing" 
+              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            >
+              Precios
+            </Link>
+            <Link 
+              href="/about" 
+              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            >
+              Nosotros
+            </Link>
+            <Link 
+              href="/beta" 
+              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            >
+              Beta
+            </Link>
+            <Link 
+              href="/blog" 
+              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            >
+              Blog
+            </Link>
+          </nav>
         </div>
 
-        <NavbarUserInfo />
+        <div className="flex items-center space-x-4">
+          <Link 
+            href="/sign-in" 
+            className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+          >
+            Entrar
+          </Link>
+          <Link
+            href="/sign-up"
+            className="rounded-none bg-white px-4 py-2 text-sm text-zinc-900 transition-colors hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+          >
+            Empezar
+          </Link>
+        </div>
       </MaxWidthWrapper>
     </header>
   );
