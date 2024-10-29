@@ -1,6 +1,6 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 import Link from "next/link";
-import { SignInButton, SignIn } from "@clerk/nextjs";
+import { SignInButton, useSignIn } from "@clerk/nextjs";
 import {
   Accordion,
   AccordionContent,
@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/container";
+import { useState } from "react";
 
 // Definir la interfaz Props
 interface Props {
@@ -19,6 +20,28 @@ interface Props {
 
 export default function Page({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
+  const { isLoaded, signIn, setActive } = useSignIn();
+  const [email, setEmail] = useState("");
+
+  // Manejador para el submit del formulario
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isLoaded) return;
+
+    try {
+      const result = await signIn.create({
+        identifier: email,
+      });
+
+      if (result.status === "complete") {
+        await setActive({ session: result.createdSessionId });
+        // Redirigir a la página después del login
+        window.location.href = "/dashboard";
+      }
+    } catch (err) {
+      console.error("Error during sign in:", err);
+    }
+  };
 
   const preferredSignInOption = (
     <SignInButton mode="modal">
@@ -32,16 +55,22 @@ export default function Page({ params: { locale } }: Props) {
   );
 
   const moreSignInOptions = (
-    <SignIn.Root>
-      <SignIn.EmailField
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+        placeholder="Correo electrónico"
+        required
       />
-      <SignIn.Submit
+      <button
+        type="submit"
         className="w-full mt-4 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary"
       >
         Continuar con correo
-      </SignIn.Submit>
-    </SignIn.Root>
+      </button>
+    </form>
   );
 
   return (
