@@ -26,6 +26,7 @@ export default function SignInForm() {
     },
     variables: {
         borderRadius: '0px',
+        borderColor: '#2b2b2b'
     },
   }}
 />
@@ -73,9 +74,9 @@ export default function SignInForm() {
             </div>
             <p className="font-medium pb-1 text-2xl text-[#878787]">
               Inteligencia Artificial, <br />
-              en tu idioma, el español. <br />
-              Mejorando por tí, <br />
-              600 millones y subiendo.
+              en tu lengua, el español. <br />
+              600 millones de personas, <br />
+              y un idioma que nos une.
             </p>
             <div className="pointer-events-auto mt-6 flex flex-col mb-6">
               {preferredSignInOption}
