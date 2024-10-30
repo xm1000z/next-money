@@ -80,7 +80,8 @@ export default async function HeroLanding() {
           </SignedIn>
 
           <SignedOut>
-              <Button onClick={() => window.location.href = '/sign-in'}
+            <SignInButton mode="redirect">
+              <Button
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "min-w-34 gap-2 ",
@@ -89,6 +90,7 @@ export default async function HeroLanding() {
                 <UserArrowLeftIcon className="mr-2 size-4" />
                 <span>{t("action.login")}</span>
               </Button>
+            </SignInButton>
           </SignedOut>
 
           <Link
