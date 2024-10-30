@@ -212,7 +212,7 @@ export default function Playground({
   };
 
   return (
-    <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow">
+    <div className="overflow-hidden border bg-background shadow">
       <div className="container h-full p-6">
         <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_240px]">
           <div className="flex-col space-y-4 sm:flex md:order-2">
@@ -277,7 +277,7 @@ export default function Playground({
                 </div>
                 <div className="flex flex-1 flex-col space-y-2">
                   <Label htmlFor="Result">{t("form.result")}</Label>
-                  <div className="min-h-20 rounded-md border-0 md:min-h-[400px] md:border lg:min-h-[450px]">
+                  <div className="min-h-20 border-0 md:min-h-[400px] md:border lg:min-h-[450px]">
                     {loading || (generateLoading && fluxId) ? (
                       <div className="flex size-full flex-col items-center justify-center">
                         <Loading />
