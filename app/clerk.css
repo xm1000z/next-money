@@ -171,3 +171,10 @@
 .cl-footerActionLink {
   display: none !important;
 }
+.cl-formFieldInput {
+  border: 1px solid #777676 !important;
+}
+
+.dark .cl-formFieldInput {
+  border: 1px solid #2e2e2e !important;
+}
