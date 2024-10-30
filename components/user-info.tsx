@@ -89,6 +89,8 @@ export function UserInfo() {
             <TooltipProvider>
               <Tooltip>
                 <SignInButton
+                  mode="modal"
+                  forceRedirectUrl={url(pathname).href}
                 >
                   <TooltipTrigger asChild>
                     <button
