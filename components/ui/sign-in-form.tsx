@@ -13,10 +13,12 @@ export default function SignInForm() {
     <SignIn
   appearance={{
     elements: {
+      card: 'bg-transparent shadow-none',
+      form: 'tu-clase-personalizada',
       header: 'hidden',
       formFieldLabelRow : 'flex text-[#777676] dark:text-[#2e2e2e]',
       buttonArrowIcon: 'hidden',
-      formFieldInput: 'flex h-9 w-full bg-transparent px-3 py-1 text-sm text-black dark:text-white file:bg-transparent file:text-sm file:font-medium placeholder:text-black focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 shadow-none',
+      formFieldInput: 'flex h-9 w-full bg-transparent px-3 py-1 text-sm text-black dark:text-white transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-black focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 shadow-none',
           formButtonPrimary: 'h-10 w-full bg-black text-md text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-[#FFFFF] font-bold focus-visible:outline-none disabled:pointer-events-none',
       footerAction: 'hidden', // Oculta elementos del footer
       footer: 'hidden' // Oculta el footer completo
