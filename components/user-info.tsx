@@ -88,10 +88,7 @@ export function UserInfo() {
           >
             <TooltipProvider>
               <Tooltip>
-                <SignInButton
-                  mode="modal"
-                  forceRedirectUrl={url(pathname).href}
-                >
+                <Link href="/sign-in" className="size-full">
                   <TooltipTrigger asChild>
                     <button
                       type="button"
@@ -100,7 +97,7 @@ export function UserInfo() {
                       <UserArrowLeftIcon className="h-5 w-5" />
                     </button>
                   </TooltipTrigger>
-                </SignInButton>
+                </Link>
 
                 <TooltipContent>
                   <motion.div
