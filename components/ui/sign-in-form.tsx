@@ -18,8 +18,8 @@ export default function SignInForm() {
       header: 'hidden',
       formFieldLabelRow : 'hidden',
       buttonArrowIcon: 'hidden',
-      formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-zinc-400 focus:border-primary focus:outline-none focus-visible:outline-none focus:ring-0 dark:border-zinc-200 dark:text-white dark:placeholder:text-zinc-400',
-          formButtonPrimary: 'h-12 w-full bg-black text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200 font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
+      formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-zinc-400 focus:border-primary focus:outline-none focus-visible:outline-none focus:ring-0 dark:border-[#2B2B2B] dark:text-white dark:placeholder:text-[#2B2B2B]',
+          formButtonPrimary: 'h-12 w-full bg-black text-sm text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-[#2B2B2B] font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
       footerAction: 'hidden', // Oculta elementos del footer
       footer: 'hidden' // Oculta el footer completo
     },
@@ -53,7 +53,7 @@ export default function SignInForm() {
       <div className="flex min-h-screen justify-center items-center overflow-hidden p-6 md:p-0">
         <div className="relative z-20 m-auto flex w-full max-w-[380px] flex-col py-8">
           <div className="flex w-full flex-col relative">
-          <div className="pointer-events-auto mt-6 flex flex-col mb-6">
+          {/*<div className="pointer-events-auto mt-6 flex flex-col mb-6">
               <Accordion type="single" collapsible className="pt-2 mt-6">
                 <AccordionItem value="item-1" className="border-0">
                   <AccordionTrigger className="justify-center space-x-2 flex text-sm no-underline">
@@ -66,7 +66,7 @@ export default function SignInForm() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-            </div>
+            </div>*/}
             <div className="pb-4 bg-gradient-to-r from-primary dark:via-primary dark:to-[#848484] to-[#000] inline-block text-transparent bg-clip-text">
               <h1 className="font-medium pb-1 text-3xl">Entrar a NotasAI.</h1>
             </div>
