@@ -26,7 +26,6 @@ export default function SignInForm() {
     },
     variables: {
         borderRadius: '0px',
-        borderColor: '#2b2b2b'
     },
   }}
 />
