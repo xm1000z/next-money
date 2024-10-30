@@ -18,11 +18,11 @@ export default function SignInForm() {
       header: 'hidden',
       formFieldLabelRow : 'hidden',
       buttonArrowIcon: 'hidden',
-      formFieldInput: 'flex h-9 w-full border border-[#777676] dark:border-[#2b2b2b] bg-transparent px-3 py-1 text-sm transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+      formFieldInput: 'flex h-9 w-full border border-[#777676] dark:border-[#2b2b2b] bg-transparent px-3 py-1 text-sm  text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
 
-          formButtonPrimary: 'h-10 w-full bg-black text-md text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-[#FFFFF] font-bold focus-visible:outline-none disabled:pointer-events-none',
-      footerAction: 'hidden', // Oculta elementos del footer
-      footer: 'hidden' // Oculta el footer completo
+        formButtonPrimary: 'h-10 w-full bg-black text-md text-white hover:bg-zinc-900 dark:bg-white dark:text-black  font-bold focus-visible:outline-none disabled:pointer-events-none',
+      footerAction: 'hidden',
+      footer: 'hidden'
     },
     variables: {
         borderRadius: '0px',
@@ -38,7 +38,7 @@ export default function SignInForm() {
   );
 
   return (
-    <div className="dark:bg-[#121212]">
+    <div className="dark bg-[#121212]">
       <header className="w-full fixed left-0 right-0">
         <div className="ml-5 mt-4 md:ml-10 md:mt-10">
           <Link href="https://app.notas.ai">
