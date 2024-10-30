@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-
+import { buttonVariants } from "@/components/ui/button";
 import {
   SignedIn,
   SignedOut,
