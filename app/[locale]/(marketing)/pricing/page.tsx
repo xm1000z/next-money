@@ -11,7 +11,7 @@ type Props = {
 export async function generateMetadata({ params: { locale } }: Props) {
   const t = await getTranslations({ locale });
   return {
-    title: `Pricing - NotasAI`,
+    title: `Packs - NotasAI`,
     description: t("LocaleLayout.description"),
   };
 }
