@@ -171,10 +171,18 @@
 .cl-footerActionLink {
   display: none !important;
 }
-.cl-formFieldInput {
+.cl-formFieldInput .cl-formFieldInput__identifier {
   border: 1px solid #777676 !important;
 }
 
-.dark .cl-formFieldInput {
+.dark .cl-formFieldInput .cl-formFieldInput__identifier {
   border: 1px solid #2e2e2e !important;
+}
+.cl-formFieldLabelRow {
+  display: flex !important;
+  color: #5e5e5e;
+}
+.dark .cl-formFieldLabelRow {
+  display: flex !important;
+  color: #515050;
 }
