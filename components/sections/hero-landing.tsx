@@ -80,7 +80,7 @@ export default async function HeroLanding() {
           </SignedIn>
 
           <SignedOut>
-              <Link href="/sign-in'}"
+              <Link href="/sign-in"
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "min-w-34 gap-2 ",
