@@ -22,7 +22,7 @@ import {
   DashboardIcon,
   UserArrowLeftIcon,
 } from "@/assets";
-import ShimmerButton from "@/components/forms/shimmer-button";
+import { CornerDownRight } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
