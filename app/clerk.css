@@ -173,10 +173,12 @@
 }
 .cl-formFieldInput .cl-formFieldInput__identifier {
   border: 1px solid #777676 !important;
+  border-color: #777676 !important;
 }
 
 .dark .cl-formFieldInput .cl-formFieldInput__identifier {
   border: 1px solid #2e2e2e !important;
+  border-color:#2e2e2e !important;
 }
 .cl-formFieldLabelRow {
   display: flex !important;
