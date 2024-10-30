@@ -38,13 +38,13 @@ export default function SignInForm() {
   );
 
   return (
-    <div className="dark bg-[#121212]">
+    <div className="light bg-white">
       <header className="w-full fixed left-0 right-0">
         <div className="ml-5 mt-4 md:ml-10 md:mt-10">
           <Link href="https://app.notas.ai">
             <h1
               style={{ fontFamily: 'Apple Garamond' }}
-              className="text-balance text-2xl tracking-tight"
+              className="text-balance text-2xl text-black dark:text-white tracking-tight"
             >
               NotasAI
             </h1>
