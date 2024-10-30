@@ -89,7 +89,6 @@ export function UserInfo() {
             <TooltipProvider>
               <Tooltip>
                 <SignInButton
-                  onClick={() => window.location.href = '/sign-in'}
                 >
                   <TooltipTrigger asChild>
                     <button
