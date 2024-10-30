@@ -16,9 +16,9 @@ export default function SignInForm() {
       card: 'bg-transparent shadow-none',
       form: 'tu-clase-personalizada',
       header: 'hidden',
-      formFieldLabelRow : 'flex',
+      formFieldLabelRow : 'hidden',
       buttonArrowIcon: 'hidden',
-      formFieldInput: 'flex h-9 w-full border !border-[#777676] !dark:border-[#2e2e2e] bg-transparent px-3 py-1 text-sm text-black dark:text-white transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-black focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 shadow-none',
+      formFieldInput: 'flex h-9 w-full border bg-transparent px-3 py-1 text-sm text-black dark:text-white transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
           formButtonPrimary: 'h-10 w-full bg-black text-md text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-[#FFFFF] font-bold focus-visible:outline-none disabled:pointer-events-none',
       footerAction: 'hidden', // Oculta elementos del footer
       footer: 'hidden' // Oculta el footer completo
