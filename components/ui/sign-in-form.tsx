@@ -37,7 +37,7 @@ export default function SignInForm() {
   );
 
   return (
-    <div>
+    <div className="dark:bg-[#2b2b2b]">
       <header className="w-full fixed left-0 right-0">
         <div className="ml-5 mt-4 md:ml-10 md:mt-10">
           <Link href="https://app.notas.ai">
