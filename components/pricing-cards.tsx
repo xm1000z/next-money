@@ -238,7 +238,7 @@ export function PricingCards({
           {t("contact.title")}
           <br />
           <a
-            className="font-medium text-primary hover:underline"
+            className="font-medium text-primary"
             href="mailto:soporte@notas.ai"
           >
             soporte@notas.ai

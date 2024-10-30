@@ -23,7 +23,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
       <div className="flex max-w-7xl flex-col items-center justify-end gap-4 text-sm md:flex-row">
         <Link
           href="/terms-of-use"
-          className="underline-offset-4 hover:underline"
+          className="underline-offset-4"
           prefetch={false}
           title={t("footer.term")}
         >
@@ -31,7 +31,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         </Link>
         <Link
           href="/privacy-policy"
-          className="underline-offset-4 hover:underline"
+          className="underline-offset-4"
           prefetch={false}
           title={t("footer.privacy")}
         >
@@ -39,7 +39,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         </Link>
         <Link
           href="mailto:support@fluxaipro.art"
-          className="underline-offset-4 hover:underline"
+          className="underline-offset-4"
           prefetch={false}
           title={t("footer.contact")}
         >
@@ -56,7 +56,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           <Link
             href="https://chat.notas.ai/"
             title=" Chat"
-            className="underline-offset-4 hover:underline"
+            className="underline-offset-4"
             prefetch={false}
             target="_blank"
           >
@@ -65,7 +65,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           <Link
             href="https://search.notas.ai/"
             title="Notas Search"
-            className="underline-offset-4 hover:underline"
+            className="underline-offset-4"
             prefetch={false}
             target="_blank"
           >
@@ -73,7 +73,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           </Link>
           <Link
             href="https://pdf.notas.ai/"
-            className="underline-offset-4 hover:underline"
+            className="underline-offset-4"
             title="Woy AI Tools Directory"
             prefetch={false}
             target="_blank"
@@ -84,7 +84,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             href="https://seo.notas.ai/"
             prefetch={false}
             target="_blank"
-            className="underline-offset-4 hover:underline"
+            className="underline-offset-4"
           >
             SEO
           </Link>
@@ -92,7 +92,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             href="https://www.notas.ai/"
             prefetch={false}
             target="_blank"
-            className="underline-offset-4 hover:underline"
+            className="underline-offset-4"
           >
             notas.ai
           </Link>
