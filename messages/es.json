@@ -112,7 +112,7 @@
     },
     "tip": {
       "title": "💳 Recuerda: Si no estás suscrito, puedes hacerlo ",
-      "subtitle": "PACKS PARA SUSCRIPTORES",
+      "subtitle": "",
       "contact": "aquí"
     }
   },
@@ -384,6 +384,7 @@
     "Generate": "Generar",
     "Historial": "Historial",
     "Canjear Código": "Canjear Código",
+    "ChargeOrder": "Cargar pago",
     "Facturación": "Facturación",
     "Notas": "Notas",
     "Chat": "Chat",

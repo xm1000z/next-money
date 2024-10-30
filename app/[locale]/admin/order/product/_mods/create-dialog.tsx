@@ -69,7 +69,7 @@ export function CreateDialog() {
       <Drawer
         open={open}
         onClose={() => setOpen(false)}
-        title="Create Charge Product"
+        title="Crear Producto"
         size="large"
         footer={
           <Space className="flex w-full justify-end gap-2 pt-2 sm:space-x-0">

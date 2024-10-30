@@ -20,7 +20,7 @@ interface BillingFormButtonProps {
 
 export function BillingFormButton({
   offer,
-  btnText = "Buy Plan",
+  btnText = "Comprar Pack",
 }: BillingFormButtonProps) {
   let [isPending, startTransition] = useTransition();
   const { getToken } = useAuth();
@@ -51,7 +51,7 @@ export function BillingFormButton({
     >
       {isPending ? (
         <>
-          <Icons.spinner className="mr-2 size-4 animate-spin" /> Loading...
+          <Icons.spinner className="mr-2 size-4 animate-spin" /> Cargando...
         </>
       ) : (
         <>{btnText}</>

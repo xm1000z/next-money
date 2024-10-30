@@ -23,10 +23,10 @@ export function CustomerPortalButton({
     <Button disabled={isPending} onClick={stripeSessionAction}>
       {isPending ? (
         <>
-          <Icons.spinner className="mr-2 size-4 animate-spin" /> Loading...
+          <Icons.spinner className="mr-2 size-4 animate-spin" /> Cargando...
         </>
       ) : (
-        "Open Customer Portal"
+        "Abrir Portal del Cliente"
       )}
     </Button>
   );
