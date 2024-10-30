@@ -18,7 +18,7 @@ export default function SignInForm() {
       header: 'hidden',
       formFieldLabelRow : 'hidden',
       buttonArrowIcon: 'hidden',
-      formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-zinc-400 focus:border-primary focus:outline-none focus-visible:outline-none focus:ring-0 dark:border-zinc-200 dark:placeholder:text-zinc-400',
+      formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-zinc-400 focus:border-primary focus:outline-none focus-visible:outline-none focus:ring-0 dark:border-zinc-200 dark:text-white dark:placeholder:text-zinc-400',
           formButtonPrimary: 'h-12 w-full bg-black text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200 font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
       footerAction: 'hidden', // Oculta elementos del footer
       footer: 'hidden' // Oculta el footer completo
