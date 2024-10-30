@@ -56,11 +56,21 @@ export function UserInfo() {
             <TooltipProvider>
               <Tooltip>
               <TooltipTrigger asChild>
-                <Link href="/app" className="size-full">
-                    <button className="group h-10 bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 text-sm shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20">
-                      <DashboardIcon className="h-5 w-5" />
-                    </button>
-                </Link>
+              <Link
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "group relative w-full max-w-52 items-center justify-center gap-2 overflow-hidden whitespace-pre  bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 ease-out hover:bg-primary/90 hover:ring-2 hover:ring-primary hover:ring-offset-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 md:flex",
+              )}
+              href="/app"
+            >
+              <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
+              <div className="flex items-center">
+                <CornerDownRight className="mr-2 size-4" />
+                <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 dark:text-slate-900">
+                  {t("action.generate")}
+                </span>
+              </div>
+            </Link>
                 </TooltipTrigger>
                 <TooltipContent>
                   <motion.div
