@@ -18,7 +18,7 @@ export default function SignInForm() {
       header: 'hidden',
       formFieldLabelRow : 'flex text-white',
       buttonArrowIcon: 'hidden',
-      formFieldInput: 'flex h-9 w-full border border-[#777676] dark:border-[#2b2b2b] bg-transparent px-3 py-1 text-sm  text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+      formFieldInput: 'flex h-9 w-full border bg-transparent px-3 py-1 text-sm  text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
 
         formButtonPrimary: 'h-10 w-full bg-black text-md text-white hover:bg-zinc-900 dark:bg-white dark:text-black  font-bold focus-visible:outline-none disabled:pointer-events-none',
       footerAction: 'hidden',
