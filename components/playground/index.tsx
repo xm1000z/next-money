@@ -269,7 +269,7 @@ export default function Playground({
                     <Textarea
                       id="input"
                       placeholder={t("form.placeholder")}
-                      className="lg:min-h-[320px]"
+                      className="lg:min-h-[450px]"
                       value={inputPrompt}
                       onChange={(e) => setInputPrompt(e.target.value)}
                     />
