@@ -18,7 +18,7 @@ export default function SignInForm() {
       header: 'hidden',
       formFieldLabelRow : 'hidden',
       buttonArrowIcon: 'hidden',
-      formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-muted-foreground focus:border-primary focus:outline-none focus-visible:outline-none focus:ring-0 dark:border-zinc-700 dark:placeholder:text-zinc-400',
+      formFieldInput: 'h-12 rounded-none border-0 border-b bg-transparent px-4 py-2 text-base placeholder:text-zinc-400 focus:border-primary focus:outline-none focus-visible:outline-none focus:ring-0 dark:border-zinc-200 dark:placeholder:text-zinc-400',
           formButtonPrimary: 'h-12 w-full bg-black text-white hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200 font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
       footerAction: 'hidden', // Oculta elementos del footer
       footer: 'hidden' // Oculta el footer completo
@@ -40,7 +40,7 @@ export default function SignInForm() {
     <div>
       <header className="w-full fixed left-0 right-0">
         <div className="ml-5 mt-4 md:ml-10 md:mt-10">
-          <Link href="https://notas.ai">
+          <Link href="https://app.notas.ai">
             <h1
               style={{ fontFamily: 'Apple Garamond' }}
               className="text-balance text-2xl tracking-tight"
