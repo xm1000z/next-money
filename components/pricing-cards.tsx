@@ -47,7 +47,7 @@ const PricingCard = ({
   return (
     <div
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-3xl border shadow-lg transition-all duration-300",
+        "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
         "backdrop-blur-md bg-background/50 dark:bg-background/30",
         offer.amount === 1990 
           ? "border-primary/50 dark:border-primary/30 scale-105" 
@@ -123,7 +123,7 @@ export function FreeCard() {
   return (
     <div
       className={cn(
-        "relative col-span-3 flex flex-col overflow-hidden rounded-3xl border shadow-lg transition-all duration-300 hover:shadow-xl",
+        "relative col-span-3 flex flex-col overflow-hidden border shadow-lg transition-all duration-300 hover:shadow-xl",
         "backdrop-blur-md bg-background/50 dark:bg-background/30 hover:scale-102.5",
       )}
     >
@@ -215,10 +215,9 @@ export function PricingCards({
           className="text-4xl font-bold tracking-tight"
         />
         <div className="w-full">
-          <p className="mb-8 inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-2 text-sm text-primary dark:bg-primary/20">
+          <p className="mb-8 inline-flex items-center justify-center border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] px-4 py-2 text-sm text-primary dark:bg-[#1b1b1b]">
             <span className="font-medium">
-              {t("tip.title")}&nbsp;
-              {t("tip.subtitle")}&nbsp;
+              {t("tip.title")}
               <a
                 href="https://notas.ai/pricing"
                 className="font-semibold underline decoration-primary/70 hover:decoration-primary"
