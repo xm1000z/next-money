@@ -11,23 +11,24 @@ import {
 export default function SignInForm() {
   const preferredSignInOption = (
     <SignIn
-      appearance={{
-        elements: {
-          card: 'bg-transparent shadow-none',
-          form: 'tu-clase-personalizada',
-          header: 'hidden',
-          formFieldLabelRow: 'flex text-black',
-          buttonArrowIcon: 'hidden',
-          formFieldInput: 'flex h-9 w-full border bg-transparent px-3 py-1 text-sm text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-          formButtonPrimary: 'h-10 w-full bg-black text-md text-white hover:bg-zinc-900 font-bold focus-visible:outline-none disabled:pointer-events-none',
-          footerAction: 'hidden',
-          footer: 'hidden'
-        },
-        variables: {
-          borderRadius: '0px',
-        },
-      }}
-    />
+  appearance={{
+    elements: {
+      card: 'bg-transparent shadow-none',
+      form: 'tu-clase-personalizada',
+      header: 'hidden',
+      formFieldLabelRow : 'flex text-white',
+      buttonArrowIcon: 'hidden',
+      formFieldInput: 'flex h-9 w-full border bg-transparent px-3 py-1 text-sm  text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+
+        formButtonPrimary: 'h-10 w-full bg-black text-md text-white hover:bg-zinc-900 dark:bg-white dark:text-black  font-bold focus-visible:outline-none disabled:pointer-events-none',
+      footerAction: 'hidden',
+      footer: 'hidden'
+    },
+    variables: {
+        borderRadius: '0px',
+    },
+  }}
+/>
   );
 
   const News = (
@@ -37,13 +38,13 @@ export default function SignInForm() {
   );
 
   return (
-    <div className="light bg-white">
+    <div className="dark bg-[#121212]">
       <header className="w-full fixed left-0 right-0">
         <div className="ml-5 mt-4 md:ml-10 md:mt-10">
           <Link href="https://app.notas.ai">
             <h1
               style={{ fontFamily: 'Apple Garamond' }}
-              className="text-balance text-2xl text-black tracking-tight"
+              className="text-balance text-2xl text-black dark:text-white tracking-tight"
             >
               NotasAI
             </h1>
@@ -53,10 +54,24 @@ export default function SignInForm() {
       <div className="flex min-h-screen justify-center items-center overflow-hidden p-6 md:p-0">
         <div className="relative z-20 m-auto flex w-full max-w-[380px] flex-col py-8">
           <div className="flex w-full flex-col relative">
-            <div className="pb-4 bg-gradient-to-r from-[#000] to-[#000] inline-block text-transparent bg-clip-text">
+          {/*<div className="pointer-events-auto mt-6 flex flex-col mb-6">
+              <Accordion type="single" collapsible className="pt-2 mt-6">
+                <AccordionItem value="item-1" className="border-0">
+                  <AccordionTrigger className="justify-center space-x-2 flex text-sm no-underline">
+                    <span className="no-underline">Novedades</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="mt-4">
+                    <div className="flex flex-col space-y-4">
+                      <p >{News}</p>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>*/}
+            <div className="pb-4 bg-gradient-to-r from-primary dark:via-primary dark:to-[#848484] to-[#000] inline-block text-transparent bg-clip-text">
               <h1 className="font-medium pb-1 text-3xl">Entrar a NotasAI.</h1>
             </div>
-            <p className="font-medium pb-1 text-2xl text-[rgba(87, 86, 86, 1)]">
+            <p className="font-medium pb-1 text-2xl text-[#878787]">
               Inteligencia Artificial, <br />
               en tu lengua, el español. <br />
               600 millones de personas, <br />
