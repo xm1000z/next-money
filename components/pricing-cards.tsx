@@ -221,7 +221,7 @@ export function PricingCards({
               <a
                 href="https://notas.ai/pricing"
                 className="font-semibold underline decoration-primary/70 hover:decoration-primary"
-              >
+              >&nbsp;
                 {t("tip.contact")}
               </a>
             </span>
