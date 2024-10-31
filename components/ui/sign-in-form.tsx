@@ -78,7 +78,7 @@ export default function SignInForm() {
               y un idioma que nos une.
             </p>
             <div className="pointer-events-auto mt-6 flex flex-col mb-6">
-                <span className="mt-5 text-black dark:text-white">Correo electrónico</span>
+                <span className="text-sm text-black dark:text-white">Email</span>
               {preferredSignInOption}
             </div>
             <p className="text-xs text-[#878787]">

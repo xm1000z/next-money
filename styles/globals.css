@@ -187,6 +187,7 @@
 .cl-signIn-start {
   box-shadow: none !important;
   padding-left: 1px;
+  padding-top: 1px;
 /*margin-right: 50px;*/
 }
 .cl-formFieldInput {
