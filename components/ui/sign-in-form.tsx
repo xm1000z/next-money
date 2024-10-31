@@ -16,7 +16,7 @@ export default function SignInForm() {
       card: 'bg-transparent shadow-none',
       form: 'tu-clase-personalizada',
       header: 'hidden',
-      formFieldLabelRow : 'flex text-white',
+      formFieldLabelRow : 'flex !dark:text-white',
       buttonArrowIcon: 'hidden',
       formFieldInput: 'flex h-9 w-full border bg-transparent px-3 py-1 text-sm  text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
 
