@@ -53,7 +53,7 @@ export default function SignInForm() {
       <div className="flex min-h-screen justify-center items-center overflow-hidden p-6 md:p-0">
         <div className="relative z-20 m-auto flex w-full max-w-[380px] flex-col py-8">
           <div className="flex w-full flex-col relative">
-            <div className="pb-4 bg-gradient-to-r from-[#646464] to-[#00000] inline-block bg-clip-text text-[#646464]">
+            <div className="pb-4 bg-gradient-to-r from-[#000] to-[#000] inline-block text-transparent bg-clip-text">
               <h1 className="font-medium pb-1 text-3xl">Entrar a NotasAI.</h1>
             </div>
             <p className="font-medium pb-1 text-2xl text-[rgba(87, 86, 86, 1)]">
