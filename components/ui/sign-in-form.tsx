@@ -16,7 +16,7 @@ export default function SignInForm() {
       card: 'bg-transparent shadow-none',
       form: 'tu-clase-personalizada',
       header: 'hidden',
-      formFieldLabelRow : 'flex !dark:text-white',
+      formFieldLabelRow : 'hidden',
       buttonArrowIcon: 'hidden',
       formFieldInput: 'flex h-9 w-full border bg-transparent px-3 py-1 text-sm  text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
 
@@ -78,6 +78,7 @@ export default function SignInForm() {
               y un idioma que nos une.
             </p>
             <div className="pointer-events-auto mt-6 flex flex-col mb-6">
+                <span className="text-black dark:text-white">Correo electrónico</span>
               {preferredSignInOption}
             </div>
             <p className="text-xs text-[#878787]">
