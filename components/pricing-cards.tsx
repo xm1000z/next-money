@@ -209,19 +209,20 @@ export function PricingCards({
   return (
     <MaxWidthWrapper className="py-20">
       <section className="flex flex-col items-center text-center space-y-12">
-        <HeaderSection 
-          label={t("label")} 
-          title={t("title")} 
+        <HeaderSection
+          label={t("label")}
+          title={t("title")}
           className="text-4xl font-bold tracking-tight"
         />
         <div className="w-full">
           <p className="mb-8 inline-flex items-center justify-center border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] px-4 py-2 text-sm text-primary dark:bg-[#1b1b1b]">
             <span className="font-medium">
               {t("tip.title")}
+              &nbsp;
               <a
                 href="https://notas.ai/pricing"
                 className="font-semibold underline decoration-primary/70 hover:decoration-primary"
-              >&nbsp;
+              >
                 {t("tip.contact")}
               </a>
             </span>
