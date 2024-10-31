@@ -3,7 +3,7 @@
 import { cloneElement, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
 
@@ -70,7 +70,7 @@ const PricingCard = ({
                 <span>{formatPrice(offer.amount, "€")}</span>
               </>
             ) : (
-              `€{formatPrice(offer.amount, "€")}`
+              `${formatPrice(offer.amount, "€")}`
             )}
             <div className="text-base font-medium text-muted-foreground">
               / {offer.credit} {t("worth")}
@@ -102,14 +102,13 @@ const PricingCard = ({
 
         <SignedOut>
           <div className="flex justify-center">
-            <SignInButton mode="modal" forceRedirectUrl={url(pathname).href}>
               <Button
+                href="/sign-in"
                 variant={offer.amount === 1990 ? "default" : "outline"}
                 className="w-full transition-all duration-300 hover:brightness-110"
               >
                 {t("action.signin")}
               </Button>
-            </SignInButton>
           </div>
         </SignedOut>
       </div>
@@ -134,7 +133,7 @@ export function FreeCard() {
 
         <div className="flex flex-col items-start">
           <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-            {`€{formatPrice(0, "€")}`}
+            {`${formatPrice(0, "€")}`}
             <div className="text-base font-medium text-muted-foreground">
               / 5 {t("worth")}
             </div>
