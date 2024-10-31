@@ -103,7 +103,7 @@ const PricingCard = ({
         <SignedOut>
           <div className="flex justify-center">
               <Button
-                href="/sign-in"
+                ref="/sign-in"
                 variant={offer.amount === 1990 ? "default" : "outline"}
                 className="w-full transition-all duration-300 hover:brightness-110"
               >
@@ -163,7 +163,7 @@ export function FreeCard() {
           ))}
         </ul>
         <SignBox>
-          <Button className="w-full transition-all duration-300 hover:brightness-110">Try Out</Button>
+          <Button className="w-full transition-all duration-300 hover:brightness-110">Probar</Button>
         </SignBox>
       </div>
     </div>
