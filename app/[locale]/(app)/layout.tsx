@@ -6,7 +6,7 @@ import {
   DashboardSidebar,
   MobileSheetSidebar,
 } from "@/components/layout/dashboard-sidebar";
-import { CustomUserButton } from "@/components/ui/userbutton";
+import CustomUserButton from "@/components/ui/userbutton";
 import { DashboardNav } from "@/components/layout/dashboard-sidenav";
 {/*import { ModeToggle } from "@/components/layout/mode-toggle";*/}
 import { NavBar, NavbarUserInfo } from "@/components/layout/navbar";
