@@ -6,8 +6,9 @@ import {
   DashboardSidebar,
   MobileSheetSidebar,
 } from "@/components/layout/dashboard-sidebar";
+import { CustomUserButton } from "@/components/ui/userbutton"
 import { DashboardNav } from "@/components/layout/dashboard-sidenav";
-import { ModeToggle } from "@/components/layout/mode-toggle";
+{/*import { ModeToggle } from "@/components/layout/mode-toggle";*/}
 import { NavBar, NavbarUserInfo } from "@/components/layout/navbar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
@@ -64,7 +65,7 @@ export default function DashboardLayout({
 
             {/* <Notifications /> */}
             <UserPoints />
-            <ModeToggle />
+            <CustomUserButton />
             <NavbarUserInfo />
           </header>
 
