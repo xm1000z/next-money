@@ -133,6 +133,9 @@ export async function POST(req: NextRequest, { params }: Params) {
         locale,
       }),
     }).then((res) => res.json());
+
+    console.log("Respuesta de la API de generación:", res);
+
     if (!res?.replicate_id && res.error) {
       return NextResponse.json(
         { error: res.error || "Create Generator Error" },
