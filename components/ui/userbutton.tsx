@@ -72,7 +72,7 @@ export default function CustomUserButton() {
                   {user?.primaryEmailAddress?.emailAddress || "Correo no disponible"}
                 </div>
               </div>
-              <div className="px-2 py-0.5 text-xs border border-[rgba(228, 228, 228, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-transparent rounded-full">
+              <div className="px-2 py-0.5 text-xs border border-gray-200 dark:border-[#2e2e2e] bg-white dark:bg-[#141414] bg-transparent bg-transparent">
               <UserPoints/>
               </div>
             </div>
