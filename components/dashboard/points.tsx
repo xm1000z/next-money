@@ -20,8 +20,8 @@ export default function UserPoints() {
     },
   });
   return (
-    <div className="flex items-center gap-1 text-sm font-medium text-muted-foreground">
-      <WalletIcon className="h-4 w-4" />
+    <div className="flex items-center gap-1 text-[12px] font-medium text-muted-foreground">
+      <WalletIcon className="h-3 w-3" />
       <NumberTicker value={data?.credit || 0} />
     </div>
   );

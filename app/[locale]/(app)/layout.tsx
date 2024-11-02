@@ -64,7 +64,6 @@ export default function DashboardLayout({
             </div>
 
             {/* <Notifications /> */}
-            <UserPoints />
             <CustomUserButton />
             <NavbarUserInfo />
           </header>
