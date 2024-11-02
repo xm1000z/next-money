@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
-import NumberTicker from "../magicui/number-ticker";
-
+import UserPoints from "@/components/dashboard/points";
 
 export default function CustomUserButton() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -74,7 +73,7 @@ export default function CustomUserButton() {
                 </div>
               </div>
               <div className="px-2 py-0.5 text-xs border border-[rgba(228, 228, 228, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-transparent rounded-full">
-              <NumberTicker value={data?.credit || 0} />
+              <UserPoints/>
               </div>
             </div>
           </div>
