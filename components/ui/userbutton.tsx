@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
+import NumberTicker from "../magicui/number-ticker";
+
+
 export default function CustomUserButton() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isLoaded, user } = useUser();
@@ -70,8 +73,8 @@ export default function CustomUserButton() {
                   {user?.primaryEmailAddress?.emailAddress || "Correo no disponible"}
                 </div>
               </div>
-              <div className="px-2.5 py-1 text-xs border border-[rgba(228, 228, 228, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-transparent rounded-full">
-                Beta
+              <div className="px-2 py-0.5 text-xs border border-[rgba(228, 228, 228, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-transparent rounded-full">
+              <NumberTicker value={data?.credit || 0} />
               </div>
             </div>
           </div>
