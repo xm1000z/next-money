@@ -17,7 +17,7 @@ export function OperationalStatus() {
   ]);
 
   return (
-    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+    <div className="flex items-center gap-2 text-sm text-black dark:text-white border rounded-full">
       <div className="flex items-center gap-1.5">
         <span className={cn(
           "size-2 rounded-full",
@@ -25,13 +25,6 @@ export function OperationalStatus() {
         )} />
         <span>Operativo</span>
       </div>
-      <span>·</span>
-      <a 
-        href="/status" 
-        className="hover:text-foreground hover:underline"
-      >
-        Estado del sistema
-      </a>
     </div>
   );
 } 

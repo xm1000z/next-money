@@ -80,27 +80,20 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
       <input type="hidden" className="hidden" {...register("formId")} />
       
       <div className="flex flex-col space-y-2">
-        <div className="flex items-center gap-2">
-          <TiltedSendIcon className="h-4 w-4 flex-none" />
-          <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-            {t("title")}
-          </span>
-        </div>
-        
         <div className="flex gap-2">
           <input
             type="email"
             placeholder={t("form.placeholder")}
             aria-label={t("form.aria_label")}
             required
-            className="flex-1 min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            className="flex-1 min-w-0 border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             {...register("email")}
           />
           <Button 
             type="submit" 
             size="sm"
             disabled={isSubmitting}
-            className="px-3"
+            className="px-2"
           >
             {t("form.button")}
           </Button>
