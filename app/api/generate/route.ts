@@ -66,7 +66,7 @@ export async function POST(req: NextRequest, { params }: Params) {
     getKey(user.id) + `_${req.ip ?? ""}`,
   );
   if (!success) {
-    return new Response("Too Many Requests", {
+    return new Response("Crédito insuficiente", {
       status: 429,
     });
   }
@@ -99,7 +99,7 @@ export async function POST(req: NextRequest, { params }: Params) {
       // 5 free schnell generate per month
       if (freeSchnellCount >= 5 && !user.publicMetadata.siteOwner) {
         return NextResponse.json(
-          { error: "Insufficient credit", code: 1000403 },
+          { error: "Crédito insuficiente", code: 1000403 },
           { status: 400 },
         );
       }
@@ -111,7 +111,7 @@ export async function POST(req: NextRequest, { params }: Params) {
       account.credit < needCredit
     ) {
       return NextResponse.json(
-        { error: "Insufficient credit", code: 1000402 },
+        { error: "Crédito insuficiente", code: 1000402 },
         { status: 400 },
       );
     }
@@ -164,10 +164,10 @@ export async function POST(req: NextRequest, { params }: Params) {
         data: {
           userId,
           fluxId: fluxData.id,
-          state: "Done",
+          state: "Hecho",
           amount: -needCredit,
           type: BillingType.Withdraw,
-          description: `Generate ${modelName} - ${aspectRatio} Withdraw`,
+          description: `Generar ${modelName} - Retirada ${aspectRatio}`,
         },
       });
 
@@ -177,7 +177,7 @@ export async function POST(req: NextRequest, { params }: Params) {
           credit: -needCredit,
           balance: newAccount.credit,
           billingId: billing.id,
-          type: "Generate",
+          type: "Generar",
         },
       });
     });

@@ -98,11 +98,11 @@ export async function POST(req: Request) {
       const newBilling = await tx.userBilling.create({
         data: {
           userId: billingData.userId,
-          state: "Done",
+          state: "Hecho",
           amount: -billingAmount,
           type: BillingType.Refund,
           fluxId: fluxData.id,
-          description: "Refund",
+          description: "Devolución",
         },
       });
 
@@ -112,7 +112,7 @@ export async function POST(req: Request) {
           credit: -billingAmount,
           billingId: newBilling.id,
           balance: account.credit - billingAmount,
-          type: "Refund",
+          type: "Devolución",
         },
       });
       await tx.userCredit.update({
