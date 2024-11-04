@@ -26,8 +26,8 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="flex flex-col gap-8">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <Image className="h-6 w-6" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
-            <span style={{ fontFamily: 'Apple Garamond', fontSize: 'larger' }}>NotasAI</span>
+            <Image className="h-8 w-8" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
+            <span className="text-md" style={{ fontFamily: 'Apple Garamond'}}>NotasAI</span>
           </div>
           
           {/* Links en columnas */}
@@ -66,7 +66,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="flex flex-col items-center justify-between gap-4 text-sm md:flex-row">
           <OperationalStatus />
           <p className="text-muted-foreground">
-            &copy; 2024 NotasAI. All rights reserved.
+            &copy; 2024 Notas AI. Todos los derechos reservados.
           </p>
         </div>
       </div>
