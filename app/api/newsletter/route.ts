@@ -17,45 +17,65 @@ export async function POST(req: Request) {
       );
     }
 
-    // Generar token primero
-    const token = crypto.randomUUID();
+    try {
+      // Generar token primero
+      const token = crypto.randomUUID();
 
-    // Crear o actualizar suscriptor
-    const subscriber = await prisma.subscribers.upsert({
-      where: { email },
-      update: { 
-        token,
-        status: "PENDING",
-        locale,
-      },
-      create: {
-        email,
-        token,
-        status: "PENDING",
-        locale,
-      },
-    });
+      // Crear o actualizar suscriptor
+      const subscriber = await prisma.subscribers.upsert({
+        where: { email },
+        update: { 
+          token,
+          status: "PENDING",
+          locale,
+        },
+        create: {
+          email,
+          token,
+          status: "PENDING",
+          locale,
+        },
+      });
 
-    // Enviar email de confirmación
-    await resend.emails.send({
-      from: emailConfig.from,
-      to: email,
-      subject: "Confirma tu suscripción a NotasAI",
-      html: `
-        <h1>¡Gracias por suscribirte a NotasAI!</h1>
-        <p>Por favor, confirma tu suscripción haciendo clic en el siguiente enlace:</p>
-        <a href="${url(`confirm/${token}`).href}">Confirmar suscripción</a>
-      `
-    });
+      console.log("Subscriber created/updated:", subscriber);
 
-    return NextResponse.json(
-      { success: true },
-      { status: 200 }
-    );
-  } catch (error) {
+      try {
+        // Enviar email de confirmación
+        const emailResult = await resend.emails.send({
+          from: emailConfig.from,
+          to: email,
+          subject: "Confirma tu suscripción a NotasAI",
+          html: `
+            <h1>¡Gracias por suscribirte a NotasAI!</h1>
+            <p>Por favor, confirma tu suscripción haciendo clic en el siguiente enlace:</p>
+            <a href="${url(`confirm/${token}`).href}">Confirmar suscripción</a>
+          `
+        });
+        
+        console.log("Email sent:", emailResult);
+
+      } catch (emailError) {
+        console.error("Error sending email:", emailError);
+        // Continuamos aunque falle el email
+      }
+
+      return NextResponse.json(
+        { success: true },
+        { status: 200 }
+      );
+
+    } catch (dbError) {
+      console.error("Database error:", dbError);
+      throw dbError;
+    }
+
+  } catch (error: any) {
     console.error("Newsletter error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: "Internal server error", 
+        details: error.message 
+      },
       { status: 500 }
     );
   }
