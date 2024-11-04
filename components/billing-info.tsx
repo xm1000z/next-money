@@ -124,7 +124,7 @@ export default function BillingInfo() {
                         {item.fluxId}
                       </TableCell>
                       <TableCell>
-                        {item.amount} {t("table.amount")}
+                        {item.amount}
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
                         {item.type}
