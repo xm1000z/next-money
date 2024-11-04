@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     // Verificar si el email ya existe
-    const existingSubscriber = await prisma.subscriber.findUnique({
+    const existingSubscriber = await prisma.subscribers.findUnique({
       where: { email },
     });
 
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     });
 
     // Crear nuevo suscriptor
-    const subscriber = await prisma.subscriber.create({
+    const subscriber = await prisma.subscribers.create({
       data: {
         email,
         status: "ACTIVE",
@@ -50,12 +50,13 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(
-      { success: true },
+      { success: true, subscriber },
       { status: 200 }
     );
   } catch (error) {
+    console.error("Newsletter error:", error);
     return NextResponse.json(
-      { error: "An error occurred" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
