@@ -2,6 +2,7 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
+import CustomUserButton from "@/components/ui/userbutton";
 import { buttonVariants } from "@/components/ui/button";
 import {
   SignedIn,
@@ -56,6 +57,7 @@ export function UserInfo() {
             <TooltipProvider>
               <Tooltip>
               <TooltipTrigger asChild>
+              <CustomUserButton/>
                 </TooltipTrigger>
                 <TooltipContent>
                   <motion.div

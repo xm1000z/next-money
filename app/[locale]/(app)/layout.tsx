@@ -1,6 +1,5 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 
-import UserPoints from "@/components/dashboard/points";
 import { SearchCommand } from "@/components/dashboard/search-command";
 import {
   DashboardSidebar,
