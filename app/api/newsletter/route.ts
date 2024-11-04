@@ -1,69 +1,47 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-import { Ratelimit } from "@upstash/ratelimit";
-import { z } from "zod";
-
-import { emailConfig } from "@/config/email";
-import { prisma } from "@/db/prisma";
-// import ConfirmSubscriptionEmail from "@/emails/ConfirmSubscription";
-import { env } from "@/env.mjs";
-import { url } from "@/lib";
-import { resend } from "@/lib/email";
-import { redis } from "@/lib/redis";
-
-const newsletterFormSchema = z.object({
-  email: z.string().email().min(1),
-});
-
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(1, "10 s"),
-});
-
-export async function POST(req: NextRequest) {
-  const { success } = await ratelimit.limit("subscribe_" + (req.ip ?? ""));
-  if (!success) {
-    return NextResponse.error();
-  }
-
+export async function POST(req: Request) {
   try {
     const { data } = await req.json();
-    const parsed = newsletterFormSchema.parse(data);
+    const { email } = data;
 
-    const subscriber = await prisma.subscribers.findFirst({
-      where: {
-        email: parsed.email,
+    if (!email) {
+      return NextResponse.json(
+        { error: "Email is required" },
+        { status: 400 }
+      );
+    }
+
+    // Verificar si el email ya existe
+    const existingSubscriber = await prisma.subscriber.findUnique({
+      where: { email },
+    });
+
+    if (existingSubscriber) {
+      return NextResponse.json(
+        { error: "Email already subscribed" },
+        { status: 400 }
+      );
+    }
+
+    // Crear nuevo suscriptor
+    const subscriber = await prisma.subscriber.create({
+      data: {
+        email,
+        status: "ACTIVE",
       },
     });
 
-    if (subscriber) {
-      return NextResponse.json({ status: "success" });
-    }
-
-    // generate a random one-time token
-    const token = crypto.randomUUID();
-
-    if (env.NODE_ENV === "production") {
-      await resend.emails.send({
-        from: emailConfig.from,
-        to: parsed.email,
-        subject: "来自 Koya 的订阅确认",
-        html: '<p>请点击 <a href="' + url(`confirm/${token}`).href + '">这里</a> 确认订阅 Koya 的动态。</p>',
-        // react: ConfirmSubscriptionEmail({
-        //   link: url(`confirm/${token}`).href,
-        // }),
-      });
-
-      await prisma.subscribers.create({
-        data: {
-          email: parsed.email,
-          token,
-        },
-      });
-    }
-
-    return NextResponse.json({ status: "success" });
+    return NextResponse.json(
+      { success: true, subscriber },
+      { status: 200 }
+    );
   } catch (error) {
-    return NextResponse.error();
+    console.error("Newsletter error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
