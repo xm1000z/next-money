@@ -28,11 +28,22 @@ export async function POST(req: NextRequest) {
 
   try {
     const { data } = await req.json();
+    const { email, locale = "es" } = data;
+
     const parsed = newsletterFormSchema.parse(data);
 
-    const subscriber = await prisma.subscribers.findFirst({
-      where: {
-        email: parsed.email,
+    const subscriber = await prisma.subscribers.upsert({
+      where: { email },
+      update: { 
+        token,
+        status: "PENDING",
+        locale,
+      },
+      create: {
+        email,
+        token,
+        status: "PENDING",
+        locale,
       },
     });
 

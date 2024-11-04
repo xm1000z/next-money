@@ -146,15 +146,19 @@ model newsletters {
 }
 
 model Subscribers {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  token     String?  // Mantenemos el token que existía
-  status    String   @default("PENDING")  // Volvemos a PENDING como estado inicial
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  token          String?
+  status         String    @default("PENDING")
+  locale         String    @default("es")
+  subscribedAt   DateTime?
+  unsubscribedAt DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@index([email])
   @@index([token])
+  @@index([locale])
 }
 
 model UserBilling {
