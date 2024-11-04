@@ -34,8 +34,8 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             {/* Columna 1: Productos */}
             <div className="flex flex-col gap-3">
-              <h3 className="font-semibold text-xl">Productos</h3>
-              <div className="flex flex-col gap-2 text-md text-muted-foreground">
+              <h3 className="font-semibold">Productos</h3>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <Link href="https://chat.notas.ai/" prefetch={false} target="_blank">Chat</Link>
                 <Link href="https://search.notas.ai/" prefetch={false} target="_blank">Search</Link>
                 <Link href="https://pdf.notas.ai/" prefetch={false} target="_blank">PDF</Link>
@@ -45,8 +45,8 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
 
             {/* Columna 2: Legal */}
             <div className="flex flex-col gap-3">
-              <h3 className="font-semibold text-xl">Legal</h3>
-              <div className="flex flex-col gap-2 text-md text-muted-foreground">
+              <h3 className="font-semibold">Legal</h3>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <Link href="/terms-of-use" prefetch={false}>{t("footer.term")}</Link>
                 <Link href="/privacy-policy" prefetch={false}>{t("footer.privacy")}</Link>
                 <Link href="mailto:soporte@notas.ai" prefetch={false}>{t("footer.contact")}</Link>

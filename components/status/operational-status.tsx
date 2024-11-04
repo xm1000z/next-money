@@ -17,7 +17,7 @@ export function OperationalStatus() {
   ]);
 
   return (
-    <div className="flex items-center gap-2 text-sm text-black dark:text-white border rounded-full">
+    <div className="flex items-center gap-2 px-2 text-xs text-black dark:text-white border rounded-full font-mono">
       <div className="flex items-center gap-1.5">
         <span className={cn(
           "size-2 rounded-full",
