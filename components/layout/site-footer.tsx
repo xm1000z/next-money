@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import NewsletterForm from "../forms/newsletter-form";
 import { Icons } from "../shared/icons";
 import Image from 'next/image';
+import { OperationalStatus } from "../status/operational-status";
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   const t = useTranslations("PageLayout");
@@ -20,91 +21,63 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         className,
       )}
     >
-      <div className="flex max-w-7xl flex-col items-center justify-end gap-4 text-sm md:flex-row">
-        <Link
-          href="/terms-of-use"
-          className="underline-offset-4"
-          prefetch={false}
-          title={t("footer.term")}
-        >
-          {t("footer.term")}
-        </Link>
-        <Link
-          href="/privacy-policy"
-          className="underline-offset-4"
-          prefetch={false}
-          title={t("footer.privacy")}
-        >
-          {t("footer.privacy")}
-        </Link>
-        <Link
-          href="mailto:support@fluxaipro.art"
-          className="underline-offset-4"
-          prefetch={false}
-          title={t("footer.contact")}
-        >
-          {t("footer.contact")}
-        </Link>
-        <ModeToggle />
-      </div>
-      <div className="mt-4 flex max-w-7xl flex-col items-center justify-between gap-4 text-sm md:flex-row">
-        <div className="flex items-center gap-2">
-          <Image className="h-6 w-6" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
-          <span style={{ fontFamily: 'Apple Garamond', fontSize: 'larger' }}>NotasAI</span>
+      <div className="flex max-w-7xl flex-col justify-between gap-8 md:flex-row">
+        {/* Columna izquierda: Logo y links */}
+        <div className="flex flex-col gap-8">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <Image className="h-6 w-6" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
+            <span style={{ fontFamily: 'Apple Garamond', fontSize: 'larger' }}>NotasAI</span>
+          </div>
+          
+          {/* Links en columnas */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+            {/* Columna 1: Productos */}
+            <div className="flex flex-col gap-3">
+              <h3 className="font-semibold">Productos</h3>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link href="https://chat.notas.ai/" prefetch={false} target="_blank">Chat</Link>
+                <Link href="https://search.notas.ai/" prefetch={false} target="_blank">Search</Link>
+                <Link href="https://pdf.notas.ai/" prefetch={false} target="_blank">PDF</Link>
+                <Link href="https://seo.notas.ai/" prefetch={false} target="_blank">SEO</Link>
+              </div>
+            </div>
+
+            {/* Columna 2: Legal */}
+            <div className="flex flex-col gap-3">
+              <h3 className="font-semibold">Legal</h3>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link href="/terms-of-use" prefetch={false}>{t("footer.term")}</Link>
+                <Link href="/privacy-policy" prefetch={false}>{t("footer.privacy")}</Link>
+                <Link href="mailto:support@fluxaipro.art" prefetch={false}>{t("footer.contact")}</Link>
+              </div>
+            </div>
+
+            {/* Columna 3: Más */}
+            <div className="flex flex-col gap-3">
+              <h3 className="font-semibold">Más</h3>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link href="https://www.notas.ai/" prefetch={false} target="_blank">notas.ai</Link>
+                <ModeToggle />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col items-center gap-4 md:flex-row">
-          <Link
-            href="https://chat.notas.ai/"
-            title=" Chat"
-            className="underline-offset-4"
-            prefetch={false}
-            target="_blank"
-          >
-            Chat
-          </Link>
-          <Link
-            href="https://search.notas.ai/"
-            title="Notas Search"
-            className="underline-offset-4"
-            prefetch={false}
-            target="_blank"
-          >
-            Search
-          </Link>
-          <Link
-            href="https://pdf.notas.ai/"
-            className="underline-offset-4"
-            title="Woy AI Tools Directory"
-            prefetch={false}
-            target="_blank"
-          >
-            PDF
-          </Link>
-          <Link
-            href="https://seo.notas.ai/"
-            prefetch={false}
-            target="_blank"
-            className="underline-offset-4"
-          >
-            SEO
-          </Link>
-          <Link
-            href="https://www.notas.ai/"
-            prefetch={false}
-            target="_blank"
-            className="underline-offset-4"
-          >
-            notas.ai
-          </Link>
+
+        {/* Columna derecha: Newsletter */}
+        <div className="w-full max-w-sm">
+          <NewsletterForm />
         </div>
       </div>
-      <div className="mt-8 max-w-7xl">
-        <NewsletterForm />
-      </div>
-      <div className="mt-4 flex max-w-7xl flex-col items-center justify-center gap-4 text-sm md:flex-row">
-        <p className="text-muted-foreground">
-          &copy; 2024 NotasAI. All rights reserved.
-        </p>
+
+      {/* Estado Operacional y Copyright */}
+      <div className="mt-8 border-t pt-8">
+        <div className="flex flex-col items-center justify-between gap-4 text-sm md:flex-row">
+          <OperationalStatus />
+          <p className="text-muted-foreground">
+            &copy; 2024 NotasAI. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );
