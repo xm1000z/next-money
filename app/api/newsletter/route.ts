@@ -1,59 +1,69 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { Resend } from 'resend';
-import { nanoid } from 'nanoid';
+import { NextResponse, type NextRequest } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { Ratelimit } from "@upstash/ratelimit";
+import { z } from "zod";
 
-export async function POST(req: Request) {
+import { emailConfig } from "@/config/email";
+import { prisma } from "@/db/prisma";
+// import ConfirmSubscriptionEmail from "@/emails/ConfirmSubscription";
+import { env } from "@/env.mjs";
+import { url } from "@/lib";
+import { resend } from "@/lib/email";
+import { redis } from "@/lib/redis";
+
+const newsletterFormSchema = z.object({
+  email: z.string().email().min(1),
+});
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(1, "10 s"),
+});
+
+export async function POST(req: NextRequest) {
+  const { success } = await ratelimit.limit("subscribe_" + (req.ip ?? ""));
+  if (!success) {
+    return NextResponse.error();
+  }
+
   try {
     const { data } = await req.json();
-    const { email } = data;
+    const parsed = newsletterFormSchema.parse(data);
 
-    if (!email) {
-      return NextResponse.json(
-        { error: "Email is required" },
-        { status: 400 }
-      );
+    const subscriber = await prisma.subscribers.findFirst({
+      where: {
+        email: parsed.email,
+      },
+    });
+
+    if (subscriber) {
+      return NextResponse.json({ status: "success" });
     }
 
-    const token = nanoid();
+    // generate a random one-time token
+    const token = crypto.randomUUID();
 
-    // Crear o actualizar suscriptor
-    const subscriber = await prisma.subscribers.upsert({
-      where: { email },
-      update: { 
-        token,
-        status: "PENDING"
-      },
-      create: {
-        email,
-        token,
-        status: "PENDING"
-      },
-    });
+    if (env.NODE_ENV === "production") {
+      await resend.emails.send({
+        from: emailConfig.from,
+        to: parsed.email,
+        subject: "来自 Koya 的订阅确认",
+        html: '<p>请点击 <a href="' + url(`confirm/${token}`).href + '">这里</a> 确认订阅 Koya 的动态。</p>',
+        // react: ConfirmSubscriptionEmail({
+        //   link: url(`confirm/${token}`).href,
+        // }),
+      });
 
-    // Enviar email de confirmación
-    await resend.emails.send({
-      from: 'NotasAI <no-reply@notas.ai>',
-      to: email,
-      subject: '¡Bienvenido a NotasAI!',
-      html: `
-        <h1>¡Gracias por suscribirte a NotasAI!</h1>
-        <p>Por favor, confirma tu suscripción haciendo clic en el siguiente enlace:</p>
-        <a href="${process.env.NEXT_PUBLIC_APP_URL}/confirm/${token}">Confirmar suscripción</a>
-      `
-    });
+      await prisma.subscribers.create({
+        data: {
+          email: parsed.email,
+          token,
+        },
+      });
+    }
 
-    return NextResponse.json(
-      { success: true },
-      { status: 200 }
-    );
+    return NextResponse.json({ status: "success" });
   } catch (error) {
-    console.error("Newsletter error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.error();
   }
 }

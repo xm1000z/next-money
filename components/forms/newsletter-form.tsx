@@ -33,7 +33,7 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
 
   const { reward } = useReward("newsletter-rewards", "emoji", {
     position: "absolute",
-    emoji: ["🤓", "😊", "🥳", "🤩", "🤪", "🤯", "🥰", "😎", "🤑", "🤗", "😇"],
+    emoji: ["N", "O", "T", "A", "S", "AI"],
     elementCount: 32,
   });
 
