@@ -145,15 +145,14 @@ model newsletters {
   updatedAt DateTime  @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 }
 
-model subscribers {
-  id             Int       @id @default(autoincrement())
-  email          String?   @db.VarChar(120)
-  token          String?   @db.VarChar(50)
-  locale         String?   @db.VarChar(10)
-  subscribedAt   DateTime? @map(name: "subscribed_at") @db.Timestamp(6)
-  unsubscribedAt DateTime? @map(name: "unsubscribed_at") @db.Timestamp(6)
+model Subscribers {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  status    String   @default("ACTIVE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  @@index([email])
 }
 
 model UserBilling {

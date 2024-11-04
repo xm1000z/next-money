@@ -16,9 +16,11 @@ export async function POST(req: Request) {
       );
     }
 
-    // Verificar si el email ya existe
-    const existingSubscriber = await prisma.subscribers.findUnique({
-      where: { email },
+    // Verificar si el email ya existe usando findFirst
+    const existingSubscriber = await prisma.subscribers.findFirst({
+      where: {
+        email: email
+      }
     });
 
     if (existingSubscriber) {
@@ -44,7 +46,7 @@ export async function POST(req: Request) {
     // Crear nuevo suscriptor
     const subscriber = await prisma.subscribers.create({
       data: {
-        email,
+        email: email,
         status: "ACTIVE",
       },
     });
