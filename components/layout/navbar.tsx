@@ -67,7 +67,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
     >
       <div className="border border-[rgba(27, 27, 27, 0.48)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[rgba(236, 236, 236, 0.5)] dark:bg-[rgba(27, 27, 27, 0.5)] backdrop-blur-sm">
         <MaxWidthWrapper2
-          className="flex h-14 items-center justify-between px-4"
+          className="flex h-10 items-center justify-between px-4"
           large={documentation}
         >
           <div className="flex items-center gap-8">
@@ -81,7 +81,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
                     href={item.disabled ? "#" : item.href}
                     prefetch={true}
                     className={cn(
-                      "text-sm transition-colors font-bold",
+                      "text-sm transition-colors",
                       item.href.startsWith(`/${selectedLayout}`) ||
                         (item.href === "/blog" && blog)
                         ? "text-zinc-900 dark:text-zinc-100"
