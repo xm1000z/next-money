@@ -6,6 +6,7 @@ import va from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
+import { useReward } from "react-rewards";
 import { z } from "zod";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -19,6 +20,7 @@ export type NewsletterForm = z.infer<typeof newsletterFormSchema>;
 
 export default function Newsletter({ subCount }: { subCount?: string }) {
   const t = useTranslations("NewsLetter");
+  const [isSubscribed, setIsSubscribed] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -27,6 +29,12 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
   } = useForm<NewsletterForm>({
     defaultValues: { formId },
     resolver: zodResolver(newsletterFormSchema),
+  });
+
+  const { reward } = useReward("newsletter-rewards", "emoji", {
+    position: "absolute",
+    emoji: ["🤓", "😊", "🥳", "🤩", "🤪", "🤯", "🥰", "😎", "🤑", "🤗", "😇"],
+    elementCount: 32,
   });
 
   const onSubmit = React.useCallback(
@@ -45,13 +53,21 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
         });
         if (response.ok) {
           reset();
+          reward();
+          setIsSubscribed(true);
         }
       } catch (error) {
-        console.error("Error submitting newsletter form:", error);
+        console.error(error);
       }
     },
-    [isSubmitting, reset]
+    [isSubmitting, reset, reward],
   );
+
+  React.useEffect(() => {
+    if (isSubscribed) {
+      setTimeout(() => setIsSubscribed(false), 60000);
+    }
+  }, [isSubscribed]);
 
   return (
     <form
@@ -77,10 +93,10 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
             />
             <Button 
               type="submit" 
-              size="xs"
+              size="sm"
               variant="ghost"
               disabled={isSubmitting}
-              className="absolute bg-black dark:bg-white right-0 px-3 p-1"
+              className="absolute right-0 px-3"
             >
               {t("form.button")}
             </Button>
