@@ -1,37 +1,26 @@
-import { NextResponse, type NextRequest } from "next/server";
-
-import { Ratelimit } from "@upstash/ratelimit";
-import { z } from "zod";
-
-import { emailConfig } from "@/config/email";
-import { prisma } from "@/db/prisma";
-// import ConfirmSubscriptionEmail from "@/emails/ConfirmSubscription";
-import { env } from "@/env.mjs";
-import { url } from "@/lib";
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 import { resend } from "@/lib/email";
-import { redis } from "@/lib/redis";
+import { emailConfig } from "@/config/email";
+import { url } from "@/lib";
+import crypto from "crypto";
 
-const newsletterFormSchema = z.object({
-  email: z.string().email().min(1),
-});
-
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(1, "10 s"),
-});
-
-export async function POST(req: NextRequest) {
-  const { success } = await ratelimit.limit("subscribe_" + (req.ip ?? ""));
-  if (!success) {
-    return NextResponse.error();
-  }
-
+export async function POST(req: Request) {
   try {
     const { data } = await req.json();
     const { email, locale = "es" } = data;
 
-    const parsed = newsletterFormSchema.parse(data);
+    if (!email) {
+      return NextResponse.json(
+        { error: "Email is required" },
+        { status: 400 }
+      );
+    }
 
+    // Generar token primero
+    const token = crypto.randomUUID();
+
+    // Crear o actualizar suscriptor
     const subscriber = await prisma.subscribers.upsert({
       where: { email },
       update: { 
@@ -47,34 +36,27 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    if (subscriber) {
-      return NextResponse.json({ status: "success" });
-    }
+    // Enviar email de confirmación
+    await resend.emails.send({
+      from: emailConfig.from,
+      to: email,
+      subject: "Confirma tu suscripción a NotasAI",
+      html: `
+        <h1>¡Gracias por suscribirte a NotasAI!</h1>
+        <p>Por favor, confirma tu suscripción haciendo clic en el siguiente enlace:</p>
+        <a href="${url(`confirm/${token}`).href}">Confirmar suscripción</a>
+      `
+    });
 
-    // generate a random one-time token
-    const token = crypto.randomUUID();
-
-    if (env.NODE_ENV === "production") {
-      await resend.emails.send({
-        from: emailConfig.from,
-        to: parsed.email,
-        subject: "来自 Koya 的订阅确认",
-        html: '<p>请点击 <a href="' + url(`confirm/${token}`).href + '">这里</a> 确认订阅 Koya 的动态。</p>',
-        // react: ConfirmSubscriptionEmail({
-        //   link: url(`confirm/${token}`).href,
-        // }),
-      });
-
-      await prisma.subscribers.create({
-        data: {
-          email: parsed.email,
-          token,
-        },
-      });
-    }
-
-    return NextResponse.json({ status: "success" });
+    return NextResponse.json(
+      { success: true },
+      { status: 200 }
+    );
   } catch (error) {
-    return NextResponse.error();
+    console.error("Newsletter error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
