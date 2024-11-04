@@ -98,6 +98,9 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           </Link>
         </div>
       </div>
+      <div className="mt-8 max-w-7xl">
+        <NewsletterForm />
+      </div>
       <div className="mt-4 flex max-w-7xl flex-col items-center justify-center gap-4 text-sm md:flex-row">
         <p className="text-muted-foreground">
           &copy; 2024 NotasAI. All rights reserved.
