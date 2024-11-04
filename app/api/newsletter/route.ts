@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { Resend } from 'resend';
+import { nanoid } from 'nanoid';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -16,19 +17,21 @@ export async function POST(req: Request) {
       );
     }
 
-    // Verificar si el email ya existe usando findFirst
-    const existingSubscriber = await prisma.subscribers.findFirst({
-      where: {
-        email: email
-      }
-    });
+    const token = nanoid();
 
-    if (existingSubscriber) {
-      return NextResponse.json(
-        { error: "Email already subscribed" },
-        { status: 400 }
-      );
-    }
+    // Crear o actualizar suscriptor
+    const subscriber = await prisma.subscribers.upsert({
+      where: { email },
+      update: { 
+        token,
+        status: "PENDING"
+      },
+      create: {
+        email,
+        token,
+        status: "PENDING"
+      },
+    });
 
     // Enviar email de confirmación
     await resend.emails.send({
@@ -37,22 +40,13 @@ export async function POST(req: Request) {
       subject: '¡Bienvenido a NotasAI!',
       html: `
         <h1>¡Gracias por suscribirte a NotasAI!</h1>
-        <p>Estamos emocionados de tenerte con nosotros. Te mantendremos informado sobre las últimas novedades y actualizaciones.</p>
-        <p>¡Saludos!</p>
-        <p>El equipo de NotasAI</p>
+        <p>Por favor, confirma tu suscripción haciendo clic en el siguiente enlace:</p>
+        <a href="${process.env.NEXT_PUBLIC_APP_URL}/confirm/${token}">Confirmar suscripción</a>
       `
     });
 
-    // Crear nuevo suscriptor
-    const subscriber = await prisma.subscribers.create({
-      data: {
-        email: email,
-        status: "ACTIVE",
-      },
-    });
-
     return NextResponse.json(
-      { success: true, subscriber },
+      { success: true },
       { status: 200 }
     );
   } catch (error) {
