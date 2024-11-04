@@ -96,7 +96,7 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
               size="sm"
               variant="ghost"
               disabled={isSubmitting}
-              className="absolute bg-black dark:bg-white text-[5px] h-7 w-19 right-2 py-1 bg-black dark:bg-white text-white dark:text-black"
+              className="absolute bg-black dark:bg-white text-[12px] h-6 w-19 right-2 py-1 bg-black dark:bg-white text-white dark:text-black"
             >
               {t("form.button")}
             </Button>
