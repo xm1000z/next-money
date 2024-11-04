@@ -71,7 +71,7 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
 
   return (
     <form
-      className="relative w-full max-w-sm"
+      className="relative w-full max-w-xs"
       onSubmit={handleSubmit(onSubmit)}
     >
       <input type="hidden" {...register("formId")} />
@@ -85,7 +85,7 @@ export default function Newsletter({ subCount }: { subCount?: string }) {
           >
             <input
               type="email"
-              placeholder={t("form.placeholder")}
+              placeholder="Email"
               aria-label={t("form.aria_label")}
               required
               className="w-full border border-input bg-transparent px-3 py-1.5 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
