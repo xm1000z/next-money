@@ -57,7 +57,6 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
 
         {/* Columna derecha: Newsletter */}
         <div className="w-full max-w-sm">
-          <NewsletterForm />
         </div>
       </div>
 
