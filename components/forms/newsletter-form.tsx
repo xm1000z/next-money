@@ -3,13 +3,9 @@
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import va from "@vercel/analytics";
-import { TiltedSendIcon } from "@/assets";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { useReward } from "react-rewards";
 import { z } from "zod";
 
 const formId = "5108903";
@@ -26,10 +22,35 @@ export default function Newsletter() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm<NewsletterForm>({
     defaultValues: { formId },
     resolver: zodResolver(newsletterFormSchema),
   });
+
+  const onSubmit = React.useCallback(
+    async (data: NewsletterForm) => {
+      try {
+        if (isSubmitting) return;
+
+        va.track("Newsletter:Subscribe");
+
+        const response = await fetch("/api/newsletter", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data }),
+        });
+        if (response.ok) {
+          reset();
+        }
+      } catch (error) {
+        console.error("Error submitting newsletter form:", error);
+      }
+    },
+    [isSubmitting, reset]
+  );
 
   return (
     <form
