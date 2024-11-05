@@ -1,6 +1,6 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 
-import Examples from "@/components/sections/examples";
+import Screens from "@/components/sections/screens";
 import Features from "@/components/sections/features";
 import HeroLanding from "@/components/sections/hero-landing";
 import PricingCard from "@/components/sections/pricing-card";
@@ -24,7 +24,7 @@ export default function IndexPage({ params: { locale } }: Props) {
       {/* <InfoLanding data={infos[0]} reverse={true} /> */}
       {/* <InfoLanding data={infos[1]} /> */}
       <Features />
-      <Examples />
+      <Screens />
       <SchnellIntro />
       <PricingCard locale={locale} />
       {process.env.NODE_ENV === "production" && <TwitterList />}
