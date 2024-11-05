@@ -4,8 +4,6 @@ import { Screens } from "@/components/sections/screens";
 import Features from "@/components/sections/features";
 import HeroLanding from "@/components/sections/hero-landing";
 import PricingCard from "@/components/sections/pricing-card";
-import TwitterList from "@/components/sections/twitter-list";
-import SchnellIntro from "@/components/sections/schnell-intro";
 import { infos } from "@/config/landing";
 
 type Props = {
@@ -25,9 +23,7 @@ export default function IndexPage({ params: { locale } }: Props) {
       {/* <InfoLanding data={infos[1]} /> */}
       <Features />
       <Screens />
-      <SchnellIntro />
       <PricingCard locale={locale} />
-      {process.env.NODE_ENV === "production" && <TwitterList />}
     </>
   );
 }
