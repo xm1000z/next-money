@@ -82,7 +82,7 @@ export const CardStack = ({
           clearInterval(intervalRef.current);
         }
       }}
-      onMouseLeave={() => startFlipping()}
+      onMouseLeave={() => !isAnimating && startFlipping()}
     >
       {cards.map((card, index) => {
         return (
@@ -94,7 +94,7 @@ export const CardStack = ({
               display: index > 2 ? "none" : "block",
             }}
             whileHover={{
-              top: index > 0 && index > 0 && index * -CARD_OFFSET - 30,
+              top: index > 0 ? index * -CARD_OFFSET - 30 : 0,
               transition: { duration: 0.3 },
             }}
             animate={{
@@ -107,7 +107,6 @@ export const CardStack = ({
                 clearInterval(intervalRef.current);
               }
             }}
-            onMouseLeave={() => startFlipping()}
           >
             <TooltipProvider delayDuration={0}>
               <Tooltip>
@@ -146,7 +145,7 @@ export const CardStack = ({
             </TooltipProvider>
 
             <div 
-              onClick={() => onChangeCard(card)}
+              onClick={() => onChangeCardByIndex(index)}
               className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200"
             >
               {card.content}
