@@ -31,7 +31,7 @@ export function Screens() {
             },
             {
               id: 2,
-              name: "Tracker",
+              name: "Chat",
               content: (
                 <Image
                   quality={100}
@@ -45,7 +45,7 @@ export function Screens() {
             },
             {
               id: 3,
-              name: "Inbox",
+              name: "Search",
               content: (
                 <Image
                   quality={100}
@@ -59,7 +59,7 @@ export function Screens() {
             },
             {
               id: 4,
-              name: "Vault",
+              name: "Search",
               content: (
                 <Image
                   quality={100}
@@ -73,7 +73,7 @@ export function Screens() {
             },
             {
               id: 5,
-              name: "Dashboard - Transactions",
+              name: "Studio",
               content: (
                 <Image
                   quality={100}
