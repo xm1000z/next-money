@@ -49,8 +49,10 @@ export const CardStack = ({
     }, 5000);
   };
 
-  const onChangeCardByIndex = (index) => {
-    const item = cards.at(index);
+  const onChangeCardByIndex = (index: number) => {
+    const item = cards[index];
+    if (!item) return;
+
     setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
   };
 
