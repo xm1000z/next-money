@@ -69,26 +69,29 @@ export const CardStack = ({
   };
 
   return (
-    <div
-      className={cn(
-        "relative z-10",
-        "before:absolute before:inset-0 before:-z-20 before:rounded-lg",
-        "before:bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:before:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
-        "before:bg-[size:16px_16px]",
-        "before:opacity-50",
-        "h-[220px] w-[331px] md:h-[670px] md:w-[1031px]",
-        "bg-background/50 dark:bg-background/30",
-        "backdrop-blur-sm"
-      )}
-      onMouseEnter={() => {
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
-      }}
-      onMouseLeave={() => !isAnimating && startFlipping()}
-    >
-      {cards.map((card, index) => {
-        return (
+    <div className="relative">
+      {/* Fondo con puntos */}
+      <div className={cn(
+        "absolute inset-0 -z-10",
+        "bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
+        "bg-[size:16px_16px]",
+        "opacity-50"
+      )} />
+
+      {/* Contenedor principal sin los puntos */}
+      <div
+        className={cn(
+          "relative z-10",
+          "h-[220px] w-[331px] md:h-[670px] md:w-[1031px]",
+        )}
+        onMouseEnter={() => {
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+          }
+        }}
+        onMouseLeave={() => !isAnimating && startFlipping()}
+      >
+        {cards.map((card, index) => (
           <motion.div
             key={card.id}
             className="absolute h-[220px] md:h-[670px] w-[331px] md:w-[1031px] flex flex-col justify-between"
@@ -149,13 +152,13 @@ export const CardStack = ({
 
             <div 
               onClick={() => onChangeCardByIndex(index)}
-              className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200 border border-border/50"
             >
               {card.content}
             </div>
           </motion.div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 };
