@@ -82,9 +82,6 @@ export const CardStack = ({
       <div
         className={cn(
           "relative z-10",
-          "bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
-          "bg-[size:16px_16px]",
-          "h-[220px] w-[331px] md:h-[670px] md:w-[1031px]",
         )}
         onMouseEnter={() => {
           if (intervalRef.current) {
