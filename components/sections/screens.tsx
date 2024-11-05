@@ -89,7 +89,7 @@ export function Screens() {
         />
       </div>
 
-      <div className="dotted-bg absolute w-[calc(100%+2rem)] md:w-[10000px] h-full top-0 -left-4 md:-left-[5000px]" />
+      <div className="dotted-bg absolute w-[calc(100%-2rem)] md:w-[10000px] h-full top-0 left-4 md:-left-[5000px]" />
     </div>
   );
 }

@@ -4,14 +4,16 @@ export function SectionTwo() {
   return (
     <section className="border border-border mx-4 md:container bg-[#121212] md:pb-0 overflow-hidden mb-8">
       <div className="flex flex-col md:space-x-8 md:flex-row">
-        <Image
-          src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-5.png"
-          height={446}
-          width={836}
-          className="-mb-[1px] object-contain w-full"
-          alt="Overview"
-          quality={100}
-        />
+        <div className="md:max-w-[60%]">
+          <Image
+            src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-5.png"
+            height={446}
+            width={836}
+            className="-mb-[1px] object-contain w-full"
+            alt="Overview"
+            quality={100}
+          />
+        </div>
 
         <div className="mt-4 md:max-w-[40%] md:ml-6 md:mb-6 flex flex-col justify-center p-6 md:p-0">
           <h3 className="font-medium text-lg md:text-xl mb-2">
