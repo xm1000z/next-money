@@ -69,123 +69,33 @@ export const CardStack = ({
     >
       {cards.map((card, index) => {
         return (
-          <motion.div
-            key={card.id}
-            className="absolute h-[220px] md:h-[670px] w-[331px] md:w-[1031px] flex flex-col justify-between"
-            style={{
-              transformOrigin: "top center",
-              display: index > 2 ? "none" : "block",
-            }}
-            whileHover={{
-              top: index > 0 && index > 0 && index * -CARD_OFFSET - 30,
-              transition: { duration: 0.3 },
-            }}
-            animate={{
-              top: index * -CARD_OFFSET,
-              scale: 1 - index * SCALE_FACTOR, // decrease scale for cards that are behind
-              zIndex: cards.length - index, //  decrease z-index for the cards that are behind
-            }}
-            onMouseEnter={() => clearInterval(interval)}
-          >
-            <TooltipProvider delayDuration={0}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    className="w-[35px] h-[20px] z-20 absolute top-[75px] left-[8px]"
-                    onClick={() => onChangeCard(cards.find((c) => c.id === 1))}
-                  >
-                    <span className="sr-only">Overview</span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="right"
-                  className="py-1 px-3 rounded-sm"
-                  sideOffset={8}
+          <TooltipProvider delayDuration={0}>
+            <Tooltip key={card.id}>
+              <TooltipTrigger asChild>
+                <motion.div
+                  className="absolute left-0 top-0 h-full w-full transition-all duration-200"
+                  style={{
+                    transform: `scale(${1 - SCALE_FACTOR * index}) translateY(${index * CARD_OFFSET}px)`,
+                    zIndex: cards.length - index,
+                    display: index > 2 ? "none" : "block",
+                  }}
+                  whileHover={{
+                    top: index > 0 ? index * -CARD_OFFSET - 30 : 0,
+                    transition: { duration: 0.3 },
+                  }}
                 >
-                  <p className="text-xs">Overview</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    className="w-[35px] h-[20px] z-20 absolute top-[105px] left-[8px]"
-                    onClick={() => onChangeCard(cards.find((c) => c.id === 5))}
-                  >
-                    <span className="sr-only">Transactions</span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="right"
-                  className="py-1 px-3 rounded-sm"
-                  sideOffset={8}
-                >
-                  <p className="text-xs">Transactions</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    className="w-[35px] h-[20px] z-20 absolute top-[135px] left-[8px]"
-                    onClick={() => onChangeCard(cards.find((c) => c.id === 3))}
-                  >
-                    <span className="sr-only">Inbox</span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="right"
-                  className="py-1 px-3 rounded-sm"
-                  sideOffset={8}
-                >
-                  <p className="text-xs">Inbox</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    className="w-[35px] h-[20px] z-20 absolute top-[170px] left-[8px]"
-                    onClick={() => onChangeCard(cards.find((c) => c.id === 2))}
-                  >
-                    <span className="sr-only">Tracker</span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="right"
-                  className="py-1 px-3 rounded-sm"
-                  sideOffset={8}
-                >
-                  <p className="text-xs">Tracker</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    className="w-[35px] h-[20px] z-20 absolute top-[230px] left-[8px]"
-                    onClick={() => onChangeCard(cards.find((c) => c.id === 4))}
-                  >
-                    <span className="sr-only">Vault</span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="right"
-                  className="py-1 px-3 rounded-sm"
-                  sideOffset={8}
-                >
-                  <p className="text-xs">Vault</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
-            <div onClick={() => onChangeCardByIndex(index)}>{card.content}</div>
-          </motion.div>
+                  <div onClick={() => onChangeCardByIndex(index)}>{card.content}</div>
+                </motion.div>
+              </TooltipTrigger>
+              <TooltipContent
+                side="right"
+                className="py-1 px-3 rounded-sm"
+                sideOffset={8}
+              >
+                <p className="text-xs">{card.name}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         );
       })}
     </div>
