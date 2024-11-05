@@ -20,7 +20,7 @@ export function Screens() {
               content: (
                 <Image
                   quality={100}
-                  alt="Dashboard - Overview"
+                  alt="Escritor de NotasAI"
                   src="https://notas.ai/64e38a3a25593ef3c6e7968a/writer-3.png"
                   width={1031}
                   height={670}
@@ -35,7 +35,7 @@ export function Screens() {
               content: (
                 <Image
                   quality={100}
-                  alt="Dashboard - Tracker"
+                  alt="Chat de NotasAI"
                   src="https://notas.ai/64e38a3a25593ef3c6e7968a/chat-4.png"
                   width={1031}
                   height={670}
@@ -49,7 +49,7 @@ export function Screens() {
               content: (
                 <Image
                   quality={100}
-                  alt="Dashboard - Inbox"
+                  alt="Search de NotasAI"
                   src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-3.png"
                   width={1031}
                   height={670}
@@ -63,7 +63,7 @@ export function Screens() {
               content: (
                 <Image
                   quality={100}
-                  alt="Dashboard - Vault"
+                  alt="Search de NotasAI"
                   src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-5.png"
                   width={1031}
                   height={670}
@@ -77,7 +77,7 @@ export function Screens() {
               content: (
                 <Image
                   quality={100}
-                  alt="Dashboard - Transactions"
+                  alt="Studio - NotasAI"
                   src="https://notas.ai/64e38a3a25593ef3c6e7968a/studio-4.png"
                   width={1031}
                   height={670}
