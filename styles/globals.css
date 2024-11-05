@@ -213,3 +213,11 @@
   border: 1px solid #2e2e2e !important;
   border-color:#2e2e2e !important;
 }
+.dotted-bg {
+  background-image: radial-gradient(circle at 1px 1px,#eaeaea 1px,transparent 0);
+  background-size: 8px 8px;
+  }
+  .dark .dotted-bg {
+    background-image: radial-gradient(circle at 1px 1px,#232323 1px,transparent 0);
+    background-size: 8px 8px;
+    }
