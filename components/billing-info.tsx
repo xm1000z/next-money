@@ -44,8 +44,8 @@ interface BillingInfoProps extends React.HTMLAttributes<HTMLFormElement> {
 }
 
 const OrderBadge = {
-  Hecho: "default",
-  Pendiente: "Secondary",
+  Done: "default",
+  Pending: "Secondary",
 };
 export default function BillingInfo() {
   const { getToken } = useAuth();
@@ -124,7 +124,7 @@ export default function BillingInfo() {
                         {item.fluxId}
                       </TableCell>
                       <TableCell>
-                        {item.amount}
+                        {item.amount} {t("table.amount")}
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
                         {item.type}
