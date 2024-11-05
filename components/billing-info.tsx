@@ -44,8 +44,8 @@ interface BillingInfoProps extends React.HTMLAttributes<HTMLFormElement> {
 }
 
 const OrderBadge = {
-  Done: "default",
-  Pending: "Secondary",
+  Hecho: "default",
+  Pendiente: "Secondary",
 };
 export default function BillingInfo() {
   const { getToken } = useAuth();
