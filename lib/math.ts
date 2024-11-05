@@ -22,7 +22,7 @@ export function prettifyNumber(n: number, inChinese = false): string {
     } else if (Math.abs(n) >= 10000) {
       return toFixed(n / 10000) + "万";
     } else {
-      return Intl.NumberFormat("en-US").format(n);
+      return Intl.NumberFormat("es-ES").format(n);
     }
   }
 
@@ -31,6 +31,6 @@ export function prettifyNumber(n: number, inChinese = false): string {
   } else if (Math.abs(n) >= 1000) {
     return toFixed(n / 1000) + "k";
   } else {
-    return Intl.NumberFormat("en-US").format(n);
+    return Intl.NumberFormat("es-ES").format(n);
   }
 }
