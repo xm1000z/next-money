@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CardStack } from "../card-stack";
+import { CardStack } from "@/components/card-stack";
 
 export function Screens() {
   return (

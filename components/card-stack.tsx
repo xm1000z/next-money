@@ -1,12 +1,12 @@
 "use client";
 
-import { useMediaQuery } from "./ui/hooks";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip";
+} from "@/components/ui/tooltip";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
