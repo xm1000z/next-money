@@ -5,7 +5,7 @@ export function SectionTwo() {
     <section className="border border-border container bg-[#121212] md:pb-0 overflow-hidden mb-8">
       <div className="flex flex-col md:space-x-8 md:flex-row">
         <Image
-          src="https://midday.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcomputer.84f0a581.png&w=1080&q=100"
+          src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-5.png"
           height={446}
           width={836}
           className="-mb-[1px] object-contain"
