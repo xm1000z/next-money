@@ -8,7 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 type Card = {
@@ -29,36 +29,40 @@ export const CardStack = ({
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const CARD_OFFSET = isDesktop ? 10 : 5;
   const SCALE_FACTOR = scaleFactor || 0.06;
-  const [cards, setCards] = useState<Card[]>(items);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [cards, setCards] = useState<Card[]>([items[0] || items[0]]);
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isAnimating) {
-        setCards((prevCards) => {
-          const newCards = [...prevCards];
-          const lastCard = newCards.pop();
-          if (lastCard) {
-            newCards.unshift(lastCard);
-          }
-          return newCards;
-        });
+    startFlipping();
+    setCards(items);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
+    };
+  }, []);
+
+  const startFlipping = () => {
+    intervalRef.current = setInterval(() => {
+      setCards((prevCards: Card[]) => {
+        const newArray = [...prevCards];
+        newArray.unshift(newArray.pop()!);
+        return newArray;
+      });
     }, 5000);
+  };
 
-    return () => clearInterval(interval);
-  }, [isAnimating]);
+  const onChangeCardByIndex = (index: number) => {
+    const item = cards[index];
+    if (!item) return;
 
-  const onCardClick = (index: number) => {
-    setIsAnimating(true);
-    const selectedCard = cards[index];
-    const newCards = [
-      selectedCard,
-      ...cards.slice(0, index),
-      ...cards.slice(index + 1),
-    ];
-    setCards(newCards);
-    setTimeout(() => setIsAnimating(false), 300);
+    setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
+  };
+
+  const onChangeCard = (item) => {
+    const index = cards.findIndex((card) => card.id === item.id);
+    setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
   };
 
   return (
@@ -73,7 +77,12 @@ export const CardStack = ({
         "bg-background/50 dark:bg-background/30",
         "backdrop-blur-sm"
       )}
-      onMouseEnter={() => clearInterval(interval)}
+      onMouseEnter={() => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      }}
+      onMouseLeave={() => startFlipping()}
     >
       {cards.map((card, index) => {
         return (
@@ -93,7 +102,12 @@ export const CardStack = ({
               scale: 1 - index * SCALE_FACTOR,
               zIndex: cards.length - index,
             }}
-            onMouseEnter={() => clearInterval(interval)}
+            onMouseEnter={() => {
+              if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+              }
+            }}
+            onMouseLeave={() => startFlipping()}
           >
             <TooltipProvider delayDuration={0}>
               <Tooltip>
@@ -116,7 +130,7 @@ export const CardStack = ({
                       top: index > 0 ? -30 : 0,
                       transition: { duration: 0.3 },
                     }}
-                    onClick={() => onCardClick(index)}
+                    onClick={() => onChangeCard(card)}
                   >
                     {card.content}
                   </motion.div>
@@ -132,7 +146,7 @@ export const CardStack = ({
             </TooltipProvider>
 
             <div 
-              onClick={() => onCardClick(index)}
+              onClick={() => onChangeCard(card)}
               className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200"
             >
               {card.content}
