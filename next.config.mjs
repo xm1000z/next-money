@@ -28,6 +28,12 @@ const nextConfig = {
         hostname: "img.douni.one",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "notas.ai",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 
