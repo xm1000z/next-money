@@ -70,9 +70,7 @@ export const CardStack = ({
 
   return (
     <div className={cn(
-      "relative", // Contenedor principal
-      "bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
-      "bg-[size:16px_16px]"
+      "dotted-bg absolute w-[10000px] h-full top-0 -left-[5000px]"
     )}>
       {/* Contenedor de las tarjetas */}
       <div
