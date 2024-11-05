@@ -89,7 +89,7 @@ export function Screens() {
         />
       </div>
 
-      <div className="dotted-bg absolute w-[10000px] h-full top-0 -left-[5000px]" />
+      <div className="bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-[size:16px_16px] absolute w-[10000px] h-full top-0 -left-[5000px]" />
     </div>
   );
 }
