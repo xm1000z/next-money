@@ -3,11 +3,11 @@ import { CardStack } from "@/components/card-stack";
 
 export function Screens() {
   return (
-    <div className="mt-[120px] md:mt-[240px] relative pt-12 pb-16">
+    <div className="mt-16 md:mt-32 relative pt-8 pb-12">
       <div className="relative z-10 flex flex-col items-center">
-        <div className="text-center pb-14">
-          <h3 className="text-4xl md:text-6xl font-medium">Simple y Eficaz</h3>
-          <p className="mt-4 text-[#878787]">
+        <div className="text-center pb-8">
+          <h3 className="text-2xl md:text-4xl font-medium">Simple y Eficaz</h3>
+          <p className="mt-2 text-sm text-[#878787]">
             Brindamos una plataforma completa con todas las necesidades cubiertas.
           </p>
         </div>
@@ -89,7 +89,7 @@ export function Screens() {
         />
       </div>
 
-      <div className="dotted-bg absolute w-screen md:w-[10000px] h-full top-0 left-0 md:-left-[5000px]" />
+      <div className="dotted-bg absolute w-[calc(100%+2rem)] md:w-[10000px] h-full top-0 -left-4 md:-left-[5000px]" />
     </div>
   );
 }
