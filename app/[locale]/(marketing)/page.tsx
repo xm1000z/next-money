@@ -1,7 +1,7 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 
 import { Screens } from "@/components/sections/screens";
-import { SectionOne } from "@/components/section-one";
+import { SectionOne } from "@/components/sections/section-one";
 import Features from "@/components/sections/features";
 import HeroLanding from "@/components/sections/hero-landing";
 import PricingCard from "@/components/sections/pricing-card";
