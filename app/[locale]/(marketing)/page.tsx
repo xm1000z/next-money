@@ -23,8 +23,9 @@ export default function IndexPage({ params: { locale } }: Props) {
       {/* <InfoLanding data={infos[0]} reverse={true} /> */}
       {/* <InfoLanding data={infos[1]} /> */}
       <Screens />
+      {/*<Features />*/}
       <SectionOne />
-      <Features />
+      <SectionTwo />
       <PricingCard locale={locale} />
     </>
   );
