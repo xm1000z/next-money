@@ -70,7 +70,7 @@ export const CardStack = ({
 
   return (
     <div
-      className="relative h-[180px] md:h-[480px] w-[280px] md:w-[720px] z-10"
+      className="relative h-[200px] md:h-[520px] w-[300px] md:w-[800px] z-10"
       onMouseEnter={() => {
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
@@ -82,7 +82,7 @@ export const CardStack = ({
         return (
           <motion.div
             key={card.id}
-            className="absolute h-[180px] md:h-[480px] w-[280px] md:w-[720px] flex flex-col justify-between"
+            className="absolute h-[200px] md:h-[520px] w-[300px] md:w-[800px] flex flex-col justify-between"
             style={{
               transformOrigin: "top center",
               display: index > 2 ? "none" : "block",

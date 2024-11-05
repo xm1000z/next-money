@@ -3,10 +3,10 @@ import { CardStack } from "@/components/card-stack";
 
 export function Screens() {
   return (
-    <div className="mt-16 md:mt-32 relative pt-8 pb-12">
+    <div className="mt-16 md:mt-32 relative pt-8 pb-12 px-4 md:px-0">
       <div className="relative z-10 flex flex-col items-center">
         <div className="text-center pb-8">
-          <h3 className="text-2xl md:text-4xl font-medium">Simple y Eficaz</h3>
+          <h3 className="text-3xl md:text-5xl font-medium">Simple y Eficaz</h3>
           <p className="mt-2 text-sm text-[#878787]">
             Brindamos una plataforma completa con todas las necesidades cubiertas.
           </p>

@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export function SectionTwo() {
   return (
-    <section className="border border-border container bg-[#121212] md:pb-0 overflow-hidden mb-8">
+    <section className="border border-border mx-4 md:container bg-[#121212] md:pb-0 overflow-hidden mb-8">
       <div className="flex flex-col md:space-x-8 md:flex-row">
         <Image
           src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-5.png"
           height={446}
           width={836}
-          className="-mb-[1px] object-contain"
+          className="-mb-[1px] object-contain w-full"
           alt="Overview"
           quality={100}
         />
