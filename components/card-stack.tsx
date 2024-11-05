@@ -71,7 +71,12 @@ export const CardStack = ({
   return (
     <div
       className="relative h-[220px] md:h-[670px] w-[331px] md:w-[1031px] z-10"
-      onMouseEnter={() => clearInterval(interval)}
+      onMouseEnter={() => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      }}
+      onMouseLeave={() => !isAnimating && startFlipping()}
     >
       {cards.map((card, index) => {
         return (
