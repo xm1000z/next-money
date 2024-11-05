@@ -72,10 +72,9 @@ export const CardStack = ({
     <div
       className={cn(
         "relative z-10",
-        "before:absolute before:inset-0 before:-z-10 before:rounded-lg",
-        "before:bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:before:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
-        "before:bg-[size:16px_16px]",
-        "before:opacity-50",
+        "bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
+        "bg-[size:16px_16px]",
+        "opacity-50",
         "h-[220px] w-[331px] md:h-[670px] md:w-[1031px]",
         "bg-background/50 dark:bg-background/30",
         "backdrop-blur-sm"
