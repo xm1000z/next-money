@@ -72,18 +72,14 @@ export const CardStack = ({
     <div className="relative">
       {/* Fondo con puntos */}
       <div className={cn(
-        "absolute inset-0 -z-10",
+        "absolute inset-0 -z-10", // Asegura que esté detrás de todo
         "bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
         "bg-[size:16px_16px]",
-        "opacity-50"
       )} />
 
-      {/* Contenedor principal sin los puntos */}
+      {/* Contenedor de las tarjetas */}
       <div
-        className={cn(
-          "relative z-10",
-          "h-[220px] w-[331px] md:h-[670px] md:w-[1031px]",
-        )}
+        className="relative z-10 h-[220px] w-[331px] md:h-[670px] md:w-[1031px]"
         onMouseEnter={() => {
           if (intervalRef.current) {
             clearInterval(intervalRef.current);
