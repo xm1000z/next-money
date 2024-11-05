@@ -6,8 +6,10 @@ type MediaQueryProps = {
   isTablet: boolean;
 };
 
-export function useMediaQuery(query?: string): MediaQueryProps | boolean {
-  // Si se proporciona una query específica, usar el comportamiento original
+// Función sobrecargada para manejar ambos casos
+export function useMediaQuery(): MediaQueryProps;
+export function useMediaQuery(query: string): boolean;
+export function useMediaQuery(query?: string) {
   if (query) {
     const [matches, setMatches] = useState(false);
 
@@ -26,7 +28,6 @@ export function useMediaQuery(query?: string): MediaQueryProps | boolean {
     return matches;
   }
 
-  // Comportamiento para breakpoints predefinidos
   const [matches, setMatches] = useState<MediaQueryProps>({
     isMobile: false,
     isSm: false,
