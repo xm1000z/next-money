@@ -30,6 +30,7 @@ export const CardStack = ({
   const CARD_OFFSET = isDesktop ? 10 : 5;
   const SCALE_FACTOR = scaleFactor || 0.06;
   const [cards, setCards] = useState<Card[]>([items[0] || items[0]]);
+  const [isAnimating, setIsAnimating] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
@@ -41,9 +42,11 @@ export const CardStack = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, []);
+  }, [items]);
 
   const startFlipping = () => {
+    if (isAnimating) return;
+    
     intervalRef.current = setInterval(() => {
       setCards((prevCards: Card[]) => {
         const newArray = [...prevCards];
