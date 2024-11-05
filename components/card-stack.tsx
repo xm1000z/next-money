@@ -70,7 +70,7 @@ export const CardStack = ({
 
   return (
     <div className={cn(
-      "dotted-bg absolute w-[10000px] h-full top-0 -left-[5000px]"
+      "relative dotted-bg w-[10000px] h-full top-0 -left-[5000px]"
     )}>
       {/* Contenedor de las tarjetas */}
       <div
