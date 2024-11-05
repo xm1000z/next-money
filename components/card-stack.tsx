@@ -69,14 +69,11 @@ export const CardStack = ({
   };
 
   return (
-    <div className="relative">
-      {/* Fondo con puntos */}
-      <div className={cn(
-        "absolute inset-0 -z-10", // Asegura que esté detrás de todo
-        "bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
-        "bg-[size:16px_16px]",
-      )} />
-
+    <div className={cn(
+      "relative", // Contenedor principal
+      "bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]",
+      "bg-[size:16px_16px]"
+    )}>
       {/* Contenedor de las tarjetas */}
       <div
         className="relative z-10 h-[220px] w-[331px] md:h-[670px] md:w-[1031px]"
