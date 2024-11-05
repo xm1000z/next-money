@@ -324,7 +324,7 @@
     "table": {
       "fluxId": "ID de Tarea",
       "status": "Estado",
-      "amount": "créditos",
+      "amount": "Créditos",
       "type": "Tipo",
       "createdAt": "Creado En",
       "total": "Total",

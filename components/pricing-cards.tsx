@@ -3,7 +3,7 @@
 import { cloneElement, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
 
@@ -102,13 +102,14 @@ const PricingCard = ({
 
         <SignedOut>
           <div className="flex justify-center">
+            <SignInButton mode="redirect" forceRedirectUrl={url(pathname).href}>
               <Button
-                ref="/sign-in"
                 variant={offer.amount === 1990 ? "default" : "outline"}
                 className="w-full transition-all duration-300 hover:brightness-110"
               >
                 {t("action.signin")}
               </Button>
+            </SignInButton>
           </div>
         </SignedOut>
       </div>
@@ -163,7 +164,7 @@ export function FreeCard() {
           ))}
         </ul>
         <SignBox>
-          <Button className="w-full transition-all duration-300 hover:brightness-110">Probar</Button>
+          <Button className="w-full transition-all duration-300 hover:brightness-110">Try Out</Button>
         </SignBox>
       </div>
     </div>
