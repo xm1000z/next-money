@@ -1,5 +1,5 @@
 import Image from "next/image";
-import computer from "@/public/computer.png";
+import computer from "@/public/computer.webp";
 
 export function SectionTwo() {
   return (
