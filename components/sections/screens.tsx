@@ -1,4 +1,5 @@
 import Image from "next/image";
+import screen1 from "public/screen-3.webp";
 import { CardStack } from "@/components/card-stack";
 
 export function Screens() {
@@ -21,7 +22,7 @@ export function Screens() {
                 <Image
                   quality={100}
                   alt="Escritor de NotasAI"
-                  src="https://notas.ai/64e38a3a25593ef3c6e7968a/writer-3.png"
+                  src={screen1}
                   width={1031}
                   height={670}
                   priority
@@ -36,7 +37,7 @@ export function Screens() {
                 <Image
                   quality={100}
                   alt="Chat de NotasAI"
-                  src="https://notas.ai/64e38a3a25593ef3c6e7968a/chat-4.png"
+                  src={screen1}
                   width={1031}
                   height={670}
                   className="border border-border"
@@ -50,7 +51,7 @@ export function Screens() {
                 <Image
                   quality={100}
                   alt="Search de NotasAI"
-                  src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-3.png"
+                  src={screen1}
                   width={1031}
                   height={670}
                   className="border border-border"
@@ -64,7 +65,7 @@ export function Screens() {
                 <Image
                   quality={100}
                   alt="Search de NotasAI"
-                  src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-5.png"
+                  src={screen1}
                   width={1031}
                   height={670}
                   className="border border-border"
@@ -78,7 +79,7 @@ export function Screens() {
                 <Image
                   quality={100}
                   alt="Studio - NotasAI"
-                  src="https://notas.ai/64e38a3a25593ef3c6e7968a/studio-4.png"
+                  src={screen1}
                   width={1031}
                   height={670}
                   className="border border-border"

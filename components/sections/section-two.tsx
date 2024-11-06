@@ -1,4 +1,5 @@
 import Image from "next/image";
+import computer from "public/computer.png";
 
 export function SectionTwo() {
   return (
@@ -6,7 +7,7 @@ export function SectionTwo() {
       <div className="flex flex-col md:space-x-8 md:flex-row md:h-[400px]">
         <div className="md:max-w-[55%] md:h-full">
           <Image
-            src="https://notas.ai/64e38a3a25593ef3c6e7968a/search-5.png"
+            src={computer}
             height={400}
             width={700}
             className="-mb-[1px] object-contain w-full h-full"
@@ -17,7 +18,7 @@ export function SectionTwo() {
 
         <div className="mt-4 md:max-w-[45%] md:ml-6 md:mb-6 flex flex-col justify-center p-6 md:p-0">
           <h3 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">
-            Financial overview
+            Product overview
           </h3>
 
           <p className="text-gray-600 dark:text-[#878787] mb-3 text-xs">
