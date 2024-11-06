@@ -1,5 +1,5 @@
 import Image from "next/image";
-import screen1 from "public/screen-3.webp";
+import screen1 from "@/public/screen-3.webp";
 import { CardStack } from "@/components/card-stack";
 
 export function Screens() {
