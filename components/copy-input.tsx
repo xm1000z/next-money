@@ -39,7 +39,7 @@ export function CopyInput({ value, className }: Props) {
           initial={{ opacity: 1, scale: 1 }}
           animate={{ opacity: isCopied ? 0 : 1, scale: isCopied ? 0 : 1 }}
         >
-          <Icons.Copy />
+          <Icons.copy />
         </motion.div>
 
         <motion.div
