@@ -30,6 +30,9 @@ export default function IndexPage({ params: { locale } }: Props) {
       {/*<Features />*/}
       <SectionOne />
       <SectionTwo />
+      <SectionThree />
+      <SectionFour />
+      <SectionFive />
       <PricingCard locale={locale} />
     </>
   );
