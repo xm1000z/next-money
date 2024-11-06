@@ -108,7 +108,7 @@ export const CardStack = ({
                   <motion.div
                     className={cn(
                       "absolute left-0 top-0 h-full w-full cursor-pointer",
-                      "rounded-lg overflow-hidden",
+                      "overflow-hidden",
                       "shadow-lg hover:shadow-xl",
                       "transition-shadow duration-200"
                     )}
@@ -140,7 +140,7 @@ export const CardStack = ({
 
             <div 
               onClick={() => onChangeCardByIndex(index)}
-              className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200"
             >
               {card.content}
             </div>
