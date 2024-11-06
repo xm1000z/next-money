@@ -18,32 +18,32 @@ export function SectionFour() {
           src={invoicing}
           quality={100}
           className="object-contain mt-auto"
-          alt="Invoice"
+          alt="Lisa"
         />
       </div>
 
       <div className="border border-border md:basis-2/3 bg-white dark:bg-[#121212] p-6 md:p-8 flex justify-between md:space-x-8 md:flex-row flex-col">
         <div className="flex flex-col md:basis-1/2">
-          <h4 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">Prompts preentrenados</h4>
+          <h4 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">Directorio Prompts</h4>
 
           <p className="text-gray-600 dark:text-[#878787] mb-3 text-xs">
-            Matching automático de facturas y recibos con la transacción correcta.
+            Utiliza nuestro directorio de prompts para obtener los mejores resultados.
           </p>
 
           <ul className="list-decimal pl-4 space-y-2">
             <li className="text-gray-600 dark:text-[#878787] text-xs">
-              Usa tu email personalizado para facturas y recibos.
+              Copia el enlace o visita www.prompts.notas.ai.
             </li>
             <li className="text-gray-600 dark:text-[#878787] text-xs">
-              La factura llega al inbox y se asocia automáticamente.
+              Selecciona por categoría el prompt que más encaje con tu tarea.
             </li>
             <li className="text-gray-600 dark:text-[#878787] text-xs">
-              Tus transacciones tendrán los adjuntos correctos para exportar.
+              Pegalo en el Chat, cambia las variables y logra el mejor resultado.
             </li>
           </ul>
 
           <CopyInput
-            value="trainer@notas.ai"
+            value="prompts.notas.ai"
             className="max-w-[240px] mt-6"
           />
         </div>
