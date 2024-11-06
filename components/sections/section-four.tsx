@@ -5,7 +5,7 @@ import { CopyInput } from "@/components/copy-input";
 
 export function SectionFour() {
   return (
-    <section className="flex justify-between space-y-12 md:space-y-0 md:space-x-8 flex-col md:flex-row overflow-hidden mb-12">
+    <section className="flex justify-between space-y-12 md:space-y-0 md:space-x-8 flex-col md:flex-row overflow-hidden mb-12 mx-4 md:container md:px-0">
       <div className="border border-border basis-1/3 bg-white dark:bg-[#121212] p-10 md:text-center flex flex-col">
         <span className="text-[#F5F5F3] border border-border rounded-full self-start font-medium font-mono px-3 text-xs py-1.5 mb-4 bg-[#1D1D1D]">
           Muy pronto

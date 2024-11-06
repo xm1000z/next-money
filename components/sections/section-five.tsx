@@ -4,7 +4,7 @@ import vault from "@/public/vault.webp";
 
 export function SectionFive() {
   return (
-    <section className="flex justify-between space-y-12 lg:space-y-0 lg:space-x-8 flex-col lg:flex-row overflow-hidden mb-12">
+    <section className="flex justify-between space-y-12 lg:space-y-0 lg:space-x-8 flex-col lg:flex-row overflow-hidden mb-12 mx-4 md:container md:px-0">
       <div className="border border-border lg:basis-2/3 bg-white dark:bg-[#121212] p-10 flex justify-between lg:space-x-8 lg:flex-row flex-col-reverse items-center lg:items-start">
         <Image
           src={vault}
