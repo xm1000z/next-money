@@ -3,16 +3,14 @@ import computer from "@/public/computer.webp";
 
 export function SectionTwo() {
   return (
-    <section className="border border-border mx-4 md:container bg-white dark:bg-[#121212] md:pb-0 overflow-hidden mb-8">
+    <section className="border border-border mx-4 md:container md:px-0 bg-white dark:bg-[#121212] md:pb-0 overflow-hidden mb-8">
       <div className="flex flex-col md:space-x-8 md:flex-row md:h-[400px]">
-        <div className="md:max-w-[55%] md:h-full">
+        <div className="relative w-full md:w-[45%]">
           <Image
             src={computer}
-            height={400}
-            width={700}
-            className="-mb-[1px] object-contain w-full h-full"
-            alt="Overview"
-            quality={100}
+            alt="Computer"
+            className="object-cover h-full"
+            priority
           />
         </div>
 
