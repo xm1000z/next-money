@@ -47,7 +47,7 @@ export function CopyInput({ value, className }: Props) {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}
         >
-          <Icons.Check />
+          <Icons.check />
         </motion.div>
       </button>
     </div>
