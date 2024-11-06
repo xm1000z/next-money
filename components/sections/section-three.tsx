@@ -6,7 +6,7 @@ export function SectionThree() {
     <section className="relative mb-12">
       <div className="border border-border mx-4 md:container md:px-0 bg-white dark:bg-[#121212] p-8 md:p-10 md:pb-0 overflow-hidden">
         <div className="flex flex-col md:space-x-12 md:flex-row">
-          <div className="mt-4 md:max-w-[40%] md:mr-8 md:mb-6 px-6 md:px-0">
+          <div className="mt-4 md:max-w-[40%] md:mr-8 md:mb-6 px-6 md:pl-8">
             <h3 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">
               Time track your projects
             </h3>
