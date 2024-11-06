@@ -24,7 +24,7 @@ export function SectionFour() {
 
       <div className="border border-border md:basis-2/3 bg-white dark:bg-[#121212] p-6 md:p-8 flex justify-between md:space-x-8 md:flex-row flex-col">
         <div className="flex flex-col md:basis-1/2">
-          <h4 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">Directorio Prompts</h4>
+          <h4 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">Directorio de Prompts</h4>
 
           <p className="text-gray-600 dark:text-[#878787] mb-3 text-xs">
             Utiliza nuestro directorio de prompts para obtener los mejores resultados.
