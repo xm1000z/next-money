@@ -1,5 +1,10 @@
 import Image from "next/image";
-import screen1 from "@/public/screen-3.webp";
+import screen1 from "@/public/chat.png";
+import screen2 from "@/public/writer.png";
+import screen3 from "@/public/search.png";
+import screen4 from "@/public/traductor.png";
+import screen5 from "@/public/studio.png";
+
 import { CardStack } from "@/components/card-stack";
 
 export function Screens() {
@@ -7,9 +12,9 @@ export function Screens() {
     <div className="mt-16 md:mt-32 relative pt-8 pb-12 px-4 md:px-0">
       <div className="relative z-10 flex flex-col items-center">
         <div className="text-center pb-8">
-          <h3 className="text-3xl md:text-5xl font-medium">Simple y Eficaz</h3>
+          <h3 className="text-3xl md:text-5xl font-medium">Todo en uno</h3>
           <p className="mt-2 text-sm text-[#878787]">
-            Brindamos una plataforma completa con todas las necesidades cubiertas.
+            Una plataforma completa con todas las necesidades cubiertas.
           </p>
         </div>
 
@@ -17,11 +22,11 @@ export function Screens() {
           items={[
             {
               id: 1,
-              name: "Overview",
+              name: "Chat",
               content: (
                 <Image
                   quality={100}
-                  alt="Escritor de NotasAI"
+                  alt="Chat"
                   src={screen1}
                   width={1031}
                   height={670}
@@ -32,12 +37,12 @@ export function Screens() {
             },
             {
               id: 2,
-              name: "Chat",
+              name: "Escritor",
               content: (
                 <Image
                   quality={100}
-                  alt="Chat de NotasAI"
-                  src={screen1}
+                  alt="Escritor"
+                  src={screen2}
                   width={1031}
                   height={670}
                   className="border border-border"
@@ -50,8 +55,8 @@ export function Screens() {
               content: (
                 <Image
                   quality={100}
-                  alt="Search de NotasAI"
-                  src={screen1}
+                  alt="Search"
+                  src={screen3}
                   width={1031}
                   height={670}
                   className="border border-border"
@@ -60,12 +65,12 @@ export function Screens() {
             },
             {
               id: 4,
-              name: "Search",
+              name: "Traductor",
               content: (
                 <Image
                   quality={100}
-                  alt="Search de NotasAI"
-                  src={screen1}
+                  alt="Traductor"
+                  src={screen4}
                   width={1031}
                   height={670}
                   className="border border-border"
@@ -78,8 +83,8 @@ export function Screens() {
               content: (
                 <Image
                   quality={100}
-                  alt="Studio - NotasAI"
-                  src={screen1}
+                  alt="Studio"
+                  src={screen5}
                   width={1031}
                   height={670}
                   className="border border-border"
