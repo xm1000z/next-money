@@ -1,5 +1,5 @@
 import Image from "next/image";
-import computer from "@/public/ab.png";
+import computer from "@/public/ab.jpeg";
 
 export function SectionTwo() {
   return (
@@ -16,13 +16,13 @@ export function SectionTwo() {
 
         <div className="mt-4 md:max-w-[45%] md:ml-6 md:mb-6 flex flex-col justify-center p-6 md:p-0">
           <h3 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">
-            Product overview
+            Inteligencia Artificial
           </h3>
 
           <p className="text-gray-600 dark:text-[#878787] mb-3 text-xs">
-            Bring your own bank. We connect to over 20 000+ banks in 33
-            countries across US, Canada, UK and Europe. Keep tabs on your
-            expenses and income.
+            Una nueva revolución que depara cambios sociales y económicos. 
+            La lengua española no debe quedarse atrás y para eso Notas AI trabaja 
+            en el desarrollo constante de nuestro idioma en el sector. 
           </p>
 
           <div className="flex space-x-2 items-center mt-4">
@@ -38,7 +38,7 @@ export function SectionTwo() {
               />
             </svg>
             <span className="text-gray-600 dark:text-[#878787] text-xs">
-              Share financial reports
+              IA en español
             </span>
           </div>
         </div>
