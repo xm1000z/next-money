@@ -1,5 +1,5 @@
 import Image from "next/image";
-import inbox from "@/public/inbox.webp";
+import prompt from "@/public/prompt.png";
 import { CopyInput } from "@/components/copy-input";
 
 export function SectionFour() {
@@ -12,7 +12,7 @@ export function SectionFour() {
         <div className="flex flex-col items-center justify-center flex-1">
         <h4 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">Lisa</h4>
           <p className="text-gray-600 dark:text-[#878787] text-base md:text-lg text-center">
-            Estamos trabajando arduamente para brindarte la mejor solución de audio con modelos web y conversación en vivo.
+            Estamos trabajando para brindarte la mejor solución de audio con lenguaje natural y conversación en tiempo real.
           </p>
         </div>
       </div>
@@ -27,7 +27,7 @@ export function SectionFour() {
 
           <ul className="list-decimal pl-4 space-y-2">
             <li className="text-gray-600 dark:text-[#878787] text-xs">
-              Copia el enlace o visita www.prompts.notas.ai.
+              Visita prompts.notas.ai.
             </li>
             <li className="text-gray-600 dark:text-[#878787] text-xs">
               Selecciona por categoría el prompt que más encaje con tu tarea.
@@ -38,17 +38,17 @@ export function SectionFour() {
           </ul>
 
           <CopyInput
-            value="prompts.notas.ai"
+            value="prompts@notas.ai"
             className="max-w-[240px] mt-6"
           />
         </div>
 
         <div className="md:basis-1/2 mt-6 md:mt-0 -bottom-[8px] relative">
           <Image
-            src={inbox}
+            src={prompt}
             quality={100}
-            className="object-contain -bottom-[32px] relative"
-            alt="Inbox"
+            className="object-contain -bottom-[32px] relative dark:invert-0 invert"
+            alt="Prompt"
           />
         </div>
       </div>
