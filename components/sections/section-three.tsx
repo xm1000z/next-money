@@ -77,6 +77,7 @@ export function SectionThree() {
 
             <Image
               src={dark}
+              alt="Chat"
               height={300}
               priority
             />
@@ -148,6 +149,7 @@ export function SectionThree() {
 
           <Image
             src={resolvedTheme === 'dark' ? dark : light}
+            alt="Chat"
             height={300}
             priority
           />
