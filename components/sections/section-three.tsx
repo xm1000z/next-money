@@ -77,7 +77,6 @@ export function SectionThree() {
 
             <Image
               src={dark}
-              alt="Imagen adaptativa"
               height={300}
               priority
             />
@@ -149,7 +148,6 @@ export function SectionThree() {
 
           <Image
             src={resolvedTheme === 'dark' ? dark : light}
-            alt="Imagen adaptativa"
             height={300}
             priority
           />
