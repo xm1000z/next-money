@@ -20,20 +20,17 @@ export default function IndexPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
 
   return (
-    <>
-      <HeroLanding />
-      {/* <Powered />
-      {/* <BentoGrid /> */}
-      {/* <InfoLanding data={infos[0]} reverse={true} /> */}
-      {/* <InfoLanding data={infos[1]} /> */}
-      <Screens />
-      {/*<Features />*/}
-      <SectionOne />
-      <SectionTwo />
-      <SectionThree />
-      <SectionFour />
-      <SectionFive />
-      <PricingCard locale={locale} />
-    </>
+    <div className="dark">
+      <div className="bg-background">
+        <HeroLanding />
+        <Screens />
+        <SectionOne />
+        <SectionTwo />
+        <SectionThree />
+        <SectionFour />
+        <SectionFive />
+        <PricingCard locale={locale} />
+      </div>
+    </div>
   );
 }
