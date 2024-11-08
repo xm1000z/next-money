@@ -1,6 +1,6 @@
 import Image from "next/image";
-import exporting from "@/public/exporting.webp";
-import vault from "@/public/vault.webp";
+import exporting from "@/public/exporting.png";
+import vault from "@/public/vault.png";
 
 export function SectionFive() {
   return (
