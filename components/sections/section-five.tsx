@@ -10,7 +10,7 @@ export function SectionFive() {
           src={vault}
           quality={100}
           alt="Vault"
-          className="mt-6 lg:mt-0 basis-1/2 object-contain md:max-w-[367px] border-l-[1px] border-border"
+          className="mt-6 lg:mt-0 basis-1/2 object-contain md:max-w-[367px] border-l-[1px] border-border dark:invert-0 invert"
         />
 
         <div className="flex flex-col basis-1/2">
@@ -38,7 +38,7 @@ export function SectionFive() {
           src={exporting}
           quality={100}
           alt="Export"
-          className="md:mt-auto mt-8"
+          className="md:mt-auto mt-8 dark:invert-0 invert"
         />
       </div>
     </section>
