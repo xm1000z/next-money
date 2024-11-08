@@ -2,8 +2,8 @@
 
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import dark from "@/public/dark.png";
-import light from "@/public/light.png";
+import dark from "@/public/chat-modal.png";
+import light from "@/public/chat-modal2.png";
 
 export function SectionThree() {
   const { theme } = useTheme();
