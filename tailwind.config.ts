@@ -78,7 +78,8 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         urban: ["var(--font-urban)", ...fontFamily.sans],
-        heading: ['Apple Garamond', 'serif'],
+        heading: ["var(--font-sans)", ...fontFamily.sans],
+        apple: ['Apple Garamond', 'serif'],
         'apple-garamond': ['Apple Garamond', 'serif'],
       },
       keyframes: {

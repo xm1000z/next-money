@@ -46,7 +46,7 @@ export function PricingFaq() {
   const t = useTranslations("PricingPage");
 
   return (
-    <section className="container max-w-4xl py-2">
+    <section className="container max-w-2xl py-2">
       <HeaderSection
         title={t("faq.title")}
         subtitle={t("faq.subtitle")}
