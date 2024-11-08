@@ -6,8 +6,8 @@ export function SectionFour() {
   return (
     <section className="flex justify-between space-y-12 md:space-y-0 md:space-x-8 flex-col md:flex-row overflow-hidden mb-12 mx-4 md:container md:px-0">
       <div className="border border-border basis-1/3 bg-white dark:bg-[#121212] p-6 md:p-8 flex flex-col items-center justify-center">
-        <h4 className="font-medium text-2xl md:text-4xl mb-4 text-gray-900 dark:text-white">Lisa</h4>
-        <p className="text-gray-600 dark:text-[#878787] text-base md:text-lg text-center">
+      <h4 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">Lisa</h4>
+      <p className="text-gray-600 dark:text-[#878787] text-base md:text-lg text-center">
           Estamos trabajando arduamente para brindarte la mejor solución de audio con modelos web y conversación en vivo.
         </p>
       </div>
