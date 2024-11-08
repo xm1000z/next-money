@@ -1,7 +1,13 @@
+"use client";
+
+import { useTheme } from "next-themes";
 import Image from "next/image";
-import timetracker from "@/public/chat-modal.png";
+import dark from "@/public/dark.png";
+import light from "@/public/light.png";
 
 export function SectionThree() {
+  const { theme } = useTheme();
+  
   return (
     <section className="relative mb-12">
       <div className="border border-border mx-4 md:container md:px-0 bg-white dark:bg-[#121212] p-8 md:p-10 md:pb-0 overflow-hidden">
@@ -63,11 +69,10 @@ export function SectionThree() {
           </div>
 
           <Image
-            src={timetracker}
+            src={theme === 'dark' ? dark : light}
+            alt="Imagen adaptativa"
             height={300}
-            className="-mb-[32px] md:-mb-[1px] object-contain mt-8 md:mt-0"
-            quality={100}
-            alt="Tracker"
+            priority
           />
         </div>
       </div>
