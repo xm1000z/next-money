@@ -10,6 +10,10 @@ import { CardStack } from "@/components/card-stack";
 export function Screens() {
   return (
     <div className="mt-16 md:mt-32 relative pt-8 pb-12 px-4 md:px-0">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="dotted-bg absolute w-[calc(100%-2rem)] md:w-[200vw] h-full top-0 left-4 md:-left-[50vw]" />
+      </div>
+
       <div className="relative z-10 flex flex-col items-center">
         <div className="text-center pb-8">
           <h3 className="text-3xl md:text-5xl font-medium">Todo en uno</h3>
@@ -93,10 +97,6 @@ export function Screens() {
             },
           ]}
         />
-      </div>
-
-      <div className="relative overflow-hidden">
-        <div className="dotted-bg absolute w-[calc(100%-2rem)] md:w-[200vw] h-full top-0 left-4 md:-left-[50vw]" />
       </div>
     </div>
   );
