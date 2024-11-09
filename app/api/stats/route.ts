@@ -8,9 +8,12 @@ export async function GET() {
     if (!stats) {
       stats = await prisma.globalStats.create({
         data: {
-          totalSum: 1000000,
-          businessCount: 500,
-          transactionCount: 2000
+          totalSum: 7384,
+          chatUsage: 2341,
+          writerUsage: 1876,
+          searchUsage: 1453,
+          translatorUsage: 984,
+          directoryUsage: 730
         }
       })
     }
@@ -22,8 +25,11 @@ export async function GET() {
       where: { id: stats.id },
       data: {
         totalSum: stats.totalSum + increment,
-        businessCount: stats.businessCount + increment,
-        transactionCount: stats.transactionCount + increment
+        chatUsage: stats.chatUsage + increment,
+        writerUsage: stats.writerUsage + increment,
+        searchUsage: stats.searchUsage + increment,
+        translatorUsage: stats.translatorUsage + increment,
+        directoryUsage: stats.directoryUsage + increment
       }
     })
 
