@@ -215,12 +215,12 @@ model UserPaymentInfo {
 
 model GlobalStats {
   id              Int      @id @default(autoincrement())
-  totalSum        Int      @default(7384)    // Visitantes totales
-  chatUsage       Int      @default(2341)    // Uso del chat
-  writerUsage     Int      @default(1876)    // Uso del escritor
-  searchUsage     Int      @default(1453)    // Uso del buscador
-  translatorUsage Int      @default(984)     // Uso del traductor
-  directoryUsage  Int      @default(730)     // Uso del directorio
+  totalSum        Int      @default(7384)
+  chatUsage       Int      @default(2341)
+  writerUsage     Int      @default(1876)
+  searchUsage     Int      @default(1453)
+  translatorUsage Int      @default(984)
+  directoryUsage  Int      @default(730)
   updatedAt       DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
   @@map(name: "global_stats")
