@@ -5,8 +5,8 @@ import Link from "next/link"
 
 interface Stats {
   totalSum: number
-  businessCount: number
-  transactionCount: number
+  chatUsage: number
+  writerUsage: number
 }
 
 export function Ticker() {
