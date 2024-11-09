@@ -3,13 +3,18 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
+    // Buscar stats existentes
     let stats = await prisma.globalStats.findFirst()
     
+    console.log("Stats encontrados en DB:", stats)
+
+    // Si no hay stats en la DB, crear valores iniciales
     if (!stats) {
+      console.log("No se encontraron stats, creando valores iniciales")
       stats = await prisma.globalStats.create({
         data: {
-          totalSum: 7384,
-          chatUsage: 2341,
+          totalSum: 7384,        // Valores iniciales por defecto
+          chatUsage: 2341,       // solo se usan si la DB está vacía
           writerUsage: 1876,
           searchUsage: 1453,
           translatorUsage: 984,
@@ -18,23 +23,23 @@ export async function GET() {
       })
     }
 
-    // Incrementar aleatoriamente entre 1-4
-    const increment = Math.floor(Math.random() * 4) + 1
-    
-    stats = await prisma.globalStats.update({
-      where: { id: stats.id },
-      data: {
-        totalSum: stats.totalSum + increment,
-        chatUsage: stats.chatUsage + increment,
-        writerUsage: stats.writerUsage + increment,
-        searchUsage: stats.searchUsage + increment,
-        translatorUsage: stats.translatorUsage + increment,
-        directoryUsage: stats.directoryUsage + increment
-      }
-    })
+    const response = {
+      totalSum: Number(stats.totalSum),
+      chatUsage: Number(stats.chatUsage),
+      writerUsage: Number(stats.writerUsage),
+      searchUsage: Number(stats.searchUsage),
+      translatorUsage: Number(stats.translatorUsage),
+      directoryUsage: Number(stats.directoryUsage)
+    }
 
-    return NextResponse.json(stats)
+    console.log("Enviando respuesta:", response)
+
+    return NextResponse.json(response)
   } catch (error) {
-    return NextResponse.json({ error: "Error fetching stats" }, { status: 500 })
+    console.error("Error completo:", error)
+    return NextResponse.json({ 
+      error: "Error fetching stats", 
+      details: error.message 
+    }, { status: 500 })
   }
 } 
