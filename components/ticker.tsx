@@ -48,7 +48,7 @@ export function Ticker() {
 
   return (
     <div className="text-center flex flex-col mt-[120px] md:mt-[280px] mb-[120px] md:mb-[250px] space-y-4 md:space-y-10">
-      <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] xl:text-[130px] 2xl:text-[160px] md:mb-2 text-stroke leading-none text-gray-900 dark:text-white">
+      <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] xl:text-[130px] 2xl:text-[160px] md:mb-2 leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
         {stats.totalSum ? 
           Intl.NumberFormat("es-ES", {
             maximumFractionDigits: 0,
