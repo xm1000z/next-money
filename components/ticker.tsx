@@ -49,7 +49,7 @@ export function Ticker() {
   console.log("Renderizando con stats:", stats) // Debug
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 mt-5">
       {/* Título general */}
       <h2 className="text-center text-2xl md:text-3xl font-medium mb-8 text-gray-800 dark:text-gray-200">
         Métricas en Tiempo Real
