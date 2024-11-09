@@ -18,7 +18,9 @@ export async function GET() {
           writerUsage: 1876,
           searchUsage: 1453,
           translatorUsage: 984,
-          directoryUsage: 730
+          directoryUsage: 730,
+          creditsUsed: 15384,      // Valor inicial de créditos
+          activeSubscribers: 124   // Valor inicial de suscriptores
         }
       })
     }
@@ -29,7 +31,9 @@ export async function GET() {
       writerUsage: Number(stats.writerUsage),
       searchUsage: Number(stats.searchUsage),
       translatorUsage: Number(stats.translatorUsage),
-      directoryUsage: Number(stats.directoryUsage)
+      directoryUsage: Number(stats.directoryUsage),
+      creditsUsed: Number(stats.creditsUsed),
+      activeSubscribers: Number(stats.activeSubscribers)
     }
 
     console.log("Enviando respuesta:", response)

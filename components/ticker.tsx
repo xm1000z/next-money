@@ -10,6 +10,8 @@ interface Stats {
   searchUsage: number
   translatorUsage: number
   directoryUsage: number
+  creditsUsed: number
+  activeSubscribers: number
 }
 
 export function Ticker() {
@@ -47,18 +49,53 @@ export function Ticker() {
   console.log("Renderizando con stats:", stats) // Debug
 
   return (
-    <div className="text-center flex flex-col mt-[120px] md:mt-[280px] mb-[120px] md:mb-[250px] space-y-4 md:space-y-10">
-      <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] xl:text-[130px] 2xl:text-[160px] md:mb-2 leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
-        {stats.totalSum ? 
-          Intl.NumberFormat("es-ES", {
-            maximumFractionDigits: 0,
-          }).format(stats.totalSum)
-          : 'Cargando...'
-        }
-      </span>
-      <span className="text-gray-600 dark:text-[#878787]">
-        Visitantes
-      </span>
+    <div className="container mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[120px] md:mt-[280px] mb-[120px] md:mb-[250px]">
+        {/* Visitantes */}
+        <div className="text-center flex flex-col space-y-4">
+          <span className="text-gray-600 dark:text-[#878787]">
+            Usuarios y Clientes Activos
+          </span>
+          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
+            {Intl.NumberFormat("es-ES", {
+              maximumFractionDigits: 0,
+            }).format(stats.totalSum)}
+          </span>
+          <span className="text-gray-600 dark:text-[#878787]">
+            Visitantes nuevos e
+          </span>
+        </div>
+
+        {/* Créditos Usados */}
+        <div className="text-center flex flex-col space-y-4">
+          <span className="text-gray-600 dark:text-[#878787]">
+            Créditos Totales
+          </span>
+          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
+            {Intl.NumberFormat("es-ES", {
+              maximumFractionDigits: 0,
+            }).format(stats.creditsUsed)}
+          </span>
+          <span className="text-gray-600 dark:text-[#878787]">
+            Créditos consumidos
+          </span>
+        </div>
+
+        {/* Suscriptores Activos */}
+        <div className="text-center flex flex-col space-y-4">
+          <span className="text-gray-600 dark:text-[#878787]">
+            Suscriptores
+          </span>
+          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
+            {Intl.NumberFormat("es-ES", {
+              maximumFractionDigits: 0,
+            }).format(stats.activeSubscribers)}
+          </span>
+          <span className="text-gray-600 dark:text-[#878787]">
+            Usuarios Premium
+          </span>
+        </div>
+      </div>
     </div>
   )
 }
