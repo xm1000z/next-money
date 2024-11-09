@@ -6,7 +6,7 @@ import { SectionTwo } from "@/components/sections/section-two";
 import { SectionThree } from "@/components/sections/section-three";
 import { SectionFour } from "@/components/sections/section-four";
 import { SectionFive } from "@/components/sections/section-five";
-import { Ticker } from "./ticker";
+import { Ticker } from "@/components/ticker";
 import Features from "@/components/sections/features";
 import HeroLanding from "@/components/sections/hero-landing";
 import PricingCard from "@/components/sections/pricing-card";
