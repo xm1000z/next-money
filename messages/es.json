@@ -326,7 +326,7 @@
       "status": "Estado",
       "amount": "Créditos",
       "type": "Tipo",
-      "createdAt": "Creado En",
+      "createdAt": "Fecha",
       "total": "Total",
       "records": "Órdenes"
     }
