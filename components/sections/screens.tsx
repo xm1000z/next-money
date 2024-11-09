@@ -95,7 +95,9 @@ export function Screens() {
         />
       </div>
 
-      <div className="dotted-bg absolute w-[calc(100%-2rem)] md:w-[200vw] h-full top-0 left-4 md:-left-[50vw]" />
+      <div className="relative overflow-hidden">
+        <div className="dotted-bg absolute w-[calc(100%-2rem)] md:w-[200vw] h-full top-0 left-4 md:-left-[50vw]" />
+      </div>
     </div>
   );
 }
