@@ -50,49 +50,45 @@ export function Ticker() {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[120px] md:mt-[280px] mb-[120px] md:mb-[250px]">
+      {/* Título general */}
+      <h2 className="text-center text-2xl md:text-3xl font-medium mb-8 text-gray-800 dark:text-gray-200">
+        Métricas en Tiempo Real
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[60px] md:mt-[120px] mb-[120px] md:mb-[250px]">
         {/* Visitantes */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="text-gray-600 dark:text-[#878787]">
-            Usuarios y Clientes Activos
-          </span>
           <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
-            {Intl.NumberFormat("es-ES", {
+            {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.totalSum)}
           </span>
           <span className="text-gray-600 dark:text-[#878787]">
-            Visitantes nuevos e
+            Visitas totales
           </span>
         </div>
 
         {/* Créditos Usados */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="text-gray-600 dark:text-[#878787]">
-            Créditos Totales
-          </span>
           <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
-            {Intl.NumberFormat("es-ES", {
+            {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.creditsUsed)}
           </span>
           <span className="text-gray-600 dark:text-[#878787]">
-            Créditos consumidos
+            Créditos usados
           </span>
         </div>
 
         {/* Suscriptores Activos */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="text-gray-600 dark:text-[#878787]">
-            Suscriptores
-          </span>
           <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
-            {Intl.NumberFormat("es-ES", {
+            {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.activeSubscribers)}
           </span>
           <span className="text-gray-600 dark:text-[#878787]">
-            Usuarios Premium
+            Clientes Activos
           </span>
         </div>
       </div>
