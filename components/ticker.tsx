@@ -7,6 +7,9 @@ interface Stats {
   totalSum: number
   chatUsage: number
   writerUsage: number
+  searchUsage: number
+  translatorUsage: number
+  directoryUsage: number
 }
 
 export function Ticker() {
