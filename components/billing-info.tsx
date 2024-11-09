@@ -103,7 +103,6 @@ export default function BillingInfo() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>{t("table.fluxId")}</TableHead>
                     <TableHead className="hidden md:table-cell">
                       {t("table.amount")}
                     </TableHead>
@@ -120,9 +119,6 @@ export default function BillingInfo() {
                 <TableBody>
                   {queryData.data?.data?.map((item) => (
                     <TableRow key={item.id}>
-                      <TableCell className="font-medium">
-                        {item.fluxId}
-                      </TableCell>
                       <TableCell>
                         {item.amount} créditos
                       </TableCell>

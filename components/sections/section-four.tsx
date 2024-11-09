@@ -41,6 +41,9 @@ export function SectionFour() {
             value="prompts@notas.ai"
             className="max-w-[240px] mt-6"
           />
+          <p className="text-gray-600 dark:text-[#878787] mb-3 text-xs">
+            Habla con nosotros para entrenar a los modelos con tus prompts.
+          </p>
         </div>
 
         <div className="md:basis-1/2 mt-6 md:mt-0 -bottom-[8px] relative">
