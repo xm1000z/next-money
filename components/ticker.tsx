@@ -49,48 +49,57 @@ export function Ticker() {
   console.log("Renderizando con stats:", stats) // Debug
 
   return (
-    <div className="container mx-auto px-4 mt-5">
-      {/* Título general */}
-      <h2 className="text-center text-2xl md:text-3xl font-medium mb-8 text-gray-800 dark:text-gray-200">
-        Métricas en Tiempo Real
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[60px] md:mt-[120px] mb-[120px] md:mb-[250px]">
+    <div className="container mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[100px] md:mt-[160px] mb-4">
         {/* Visitantes */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
+          <span className="font-medium font-mono text-center text-[60px] md:text-[100px] lg:text-[120px] xl:text-[140px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.totalSum)}
           </span>
-          <span className="text-gray-600 dark:text-[#878787]">
+          <span className="text-gray-600 dark:text-[#878787] text-lg">
             Visitas totales
           </span>
         </div>
 
         {/* Créditos Usados */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
+          <span className="font-medium font-mono text-center text-[60px] md:text-[100px] lg:text-[120px] xl:text-[140px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.creditsUsed)}
           </span>
-          <span className="text-gray-600 dark:text-[#878787]">
+          <span className="text-gray-600 dark:text-[#878787] text-lg">
             Créditos usados
           </span>
         </div>
 
         {/* Suscriptores Activos */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
+          <span className="font-medium font-mono text-center text-[60px] md:text-[100px] lg:text-[120px] xl:text-[140px] leading-none text-transparent dark:text-transparent [text-shadow:none] [-webkit-text-stroke:1px_#000] dark:[-webkit-text-stroke:1px_#fff]">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.activeSubscribers)}
           </span>
-          <span className="text-gray-600 dark:text-[#878787]">
+          <span className="text-gray-600 dark:text-[#878787] text-lg">
             Clientes Activos
           </span>
         </div>
+      </div>
+
+      {/* Texto inferior con link */}
+      <div className="text-center mt-8 mb-[60px] md:mb-[100px]">
+        <span className="text-sm text-gray-500 dark:text-[#878787]">
+          NotasAI es una startup transparente. Consulta nuestras{" "}
+          <Link href="/startup" className="underline hover:text-gray-700 dark:hover:text-gray-300">
+            métricas
+          </Link>{" "}
+            y{" "}
+          <Link href="/tartup" className="underline hover:text-gray-700 dark:hover:text-gray-300">
+            registros.
+          </Link>
+        </span>
       </div>
     </div>
   )
