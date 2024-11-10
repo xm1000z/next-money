@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 
-const ReactPlayer = dynamic(() => import("react-player/lazy"), {
+const HlsPlayer = dynamic(() => import("react-hls-player"), {
   ssr: false,
 });
 
@@ -76,7 +76,7 @@ export function SectionVideo() {
           </div>
         )}
 
-        <ReactPlayer
+        <HlsPlayer
           onEnded={() => playerRef.current?.load()}
           onClick={togglePlay}
           url="https://notas.ai/e/acc.mp4"
