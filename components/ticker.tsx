@@ -40,7 +40,7 @@ export function Ticker() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[100px] md:mt-[160px]">
         {/* Visitantes */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[50px] md:text-[80px] lg:text-[90px] xl:text-[100px] leading-none text-transparent [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff]">
+          <span className="font-medium font-mono text-center text-[50px] md:text-[80px] lg:text-[90px] xl:text-[100px] leading-none bg-white dark:bg-[#121212] [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff]">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.totalSum)}
@@ -52,7 +52,7 @@ export function Ticker() {
 
         {/* Créditos Usados */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[50px] md:text-[80px] lg:text-[90px] xl:text-[100px] leading-none text-transparent [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff]">
+          <span className="font-medium font-mono text-center text-[50px] md:text-[80px] lg:text-[90px] xl:text-[100px] leading-none bg-white dark:bg-[#121212] [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff]">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.creditsUsed)}
@@ -64,7 +64,7 @@ export function Ticker() {
 
         {/* Suscriptores Activos */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[50px] md:text-[80px] lg:text-[90px] xl:text-[100px] leading-none text-transparent [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff]">
+          <span className="font-medium font-mono text-center text-[50px] md:text-[80px] lg:text-[90px] xl:text-[100px] leading-none bg-white dark:bg-[#121212] [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff]">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.activeSubscribers)}
