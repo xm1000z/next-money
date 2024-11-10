@@ -4,12 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Icons } from "@/components/shared/icons";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
-
-const HlsPlayer = dynamic(() => import("react-hls-player"), {
-  ssr: false,
-});
 
 interface VideoPlayer extends HTMLVideoElement {
   play: () => Promise<void>;
@@ -80,21 +75,18 @@ export function SectionVideo() {
           </div>
         )}
 
-        <HlsPlayer
-          src="/videos/RZrE73.m3u8"
-          autoPlay={false}
-          controls={false}
-          width="100%"
-          height="auto"
-          playerRef={playerRef}
+        <video
+          ref={playerRef}
           onClick={togglePlay}
           onEnded={() => {
             playerRef.current?.load();
             setPlaying(false);
           }}
-          muted={isMuted}
+          src="https://notas.ai/e:acc.mp4"
           poster="https://pbs.twimg.com/media/F1TM4rNakAAyoQa?format=png&name=4096x4096"
           className="w-full cursor-pointer"
+          muted={isMuted}
+          playsInline
         />
       </div>
     </motion.div>
