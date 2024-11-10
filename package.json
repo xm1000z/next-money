@@ -121,6 +121,7 @@
     "react-dom": "18.3.1",
     "react-dropzone": "^14.2.3",
     "react-email": "2.1.6",
+    "react-hls-player": "^3.0.7",
     "react-hook-form": "^7.52.2",
     "react-infinite-scroll-component": "^6.1.0",
     "react-markdown": "^9.0.1",
