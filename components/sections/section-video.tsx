@@ -84,7 +84,7 @@ export function SectionVideo() {
         <HlsPlayer
           onEnded={() => playerRef.current?.load()}
           onClick={togglePlay}
-          src="https://jumpshare.com/embed/6NeKHPY8QMJjSMIadDRw"
+          src="https://notas.ai/e:acc.m3u8"
           autoPlay={false}
           poster="https://pbs.twimg.com/media/F1TM4rNakAAyoQa?format=png&name=4096x4096"
           playerRef={playerRef}
