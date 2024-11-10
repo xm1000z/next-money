@@ -20,19 +20,19 @@ export function FooterCTA() {
         Una herramienta todo-en-uno para freelancers, trabajadores, consultores, startups y
         empresas para optimizar su productividad, mejorar y avanzar resultados.
       </p>
-      <div className="mt-6 md:mb-4">
+      <div className="mt-8 md:mb-6">
         <div className="flex items-center space-x-4">
           <Link href="mailto:sales@notas.ai">
             <Button
               variant="outline"
-              className="border border-primary h-8 px-4 text-xs border-gray-900 dark:border-white text-gray-900 dark:text-white hidden md:block hover:bg-gray-100 dark:hover:bg-white/10"
+              className="border border-primary h-10 px-4 text-sm border-gray-900 dark:border-white text-gray-900 dark:text-white hidden md:block hover:bg-gray-100 dark:hover:bg-white/10"
             >
               Contactar
             </Button>
           </Link>
 
           <a href="https://notas.ai/pricing">
-            <Button className="h-8 px-4 text-xs bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-white/90">
+            <Button className="h-12 px-5 bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-white/90">
               Empezar
             </Button>
           </a>
