@@ -11,7 +11,6 @@ const HlsPlayer = dynamic(() => import("react-hls-player"), {
   ssr: false,
 });
 
-// Definimos la interfaz para el player
 interface VideoPlayer extends HTMLVideoElement {
   play: () => Promise<void>;
   pause: () => void;
@@ -82,14 +81,20 @@ export function SectionVideo() {
         )}
 
         <HlsPlayer
-          onEnded={() => playerRef.current?.load()}
-          onClick={togglePlay}
-          src="https://notas.ai/e:acc.m3u8"
+          src="/videos/RZrE73.m3u8"
           autoPlay={false}
-          poster="https://pbs.twimg.com/media/F1TM4rNakAAyoQa?format=png&name=4096x4096"
+          controls={false}
+          width="100%"
+          height="auto"
           playerRef={playerRef}
-          className="w-full"
+          onClick={togglePlay}
+          onEnded={() => {
+            playerRef.current?.load();
+            setPlaying(false);
+          }}
           muted={isMuted}
+          poster="https://pbs.twimg.com/media/F1TM4rNakAAyoQa?format=png&name=4096x4096"
+          className="w-full cursor-pointer"
         />
       </div>
     </motion.div>
