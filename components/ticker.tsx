@@ -79,7 +79,7 @@ export function Ticker() {
         <span className="text-sm text-gray-500 dark:text-[#878787]">
           NotasAI es una startup transparente. Consulta nuestras{" "}
           <Link href="/startup" className="underline hover:text-gray-700 dark:hover:text-gray-300">
-            métricas
+            métricas.
           </Link>
         </span>
       </div>
