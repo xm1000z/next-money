@@ -13,7 +13,7 @@ export function FooterCTA() {
 
   return (
     <div className="border border-border md:container text-center px-10 py-14 mx-4 md:mx-auto md:px-24 md:py-20 mb-32 mt-24 flex items-center flex-col bg-white dark:bg-[#121212]">
-      <span className="text-6xl md:text-8xl font-medium text-gray-900 dark:text-white">
+      <span className="text-4xl md:text-8xl font-medium text-gray-900 dark:text-white">
         Empresas x NotasAI.
       </span>
       <p className="text-gray-600 dark:text-[#878787] mt-6">
