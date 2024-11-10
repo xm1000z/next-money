@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 
-const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
+const ReactPlayer = dynamic(() => import("react-player/lazy"), {
   ssr: false,
 });
 
 export function SectionVideo() {
   const playerRef = useRef();
   const timer = useRef();
-  const [isPlaying, setPlaying] = useState<Timer | undefined>(false);
+  const [isPlaying, setPlaying] = useState<boolean>(false);
   const [isMuted, setMuted] = useState(true);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -76,10 +76,10 @@ export function SectionVideo() {
           </div>
         )}
 
-        <ReactHlsPlayer
+        <ReactPlayer
           onEnded={() => playerRef.current?.load()}
           onClick={togglePlay}
-          src="https://notas.ai/e/acc.mp4"
+          url="https://notas.ai/e/acc.mp4"
           autoPlay={false}
           poster="https://pbs.twimg.com/media/F1TM4rNakAAyoQa?format=png&name=4096x4096"
           playerRef={playerRef}
