@@ -11,9 +11,15 @@ const HlsPlayer = dynamic(() => import("react-hls-player"), {
   ssr: false,
 });
 
+// Definimos la interfaz para el player
+interface VideoPlayer extends HTMLVideoElement {
+  play: () => Promise<void>;
+  pause: () => void;
+}
+
 export function SectionVideo() {
-  const playerRef = useRef();
-  const timer = useRef();
+  const playerRef = useRef<VideoPlayer>(null);
+  const timer = useRef<NodeJS.Timeout>();
   const [isPlaying, setPlaying] = useState<boolean>(false);
   const [isMuted, setMuted] = useState(true);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -24,12 +30,11 @@ export function SectionVideo() {
     } else {
       playerRef.current?.play();
     }
-
-    setPlaying((prev) => !prev);
+    setPlaying(!isPlaying);
   };
 
   const toggleMute = () => {
-    setMuted((prev) => !prev);
+    setMuted(!isMuted);
   };
 
   return (
