@@ -21,12 +21,6 @@ import { usePathname } from "next/navigation";
 import menuAssistant from "public/menu-assistant.webp";
 import menuEngine from "public/menu-engine.webp";
 import { useEffect, useState } from "react";
-import {
-  MdOutlineDashboardCustomize,
-  MdOutlineDescription,
-  MdOutlineIntegrationInstructions,
-  MdOutlineMemory,
-} from "react-icons/md";
 
 const listVariant = {
   show: {
