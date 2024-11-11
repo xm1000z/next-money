@@ -30,7 +30,7 @@ import {
   LineChart,
   Receipt,
   LayoutDashboard,
-  Memory,
+  Cpu,
   Settings,
   Component,
   Github,
@@ -165,7 +165,7 @@ export function Header() {
         {
           path: "/engine",
           title: "Engine",
-          icon: <Memory size={20} />,
+          icon: <Cpu size={20} />,
         },
         {
           path: "https://go.midday.ai/anPiuRx",
