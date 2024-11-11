@@ -19,7 +19,7 @@ export default function MarketingLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <NavMobile />
-      <Header scroll={true} />
+      <Header/>
       <main className="flex-1">{children}</main>
       <SiteFooter />
       <Promotion locale={params.locale} />
