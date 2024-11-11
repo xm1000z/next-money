@@ -208,8 +208,8 @@ export function Header() {
                 alt="NotasAI"
                 width={30}
                 height={30}
-                className="dark:invert"
-              />
+                className="h-10 w-auto brightness-0 dark:brightness-200"
+                />
             </Link>
           </ContextMenuTrigger>
 
@@ -367,10 +367,10 @@ export function Header() {
               <Image 
                 src="https://notas.ai/white.png" 
                 alt="NotasAI"
-                width={102}
+                width={30}
                 height={30}
-                className="dark:invert"
-              />
+                className="h-10 w-auto brightness-0 dark:brightness-200"
+                />
             </button>
 
             <button
