@@ -274,7 +274,7 @@ export function Header() {
                               href={child.path}
                               className="flex space-x-2 items-center transition-opacity hover:opacity-70 duration-200"
                             >
-                              <span>{child.icon}</span>
+                              <span>df</span>
                               <span className="text-sm font-medium">
                                 {child.title}
                               </span>
