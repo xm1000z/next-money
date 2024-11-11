@@ -206,7 +206,7 @@ export function Header() {
               <Image 
                 src="https://notas.ai/white.png" 
                 alt="NotasAI"
-                width={102}
+                width={30}
                 height={30}
                 className="dark:invert"
               />
