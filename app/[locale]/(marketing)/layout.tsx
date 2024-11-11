@@ -1,7 +1,7 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 
 import { NavMobile } from "@/components/layout/mobile-nav";
-import { NavBar } from "@/components/header";
+import { Header } from "@/components/header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import Promotion from "@/components/sections/promotion";
 
