@@ -13,14 +13,30 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { Icons } from "@/components/shared/icons";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import menuAssistant from "public/menu-assistant.webp";
-import menuEngine from "public/menu-engine.webp";
+import menuAssistant from "public/menu-assistant.jpg";
+import menuEngine from "public/menu-engine.png";
 import { useEffect, useState } from "react";
+import { FaDiscord, FaGithub } from "react-icons/fa";
+import {
+  Copy,
+  Palette,
+  PaintBucket,
+  FileText,
+  Inbox,
+  Files,
+  LineChart,
+  Receipt,
+  LayoutDashboard,
+  Memory,
+  Settings,
+  Component,
+  Github,
+  MessageSquare
+} from "lucide-react";
 
 const listVariant = {
   show: {
@@ -89,22 +105,27 @@ export function Header() {
         {
           path: "/overview",
           title: "Overview",
+          icon: <LayoutDashboard size={20} />,
         },
         {
           path: "/inbox",
           title: "Inbox",
+          icon: <Inbox size={20} />,
         },
         {
           path: "/vault",
           title: "Vault",
+          icon: <Files size={20} />,
         },
         {
           path: "/tracker",
           title: "Tracker",
+          icon: <LineChart size={20} />,
         },
         {
           path: "/invoice",
           title: "Invoice",
+          icon: <Receipt size={20} />,
         },
       ],
     },
@@ -135,26 +156,32 @@ export function Header() {
         {
           path: "https://git.new/midday",
           title: "Open Source",
+          icon: <Github size={20} />,
         },
         {
           path: "https://docs.midday.ai",
           title: "Documentation",
+          icon: <FileText size={20} />,
         },
         {
           path: "/engine",
           title: "Engine",
+          icon: <Memory size={20} />,
         },
         {
-          title: "Join the community",
           path: "https://go.midday.ai/anPiuRx",
+          title: "Join the community",
+          icon: <MessageSquare size={20} />,
         },
         {
-          title: "Apps & Integrations",
           path: "https://docs.midday.ai",
+          title: "Apps & Integrations",
+          icon: <Settings size={20} />,
         },
         {
           path: "/components",
           title: "Components",
+          icon: <Component size={20} />,
         },
       ],
     },
@@ -177,6 +204,13 @@ export function Header() {
           <ContextMenuTrigger>
             <Link href="/">
               <span className="sr-only">NotasAI Logo</span>
+              <Image 
+                src="https://notas.ai/white.png" 
+                alt="NotasAI"
+                width={102}
+                height={30}
+                className="dark:invert"
+              />
             </Link>
           </ContextMenuTrigger>
 
@@ -212,10 +246,12 @@ export function Header() {
                   } catch {}
                 }}
               >
+                <Copy size={20} />
                 <span className="font-medium text-sm">Copy Logo as SVG</span>
               </ContextMenuItem>
               <ContextMenuItem asChild>
                 <Link href="/branding" className="flex items-center space-x-2">
+                  <PaintBucket size={20} />
                   <span className="font-medium text-sm">Branding</span>
                 </Link>
               </ContextMenuItem>
@@ -224,6 +260,7 @@ export function Header() {
                   href="https://ui.midday.ai"
                   className="flex items-center space-x-2"
                 >
+                  <Palette size={20} />
                   <span className="font-medium text-sm">Design System</span>
                 </a>
               </ContextMenuItem>
@@ -274,7 +311,7 @@ export function Header() {
                               href={child.path}
                               className="flex space-x-2 items-center transition-opacity hover:opacity-70 duration-200"
                             >
-                              <span>df</span>
+                              <span>{child.icon}</span>
                               <span className="text-sm font-medium">
                                 {child.title}
                               </span>
@@ -327,7 +364,14 @@ export function Header() {
         >
           <div className="mt-4 flex justify-between p-3 px-4 relative ml-[1px]">
             <button type="button" onClick={handleToggleMenu}>
-              <span className="sr-only">Midday Logo</span>
+              <span className="sr-only">NotasAI Logo</span>
+              <Image 
+                src="https://notas.ai/white.png" 
+                alt="NotasAI"
+                width={102}
+                height={30}
+                className="dark:invert"
+              />
             </button>
 
             <button
@@ -413,7 +457,7 @@ export function Header() {
               >
                 <Link
                   className="text-xl text-primary"
-                  href="https://app.notas.ai/sign-in"
+                  href="https://app.midday.ai"
                 >
                   Sign in
                 </Link>
