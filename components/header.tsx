@@ -17,10 +17,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import menuAssistant from "public/menu-assistant.jpg";
-import menuEngine from "public/menu-engine.png";
+import menuAssistant from "public/menu-assistant.webp";
+import menuEngine from "public/menu-engine.webp";
 import { useEffect, useState } from "react";
-import { FaDiscord, FaGithub } from "react-icons/fa";
 import {
   Copy,
   Palette,
