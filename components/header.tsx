@@ -36,6 +36,7 @@ import {
   Github,
   MessageSquare
 } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 
 const listVariant = {
   show: {
@@ -60,6 +61,7 @@ export function Header() {
   const [showBlur, setShowBlur] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastPath = `/${pathname.split("/").pop()}`;
+  const { isSignedIn } = useAuth();
 
   useEffect(() => {
     const setPixelRatio = () => {
@@ -349,9 +351,9 @@ export function Header() {
 
         <a
           className="text-sm font-medium pr-2 border-l-[1px] border-border pl-4 hidden md:block"
-          href="https://app.midday.ai"
+          href={isSignedIn ? "/app" : "https://app.notas.ai"}
         >
-          Sign in
+          {isSignedIn ? "Entrar" : "Sign in"}
         </a>
       </nav>
 
@@ -456,9 +458,9 @@ export function Header() {
               >
                 <Link
                   className="text-xl text-primary"
-                  href="https://app.midday.ai"
+                  href={isSignedIn ? "/app" : "/sign-in"}
                 >
-                  Sign in
+                  {isSignedIn ? "Entrar" : "Iniciar sesión"}
                 </Link>
               </motion.li>
             </motion.ul>
