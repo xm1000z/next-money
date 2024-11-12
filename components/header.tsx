@@ -122,8 +122,8 @@ export function Header() {
           icon: <LineChart size={20} />,
         },
         {
-          path: "https://writer.notas.ai",
-          title: "Invoice",
+          path: "#muy-pronto",
+          title: "Lisa",
           icon: <Receipt size={20} />,
         },
       ],
@@ -137,12 +137,8 @@ export function Header() {
       path: "/updates",
     },
     {
-      title: "Directorio",
+      title: "Prompts",
       path: "https://prompts.notas.ai",
-    },
-    {
-      title: "Download",
-      path: "/download",
     },
     {
       title: "Nosotros",
@@ -153,34 +149,24 @@ export function Header() {
       ),
       children: [
         {
-          path: "https://notas.ai/beta",
-          title: "Beta",
-          icon: <Github size={20} />,
-        },
-        {
-          path: "",
-          title: "Documentation",
-          icon: <FileText size={20} />,
-        },
-        {
-          path: "/engine",
-          title: "Engine",
-          icon: <Cpu size={20} />,
-        },
-        {
-          path: "https://go.midday.ai/anPiuRx",
-          title: "Join the community",
-          icon: <MessageSquare size={20} />,
-        },
-        {
-          path: "https://docs.midday.ai",
-          title: "Apps & Integrations",
+          path: "https://notas.ai/about",
+          title: "Nosotros",
           icon: <Settings size={20} />,
         },
         {
-          path: "/components",
-          title: "Components",
-          icon: <Component size={20} />,
+          path: "https://notas.ai/beta",
+          title: "Beta",
+          icon: <Settings size={20} />,
+        },
+        {
+          path: "https://docs.notas.ai",
+          title: "Documentación",
+          icon: <FileText size={20} />,
+        },
+        {
+          path: "https://x.com/notas_ia",
+          title: "Unirse a la comunidad",
+          icon: <MessageSquare size={20} />,
         },
       ],
     },
