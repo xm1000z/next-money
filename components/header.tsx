@@ -96,71 +96,69 @@ export function Header() {
 
   const links = [
     {
-      title: "Features",
+      title: "Producto",
       cover: (
-        <Link href="/#assistant" onClick={handleOnClick}>
-          <Image alt="Assistant" src={menuAssistant} quality={100} />
-        </Link>
+          <Image alt="Producto" src={menuAssistant} quality={100} />
       ),
       children: [
         {
-          path: "/overview",
-          title: "Overview",
+          path: "https://writer.notas.ai",
+          title: "Notas",
           icon: <LayoutDashboard size={20} />,
         },
         {
-          path: "/inbox",
-          title: "Inbox",
+          path: "https://chat.notas.ai",
+          title: "Chat",
           icon: <Inbox size={20} />,
         },
         {
-          path: "/vault",
-          title: "Vault",
+          path: "https://search.notas.ai",
+          title: "Search",
           icon: <Files size={20} />,
         },
         {
-          path: "/tracker",
-          title: "Tracker",
+          path: "https://traductor.notas.ai",
+          title: "Traductor",
           icon: <LineChart size={20} />,
         },
         {
-          path: "/invoice",
+          path: "https://writer.notas.ai",
           title: "Invoice",
           icon: <Receipt size={20} />,
         },
       ],
     },
     {
-      title: "Pricing",
-      path: "/pricing",
+      title: "Precios",
+      path: "https://notas.ai/pricing",
     },
     {
-      title: "Updates",
+      title: "Roadmap",
       path: "/updates",
     },
     {
-      title: "Story",
-      path: "/story",
+      title: "Directorio",
+      path: "https://prompts.notas.ai",
     },
     {
       title: "Download",
       path: "/download",
     },
     {
-      title: "Developers",
+      title: "Nosotros",
       cover: (
-        <Link href="/engine" onClick={handleOnClick}>
-          <Image alt="Engine" src={menuEngine} quality={100} />
+        <Link href="https://notas.ai/about" onClick={handleOnClick}>
+          <Image alt="Nosotros" src={menuEngine} quality={100} />
         </Link>
       ),
       children: [
         {
-          path: "https://git.new/midday",
-          title: "Open Source",
+          path: "https://notas.ai/beta",
+          title: "Beta",
           icon: <Github size={20} />,
         },
         {
-          path: "https://docs.midday.ai",
+          path: "",
           title: "Documentation",
           icon: <FileText size={20} />,
         },
