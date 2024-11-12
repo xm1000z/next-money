@@ -351,9 +351,9 @@ export function Header() {
 
         <a
           className="text-sm font-medium pr-2 border-l-[1px] border-border pl-4 hidden md:block"
-          href={isSignedIn ? "/app" : "https://app.notas.ai"}
+          href={isSignedIn ? "/app" : "/sign-in"}
         >
-          {isSignedIn ? "Entrar" : "Sign in"}
+          {isSignedIn ? "Entrar" : "Iniciar sesión"}
         </a>
       </nav>
 
