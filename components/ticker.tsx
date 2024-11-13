@@ -39,8 +39,8 @@ export function Ticker() {
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[100px] md:mt-[160px]">
         {/* Visitantes */}
-        <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] md:mb-2 text-stroke">
+        <div className="text-center flex flex-col space-y-1">
+          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] text-stroke">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.totalSum)}
@@ -51,8 +51,8 @@ export function Ticker() {
         </div>
 
         {/* Créditos Usados */}
-        <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] md:mb-2 text-stroke">
+        <div className="text-center flex flex-col space-y-1">
+          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] text-stroke">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.creditsUsed)}
@@ -63,8 +63,8 @@ export function Ticker() {
         </div>
 
         {/* Suscriptores Activos */}
-        <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] md:mb-2 text-stroke">
+        <div className="text-center flex flex-col space-y-1">
+          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] text-stroke">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.activeSubscribers)}
@@ -79,8 +79,9 @@ export function Ticker() {
         <span className="text-sm text-gray-500 dark:text-[#878787]">
           NotasAI es una startup transparente. Consulta nuestras{" "}
           <Link href="/startup" className="underline hover:text-gray-700 dark:hover:text-gray-300">
-            métricas.
+            métricas
           </Link>
+          .
         </span>
       </div>
     </div>
