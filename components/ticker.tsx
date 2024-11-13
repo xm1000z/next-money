@@ -40,7 +40,7 @@ export function Ticker() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[100px] md:mt-[160px]">
         {/* Visitantes */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] xl:text-[130px] 2xl:text-[160px] md:mb-2 text-stroke">
+          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] md:mb-2 text-stroke">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.totalSum)}
@@ -52,7 +52,7 @@ export function Ticker() {
 
         {/* Créditos Usados */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] xl:text-[130px] 2xl:text-[160px] md:mb-2 text-stroke">
+          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] md:mb-2 text-stroke">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.creditsUsed)}
@@ -64,7 +64,7 @@ export function Ticker() {
 
         {/* Suscriptores Activos */}
         <div className="text-center flex flex-col space-y-4">
-          <span className="font-medium font-mono text-center text-[40px] md:text-[80px] lg:text-[100px] xl:text-[130px] 2xl:text-[160px] md:mb-2 text-stroke">
+          <span className="font-medium font-mono text-center text-[32px] md:text-[60px] lg:text-[80px] xl:text-[100px] 2xl:text-[120px] md:mb-2 text-stroke">
             {Intl.NumberFormat("en-US", {
               maximumFractionDigits: 0,
             }).format(stats.activeSubscribers)}
