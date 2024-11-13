@@ -184,7 +184,7 @@ export function Header() {
           "transition duration-1s ease-in-out animate-header-slide-down-fade",
       )}
     >
-      <nav className="border border-border px-4 flex items-center backdrop-filter backdrop-blur-xl bg-[#121212] bg-opacity-70 h-[50px] z-20">
+      <nav className="border border-border/40 dark:border-border px-4 flex items-center backdrop-filter backdrop-blur-xl bg-white/80 dark:bg-[#121212] dark:bg-opacity-70 h-[50px] z-20">
         <ContextMenu>
           <ContextMenuTrigger>
             <Link href="/">
@@ -334,7 +334,7 @@ export function Header() {
         </button>
 
         <a
-          className="text-sm font-medium pr-2 border-l-[1px] border-border pl-4 hidden md:block"
+          className="text-sm font-medium pr-2 border-l-[1px] border-border/40 dark:border-border pl-4 hidden md:block text-gray-900 dark:text-white"
           href={isSignedIn ? "/app" : "/sign-in"}
         >
           {isSignedIn ? "Entrar" : "Iniciar sesión"}
@@ -343,7 +343,7 @@ export function Header() {
 
       {isOpen && (
         <motion.div
-          className="fixed bg-background -top-[2px] right-0 left-0 bottom-0 h-screen z-10 px-2"
+          className="fixed bg-white dark:bg-background -top-[2px] right-0 left-0 bottom-0 h-screen z-10 px-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -380,7 +380,7 @@ export function Header() {
             <motion.ul
               initial="hidden"
               animate="show"
-              className="px-3 pt-8 text-xl text-[#878787] space-y-8 mb-8 overflow-auto"
+              className="px-3 pt-8 text-xl text-gray-600 dark:text-[#878787] space-y-8 mb-8 overflow-auto"
               variants={listVariant}
             >
               {links.map(({ path, title, children }) => {

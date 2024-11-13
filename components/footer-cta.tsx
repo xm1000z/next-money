@@ -12,8 +12,8 @@ export function FooterCTA() {
   }
 
   return (
-    <div className="border border-border md:container text-center px-10 py-14 mx-4 md:mx-auto md:px-24 md:py-20 mb-32 mt-24 flex items-center flex-col bg-white dark:bg-[#121212]">
-      <span className="text-4xl md:text-6xl font-medium text-gray-900 dark:text-white">
+    <div className="border border-border/40 dark:border-border md:container text-center px-10 py-14 mx-4 md:mx-auto md:px-24 md:py-20 mb-32 mt-24 flex items-center flex-col bg-white/80 dark:bg-[#121212]">
+      <span className="text-4xl md:text-6xl font-medium bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-[#666] bg-clip-text text-transparent">
         Empresas x NotasAI.
       </span>
       <p className="text-gray-600 dark:text-[#878787] mt-6 text-sm md:text-base max-w-2xl">
@@ -25,14 +25,14 @@ export function FooterCTA() {
           <Link href="mailto:sales@notas.ai">
             <Button
               variant="outline"
-              className="items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-accent hover:text-accent-foreground py-2 border h-12 px-6 border-white text-white hidden md:block"
+              className="items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-accent hover:text-accent-foreground py-2 border h-12 px-6 border-gray-900 dark:border-white text-gray-900 dark:text-white hidden md:block"
             >
               Contactar
             </Button>
           </Link>
 
           <a href="https://notas.ai/pricing">
-            <Button className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 py-2 h-12 px-5 bg-white text-black hover:bg-white/80">
+            <Button className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 py-2 h-12 px-5 bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-white/80">
               Empezar
             </Button>
           </a>
