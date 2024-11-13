@@ -65,13 +65,19 @@ export function NavBar({ scroll = false }: NavBarProps) {
         scroll ? (scrolled ? "" : "bg-transparent") : ""
       )}
     >
-      <div className="border border-[rgba(27, 27, 27, 0.48)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[rgba(236, 236, 236, 0.5)] dark:bg-[rgba(27, 27, 27, 0.5)] backdrop-blur-sm">
+      <div className="bg-[rgba(236, 236, 236, 0.5)] dark:bg-[rgba(27, 27, 27, 0.5)] backdrop-blur-sm">
         <MaxWidthWrapper2
           className="flex h-12 items-center justify-between px-4"
           large={documentation}
         >
           <div className="flex items-center gap-8">
             <NavbarLogo />
+            <h1
+              style={{ fontFamily: 'Apple Garamond' }}
+              className="text-balance text-2xl text-black dark:text-white tracking-tight"
+            >
+              NotasAI
+            </h1>
 
             {links && links.length > 0 ? (
               <nav className="hidden items-center space-x-6 md:flex">
