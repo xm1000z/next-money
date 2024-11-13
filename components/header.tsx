@@ -184,7 +184,7 @@ export function Header() {
           "transition duration-1s ease-in-out animate-header-slide-down-fade",
       )}
     >
-      <nav className="border border-border/40 dark:border-border px-4 flex items-center backdrop-filter backdrop-blur-xl bg-white/80 dark:bg-[#121212] dark:bg-opacity-70 h-[50px] z-20">
+      <nav className="border border-border dark:border-border px-4 flex items-center backdrop-filter backdrop-blur-xl bg-white/80 dark:bg-[#121212] dark:bg-opacity-70 h-[50px] z-20">
         <ContextMenu>
           <ContextMenuTrigger>
             <Link href="/">
@@ -334,7 +334,7 @@ export function Header() {
         </button>
 
         <a
-          className="text-sm font-medium pr-2 border-l-[1px] border-border/40 dark:border-border pl-4 hidden md:block text-gray-900 dark:text-white"
+          className="text-sm font-medium pr-2 border-l-[1px] border-border dark:border-border pl-4 hidden md:block text-gray-900 dark:text-white"
           href={isSignedIn ? "/app" : "/sign-in"}
         >
           {isSignedIn ? "Entrar" : "Iniciar sesión"}
