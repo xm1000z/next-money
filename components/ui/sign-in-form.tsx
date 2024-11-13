@@ -20,7 +20,7 @@ export default function SignInForm() {
       buttonArrowIcon: 'hidden',
       formFieldInput: 'flex h-9 w-full border bg-transparent px-3 py-1 text-sm  text-[#c8c7c5] transition-colors file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
 
-        formButtonPrimary: 'h-10 w-full bg-black text-md text-white dark:bg-white dark:text-black font-bold focus-visible:outline-none disabled:pointer-events-none',
+        formButtonPrimary: 'h-10 w-full bg-black hover:bg-black text-md text-white dark:bg-white dark:hover:bg-white dark:text-black font-bold focus-visible:outline-none disabled:pointer-events-none',
       footerAction: 'hidden',
       footer: 'hidden'
     },
@@ -82,9 +82,9 @@ export default function SignInForm() {
               {preferredSignInOption}
             </div>
             <p className="text-xs text-[#878787]">
-             ¿No tienes una cuenta?{" "}
+             ¿No tienes una cuenta? Ver{" "}
               <a href="https://notas.ai/pricing" className="underline">
-              Ver planes
+                planes
               </a>
               .
             </p>
