@@ -82,9 +82,9 @@ export default function SignInForm() {
               {preferredSignInOption}
             </div>
             <p className="text-xs text-[#878787]">
-             ¿No tienes una cuenta? Ver{" "}
+             ¿No tienes una cuenta? Ver los planes{" "}
               <a href="https://notas.ai/pricing" className="underline">
-                planes
+                aquí
               </a>
               .
             </p>
