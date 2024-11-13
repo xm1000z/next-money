@@ -25,14 +25,14 @@ export function FooterCTA() {
           <Link href="mailto:sales@notas.ai">
             <Button
               variant="outline"
-              className="items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-accent hover:text-accent-foreground py-2 border h-12 px-6 border-gray-900 dark:border-white text-gray-900 dark:text-white hidden md:block"
+              className="items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 bg-transparent hover:bg-accent hover:text-accent-foreground py-2 border h-12 px-6 border-black dark:border-white text-black dark:text-white hidden md:block"
             >
               Contactar
             </Button>
           </Link>
 
           <a href="https://notas.ai/pricing">
-            <Button className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 py-2 h-12 px-5 bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-white/80">
+            <Button className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 py-2 h-12 px-5 bg-black dark:bg-white text-white dark:text-black hover:bg-black/80 dark:hover:bg-white/80">
               Empezar
             </Button>
           </a>
