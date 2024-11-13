@@ -283,7 +283,7 @@ export function Header() {
                 {children && (
                   <div
                     className={cn(
-                      "absolute top-[48px] left-0 -mx-[calc(var(--pixel-ratio)_*_2px)] bg-[#121212] flex h-0 group-hover:h-[250px] overflow-hidden transition-all duration-300 ease-in-out border-l border-r",
+                      "absolute top-[48px] left-0 -mx-[calc(var(--pixel-ratio)_*_2px)] bg-white dark:bg-[#121212] flex h-0 group-hover:h-[250px] overflow-hidden transition-all duration-300 ease-in-out border-l border-r border-border dark:border-border",
                       hidden && "hidden",
                     )}
                   >
@@ -297,7 +297,7 @@ export function Header() {
                               className="flex space-x-2 items-center transition-opacity hover:opacity-70 duration-200"
                             >
                               <span>{child.icon}</span>
-                              <span className="text-sm font-medium">
+                              <span className="text-sm font-medium text-gray-900 dark:text-white">
                                 {child.title}
                               </span>
                             </Link>
@@ -307,7 +307,7 @@ export function Header() {
                     </ul>
 
                     <div className="flex-1 p-4">{cover}</div>
-                    <div className="absolute bottom-0 w-full border-b-[1px]" />
+                    <div className="absolute bottom-0 w-full border-b-[1px] border-border/40 dark:border-border" />
                   </div>
                 )}
               </li>
