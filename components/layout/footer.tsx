@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-white dark:bg-[#0C0C0C] overflow-hidden relative">
+    <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-white dark:bg-[#0C0C0C] overflow-hidden relative min-h-[600px] md:min-h-[800px]">
       <div className="container">
         <div className="flex justify-between items-center border-border border-b-[1px] pb-10 md:pb-16 mb-12">
           <Link href="/" className="flex items-center gap-3">
@@ -20,7 +20,7 @@ export function Footer() {
           </span>
         </div>
 
-        <div className="flex flex-col md:flex-row w-full mb-32 md:mb-48">
+        <div className="flex flex-col md:flex-row w-full mb-40 md:mb-60">
           <div className="flex flex-col space-y-8 md:space-y-0 md:flex-row md:w-6/12 justify-between leading-8">
             <div>
               <span className="font-medium text-black dark:text-white">Producto</span>
@@ -99,9 +99,9 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-[300px] md:h-[400px] overflow-hidden">
+      <div className="absolute bottom-0 left-0 right-0 h-[200px] md:h-[300px] overflow-hidden">
         <h5 
-          className="text-gray-100 dark:text-[#161616] text-[250px] md:text-[600px] leading-none text-center whitespace-nowrap absolute left-1/2 transform -translate-x-1/2 bottom-[-20%] md:bottom-[-45%]"
+          className="text-gray-100 dark:text-[#161616] text-[180px] md:text-[400px] leading-none text-center whitespace-nowrap absolute left-1/2 transform -translate-x-1/2 bottom-[-30%]"
           style={{ width: 'max-content' }}
         >
           notas ai
