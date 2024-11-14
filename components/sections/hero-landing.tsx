@@ -17,7 +17,7 @@ export default async function HeroLanding() {
   const t = await getTranslations({ namespace: "IndexPage" });
 
   return (
-    <section className={`${appleGaramond.variable} space-y-6 py-12 sm:py-20 lg:py-20`}>
+    <section className={`${appleGaramond.variable} min-h-[100vh] flex items-center justify-center`}>
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
         <Link
           href="https://x.com/notas_ia"
