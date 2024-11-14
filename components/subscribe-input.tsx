@@ -19,7 +19,7 @@ function SubmitButton() {
   return (
     <button
       type="submit"
-      className="absolute right-2 h-7 bg-gray-900 dark:bg-primary top-2 px-4 font-medium text-sm z-10 text-white dark:text-primary-foreground"
+      className="absolute right-2 h-7 bg-black hover:bg-gray-900 dark:bg-primary dark:hover:bg-primary/90 top-2 px-4 font-medium text-sm z-10 text-white"
     >
       Subscribe
     </button>
@@ -33,7 +33,7 @@ export function SubscribeInput({ group }: { group: string }) {
     <div>
       <div className="flex justify-center">
         {isSubmitted ? (
-          <div className="border border-gray-200 dark:border-[#2C2C2C] font-sm text-gray-900 dark:text-primary h-11 w-[330px] flex items-center py-1 px-3 justify-between">
+          <div className="border border-gray-200 dark:border-[#2C2C2C] font-sm text-gray-600 dark:text-primary h-11 w-[330px] flex items-center py-1 px-3 justify-between">
             <p>Subscrito</p>
 
             <svg
@@ -66,7 +66,7 @@ export function SubscribeInput({ group }: { group: string }) {
                 autoComplete="email"
                 aria-label="Email"
                 required
-                className="bg-transparent font-sm text-gray-900 dark:text-primary outline-none py-1 px-3 w-[360px] placeholder-gray-400 dark:placeholder-[#606060] h-11 border border-gray-200 dark:border-border"
+                className="bg-transparent font-sm text-gray-600 dark:text-primary outline-none py-1 px-3 w-[360px] placeholder-gray-400 dark:placeholder-[#606060] h-11 border border-gray-200 dark:border-border"
               />
               <SubmitButton />
             </fieldset>

@@ -5,15 +5,17 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-white dark:bg-[#0C0C0C] overflow-hidden md:max-h-[820px]">
+    <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-white dark:bg-[#0C0C0C] overflow-hidden relative">
       <div className="container">
         <div className="flex justify-between items-center border-border border-b-[1px] pb-10 md:pb-16 mb-12">
-          <Link href="/" className="scale-50 -ml-[52px] md:ml-0 md:scale-100">
+          <Link href="/" className="flex items-center gap-3">
             <Image className="h-8 w-8" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
-            <span style={{ fontFamily: 'Apple Garamond'}} className="sr-only">NotasAI</span>
+            <span style={{ fontFamily: 'Apple Garamond'}} className="text-black dark:text-white text-lg">
+              NotasAI
+            </span>
           </Link>
 
-          <span className="font-normal md:text-2xl text-right text-gray-900 dark:text-white">
+          <span className="font-normal md:text-2xl text-right text-black dark:text-white">
             Think Better.
           </span>
         </div>
@@ -21,7 +23,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row w-full">
           <div className="flex flex-col space-y-8 md:space-y-0 md:flex-row md:w-6/12 justify-between leading-8">
             <div>
-              <span className="font-medium text-gray-900 dark:text-white">Producto</span>
+              <span className="font-medium text-black dark:text-white">Producto</span>
               <ul>
                 <li className="transition-colors text-gray-600 hover:text-gray-900 dark:text-[#878787] dark:hover:text-white">
                   <Link href="/app">Dashboard</Link>
@@ -42,7 +44,7 @@ export function Footer() {
             </div>
 
             <div>
-              <span className="text-gray-900 dark:text-white">NotasAI</span>
+              <span className="text-black dark:text-white">NotasAI</span>
               <ul>
                 <li className="transition-colors text-gray-600 hover:text-gray-900 dark:text-[#878787] dark:hover:text-white">
                   <Link href="https://notas.ai/about">Nosotros</Link>
@@ -63,7 +65,7 @@ export function Footer() {
             </div>
 
             <div>
-              <span className="text-gray-900 dark:text-white">Company</span>
+              <span className="text-black dark:text-white">Company</span>
               <ul>
                 <li className="transition-colors text-gray-600 hover:text-gray-900 dark:text-[#878787] dark:hover:text-white">
                   <Link href="/story">Story</Link>
@@ -97,7 +99,10 @@ export function Footer() {
         </div>
       </div>
 
-      <h5 className="text-gray-100 dark:text-[#161616] text-[500px] leading-none text-center pointer-events-none">
+      <h5 
+        className="text-gray-100 dark:text-[#161616] text-[200px] md:text-[500px] leading-none text-center pointer-events-none absolute -bottom-[45%] md:-bottom-1/2 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+        style={{ width: 'max-content' }}
+      >
         notas ai
       </h5>
     </footer>
