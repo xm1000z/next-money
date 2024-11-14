@@ -2,7 +2,7 @@ import { unstable_setRequestLocale } from "next-intl/server";
 
 import { NavMobile } from "@/components/layout/mobile-nav";
 import { Header } from "@/components/header";
-import { SiteFooter } from "@/components/layout/site-footer";
+import { Footer } from "@/components/layout/footer";
 import Promotion from "@/components/sections/promotion";
 
 interface MarketingLayoutProps {
@@ -20,7 +20,7 @@ export default function MarketingLayout({
     <div className="flex min-h-screen flex-col">
       <Header/>
       <main className="flex-1">{children}</main>
-      <SiteFooter />
+      <Footer />
       <Promotion locale={params.locale} />
     </div>
   );
