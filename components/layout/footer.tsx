@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-white dark:bg-[#0C0C0C] overflow-hidden relative">
-      <div className="container">
+    <footer className="border-t-[1px] border-border px-4 md:px-6 pt-10 md:pt-16 bg-white dark:bg-[#0C0C0C] overflow-hidden md:max-h-[820px] relative">
+      <div className="container mb-[200px] md:mb-[400px]">
         <div className="flex justify-between items-center border-border border-b-[1px] pb-10 md:pb-16 mb-12">
           <Link href="/" className="flex items-center gap-3">
             <Image className="h-8 w-8" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
@@ -100,7 +100,7 @@ export function Footer() {
       </div>
 
       <h5 
-        className="text-gray-100 dark:text-[#161616] text-[200px] md:text-[500px] leading-none text-center pointer-events-none absolute -bottom-[45%] md:-bottom-1/2 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+        className="text-gray-100 dark:text-[#161616] text-[300px] md:text-[500px] leading-none text-center pointer-events-none absolute bottom-0 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
         style={{ width: 'max-content' }}
       >
         notas ai
