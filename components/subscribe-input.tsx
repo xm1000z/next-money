@@ -21,7 +21,7 @@ function SubmitButton() {
       type="submit"
       className="absolute right-2 h-7 bg-black hover:bg-gray-900 dark:bg-primary dark:hover:bg-primary/90 top-2 px-4 font-medium text-sm z-10 text-white"
     >
-      Subscribe
+      Suscribirse
     </button>
   );
 }

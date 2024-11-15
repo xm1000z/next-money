@@ -56,10 +56,10 @@ export function Footer() {
                   <Link href="mailto:soporte@notas.ai">Soporte</Link>
                 </li>
                 <li className="transition-colors text-gray-600 hover:text-gray-900 dark:text-[#878787] dark:hover:text-white">
-                  <Link href="/privacy">Privacy policy</Link>
+                  <Link href="/privacy">Privacidad</Link>
                 </li>
                 <li className="transition-colors text-gray-600 hover:text-gray-900 dark:text-[#878787] dark:hover:text-white">
-                  <Link href="/terms">Terms and Conditions</Link>
+                  <Link href="/terms">Términos</Link>
                 </li>
               </ul>
             </div>
