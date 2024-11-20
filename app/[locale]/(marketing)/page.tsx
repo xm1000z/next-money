@@ -8,6 +8,7 @@ import { SectionFour } from "@/components/sections/section-four";
 import { SectionFive } from "@/components/sections/section-five";
 import { SectionSeven } from "@/components/sections/section-seven";
 import { SectionVideo } from "@/components/sections/section-video";
+import { Hero } from "@/components/sections/new-hero"
 import { Ticker } from "@/components/ticker";
 import { FooterCTA } from "@/components/footer-cta";
 import Features from "@/components/sections/features";
@@ -25,7 +26,7 @@ export default function IndexPage({ params: { locale } }: Props) {
 
   return (
     <>
-      <HeroLanding />
+      <Hero />
       {/* <Powered />
       {/* <BentoGrid /> */}
       {/* <InfoLanding data={infos[0]} reverse={true} /> */}
