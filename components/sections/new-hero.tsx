@@ -11,7 +11,7 @@ export function Hero() {
         <Link href="https://x.com/notas_ia">
           <Button
             variant="outline"
-            className="rounded-full border-border flex space-x-2 items-center text-sm"
+            className="rounded-full border-border flex space-x-2 items-center text-xs"
           >
             <span className="font-mono text-xs">Introducimos BETA</span>
             <svg
@@ -28,8 +28,8 @@ export function Hero() {
           </Button>
         </Link>
 
-        <h2 className="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[30px] font-medium">
-        Revolucionemos la Inteligencia Artificial, esta vez en español, para <WordAnimation />
+        <h2 className="mt-6 md:mt-10 max-w-[480px] text-[#878787] leading-tight text-[18px] md:text-[24px] font-medium text-center">
+          Revolucionemos la Inteligencia Artificial, esta vez en español, para <WordAnimation />
         </h2>
 
         <div className="mt-8 md:mt-10">
@@ -41,19 +41,19 @@ export function Hero() {
             >
               <Button
                 variant="outline"
-                className="border-transparent h-10 px-5 dark:bg-[#1D1D1D] bg-[#F2F1EF] text-sm"
+                className="border-transparent h-9 px-4 dark:bg-[#1D1D1D] bg-[#F2F1EF] text-xs"
               >
                 Hablar ya
               </Button>
             </Link>
 
             <a href="https://notas.ai/pricing">
-              <Button className="h-10 px-4 text-sm">Empezar ahora</Button>
+              <Button className="h-9 px-4 text-xs">Empezar ahora</Button>
             </a>
           </div>
         </div>
 
-        <p className="text-xs text-[#707070] mt-4 font-mono">
+        <p className="text-xs text-[#707070] mt-4 font-mono text-center">
           Recibe una oferta de 49€/m, solo durante BETA.
         </p>
       </div>
