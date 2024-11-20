@@ -27,6 +27,7 @@ import {
   FileText,
   Inbox,
   TrendingUp,
+  Eraser,
   Users,
   Receipt,
   SquarePen,
