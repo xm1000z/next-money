@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { HeroImage } from "@/public/chat.png";
+import { HeroImage } from "./hero-image";
 import { Metrics } from "./metrics";
 import { WordAnimation } from "./word-animation";
 
