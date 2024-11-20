@@ -46,8 +46,8 @@ export const dashboardConfig: DashboardConfig = {
           external: true 
         },
         {
-          title: "PDF",
-          href: "https://pdf.notas.ai",
+          title: "Traductor",
+          href: "https://traductor.notas.ai",
           icon: "Users",
           rightIcon: "ExternalLink",
           external: true 

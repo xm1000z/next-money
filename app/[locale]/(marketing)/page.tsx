@@ -31,7 +31,7 @@ export default function IndexPage({ params: { locale } }: Props) {
       {/* <BentoGrid /> */}
       {/* <InfoLanding data={infos[0]} reverse={true} /> */}
       {/* <InfoLanding data={infos[1]} /> */}
-      <Screens />
+      {/* <Screens /> */}
       {/*<Features />*/}
       <SectionOne />
       <SectionTwo />

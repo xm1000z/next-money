@@ -26,12 +26,12 @@ import {
   PaintBucket,
   FileText,
   Inbox,
-  Files,
-  LineChart,
+  TrendingUp,
+  Users,
   Receipt,
-  LayoutDashboard,
+  SquarePen,
   Cpu,
-  Settings,
+  Bell,
   Component,
   Github,
   MessageSquare
@@ -104,33 +104,33 @@ export function Header() {
         {
           path: "https://writer.notas.ai",
           title: "Notas",
-          icon: <LayoutDashboard size={20} />,
+          icon: <SquarePen size={20} />,
         },
         {
           path: "https://chat.notas.ai",
           title: "Chat",
-          icon: <Inbox size={20} />,
+          icon: <MessageSquare size={20} />,
         },
         {
           path: "https://search.notas.ai",
           title: "Search",
-          icon: <Files size={20} />,
+          icon: <TrendingUp size={20} />,
         },
         {
           path: "https://traductor.notas.ai",
           title: "Traductor",
-          icon: <LineChart size={20} />,
+          icon: <Users size={20} />,
         },
         {
-          path: "#muy-pronto",
-          title: "Lisa",
-          icon: <Receipt size={20} />,
+          path: "https://studio.notas.ai",
+          title: "Studio",
+          icon: <Eraser size={20} />,
         },
       ],
     },
     {
       title: "Precios",
-      path: "https://notas.ai/pricing",
+      path: "/pricing",
     },
     {
       title: "Roadmap",
@@ -149,14 +149,14 @@ export function Header() {
       ),
       children: [
         {
-          path: "https://notas.ai/about",
-          title: "Nosotros",
-          icon: <Settings size={20} />,
+          path: "/talk",
+          title: "Contactar",
+          icon: <Cpu size={20} />,
         },
         {
           path: "https://notas.ai/beta",
           title: "Beta",
-          icon: <Settings size={20} />,
+          icon: <Bell size={20} />,
         },
         {
           path: "https://docs.notas.ai",
@@ -164,8 +164,8 @@ export function Header() {
           icon: <FileText size={20} />,
         },
         {
-          path: "https://x.com/notas_ia",
-          title: "Unirse a la comunidad",
+          path: "/startup",
+          title: "Métricas",
           icon: <MessageSquare size={20} />,
         },
       ],
@@ -188,7 +188,7 @@ export function Header() {
         <ContextMenu>
           <ContextMenuTrigger>
             <Link href="/">
-              <span className="sr-only">NotasAI Logo</span>
+              <span className="sr-only">NotasAI</span>
               <Image 
                 src="https://notas.ai/white.png" 
                 alt="NotasAI"
@@ -349,7 +349,7 @@ export function Header() {
         >
           <div className="mt-4 flex justify-between p-3 px-4 relative ml-[1px]">
             <button type="button" onClick={handleToggleMenu}>
-              <span className="sr-only">NotasAI Logo</span>
+              <span className="sr-only">NotasAI</span>
               <Image 
                 src="https://notas.ai/white.png" 
                 alt="NotasAI"
