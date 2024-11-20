@@ -42,13 +42,17 @@ export default async function HeroLanding() {
           </Button>
         </Link>
 
-        <h1 style={{ fontFamily: 'Apple Garamond' }} className="text-balance font-urban text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
+        <h1 style={{ fontFamily: 'Apple Garamond' }} className="text-balance font-urban text-5xl tracking-tight sm:text-6xl md:text-7xl lg:text-[76px]">
           <span>{t("subtitle")}</span>
           <br />
           <span style={{ fontFamily: 'Apple Garamond' }}>
             {t("title")}
           </span>
         </h1>
+
+        <h2 className="text-lg mb-2" style={{ marginTop: '-10px' }}>
+          {t("subtitle")}
+        </h2>
 
         <p
           className="max-w-2xl text-balance leading-normal text-muted-foreground sm:text-xl sm:leading-8"
