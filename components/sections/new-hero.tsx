@@ -6,12 +6,12 @@ import { WordAnimation } from "./word-animation";
 
 export function Hero() {
   return (
-    <section className="mt-[60px] lg:mt-[180px] min-h-[530px] relative lg:h-[calc(100vh-300px)] overflow-hidden">
+    <section className="mt-[60px] lg:mt-[180px] min-h-[600px] relative lg:h-[calc(100vh-300px)] overflow-hidden">
       <div className="flex flex-col px-4 md:px-8">
         <Link href="https://x.com/notas_ia">
           <Button
             variant="outline"
-            className="rounded-full border-border flex space-x-2 items-center"
+            className="rounded-full border-border flex space-x-2 items-center text-sm"
           >
             <span className="font-mono text-xs">Introducimos BETA</span>
             <svg
@@ -28,7 +28,7 @@ export function Hero() {
           </Button>
         </Link>
 
-        <h2 className="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[24px] md:text-[36px] font-medium">
+        <h2 className="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[30px] font-medium">
         Revolucionemos la Inteligencia Artificial, esta vez en español, para <WordAnimation />
         </h2>
 
@@ -41,14 +41,14 @@ export function Hero() {
             >
               <Button
                 variant="outline"
-                className="border-transparent h-11 px-6 dark:bg-[#1D1D1D] bg-[#F2F1EF]"
+                className="border-transparent h-10 px-5 dark:bg-[#1D1D1D] bg-[#F2F1EF] text-sm"
               >
                 Hablar ya
               </Button>
             </Link>
 
             <a href="https://notas.ai/pricing">
-              <Button className="h-11 px-5">Empezar ahora</Button>
+              <Button className="h-10 px-4 text-sm">Empezar ahora</Button>
             </a>
           </div>
         </div>
