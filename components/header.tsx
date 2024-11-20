@@ -150,8 +150,8 @@ export function Header() {
       ),
       children: [
         {
-          path: "/talk",
-          title: "Contactar",
+          path: "/startup",
+          title: "Métricas",
           icon: <Cpu size={20} />,
         },
         {
@@ -165,8 +165,8 @@ export function Header() {
           icon: <FileText size={20} />,
         },
         {
-          path: "/startup",
-          title: "Métricas",
+          path: "/talk",
+          title: "Contactar",
           icon: <MessageSquare size={20} />,
         },
       ],
