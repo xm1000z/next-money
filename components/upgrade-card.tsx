@@ -6,7 +6,6 @@ import { Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { getTotalCredits } from '@/db/queries/totalCredits'
 
 export function UpgradeCard() {
   const [remainingCredits, setRemainingCredits] = useState(0)
@@ -20,7 +19,7 @@ export function UpgradeCard() {
       const response = await fetch('/api/account')
       const data = await response.json()
       setRemainingCredits(data.credit || 0)
-      setTotalCredits(await getTotalCredits(data.userId))
+      setTotalCredits(data.total || 0)
       setIsLoading(false)
     }
     fetchCredits()
