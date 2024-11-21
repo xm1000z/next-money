@@ -5,6 +5,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Menu, PanelLeftClose, PanelRightClose, ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { UpgradeCard } from "@/components/upgrade-card"
 import { Icons } from "@/components/shared/icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -176,7 +177,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
               </nav>
 
               <div className="mt-auto xl:p-4">
-                {/* {isSidebarExpanded ? <UpgradeCard /> : null} */}
+                {isSidebarExpanded ? <UpgradeCard /> : null}
               </div>
             </div>
           </aside>
@@ -252,7 +253,7 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
                   </section>
                 ))}
 
-                <div className="mt-auto">{/* <UpgradeCard /> */}</div>
+                <div className="mt-auto"><UpgradeCard /></div>
               </nav>
             </div>
           </ScrollArea>

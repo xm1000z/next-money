@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 
-export function CreditCard() {
+export function UpgradeCard() {
   const [remainingCredits, setRemainingCredits] = useState(0)
   const [totalCredits, setTotalCredits] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
