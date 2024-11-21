@@ -176,12 +176,11 @@ model UserBilling {
 }
 
 model UserCredit {
-  id              Int      @id @default(autoincrement())
-  userId          String   @map(name: "user_id") @db.VarChar(200)
-  credit          Int
-  subscriptionId  String?  @map(name: "subscription_id") @db.VarChar(200)
-  createdAt       DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
-  updatedAt       DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  id        Int      @id @default(autoincrement())
+  userId    String   @map(name: "user_id") @db.VarChar(200)
+  credit    Int
+  createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
 
   @@map(name: "user_credit")
 }
