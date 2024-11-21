@@ -34,7 +34,7 @@ export function UpgradeCard() {
       </h3>
       <Progress value={(remainingCredits / totalCredits) * 100} className="h-2" />
       <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-        {remainingCredits} de {totalCredits} créditos restantes
+        {remainingCredits} créditos restantes
       </p>
     </div>
   );

@@ -48,7 +48,7 @@ export default function DashboardLayout({
   }));
 
   return (
-    <MaxWidthWrapper className="max-w-[1650px] px-0">
+    <MaxWidthWrapper className="px-0">
       <div className="relative flex min-h-screen w-full">
         <DashboardSidebar links={filteredLinks} />
 
