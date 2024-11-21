@@ -91,7 +91,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                       className="stroke-muted-foreground"
                     />
                   )}
-                  <span className="sr-only">Toggle Sidebar</span>
+                  <span className="sr-only">Toggle</span>
                 </Button>
               </div>
 
@@ -121,9 +121,9 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                 target={item.external ? "_blank" : undefined}
                                 rel={item.external ? "noopener noreferrer" : undefined}
                                 className={cn(
-                                  "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-muted",
+                                  "flex items-center gap-3 p-2 text-sm font-medium hover:bg-muted",
                                   path === item.href
-                                    ? "bg-muted"
+                                    ? "bg-muted border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
                                     : "text-muted-foreground hover:text-accent-foreground",
                                   item.disabled &&
                                     "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground",
@@ -151,7 +151,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     className={cn(
                                       "flex items-center gap-3 py-2 text-sm font-medium hover:bg-muted",
                                       path === item.href
-                                        ? "bg-muted"
+                                        ? "bg-muted border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
                                         : "text-muted-foreground hover:text-accent-foreground",
                                       item.disabled &&
                                         "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-muted-foreground",
