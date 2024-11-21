@@ -22,10 +22,13 @@ export default function UserPoints() {
       const data = await response.json();
       return data;
     },
-    onSuccess: (data) => {
-      setCredit(data.credit);
-    },
   });
+
+  useEffect(() => {
+    if (data) {
+      setCredit(data.credit);
+    }
+  }, [data]);
 
   return (
     <div className="flex items-center gap-1 text-[12px] font-medium text-muted-foreground">
