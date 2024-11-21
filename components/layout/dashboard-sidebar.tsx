@@ -150,7 +150,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     target={item.external ? "_blank" : undefined}
                                     rel={item.external ? "noopener noreferrer" : undefined}
                                     className={cn(
-                                      "flex items-center gap-3 text-sm font-medium hover:bg-muted",
+                                      "flex items-center gap-3 py-2 ml-2 mr-2 text-sm font-medium hover:bg-muted",
                                       path === item.href
                                         ? "bg-muted border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
                                         : "text-muted-foreground hover:text-accent-foreground",
@@ -159,7 +159,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     )}
                                   >
                                     <span className="flex size-full items-center justify-center">
-                                      <Icon className="size-6" />
+                                      <Icon className="size-5" />
                                     </span>
                                   </Link>
                                 </TooltipTrigger>
