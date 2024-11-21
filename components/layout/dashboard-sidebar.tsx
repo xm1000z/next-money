@@ -150,7 +150,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     target={item.external ? "_blank" : undefined}
                                     rel={item.external ? "noopener noreferrer" : undefined}
                                     className={cn(
-                                      "flex items-center gap-4 py-3 px-4 text-base font-medium hover:bg-muted",
+                                      "flex items-center gap-4 py-2.5 px-2 text-sm font-medium hover:bg-muted",
                                       path === item.href
                                         ? "bg-muted border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
                                         : "text-muted-foreground hover:text-accent-foreground",
