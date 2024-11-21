@@ -239,7 +239,7 @@ export default function Playground({
 
   return (
     <div>
-      <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow">
+      <div className="overflow-hidden rounded-[0.5rem] bg-background shadow">
         <div className="container h-full p-6">
           <div className="relative">
             <div className="flex flex-col space-y-4">

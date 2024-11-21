@@ -212,7 +212,7 @@ export default function Playground({
   };
 
   return (
-    <div className="overflow-hidden border bg-background shadow">
+    <div className="overflow-hidden bg-background shadow">
       <div className="container h-full p-6">
         <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_240px]">
           <div className="flex-col space-y-4 sm:flex md:order-2">
