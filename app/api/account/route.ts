@@ -6,6 +6,7 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { AccountHashids } from "@/db/dto/account.dto";
 import { getUserCredit } from "@/db/queries/account";
 import { redis } from "@/lib/redis";
+import { getTotalCredits } from "@/db/queries/totalCredits";
 
 export async function GET(req: NextRequest) {
   console.time("stat");
@@ -31,11 +32,13 @@ export async function GET(req: NextRequest) {
   //   });
   // }
 
-  const accountInfo = await getUserCredit(user.id);
+  const remainingCredits = await getUserCredit(user.id);
+  const totalCredits = await getTotalCredits(user.id);
   console.timeEnd("stat");
 
   return NextResponse.json({
-    ...accountInfo,
-    id: AccountHashids.encode(accountInfo.id),
+    credit: remainingCredits,
+    total: totalCredits,
+    id: AccountHashids.encode(remainingCredits.id),
   });
 }

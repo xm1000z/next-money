@@ -283,7 +283,7 @@
     }
   },
   "GiftCode": {
-    "title": "Canje de Código de Regalo",
+    "title": "Canjear Código de Regalo",
     "text": "Introduce tu código de regalo para canjear créditos.",
     "form": {
       "placeholder": "Introduce tu código de regalo",
