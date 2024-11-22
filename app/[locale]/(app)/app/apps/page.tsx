@@ -61,9 +61,9 @@ const AppsPage = () => {
           key={app.name}
           className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-4 shadow-md flex flex-col"
         >
-          <div className="flex flex-col items-start mb-2">
-            <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-2" />
-            <h2 className="text-md text-left">
+          <div className="flex flex-col items-start mb-4">
+            <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-3" />
+            <h2 className="text-sm text-left">
               {app.name}
               {app.status === "Coming soon" && (
                 <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Coming soon</span>
