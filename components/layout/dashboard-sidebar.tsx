@@ -104,6 +104,7 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                   >
                     {isSidebarExpanded ? (
                       <p className="text-xs text-black dark:text-white">
+                        {section.title}
                       </p>
                     ) : (
                       <div className="h-4" />
@@ -121,12 +122,12 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                 target={item.external ? "_blank" : undefined}
                                 rel={item.external ? "noopener noreferrer" : undefined}
                                 className={cn(
-                                  "flex items-center gap-3 p-2 text-sm font-medium hover:bg-black dark:bg-white",
+                                  "flex items-center gap-3 p-2 text-sm font-medium hover:bg-muted",
                                   path === item.href
-                                    ? "bg-black dark:bg-white border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
+                                    ? "bg-muted border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
                                     : "text-black dark:text-white hover:text-accent-foreground",
                                   item.disabled &&
-                                    "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black dark:text-white",
+                                    "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black hover:dark:text-white",
                                 )}
                               >
                                 <Icon className="size-5" />
@@ -151,10 +152,10 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     className={cn(
                                       "flex items-center gap-3 py-3 text-sm font-medium hover:bg-[#ececec] hover:border border-[rgba(27, 27, 27, 0.18)] dark:hover:bg-[#1b1b1b] dark:hover:border-[rgba(185, 185, 185, 0.17)]",
                                       path === item.href
-                                        ? "bg-black dark:bg-white border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
+                                        ? "border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
                                         : "text-black dark:text-white hover:text-accent-foreground",
                                       item.disabled &&
-                                        "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black dark:text-white",
+                                        "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black hover:dark:text-white",
                                     )}
                                   >
                                     <span className="flex size-full items-center justify-center">
@@ -229,12 +230,12 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
                               key={item.title}
                               href={item.disabled ? "#" : item.href}
                               className={cn(
-                                "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-black dark:bg-white",
+                                "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-muted",
                                 path === item.href
-                                  ? "bg-black dark:bg-white"
+                                  ? "bg-muted"
                                   : "text-black dark:text-white hover:text-accent-foreground",
                                 item.disabled &&
-                                  "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black dark:text-white",
+                                  "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black hover:dark:text-white",
                               )}
                             >
                               <Icon className="size-5" />
@@ -262,6 +263,6 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
   }
 
   return (
-    <div className="flex size-9 animate-pulse rounded-lg bg-black dark:bg-white md:hidden" />
+    <div className="flex size-9 animate-pulse rounded-lg bg-muted md:hidden" />
   );
 }
