@@ -66,14 +66,14 @@ const AppsPage = () => {
             <h2 className="text-sm font-medium text-left">
               {app.name}
               {app.status === "Coming soon" && (
-                <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Coming soon</span>
+                <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Muy Pronto</span>
               )}
             </h2>
           </div>
           <p className="text-[12px] text-[#878787] mb-4 flex-grow">{app.description}</p>
           <div className="flex w-full space-x-2">
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-[#2C2C2C] transition">Details</button>
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-[#2C2C2C] transition">Install</button>
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-accent transition">Detalles</button>
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-accent transition">Visitar</button>
           </div>
         </div>
       ))}
