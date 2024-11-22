@@ -63,7 +63,7 @@ const AppsPage = () => {
         >
           <div className="flex flex-col items-start mb-4">
             <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-3" />
-            <h2 className="text-sm text-left">
+            <h2 className="text-sm font-medium text-left">
               {app.name}
               {app.status === "Coming soon" && (
                 <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Coming soon</span>
