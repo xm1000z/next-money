@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import notas from "@/public/apple-touch-icon.png"
+import canvas from "@/public/apple-touch-icon.png"
 import chat from "@/public/apple-touch-icon.png"
 import search from "@/public/apple-touch-icon.png"
 import traductor from "@/public/apple-touch-icon.png"
