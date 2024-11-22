@@ -10,12 +10,17 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: "App",
+      title: "",
       items: [
         {
           title: "Index",
           href: "/app",
           icon: "HomeIcon",
+        },
+        {
+          title: "Apps",
+          href: "/apps",
+          icon: "LayoutGrid",
         },
         {
           title: "Notas",

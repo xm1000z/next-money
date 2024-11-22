@@ -28,6 +28,12 @@ const apps = [
     status: "Available",
   },
   {
+    name: "Studio",
+    logo: "@/public/apple-touch-icon.png",
+    description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
+    status: "Coming soon",
+  },
+  {
     name: "PDF",
     logo: "@/public/apple-touch-icon.png",
     description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
