@@ -1,41 +1,48 @@
 "use client";
 
 import React from "react";
+import notas from "@/public/apple-touch-icon.png"
+import chat from "@/public/apple-touch-icon.png"
+import search from "@/public/apple-touch-icon.png"
+import traductor from "@/public/apple-touch-icon.png"
+import studio from "@/public/apple-touch-icon.png"
+import pdf from "@/public/apple-touch-icon.png"
+
 
 const apps = [
   {
     name: "Notas",
-    logo: "@/public/apple-touch-icon.png",
+    logo: {notas},
     description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
     status: "Coming soon",
   },
   {
     name: "Chat",
-    logo: "@/public/apple-touch-icon.png",
+    logo: {chat},
     description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
     status: "Available",
   },
   {
     name: "Search",
-    logo: "@/public/apple-touch-icon.png",
+    logo: {search},
     description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
     status: "Available",
   },
   {
     name: "Traductor",
-    logo: "@/public/apple-touch-icon.png",
+    logo: {traductor},
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Available",
   },
   {
     name: "Studio",
-    logo: "@/public/apple-touch-icon.png",
+    logo: {studio},
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Coming soon",
   },
   {
     name: "PDF",
-    logo: "@/public/apple-touch-icon.png",
+    logo: {pdf},
     description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
     status: "Coming soon",
   },
