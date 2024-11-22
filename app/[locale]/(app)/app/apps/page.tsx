@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import notas from "@/public/apple-touch-icon.png"
+import canvas from "@/public/apple-touch-icon.png"
 import chat from "@/public/apple-touch-icon.png"
 import search from "@/public/apple-touch-icon.png"
 import traductor from "@/public/apple-touch-icon.png"
@@ -11,8 +11,8 @@ import pdf from "@/public/apple-touch-icon.png"
 
 const apps = [
   {
-    name: "Notas",
-    logo: notas,
+    name: "Canvas",
+    logo: canvas,
     description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
     status: "Coming soon",
   },
