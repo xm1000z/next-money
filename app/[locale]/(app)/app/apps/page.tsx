@@ -57,18 +57,19 @@ const AppsPage = () => {
           >
             <div className="flex items-center mb-2">
               <div className="h-8 w-8 mr-2">
-                {/* Aquí puedes agregar un ícono o imagen */}
                 <span className="text-2xl">{app.name.charAt(0)}</span>
               </div>
-              <h2 className="text-lg font-semibold">{app.name}</h2>
+              <h2 className="text-lg font-semibold flex items-center">
+                {app.name}
+                {app.status === "Coming soon" && (
+                  <span className="text-red-500 text-xs font-semibold ml-2">Coming soon</span>
+                )}
+              </h2>
             </div>
-            <p className="text-sm mb-4">{app.description}</p>
+            <p className="text-sm mb-2">{app.description}</p>
             <div className="flex justify-between">
-              <span className="text-xs text-gray-400">{app.status}</span>
-              <div className="flex space-x-2">
-                <button className="bg-blue-600 text-white px-2 py-1 rounded">Details</button>
-                <button className="bg-green-600 text-white px-2 py-1 rounded">Install</button>
-              </div>
+              <button className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-700">Details</button>
+              <button className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-700">Install</button>
             </div>
           </div>
         ))}
