@@ -47,33 +47,30 @@ const apps = [
 
 const AppsPage = () => {
   return (
-    <div className="p-6 bg-gray-900 text-white">
-      <h1 className="text-2xl font-bold mb-6">Integrations</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {apps.map((app) => (
           <div
             key={app.name}
-            className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] p-4 rounded-lg shadow-md"
+            className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] p-4 rounded-lg shadow-md flex flex-col"
           >
             <div className="flex items-center mb-2">
-              <div className="h-8 w-8 mr-2">
+              <div className="pt-6 px-6 h-16 flex items-center justify-between">
                 <span className="text-2xl">{app.name.charAt(0)}</span>
               </div>
               <h2 className="text-lg font-semibold flex items-center">
                 {app.name}
                 {app.status === "Coming soon" && (
-                  <span className="text-red-500 text-xs font-semibold ml-2">Coming soon</span>
+                  <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-3 py-1 rounded-full font-mono">Coming soon</span>
                 )}
               </h2>
             </div>
             <p className="text-sm mb-2">{app.description}</p>
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-auto">
               <button className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-700">Details</button>
               <button className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-700">Install</button>
             </div>
           </div>
         ))}
-      </div>
     </div>
   );
 };
