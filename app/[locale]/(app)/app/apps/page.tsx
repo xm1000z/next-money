@@ -55,7 +55,7 @@ const apps = [
 
 const AppsPage = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
       {apps.map((app) => (
         <div
           key={app.name}
@@ -66,14 +66,14 @@ const AppsPage = () => {
             <h2 className="text-md text-left">
               {app.name}
               {app.status === "Coming soon" && (
-                <span className="text-[#878787] bg-[#F2F1EF] text-[9px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Coming soon</span>
+                <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Coming soon</span>
               )}
             </h2>
           </div>
-          <p className="text-[10px] text-[#878787] mb-4">{app.description}</p>
+          <p className="text-[12px] text-[#878787] mb-5">{app.description}</p>
           <div className="flex w-full space-x-2">
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-gray-900 transition">Details</button>
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-gray-900 transition">Install</button>
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-[#2C2C2C] transition">Details</button>
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-[#2C2C2C] transition">Install</button>
           </div>
         </div>
       ))}
