@@ -54,18 +54,18 @@ const AppsPage = () => {
       {apps.map((app) => (
         <div
           key={app.name}
-          className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-4 shadow-md flex flex-col h-full"
+          className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-6 shadow-md flex flex-col h-full"
         >
           <div className="flex flex-col items-start mb-4">
-            <img src={app.logo.src} alt={`${app.name} logo`} className="h-16 mb-3" />
-            <h2 className="text-sm font-medium text-left">
+            <img src={app.logo} alt={`${app.name} logo`} className="h-12 mb-4" />
+            <h2 className="text-base font-semibold text-left">
               {app.name}
               {app.status === "Coming soon" && (
                 <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Muy Pronto</span>
               )}
             </h2>
           </div>
-          <p className="text-[12px] text-[#878787] mb-4 flex-grow">{app.description}</p>
+          <p className="text-[12px] text-[#878787] mb-6 flex-grow">{app.description}</p>
           <div className="flex w-full space-x-2">
             <button
               className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 cursor-not-allowed' : 'text-white hover:bg-accent'} px-3 py-1 text-sm rounded-none transition`}
@@ -77,7 +77,7 @@ const AppsPage = () => {
               className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 cursor-not-allowed' : 'text-white hover:bg-accent'} px-3 py-1 text-sm rounded-none transition`}
               disabled={app.status === "Coming soon"}
             >
-              Visitar
+              Acceder
             </button>
           </div>
         </div>
