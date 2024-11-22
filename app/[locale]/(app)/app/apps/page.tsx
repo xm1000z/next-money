@@ -60,7 +60,7 @@ const AppsPage = () => {
               <h2 className="text-lg font-semibold flex items-center">
                 {app.name}
                 {app.status === "Coming soon" && (
-                  <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-3 py-1 rounded-full font-mono">Coming soon</span>
+                  <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-3 py-1 rounded-full font-mono ml-2">Coming soon</span>
                 )}
               </h2>
             </div>
