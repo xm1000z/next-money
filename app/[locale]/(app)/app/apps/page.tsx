@@ -5,31 +5,31 @@ import React from "react";
 const apps = [
   {
     name: "Notas",
-    logo: "/path/to/slack-logo.png",
+    logo: "@/public/apple-touch-icon.png",
     description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
     status: "Coming soon",
   },
   {
     name: "Chat",
-    logo: "/path/to/raycast-logo.png",
+    logo: "@/public/apple-touch-icon.png",
     description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
     status: "Available",
   },
   {
     name: "Search",
-    logo: "/path/to/quickbooks-logo.png",
+    logo: "@/public/apple-touch-icon.png",
     description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
     status: "Available",
   },
   {
     name: "Traductor",
-    logo: "/path/to/xero-logo.png",
+    logo: "@/public/apple-touch-icon.png",
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Available",
   },
   {
     name: "PDF",
-    logo: "/path/to/calcom-logo.png",
+    logo: "@/public/apple-touch-icon.png",
     description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
     status: "Coming soon",
   },
