@@ -54,8 +54,18 @@ const AppsPage = () => {
           </div>
           <p className="text-[12px] text-[#878787] mb-4 flex-grow">{app.description}</p>
           <div className="flex w-full space-x-2">
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-accent transition">Detalles</button>
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-accent transition">Visitar</button>
+            <button
+              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 cursor-not-allowed' : 'text-white hover:bg-accent'} px-3 py-1 text-sm rounded-none transition`}
+              disabled={app.status === "Coming soon"}
+            >
+              Detalles
+            </button>
+            <button
+              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] ${app.status === "Coming soon" ? 'text-gray-300 cursor-not-allowed' : 'text-white hover:bg-accent'} px-3 py-1 text-sm rounded-none transition`}
+              disabled={app.status === "Coming soon"}
+            >
+              Visitar
+            </button>
           </div>
         </div>
       ))}
