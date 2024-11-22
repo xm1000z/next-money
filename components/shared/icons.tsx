@@ -14,6 +14,7 @@ import {
   HelpCircle,
   History,
   HomeIcon,
+  LayoutGrid,
   Image,
   Languages,
   Laptop,
@@ -69,6 +70,7 @@ export const Icons = {
   History,
   Languages,
   HomeIcon,
+  LayoutGrid,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
