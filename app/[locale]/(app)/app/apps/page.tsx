@@ -4,51 +4,33 @@ import React from "react";
 
 const apps = [
   {
-    name: "Slack",
+    name: "Notas",
     logo: "/path/to/slack-logo.png",
     description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
+    status: "Coming soon",
+  },
+  {
+    name: "Chat",
+    logo: "/path/to/raycast-logo.png",
+    description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
     status: "Available",
   },
   {
-    name: "Raycast",
-    logo: "/path/to/raycast-logo.png",
-    description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
-    status: "Coming soon",
-  },
-  {
-    name: "QuickBooks",
+    name: "Search",
     logo: "/path/to/quickbooks-logo.png",
     description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
-    status: "Coming soon",
+    status: "Available",
   },
   {
-    name: "Xero",
+    name: "Traductor",
     logo: "/path/to/xero-logo.png",
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
-    status: "Coming soon",
+    status: "Available",
   },
   {
-    name: "Cal.com",
+    name: "PDF",
     logo: "/path/to/calcom-logo.png",
     description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
-    status: "Coming soon",
-  },
-  {
-    name: "Fortnox",
-    logo: "/path/to/fortnox-logo.png",
-    description: "By seamlessly integrating with Fortnox, you gain the ability to effortlessly synchronize every transaction and attachment.",
-    status: "Coming soon",
-  },
-  {
-    name: "Visma",
-    logo: "/path/to/visma-logo.png",
-    description: "Integrating with Visma allows you to synchronize transactions and attachments, neatly organizing them within your bookkeeping software.",
-    status: "Coming soon",
-  },
-  {
-    name: "Zapier",
-    logo: "/path/to/zapier-logo.png",
-    description: "Zapier lets you connect Midday to other apps and automate powerful workflows.",
     status: "Coming soon",
   },
 ];
