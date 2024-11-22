@@ -19,7 +19,7 @@ export const dashboardConfig: DashboardConfig = {
         },
         {
           title: "Apps",
-          href: "/apps",
+          href: "/app/apps",
           icon: "LayoutGrid",
         },
         {
