@@ -57,7 +57,7 @@ const AppsPage = () => {
           className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-6 shadow-md flex flex-col h-full"
         >
           <div className="flex flex-col items-start mb-4">
-            <img src={app.logo} alt={`${app.name} logo`} className="h-12 mb-4" />
+            <img src={app.logo.src} alt={`${app.name} logo`} className="h-11 mb-4" />
             <h2 className="text-base font-semibold text-left">
               {app.name}
               {app.status === "Coming soon" && (
