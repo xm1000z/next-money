@@ -56,36 +56,30 @@ const apps = [
 const AppsPage = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-        {apps.map((app) => (
-          <div
-            key={app.name}
-            className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-4 shadow-md flex flex-col"
-          >
-            <div className="flex flex-col items-center mb-2">
-              <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-2" />
-              <h2 className="text-lg font-semibold text-center">
-                {app.name}
-                {app.status === "Coming soon" && (
-                  <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-3 py-1 rounded-full font-mono ml-2">Coming soon</span>
-                )}
-              </h2>
-            </div>
-            <p className="text-sm mb-2">{app.description}</p>
-            <div className="flex-grow"></div>
-            <div className="flex w-full space-x-2">
-              <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-600">Details</button>
-              <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-600">Install</button>
-            </div>
+      {apps.map((app) => (
+        <div
+          key={app.name}
+          className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] p-4 shadow-md flex flex-col"
+        >
+          <div className="flex flex-col items-center mb-2">
+            <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-2" />
+            <h2 className="text-lg font-semibold text-center">
+              {app.name}
+              {app.status === "Coming soon" && (
+                <span className="text-[#878787] bg-[#F2F1EF] text-[9px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Coming soon</span>
+              )}
+            </h2>
           </div>
-        ))}
+          <p className="text-sm mb-2">{app.description}</p>
+          <div className="flex-grow"></div>
+          <div className="flex w-full space-x-2">
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-3 py-1 text-sm rounded-none hover:bg-gray-600">Details</button>
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-3 py-1 text-sm rounded-none hover:bg-gray-600">Install</button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
-
-export default AppsPage;
-
-
-export default AppsPage;
-
 
 export default AppsPage;
