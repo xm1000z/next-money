@@ -104,7 +104,6 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                   >
                     {isSidebarExpanded ? (
                       <p className="text-xs text-black dark:text-white">
-                        {section.title}
                       </p>
                     ) : (
                       <div className="h-4" />
