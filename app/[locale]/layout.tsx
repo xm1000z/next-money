@@ -73,15 +73,7 @@ export function generateStaticParams() {
 
 const localeMap = {
   en: enUS,
-  zh: zhCN,
-  tw: zhTW,
-  ja: jaJP,
-  ko: koKR,
-  fr: frFR,
   es: esES,
-  de: deDE,
-  pt: ptPT,
-  ar: arSA,
 };
 
 export default async function RootLayout({
