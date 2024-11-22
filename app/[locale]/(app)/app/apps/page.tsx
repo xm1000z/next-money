@@ -70,8 +70,7 @@ const AppsPage = () => {
               )}
             </h2>
           </div>
-          <p className="text-xs text-[#878787] mb-2">{app.description}</p>
-          <div className="flex-grow"></div>
+          <p className="text-[10px] text-[#878787] mb-4">{app.description}</p>
           <div className="flex w-full space-x-2">
             <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-gray-900 transition">Details</button>
             <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-gray-900 transition">Install</button>
