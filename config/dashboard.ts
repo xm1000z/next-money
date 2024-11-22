@@ -10,7 +10,7 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: "",
+      title: "App",
       items: [
         {
           title: "Index",

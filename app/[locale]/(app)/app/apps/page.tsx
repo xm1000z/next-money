@@ -12,37 +12,37 @@ import pdf from "@/public/apple-touch-icon.png"
 const apps = [
   {
     name: "Notas",
-    logo: {notas},
+    logo: notas,
     description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
     status: "Coming soon",
   },
   {
     name: "Chat",
-    logo: {chat},
+    logo: chat,
     description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
     status: "Available",
   },
   {
     name: "Search",
-    logo: {search},
+    logo: search,
     description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
     status: "Available",
   },
   {
     name: "Traductor",
-    logo: {traductor},
+    logo: traductor,
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Available",
   },
   {
     name: "Studio",
-    logo: {studio},
+    logo: studio,
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Coming soon",
   },
   {
     name: "PDF",
-    logo: {pdf},
+    logo: pdf,
     description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
     status: "Coming soon",
   },
@@ -57,7 +57,7 @@ const AppsPage = () => {
           className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-4 shadow-md flex flex-col h-full"
         >
           <div className="flex flex-col items-start mb-4">
-            <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-3" />
+            <img src={app.logo.src} alt={`${app.name} logo`} className="h-16 mb-3" />
             <h2 className="text-sm font-medium text-left">
               {app.name}
               {app.status === "Coming soon" && (
@@ -74,7 +74,7 @@ const AppsPage = () => {
               Detalles
             </button>
             <button
-              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] ${app.status === "Coming soon" ? 'text-gray-300 cursor-not-allowed' : 'text-white hover:bg-accent'} px-3 py-1 text-sm rounded-none transition`}
+              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 cursor-not-allowed' : 'text-white hover:bg-accent'} px-3 py-1 text-sm rounded-none transition`}
               disabled={app.status === "Coming soon"}
             >
               Visitar
