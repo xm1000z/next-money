@@ -59,7 +59,7 @@ const AppsPage = () => {
       {apps.map((app) => (
         <div
           key={app.name}
-          className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-4 shadow-md flex flex-col"
+          className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-4 shadow-md flex flex-col h-full"
         >
           <div className="flex flex-col items-start mb-4">
             <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-3" />
@@ -70,7 +70,7 @@ const AppsPage = () => {
               )}
             </h2>
           </div>
-          <p className="text-[12px] text-[#878787] mb-5">{app.description}</p>
+          <p className="text-[12px] text-[#878787] mb-4 flex-grow">{app.description}</p>
           <div className="flex w-full space-x-2">
             <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-[#2C2C2C] transition">Details</button>
             <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-[#2C2C2C] transition">Install</button>
