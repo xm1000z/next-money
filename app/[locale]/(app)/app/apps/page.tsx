@@ -51,7 +51,7 @@ const AppsPage = () => {
         {apps.map((app) => (
           <div
             key={app.name}
-            className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] p-4 rounded-lg shadow-md flex flex-col"
+            className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] p-4 shadow-md flex flex-col"
           >
             <div className="flex items-center mb-2">
               <div className="pt-6 px-6 h-16 flex items-center justify-between">
@@ -65,9 +65,10 @@ const AppsPage = () => {
               </h2>
             </div>
             <p className="text-sm mb-2">{app.description}</p>
-            <div className="flex justify-between mt-auto">
-              <button className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-700">Details</button>
-              <button className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-700">Install</button>
+            <div className="flex-grow"></div>
+            <div className="flex w-full space-x-2">
+              <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-600">Details</button>
+              <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-4 py-2 rounded-none hover:bg-gray-600">Install</button>
             </div>
           </div>
         ))}
