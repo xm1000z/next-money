@@ -61,8 +61,8 @@ const AppsPage = () => {
           key={app.name}
           className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-4 shadow-md flex flex-col"
         >
-          <div className="flex items-center mb-2">
-            <img src={app.logo} alt={`${app.name} logo`} className="h-16 mr-2" />
+          <div className="flex flex-col items-start mb-2">
+            <img src={app.logo} alt={`${app.name} logo`} className="h-16 mb-2" />
             <h2 className="text-lg font-semibold text-left">
               {app.name}
               {app.status === "Coming soon" && (
@@ -73,8 +73,8 @@ const AppsPage = () => {
           <p className="text-sm mb-2">{app.description}</p>
           <div className="flex-grow"></div>
           <div className="flex w-full space-x-2">
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-3 py-1 text-sm rounded-none hover:bg-gray-600 transition">Details</button>
-            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] text-white px-3 py-1 text-sm rounded-none hover:bg-gray-600 transition">Install</button>
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-gray-600 transition">Details</button>
+            <button className="flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent text-white px-3 py-1 text-sm rounded-none hover:bg-gray-600 transition">Install</button>
           </div>
         </div>
       ))}
