@@ -103,8 +103,8 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed right-4 top-16 w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
-      <div ref={sidebarRef}>
+    <div className="fixed right-4 top-16 w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg overflow-hidden transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C] flex flex-col">
+      <div ref={sidebarRef} className="flex-1 overflow-y-auto p-4">
         <img 
           src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
           alt={`${app.name} logo`} 
@@ -128,9 +128,9 @@ const Sidebar = ({ app, onClose }) => {
             </div>
           ))}
         </div>
-        <div className="mt-auto">
-          <button onClick={onClose} className="mt-4 text-red-500">Cerrar</button>
-        </div>
+      </div>
+      <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
+        <button onClick={onClose} className="text-red-500">Cerrar</button>
       </div>
     </div>
   );
