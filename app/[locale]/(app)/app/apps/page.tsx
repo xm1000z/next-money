@@ -111,7 +111,7 @@ const Sidebar = ({ app, onClose }) => {
           className="h-40 w-full object-contain mb-4 p-2"
         />
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{app.name}</h2>
-        <p className="text-gray-700 dark:text-gray-300">{app.description}</p>
+        <p className="text-gray-700 dark:text-[#878787] text-sm">{app.description}</p>
         <div className="mt-4">
           {app.additionalInfo.map((section) => (
             <div key={section.title} className="mb-2">
@@ -123,14 +123,15 @@ const Sidebar = ({ app, onClose }) => {
                 {openSections[section.title] ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
               </button>
               {openSections[section.title] && (
-                <p className="ml-4 text-sm text-gray-700 dark:text-gray-300">{section.content}</p>
+                <p className="text-sm text-gray-700 dark:text-[#878787]">{section.content}</p>
               )}
             </div>
           ))}
         </div>
       </div>
       <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
-        <button onClick={onClose} className="text-red-500">Cerrar</button>
+        <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
+        <button onClick={onClose} className="text-[10px] text-text-red-500">Cerrar</button>
       </div>
     </div>
   );
