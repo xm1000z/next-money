@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import canvas from "@/public/apple-touch-icon.png"
 import chat from "@/public/apple-touch-icon.png"
 import search from "@/public/apple-touch-icon.png"
 import traductor from "@/public/apple-touch-icon.png"
 import studio from "@/public/apple-touch-icon.png"
 import pdf from "@/public/apple-touch-icon.png"
-import arrowDown from "@/public/arrow-down.png"
-import arrowUp from "@/public/arrow-up.png"
 
 const apps = [
   {
@@ -117,11 +116,7 @@ const Sidebar = ({ app, onClose }) => {
                 className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center"
               >
                 {section.title}
-                <img
-                  src={openSections[section.title] ? arrowUp.src : arrowDown.src}
-                  alt="Toggle"
-                  className="ml-2 h-4 w-4"
-                />
+                {openSections[section.title] ? <ArrowUp className="ml-2 h-4 w-4" /> : <ArrowDown className="ml-2 h-4 w-4" />}
               </button>
               {openSections[section.title] && (
                 <p className="ml-4 text-sm text-gray-700 dark:text-gray-300">{section.content}</p>
