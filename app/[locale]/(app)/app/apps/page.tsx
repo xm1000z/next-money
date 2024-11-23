@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import canvas from "@/public/apple-touch-icon.png";
-import chat from "@/public/apple-touch-icon.png";
-import search from "@/public/apple-touch-icon.png";
-import traductor from "@/public/apple-touch-icon.png";
-import studio from "@/public/apple-touch-icon.png";
-import pdf from "@/public/apple-touch-icon.png";
+import canvas from "@/public/apple-touch-icon.png"
+import chat from "@/public/apple-touch-icon.png"
+import search from "@/public/apple-touch-icon.png"
+import traductor from "@/public/apple-touch-icon.png"
+import studio from "@/public/apple-touch-icon.png"
+import pdf from "@/public/apple-touch-icon.png"
 
 const apps = [
   {
@@ -31,7 +31,50 @@ const apps = [
       { title: "Integraciones", content: "Raycast, Slack." },
     ],
   },
-  // ... otras aplicaciones
+  {
+    name: "Search",
+    logo: search,
+    description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
+    status: "Available",
+    detailsUrl: "/search",
+    additionalInfo: [
+      { title: "Características", content: "Sincronización de transacciones, gestión de adjuntos." },
+      { title: "Integraciones", content: "QuickBooks, Google Drive." },
+    ],
+  },
+  {
+    name: "Traductor",
+    logo: traductor,
+    description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
+    status: "Available",
+    detailsUrl: "/traductor",
+    additionalInfo: [
+      { title: "Características", content: "Sincronización de transacciones, gestión de adjuntos." },
+      { title: "Integraciones", content: "Xero, Google Drive." },
+    ],
+  },
+  {
+    name: "Studio",
+    logo: studio,
+    description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
+    status: "Coming soon",
+    detailsUrl: "/studio",
+    additionalInfo: [
+      { title: "Características", content: "Sincronización de transacciones, gestión de adjuntos." },
+      { title: "Integraciones", content: "Xero, Google Drive." },
+    ],
+  },
+  {
+    name: "PDF",
+    logo: pdf,
+    description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
+    status: "Coming soon",
+    detailsUrl: "/pdf",
+    additionalInfo: [
+      { title: "Características", content: "Sincronización de horas, gestión de calendario." },
+      { title: "Integraciones", content: "Cal.com, Google Drive." },
+    ],
+  },
 ];
 
 const Sidebar = ({ app, onClose }) => {
@@ -127,7 +170,7 @@ const AppsPage = () => {
                   e.preventDefault(); // Evita la navegación si está "Coming soon"
                 }
               }}
-              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} px-3 py-1 text-sm rounded-none transition`}
+              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} flex items-center justify-center px-3 py-1 text-sm rounded-none transition`}
             >
               Acceder
             </a>
