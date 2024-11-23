@@ -128,7 +128,7 @@ const Sidebar = ({ app, onClose }) => {
             </div>
           ))}
         </div>
-        <button onClick={onClose} className="mt-4 text-xs text-red-500">Cerrar</button>
+        <button onClick={onClose} className="mt-4 text-[12px] text-red-500">Cerrar</button>
       </div>
     </div>
   );
