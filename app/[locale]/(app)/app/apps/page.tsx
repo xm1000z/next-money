@@ -102,21 +102,21 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed right-0 top-0 w-1/4 h-full bg-white shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0">
+    <div className="fixed right-0 top-0 w-1/4 h-full bg-white dark:bg-gray-800 shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0">
       <div ref={sidebarRef}>
-        <h2 className="text-lg font-semibold">{app.name}</h2>
-        <p>{app.description}</p>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{app.name}</h2>
+        <p className="text-gray-700 dark:text-gray-300">{app.description}</p>
         <div className="mt-4">
           {app.additionalInfo.map((section) => (
             <div key={section.title} className="mb-2">
               <button
                 onClick={() => toggleSection(section.title)}
-                className="text-left w-full font-semibold"
+                className="text-left w-full font-semibold text-gray-900 dark:text-white"
               >
                 {section.title}
               </button>
               {openSections[section.title] && (
-                <p className="ml-4 text-sm">{section.content}</p>
+                <p className="ml-4 text-sm text-gray-700 dark:text-gray-300">{section.content}</p>
               )}
             </div>
           ))}
@@ -147,7 +147,7 @@ const AppsPage = () => {
         >
           <div className="flex flex-col items-start mb-4">
             <img src={app.logo.src} alt={`${app.name} logo`} className="h-11 mb-4" />
-            <h2 className="text-base font-semibold text-left">
+            <h2 className="text-base font-semibold text-left text-gray-900 dark:text-white">
               {app.name}
               {app.status === "Coming soon" && (
                 <span className="text-[#878787] bg-[#F2F1EF] text-[10px] dark:bg-[#1D1D1D] px-2 py-1 rounded-full font-mono ml-2">Muy Pronto</span>
