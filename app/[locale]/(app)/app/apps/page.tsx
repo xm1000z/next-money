@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import canvas from "@/public/apple-touch-icon.png"
 import chat from "@/public/apple-touch-icon.png"
 import search from "@/public/apple-touch-icon.png"
@@ -79,6 +79,7 @@ const apps = [
 
 const Sidebar = ({ app, onClose }) => {
   const [openSections, setOpenSections] = useState({});
+  const sidebarRef = useRef(null);
 
   const toggleSection = (title) => {
     setOpenSections((prev) => ({
@@ -87,26 +88,41 @@ const Sidebar = ({ app, onClose }) => {
     }));
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed right-0 top-0 w-1/3 h-full bg-white shadow-lg p-4 overflow-y-auto">
-      <h2 className="text-lg font-semibold">{app.name}</h2>
-      <p>{app.description}</p>
-      <div className="mt-4">
-        {app.additionalInfo.map((section) => (
-          <div key={section.title} className="mb-2">
-            <button
-              onClick={() => toggleSection(section.title)}
-              className="text-left w-full font-semibold"
-            >
-              {section.title}
-            </button>
-            {openSections[section.title] && (
-              <p className="ml-4 text-sm">{section.content}</p>
-            )}
-          </div>
-        ))}
+    <div className="fixed right-0 top-0 w-1/4 h-full bg-white shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0">
+      <div ref={sidebarRef}>
+        <h2 className="text-lg font-semibold">{app.name}</h2>
+        <p>{app.description}</p>
+        <div className="mt-4">
+          {app.additionalInfo.map((section) => (
+            <div key={section.title} className="mb-2">
+              <button
+                onClick={() => toggleSection(section.title)}
+                className="text-left w-full font-semibold"
+              >
+                {section.title}
+              </button>
+              {openSections[section.title] && (
+                <p className="ml-4 text-sm">{section.content}</p>
+              )}
+            </div>
+          ))}
+        </div>
+        <button onClick={onClose} className="mt-4 text-red-500">Cerrar</button>
       </div>
-      <button onClick={onClose} className="mt-4 text-red-500">Cerrar</button>
     </div>
   );
 };
