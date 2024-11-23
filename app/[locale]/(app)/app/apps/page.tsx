@@ -79,7 +79,7 @@ const apps = [
 
 const Sidebar = ({ app, onClose }) => {
   const [openSections, setOpenSections] = useState({});
-  const sidebarRef = useRef(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const toggleSection = (title) => {
     setOpenSections((prev) => ({
@@ -89,8 +89,8 @@ const Sidebar = ({ app, onClose }) => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
         onClose();
       }
     };
