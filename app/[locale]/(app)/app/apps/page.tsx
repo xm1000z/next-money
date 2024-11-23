@@ -110,8 +110,30 @@ const Sidebar = ({ app, onClose }) => {
           alt={`${app.name} logo`} 
           className="h-40 w-full object-contain mb-4 p-2"
         />
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{app.name}</h2>
-        <p className="text-gray-700 dark:text-[#878787] text-sm">{app.description}</p>
+        <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
+          <div className="flex items-center space-x-2">
+            <div>
+              <div className="flex items-center space-x-2">
+                <h3 className="text-lg leading-none text-gray-900 dark:text-white">{app.name}</h3>
+              </div>
+              <span className="text-xs text-[#878787]">Assistant • Published by Midday</span>
+            </div>
+          </div>
+          <div>
+            <a
+              href={app.status === "Coming soon" ? "#" : app.detailsUrl}
+              onClick={(e) => {
+                if (app.status === "Coming soon") {
+                  e.preventDefault();
+                }
+              }}
+              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} flex items-center justify-center px-3 py-1 text-sm rounded-none transition`}
+            >
+              Install
+            </a>
+          </div>
+        </div>
+        <p className="text-gray-700 dark:text-[#878787] text-sm mt-4">{app.description}</p>
         <div className="mt-4">
           {app.additionalInfo.map((section) => (
             <div key={section.title} className="mb-2">
