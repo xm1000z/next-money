@@ -108,7 +108,7 @@ const Sidebar = ({ app, onClose }) => {
         <img 
           src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
           alt={`${app.name} logo`} 
-          className="h-24 w-full object-contain mb-4 p-2"
+          className="h-40 w-full object-contain mb-4 p-2"
         />
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{app.name}</h2>
         <p className="text-gray-700 dark:text-gray-300">{app.description}</p>
