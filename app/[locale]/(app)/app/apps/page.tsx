@@ -103,9 +103,13 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed right-0 top-16 w-1/4 h-3/4 bg-[#F2F1EF] dark:bg-[#1D1D1D] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
+    <div className="fixed right-4 top-16 w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
       <div ref={sidebarRef}>
-        <img src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" alt={`${app.name} logo`} className="h-16 mb-4" />
+        <img 
+          src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
+          alt={`${app.name} logo`} 
+          className="h-24 w-full object-contain mb-4 p-2"
+        />
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{app.name}</h2>
         <p className="text-gray-700 dark:text-gray-300">{app.description}</p>
         <div className="mt-4">
@@ -113,10 +117,10 @@ const Sidebar = ({ app, onClose }) => {
             <div key={section.title} className="mb-2">
               <button
                 onClick={() => toggleSection(section.title)}
-                className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center"
+                className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center justify-between"
               >
                 {section.title}
-                {openSections[section.title] ? <ChevronUp className="ml-2 h-4 w-4" /> : <ChevronDown className="ml-2 h-4 w-4" />}
+                {openSections[section.title] ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
               </button>
               {openSections[section.title] && (
                 <p className="ml-4 text-sm text-gray-700 dark:text-gray-300">{section.content}</p>
