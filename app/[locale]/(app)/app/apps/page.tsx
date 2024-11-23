@@ -103,7 +103,7 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed right-4 top-16 w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
+    <div className="fixed right-4 top-16 w-full sm:w-1/3 md:w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
       <div ref={sidebarRef}>
         <img 
           src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
