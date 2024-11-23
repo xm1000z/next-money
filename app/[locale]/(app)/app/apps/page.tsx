@@ -7,6 +7,8 @@ import search from "@/public/apple-touch-icon.png"
 import traductor from "@/public/apple-touch-icon.png"
 import studio from "@/public/apple-touch-icon.png"
 import pdf from "@/public/apple-touch-icon.png"
+import arrowDown from "@/public/arrow-down.png"
+import arrowUp from "@/public/arrow-up.png"
 
 const apps = [
   {
@@ -102,18 +104,24 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed right-0 top-0 w-1/4 h-3/4 bg-[#F2F1EF] dark:bg-[#1D1D1D] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
+    <div className="fixed right-0 top-16 w-1/4 h-3/4 bg-[#F2F1EF] dark:bg-[#1D1D1D] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
       <div ref={sidebarRef}>
+        <img src={app.logo.src} alt={`${app.name} logo`} className="h-16 mb-4" />
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{app.name}</h2>
         <p className="text-gray-700 dark:text-gray-300">{app.description}</p>
         <div className="mt-4">
           {app.additionalInfo.map((section) => (
-            <div key={section.title} className="mb-2">
+            <div key={section.title} className="mb-2 flex items-center">
               <button
                 onClick={() => toggleSection(section.title)}
-                className="text-left w-full font-semibold text-gray-900 dark:text-white"
+                className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center"
               >
                 {section.title}
+                <img
+                  src={openSections[section.title] ? arrowUp.src : arrowDown.src}
+                  alt="Toggle"
+                  className="ml-2 h-4 w-4"
+                />
               </button>
               {openSections[section.title] && (
                 <p className="ml-4 text-sm text-gray-700 dark:text-gray-300">{section.content}</p>
