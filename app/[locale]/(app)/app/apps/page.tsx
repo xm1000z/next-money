@@ -102,7 +102,7 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed right-0 top-0 w-1/4 h-full bg-white dark:bg-gray-800 shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out">
+    <div className="fixed right-0 top-0 w-1/4 h-3/4 bg-[#F2F1EF] dark:bg-[#1D1D1D] shadow-lg p-4 overflow-y-auto transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C]">
       <div ref={sidebarRef}>
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{app.name}</h2>
         <p className="text-gray-700 dark:text-gray-300">{app.description}</p>
