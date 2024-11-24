@@ -8,6 +8,7 @@ import search from "@/public/apple-touch-icon.png"
 import traductor from "@/public/apple-touch-icon.png"
 import studio from "@/public/apple-touch-icon.png"
 import pdf from "@/public/apple-touch-icon.png"
+import { motion, AnimatePresence } from "framer-motion";
 
 const apps = [
   {
@@ -103,59 +104,67 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed right-4 top-16 w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg overflow-hidden transition-transform transform translate-x-0 duration-300 ease-in-out border border-[#DCDAD2] dark:border-[#2C2C2C] flex flex-col">
-      <div ref={sidebarRef} className="flex-1 overflow-y-auto p-4">
-        <img 
-          src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
-          alt={`${app.name} logo`} 
-          className="h-40 w-full object-contain mb-4 p-2"
-        />
-        <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
-          <div className="flex items-center space-x-2">
-            <div>
-              <div className="flex items-center space-x-2">
-                <h3 className="text-lg leading-none text-gray-900 dark:text-white">{app.name}</h3>
+    <AnimatePresence>
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+        className="fixed right-4 top-16 w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg overflow-hidden border border-[#DCDAD2] dark:border-[#2C2C2C] flex flex-col"
+      >
+        <div ref={sidebarRef} className="flex-1 overflow-y-auto p-4">
+          <img 
+            src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
+            alt={`${app.name} logo`} 
+            className="h-40 w-full object-contain mb-4 p-2"
+          />
+          <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
+            <div className="flex items-center space-x-2">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <h3 className="text-lg leading-none text-gray-900 dark:text-white">{app.name}</h3>
+                </div>
+                <span className="text-xs text-[#878787]">App • Publicada por NotasAI</span>
               </div>
-              <span className="text-xs text-[#878787]">Assistant • Published by Midday</span>
             </div>
-          </div>
-          <div>
-            <a
-              href={app.status === "Coming soon" ? "#" : app.detailsUrl}
-              onClick={(e) => {
-                if (app.status === "Coming soon") {
-                  e.preventDefault();
-                }
-              }}
-              className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} flex items-center justify-center px-3 py-1 text-sm rounded-none transition`}
-            >
-              Install
-            </a>
-          </div>
-        </div>
-        <p className="text-gray-700 dark:text-[#878787] text-sm mt-4">{app.description}</p>
-        <div className="mt-4">
-          {app.additionalInfo.map((section) => (
-            <div key={section.title} className="mb-2">
-              <button
-                onClick={() => toggleSection(section.title)}
-                className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center justify-between"
+            <div>
+              <a
+                href={app.status === "Coming soon" ? "#" : app.detailsUrl}
+                onClick={(e) => {
+                  if (app.status === "Coming soon") {
+                    e.preventDefault();
+                  }
+                }}
+                className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} flex items-center justify-center px-3 py-1 text-sm rounded-none transition`}
               >
-                {section.title}
-                {openSections[section.title] ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-              </button>
-              {openSections[section.title] && (
-                <p className="text-sm text-gray-700 dark:text-[#878787]">{section.content}</p>
-              )}
+                Install
+              </a>
             </div>
-          ))}
+          </div>
+          <p className="text-gray-700 dark:text-[#878787] text-sm mt-4">{app.description}</p>
+          <div className="mt-4">
+            {app.additionalInfo.map((section) => (
+              <div key={section.title} className="mb-2">
+                <button
+                  onClick={() => toggleSection(section.title)}
+                  className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center justify-between"
+                >
+                  {section.title}
+                  {openSections[section.title] ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </button>
+                {openSections[section.title] && (
+                  <p className="text-sm text-gray-700 dark:text-[#878787]">{section.content}</p>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
-        <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
-        <button onClick={onClose} className="text-[10px] text-text-red-500">Cerrar</button>
-      </div>
-    </div>
+        <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
+          <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
+          <button onClick={onClose} className="text-[10px] text-red-500">Cerrar</button>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
@@ -209,7 +218,9 @@ const AppsPage = () => {
           </div>
         </div>
       ))}
-      {selectedApp && <Sidebar app={selectedApp} onClose={handleCloseSidebar} />}
+      <AnimatePresence>
+        {selectedApp && <Sidebar app={selectedApp} onClose={handleCloseSidebar} />}
+      </AnimatePresence>
     </div>
   );
 };
