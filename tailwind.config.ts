@@ -173,6 +173,22 @@ const config = {
             backgroundPosition: "var(--bg-size) 0",
           },
         },
+        "slide-in-from-left": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" }
+        },
+        "slide-out-to-left": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" }
+        },
+        "slide-in-from-right": {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" }
+        },
+        "slide-out-to-right": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(100%)" }
+        }
       },
       animation: {
         marquee: "marquee var(--duration) linear infinite",
@@ -191,6 +207,10 @@ const config = {
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         slide: "slide var(--speed) ease-in-out infinite alternate",
         'border-glow': 'border-glow 4s linear infinite',
+        "slide-in-from-left": "slide-in-from-left 0.3s ease-out",
+        "slide-out-to-left": "slide-out-to-left 0.3s ease-in",
+        "slide-in-from-right": "slide-in-from-right 0.3s ease-out",
+        "slide-out-to-right": "slide-out-to-right 0.3s ease-in"
       },
     },
   },

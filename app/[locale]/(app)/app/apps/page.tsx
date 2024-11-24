@@ -104,66 +104,86 @@ const Sidebar = ({ app, onClose }) => {
   }, [onClose]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-        className="fixed right-4 top-16 w-1/4 h-3/4 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg overflow-hidden border border-[#DCDAD2] dark:border-[#2C2C2C] flex flex-col"
+        initial={{ opacity: 0, x: "100%" }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: "100%" }}
+        transition={{ type: "spring", damping: 20, stiffness: 100 }}
+        className="fixed inset-y-0 right-0 w-full sm:w-96 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg overflow-hidden border-l border-[#DCDAD2] dark:border-[#2C2C2C] flex flex-col z-50"
       >
-        <div ref={sidebarRef} className="flex-1 overflow-y-auto p-4">
-          <img 
-            src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
-            alt={`${app.name} logo`} 
-            className="h-40 w-full object-contain mb-4 p-2"
-          />
-          <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
-            <div className="flex items-center space-x-2">
-              <div>
-                <div className="flex items-center space-x-2">
-                  <h3 className="text-lg leading-none text-gray-900 dark:text-white">{app.name}</h3>
-                </div>
-                <span className="text-xs text-[#878787]">App • Publicada por NotasAI</span>
-              </div>
-            </div>
-            <div>
-              <a
-                href={app.status === "Coming soon" ? "#" : app.detailsUrl}
-                onClick={(e) => {
-                  if (app.status === "Coming soon") {
-                    e.preventDefault();
-                  }
-                }}
-                className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} flex items-center justify-center px-3 py-1 text-sm rounded-none transition`}
+        <div ref={sidebarRef} className="flex-1 overflow-y-auto">
+          <div className="p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{app.name}</h2>
+              <button 
+                onClick={onClose}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
               >
-                Install
-              </a>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
-          </div>
-          <p className="text-gray-700 dark:text-[#878787] text-sm mt-4">{app.description}</p>
-          <div className="mt-4">
-            {app.additionalInfo.map((section) => (
-              <div key={section.title} className="mb-2">
-                <button
-                  onClick={() => toggleSection(section.title)}
-                  className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center justify-between"
-                >
-                  {section.title}
-                  {openSections[section.title] ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                </button>
-                {openSections[section.title] && (
-                  <p className="text-sm text-gray-700 dark:text-[#878787]">{section.content}</p>
-                )}
+            <img 
+              src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
+              alt={`${app.name} logo`} 
+              className="h-40 w-full object-contain mb-4 p-2"
+            />
+            <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
+              <div className="flex items-center space-x-2">
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <h3 className="text-lg leading-none text-gray-900 dark:text-white">{app.name}</h3>
+                  </div>
+                  <span className="text-xs text-[#878787]">App • Publicada por NotasAI</span>
+                </div>
               </div>
-            ))}
+              <div>
+                <a
+                  href={app.status === "Coming soon" ? "#" : app.detailsUrl}
+                  onClick={(e) => {
+                    if (app.status === "Coming soon") {
+                      e.preventDefault();
+                    }
+                  }}
+                  className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} flex items-center justify-center px-3 py-1 text-sm rounded-none transition`}
+                >
+                  Install
+                </a>
+              </div>
+            </div>
+            <p className="text-gray-700 dark:text-[#878787] text-sm mt-4">{app.description}</p>
+            <div className="mt-4">
+              {app.additionalInfo.map((section) => (
+                <div key={section.title} className="mb-2">
+                  <button
+                    onClick={() => toggleSection(section.title)}
+                    className="text-left w-full font-semibold text-gray-900 dark:text-white flex items-center justify-between"
+                  >
+                    {section.title}
+                    {openSections[section.title] ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                  </button>
+                  {openSections[section.title] && (
+                    <p className="text-sm text-gray-700 dark:text-[#878787]">{section.content}</p>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
           <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
-          <button onClick={onClose} className="text-[10px] text-red-500">Cerrar</button>
         </div>
       </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 bg-black z-40"
+        onClick={onClose}
+      />
     </AnimatePresence>
   );
 };
