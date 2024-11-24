@@ -110,7 +110,7 @@ const Sidebar = ({ app, onClose }) => {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: "100%" }}
         transition={{ type: "spring", damping: 20, stiffness: 100 }}
-        className="fixed inset-y-0 right-0 w-full sm:w-96 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg overflow-hidden border-l border-[#DCDAD2] dark:border-[#2C2C2C] flex flex-col z-50"
+        className="fixed inset-y-0 right-0 w-full sm:w-96 bg-[#FAFAF9] dark:bg-[#121212] shadow-lg overflow-hidden border-l border-[#DCDAD2] dark:border-[#2C2C2C] flex flex-col z-[60]"
       >
         <div ref={sidebarRef} className="flex-1 overflow-y-auto">
           <div className="p-4">
@@ -181,7 +181,7 @@ const Sidebar = ({ app, onClose }) => {
         animate={{ opacity: 0.5 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 bg-black z-40"
+        className="fixed inset-0 bg-black z-[55]"
         onClick={onClose}
       />
     </AnimatePresence>

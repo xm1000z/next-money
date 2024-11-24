@@ -211,58 +211,70 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col p-0">
-          <ScrollArea className="h-full overflow-y-auto">
-            <div className="flex h-screen flex-col">
-              <nav className="flex flex-1 flex-col gap-y-8 p-6 text-lg font-medium">
-                <NavBar />
+        <AnimatePresence>
+          {open && (
+            <SheetContent side="left" className="flex flex-col p-0">
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                className="h-full"
+              >
+                <ScrollArea className="h-full overflow-y-auto">
+                  <div className="flex h-screen flex-col">
+                    <nav className="flex flex-1 flex-col gap-y-8 p-6 text-lg font-medium">
+                      <NavBar />
 
-                {links.map((section) => (
-                  <section
-                    key={section.title}
-                    className="flex flex-col gap-0.5"
-                  >
-                    <p className="text-xs text-black dark:text-white">
-                      {section.title}
-                    </p>
+                      {links.map((section) => (
+                        <section
+                          key={section.title}
+                          className="flex flex-col gap-0.5"
+                        >
+                          <p className="text-xs text-black dark:text-white">
+                            {section.title}
+                          </p>
 
-                    {section?.items?.map((item) => {
-                      const Icon = Icons[item.icon || "arrowRight"];
-                      return (
-                        item.href && (
-                          <Fragment key={`link-fragment-${item.title}`}>
-                            <Link
-                              key={item.title}
-                              href={item.disabled ? "#" : item.href}
-                              className={cn(
-                                "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-muted",
-                                path === item.href
-                                  ? "bg-muted"
-                                  : "text-black dark:text-white hover:text-accent-foreground",
-                                item.disabled &&
-                                  "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black hover:dark:text-white",
-                              )}
-                            >
-                              <Icon className="size-5" />
-                              {t(item.title)}
-                              {item.badge && (
-                                <Badge className="ml-auto flex size-5 shrink-0 items-center justify-center rounded-full">
-                                  {item.badge}
-                                </Badge>
-                              )}
-                            </Link>
-                          </Fragment>
-                        )
-                      );
-                    })}
-                  </section>
-                ))}
+                          {section?.items?.map((item) => {
+                            const Icon = Icons[item.icon || "arrowRight"];
+                            return (
+                              item.href && (
+                                <Fragment key={`link-fragment-${item.title}`}>
+                                  <Link
+                                    key={item.title}
+                                    href={item.disabled ? "#" : item.href}
+                                    className={cn(
+                                      "flex items-center gap-3 rounded-md p-2 text-sm font-medium hover:bg-muted",
+                                      path === item.href
+                                        ? "bg-muted"
+                                        : "text-black dark:text-white hover:text-accent-foreground",
+                                      item.disabled &&
+                                        "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black hover:dark:text-white",
+                                    )}
+                                  >
+                                    <Icon className="size-5" />
+                                    {t(item.title)}
+                                    {item.badge && (
+                                      <Badge className="ml-auto flex size-5 shrink-0 items-center justify-center rounded-full">
+                                        {item.badge}
+                                      </Badge>
+                                    )}
+                                  </Link>
+                                </Fragment>
+                              )
+                            );
+                          })}
 
-                <div className="mt-auto"><UpgradeCard /></div>
-              </nav>
-            </div>
-          </ScrollArea>
-        </SheetContent>
+                          <div className="mt-auto"><UpgradeCard /></div>
+                        </section>
+                      ))}
+                    </nav>
+                  </div>
+                </ScrollArea>
+              </motion.div>
+            </SheetContent>
+          )}
+        </AnimatePresence>
       </Sheet>
     );
   }
