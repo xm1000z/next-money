@@ -190,7 +190,7 @@ const Sidebar = ({ app, onClose }) => {
         </div>
         <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
           <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
-          <a href="mailto:soporte@notas.ai" className="text-[10px] text-red-900 mb-6 flex-grow">Reportar</a>
+          <a href="mailto:soporte@notas.ai" className="text-[10px] text-red-500 mb-6 flex-grow">Reportar</a>
         </div>
       </motion.div>
       <motion.div
