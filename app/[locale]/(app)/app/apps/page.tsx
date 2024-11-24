@@ -134,9 +134,9 @@ const Sidebar = ({ app, onClose }) => {
               <div className="flex items-center space-x-2">
                 <div>
                   <div className="flex items-center space-x-2">
-                    <h3 className="text-lg leading-none text-gray-900 dark:text-white">{app.name}</h3>
+                    <h3 className="text-lg leading-none text-black dark:text-white">{app.name}</h3>
                   </div>
-                  <span className="text-xs text-[#878787]">App • Publicada por NotasAI</span>
+                  <span className="text-xs text-[#878787]">App • Publicado por NotasAI</span>
                 </div>
               </div>
               <div>
@@ -149,7 +149,7 @@ const Sidebar = ({ app, onClose }) => {
                   }}
                   className={`flex-1 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent ${app.status === "Coming soon" ? 'text-gray-300 dark:text-gray-700 cursor-not-allowed' : 'dark:text-white text-black hover:bg-accent'} flex items-center justify-center px-3 py-1 text-sm rounded-none transition`}
                 >
-                  Install
+                  Abrir
                 </a>
               </div>
             </div>

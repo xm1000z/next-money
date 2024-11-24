@@ -213,19 +213,26 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
         </SheetTrigger>
         <AnimatePresence>
           {open && (
-            <SheetContent side="left" className="flex flex-col p-0">
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.5 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black z-[55]"
+                onClick={() => setOpen(false)}
+              />
               <motion.div
                 initial={{ x: "-100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "-100%" }}
-                transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                className="h-full"
+                transition={{ type: "spring", damping: 20, stiffness: 100 }}
+                className="fixed inset-y-0 left-0 w-full max-w-xs bg-background p-6 shadow-lg z-[60]"
               >
-                <ScrollArea className="h-full overflow-y-auto">
-                  <div className="flex h-screen flex-col">
-                    <nav className="flex flex-1 flex-col gap-y-8 p-6 text-lg font-medium">
+                <ScrollArea className="h-full overflow-y-auto -mx-6">
+                  <div className="flex h-screen flex-col px-6">
+                    <nav className="flex flex-1 flex-col gap-y-8 text-lg font-medium">
                       <NavBar />
-
                       {links.map((section) => (
                         <section
                           key={section.title}
@@ -264,15 +271,14 @@ export function MobileSheetSidebar({ links }: DashboardSidebarProps) {
                               )
                             );
                           })}
-
-                          <div className="mt-auto"><UpgradeCard /></div>
                         </section>
                       ))}
+                      <div className="mt-auto"><UpgradeCard /></div>
                     </nav>
                   </div>
                 </ScrollArea>
               </motion.div>
-            </SheetContent>
+            </>
           )}
         </AnimatePresence>
       </Sheet>
