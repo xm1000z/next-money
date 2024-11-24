@@ -122,7 +122,7 @@ const Sidebar = ({ app, onClose }) => {
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{app.name}</h2>
-              <button 
+              <button
                 onClick={onClose}
                 className="p-2 hover:bg-[#DCDAD2] dark:hover:bg-[#2C2C2C]"
               >
