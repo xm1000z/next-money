@@ -14,6 +14,7 @@ const apps = [
   {
     name: "Canvas",
     logo: canvas,
+    image: "https://notas.ai/apps/canvas-preview.png",
     description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
     status: "Coming soon",
     detailsUrl: "/notas",
@@ -25,6 +26,7 @@ const apps = [
   {
     name: "Chat",
     logo: chat,
+    image: "https://notas.ai/apps/chat-preview.png",
     description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
     status: "Available",
     detailsUrl: "/chat",
@@ -36,6 +38,7 @@ const apps = [
   {
     name: "Search",
     logo: search,
+    image: "https://notas.ai/apps/search-preview.png",
     description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
     status: "Available",
     detailsUrl: "/search",
@@ -47,6 +50,7 @@ const apps = [
   {
     name: "Traductor",
     logo: traductor,
+    image: "https://notas.ai/apps/traductor-preview.png",
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Available",
     detailsUrl: "/traductor",
@@ -58,6 +62,7 @@ const apps = [
   {
     name: "Studio",
     logo: studio,
+    image: "https://notas.ai/apps/studio-preview.png",
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Coming soon",
     detailsUrl: "/studio",
@@ -69,6 +74,7 @@ const apps = [
   {
     name: "PDF",
     logo: pdf,
+    image: "https://notas.ai/apps/pdf-preview.png",
     description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
     status: "Coming soon",
     detailsUrl: "/pdf",
@@ -126,8 +132,8 @@ const Sidebar = ({ app, onClose }) => {
               </button>
             </div>
             <img 
-              src="https://midday.ai/cdn-cgi/image/width=1080,quality=100/https://app.midday.ai/_next/static/media/image.0f8d770e.png" 
-              alt={`${app.name} logo`} 
+              src={app.image} 
+              alt={`${app.name} preview`} 
               className="h-40 w-full object-contain mb-4 p-2"
             />
             <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
