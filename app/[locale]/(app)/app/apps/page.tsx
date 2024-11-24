@@ -124,7 +124,7 @@ const Sidebar = ({ app, onClose }) => {
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{app.name}</h2>
               <button 
                 onClick={onClose}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
+                className="p-2 hover:bg-[#DCDAD2] dark:hover:bg-[#2C2C2C]"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
