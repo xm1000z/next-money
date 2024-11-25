@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronDown, ChevronUp, MessageSquare, TrendingUp, Languages, BookOpen, Search, Eraser, FileText } from "lucide-react";
+import { ChevronDown, ChevronUp, MessageSquare, TrendingUp, Languages, BookOpen, Search, Eraser, FileText, type LucideIcon } from "lucide-react";
 import chat from "@/public/chat.png";
 import canvas from "@/public/writer.png";
 import search from "@/public/search.png";
@@ -140,11 +140,10 @@ const Sidebar = ({ app, onClose }) => {
                 <div>
                 <div className="flex justify-between items-center mb-4">
                   <div className="flex items-center gap-3">
-                    <img 
-                    src={app.logo.src} 
-                    alt={`${app.name} logo`} 
-                    className="h-8 w-8 object-contain"
-                    />
+                    {React.createElement(app.logo, { 
+                      className: "h-8 w-8",
+                      "aria-hidden": "true"
+                    })}
                     </div>
                     <h3 className="text-lg leading-none text-black dark:text-white">{app.name}</h3>
                   </div>
@@ -220,7 +219,10 @@ const AppsPage = () => {
           className="border border-[#DCDAD2] dark:border-[#2C2C2C] bg-transparent p-6 flex flex-col h-full transition duration-300 ease-in-out"
         >
           <div className="flex flex-col items-start mb-4">
-            <img src={app.logo.src} alt={`${app.name} logo`} className="h-11 mb-4" />
+            {React.createElement(app.logo, { 
+              className: "h-11 mb-4",
+              "aria-hidden": "true"
+            })}
             <h2 className="text-base font-semibold text-left text-gray-900 dark:text-white">
               {app.name}
               {app.status === "Coming soon" && (
