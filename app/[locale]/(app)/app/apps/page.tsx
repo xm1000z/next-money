@@ -135,14 +135,14 @@ const Sidebar = ({ app, onClose }) => {
             <Image 
               src={app.image} 
               alt={`${app.name} preview`} 
-              className="h-40 w-full object-contain mb-4 p-2"
+              className="h-70 w-full object-contain mb-4 p-2"
               priority
             />
             <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
               <div className="flex items-center space-x-2">
                 <div>
-                <div className="flex justify-between items-center mb-4">
-                  <div className="flex items-center gap-3">
+                <div className="flex gap-2 items-center">
+                  <div className="flex items-center">
                     {React.createElement(app.logo, { 
                       className: "h-8 w-8",
                       "aria-hidden": "true"
@@ -188,7 +188,7 @@ const Sidebar = ({ app, onClose }) => {
         </div>
         <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
           <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
-          <a href="mailto:soporte@notas.ai" className="text-[10px] text-red-500 mb-6 flex-grow">Reportar</a>
+          <button onClick={handleCloseSidebar} className="text-[10px] text-red-500 mb-6 flex-grow">Cerrar</button>
         </div>
       </motion.div>
       <motion.div
