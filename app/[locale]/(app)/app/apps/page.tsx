@@ -49,7 +49,7 @@ const apps: App[] = [
   },
   {
     name: "Search",
-    logo: Search,
+    logo: TrendingUp,
     image: search,
     description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
     status: "Available",
@@ -192,10 +192,10 @@ const Sidebar = ({ app, onClose }: SidebarProps) => {
           </div>
         </div>
         <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
-          <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
+          <p className="text-[10px] text-[#878787] mb-1 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
           <button 
             onClick={onClose}
-            className="text-[10px] text-red-500 mb-6 flex-grow"
+            className="text-[10px] text-red-500 flex-grow"
           >
             Cerrar
           </button>
