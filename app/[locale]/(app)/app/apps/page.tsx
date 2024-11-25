@@ -1,20 +1,30 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import canvas from "@/public/apple-touch-icon.png"
-import chat from "@/public/apple-touch-icon.png"
-import search from "@/public/apple-touch-icon.png"
-import traductor from "@/public/apple-touch-icon.png"
-import studio from "@/public/apple-touch-icon.png"
-import pdf from "@/public/apple-touch-icon.png"
+import { ChevronDown, ChevronUp, MessageSquare, TrendingUp, Languages, BookOpen, Search, Eraser, FileText } from "lucide-react";
+import chat from "@/public/chat.png";
+import canvas from "@/public/writer.png";
+import search from "@/public/search.png";
+import traductor from "@/public/traductor.png";
+import studio from "@/public/studio.png";
+import pdf from "@/public/studio.png";
 import { motion, AnimatePresence } from "framer-motion";
 
-const apps = [
+interface App {
+  name: string;
+  logo: LucideIcon;
+  image: string;
+  description: string;
+  status: string;
+  detailsUrl: string;
+  additionalInfo: { title: string; content: string }[];
+}
+
+const apps: App[] = [
   {
     name: "Canvas",
-    logo: canvas,
-    image: "https://notas.ai/apps/canvas-preview.png",
+    logo: BookOpen,
+    image: canvas,
     description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
     status: "Coming soon",
     detailsUrl: "/notas",
@@ -25,11 +35,11 @@ const apps = [
   },
   {
     name: "Chat",
-    logo: chat,
-    image: "https://notas.ai/apps/chat-preview.png",
+    logo: MessageSquare,
+    image: chat,
     description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
     status: "Available",
-    detailsUrl: "/chat",
+    detailsUrl: "https://chat.notas.ai",
     additionalInfo: [
       { title: "Características", content: "Temas personalizados, historial de chats." },
       { title: "Integraciones", content: "Raycast, Slack." },
@@ -37,11 +47,11 @@ const apps = [
   },
   {
     name: "Search",
-    logo: search,
-    image: "https://notas.ai/apps/search-preview.png",
+    logo: Search,
+    image: search,
     description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
     status: "Available",
-    detailsUrl: "/search",
+    detailsUrl: "https://search.notas.ai",
     additionalInfo: [
       { title: "Características", content: "Sincronización de transacciones, gestión de adjuntos." },
       { title: "Integraciones", content: "QuickBooks, Google Drive." },
@@ -49,11 +59,11 @@ const apps = [
   },
   {
     name: "Traductor",
-    logo: traductor,
-    image: "https://notas.ai/apps/traductor-preview.png",
+    logo: Languages,
+    image: traductor,
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Available",
-    detailsUrl: "/traductor",
+    detailsUrl: "https://traductor.notas.ai",
     additionalInfo: [
       { title: "Características", content: "Sincronización de transacciones, gestión de adjuntos." },
       { title: "Integraciones", content: "Xero, Google Drive." },
@@ -61,8 +71,8 @@ const apps = [
   },
   {
     name: "Studio",
-    logo: studio,
-    image: "https://notas.ai/apps/studio-preview.png",
+    logo: Eraser,
+    image: studio,
     description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
     status: "Coming soon",
     detailsUrl: "/studio",
@@ -73,8 +83,8 @@ const apps = [
   },
   {
     name: "PDF",
-    logo: pdf,
-    image: "https://notas.ai/apps/pdf-preview.png",
+    logo: FileText,
+    image: pdf,
     description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
     status: "Coming soon",
     detailsUrl: "/pdf",
