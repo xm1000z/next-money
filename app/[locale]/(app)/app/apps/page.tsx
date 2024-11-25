@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { ChevronDown, ChevronUp, MessageSquare, TrendingUp, Languages, BookOpen, Search, Eraser, FileText, type LucideIcon } from "lucide-react";
+import { StaticImageData } from "next/image";
 import chat from "@/public/chat.png";
 import canvas from "@/public/writer.png";
 import search from "@/public/search.png";
@@ -13,7 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
 interface App {
   name: string;
   logo: LucideIcon;
-  image: string;
+  image: StaticImageData;
   description: string;
   status: string;
   detailsUrl: string;
@@ -130,10 +132,11 @@ const Sidebar = ({ app, onClose }) => {
       >
         <div ref={sidebarRef} className="flex-1 overflow-y-auto">
           <div className="p-4">
-            <img 
+            <Image 
               src={app.image} 
               alt={`${app.name} preview`} 
               className="h-40 w-full object-contain mb-4 p-2"
+              priority
             />
             <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
               <div className="flex items-center space-x-2">
