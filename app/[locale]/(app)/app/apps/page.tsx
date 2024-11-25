@@ -97,7 +97,12 @@ const apps: App[] = [
   },
 ];
 
-const Sidebar = ({ app, onClose }) => {
+interface SidebarProps {
+  app: App;
+  onClose: () => void;
+}
+
+const Sidebar = ({ app, onClose }: SidebarProps) => {
   const [openSections, setOpenSections] = useState({});
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -188,7 +193,12 @@ const Sidebar = ({ app, onClose }) => {
         </div>
         <div className="p-4 border-t border-[#DCDAD2] dark:border-[#2C2C2C]">
           <p className="text-[10px] text-[#878787] mb-6 flex-grow">Todas las aplicaciones de terceros tienen que mantener altos estándares, no respaldamos otras aplicaciones que no alcancen los requisitos. Las aplicaciones publicadas por NotasAI están oficialmente certificadas. Informa de cualquier inquietud sobre el contenido o el comportamiento de la aplicación.</p>
-          <button onClick={handleCloseSidebar} className="text-[10px] text-red-500 mb-6 flex-grow">Cerrar</button>
+          <button 
+            onClick={onClose}
+            className="text-[10px] text-red-500 mb-6 flex-grow"
+          >
+            Cerrar
+          </button>
         </div>
       </motion.div>
       <motion.div
