@@ -22,13 +22,13 @@ export const dashboardConfig: DashboardConfig = {
           href: "/app/apps",
           icon: "LayoutGrid",
         },
-        {
+        /*{
           title: "Notas",
           href: "https://writer.notas.ai",
           icon: "SquarePen",
           rightIcon: "ExternalLink",
           external: true 
-        },
+        },*/
         {
           title: "Chat",
           href: "https://chat.notas.ai",
@@ -43,7 +43,7 @@ export const dashboardConfig: DashboardConfig = {
           rightIcon: "ExternalLink",
           external: true 
         },
-        {
+        /*{
           title: "SEO",
           href: "https://seo.notas.ai",
           icon: "TextSearch",
@@ -56,7 +56,7 @@ export const dashboardConfig: DashboardConfig = {
           icon: "Users",
           rightIcon: "ExternalLink",
           external: true 
-        },
+        },*/
         {
           title: "Studio",
           href: "/app/generate",

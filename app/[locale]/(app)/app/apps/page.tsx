@@ -121,17 +121,6 @@ const Sidebar = ({ app, onClose }) => {
         <div ref={sidebarRef} className="flex-1 overflow-y-auto">
           <div className="p-4">
             <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center gap-3">
-                <img 
-                  src={app.logo.src} 
-                  alt={`${app.name} logo`} 
-                  className="h-8 w-8 object-contain"
-                />
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{app.name}</h2>
-                  <p className="text-xs text-[#878787]">App · Publicado por NotasAI</p>
-                </div>
-              </div>
               <button
                 onClick={onClose}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
@@ -149,7 +138,14 @@ const Sidebar = ({ app, onClose }) => {
             <div className="flex items-center justify-between border-b border-[#DCDAD2] dark:border-[#2C2C2C] pb-2">
               <div className="flex items-center space-x-2">
                 <div>
-                  <div className="flex items-center space-x-2">
+                <div className="flex justify-between items-center mb-4">
+                  <div className="flex items-center gap-3">
+                    <img 
+                    src={app.logo.src} 
+                    alt={`${app.name} logo`} 
+                    className="h-8 w-8 object-contain"
+                    />
+                    </div>
                     <h3 className="text-lg leading-none text-black dark:text-white">{app.name}</h3>
                   </div>
                   <span className="text-xs text-[#878787]">App • Publicado por NotasAI</span>
