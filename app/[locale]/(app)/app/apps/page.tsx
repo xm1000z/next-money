@@ -27,7 +27,7 @@ const apps: App[] = [
     name: "Canvas",
     logo: BookOpen,
     image: canvas,
-    description: "Integrating with Slack enables you to use Midday Assistant right from your Slack workspace, you will also get notifications when you have new transactions and more.",
+    description: "Aumenta tu productividad en redacción y anotación con la inteligencia artificial. Mejora tus textos, traduce a cualquier idioma, modifica o incluso extiende tus propias ideas.",
     status: "Coming soon",
     detailsUrl: "/notas",
     additionalInfo: [
@@ -39,7 +39,7 @@ const apps: App[] = [
     name: "Chat",
     logo: MessageSquare,
     image: chat,
-    description: "Track time directly in Raycast. You can start a timer, add time to an existing project or create a new project directly from Raycast.",
+    description: "El primer chat de inteligencia artificial especializado en español, cada día mejorando y ampliando sus capacidades para un lenguaje natural y excelente en la lengua.",
     status: "Available",
     detailsUrl: "https://chat.notas.ai",
     additionalInfo: [
@@ -51,7 +51,7 @@ const apps: App[] = [
     name: "Search",
     logo: TrendingUp,
     image: search,
-    description: "Integrating with QuickBooks enables you to synchronize transactions and attachments, neatly organizing them in your bookkeeping software.",
+    description: "Ha llegado el momento de avanzar a una nueva forma de googlear, más rápida, más potente y con resultados más exactos, gracias a la inteligencia artificial.",
     status: "Available",
     detailsUrl: "https://search.notas.ai",
     additionalInfo: [
@@ -63,7 +63,7 @@ const apps: App[] = [
     name: "Traductor",
     logo: Languages,
     image: traductor,
-    description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
+    description: "El Traductor de Google de nuestra infancia mejorado para obtener resultados rápidos y adaptados. Para los más exigentes, una herramienta con IA para traducir y hacer consultas de gramática en cualquier idioma.",
     status: "Available",
     detailsUrl: "https://traductor.notas.ai",
     additionalInfo: [
@@ -75,7 +75,7 @@ const apps: App[] = [
     name: "Studio",
     logo: Eraser,
     image: studio,
-    description: "Integrating with Xero allows you to synchronize transactions and attachments neatly organized in your bookkeeping software.",
+    description: "El CGI mejorado para obtener resultados maravillosos en español. Para los más sofisticados, una herramienta integrada para traducir y mejorar prompts al inglés original del modelo.",
     status: "Coming soon",
     detailsUrl: "/studio",
     additionalInfo: [
@@ -87,7 +87,7 @@ const apps: App[] = [
     name: "PDF",
     logo: FileText,
     image: pdf,
-    description: "Integrating with Cal.com automatically synchronizes your tracked hours with your calendar, allowing you to easily monitor your progress on your projects.",
+    description: "Sube tus archivos y documentos y obtén notas, respuestas y conclusiones. Analiza tus documentos con una aplicación dedicada, referencias de páginas e información interna.",
     status: "Coming soon",
     detailsUrl: "/pdf",
     additionalInfo: [
