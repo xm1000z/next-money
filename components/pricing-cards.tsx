@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
+import { Switch } from "@/components/ui/switch";
 
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
@@ -28,6 +29,8 @@ import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
 import { subscriptionPlans } from "@/config/subscription-plans";
+import { createSubscriptionCheckout } from "@/lib/stripe-actions";
+import { useRouter } from "next/navigation";
 
 interface PricingCardsProps {
   userId?: string;
@@ -181,6 +184,7 @@ export function PricingCards({
   const [isYearly, setIsYearly] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const [hasSubscription, setHasSubscription] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (userId) {
@@ -190,6 +194,27 @@ export function PricingCards({
         .then(data => setHasSubscription(data.hasActiveSubscription));
     }
   }, [userId]);
+
+  const handleSubscription = async (priceId: string) => {
+    try {
+      if (!userId) {
+        return; // El usuario debe estar autenticado
+      }
+
+      const checkoutUrl = await createSubscriptionCheckout({
+        priceId,
+        userId,
+        successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
+        cancelUrl: `${window.location.origin}/pricing?success=false`,
+      });
+
+      if (checkoutUrl) {
+        router.push(checkoutUrl);
+      }
+    } catch (error) {
+      console.error('Error al crear la suscripción:', error);
+    }
+  };
 
   return (
     <MaxWidthWrapper className="py-20">
