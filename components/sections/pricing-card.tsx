@@ -21,7 +21,6 @@ export default async function PricingCard({ locale }: PricingCardProps) {
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
       <PricingCards 
         chargeProduct={chargeProduct} 
-        subscriptionPlans={plans}
       />
       <hr className="container" />
       <PricingFaq />
