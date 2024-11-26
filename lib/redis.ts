@@ -1,5 +1,6 @@
 import { Redis } from '@upstash/redis'
 import { prisma } from '@/db/prisma'
+import { Ratelimit } from '@upstash/ratelimit'
 
 export const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL!,
@@ -7,6 +8,12 @@ export const redis = new Redis({
 })
 
 const CACHE_TTL = 60 * 5 // 5 minutos
+
+export const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(30, '10 s'),
+  analytics: true,
+})
 
 export async function getCachedSubscription(userId: string) {
   const cacheKey = `subscription:${userId}`
