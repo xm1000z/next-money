@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis'
+import { prisma } from '@/db/prisma'
 
 export const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL!,
@@ -17,13 +18,12 @@ export async function getCachedSubscription(userId: string) {
   }
 
   // Si no está en caché, obtener de la base de datos
-  const subscription = await prisma.subscription.findUnique({
-    where: { userId },
-    include: {
-      // Incluir relaciones necesarias
-      transactions: {
-        take: 5,
-        orderBy: { createdAt: 'desc' }
+  const subscription = await prisma.subscription.findFirst({
+    where: { 
+      userId,
+      status: 'active',
+      currentPeriodEnd: {
+        gt: new Date()
       }
     }
   })
@@ -38,7 +38,6 @@ export async function getCachedSubscription(userId: string) {
   return subscription
 }
 
-// Función para invalidar el caché cuando hay cambios
 export async function invalidateSubscriptionCache(userId: string) {
   const cacheKey = `subscription:${userId}`
   await redis.del(cacheKey)
