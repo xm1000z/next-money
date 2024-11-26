@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { formatPrice } from "@/lib/utils";
 import { Icons } from "./shared/icons";
-import { createSubscriptionCheckout } from "@/lib/stripe-actions";
+import { PricingCard } from "./pricing-card";
 
 interface PricingCardsProps {
   chargeProduct: any[];
