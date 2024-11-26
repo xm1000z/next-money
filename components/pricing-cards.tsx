@@ -15,44 +15,24 @@ import {
 } from "@/components/ui/dialog";
 import { formatPrice } from "@/lib/utils";
 import { Icons } from "./shared/icons";
-import { subscriptionPlansClient } from "@/config/subscription-plans-client";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 
 interface PricingCardsProps {
   chargeProduct: any[];
   subscriptionPlans: any[];
   userId?: string;
+  onSubscribe: (priceId: string) => Promise<void>;
 }
 
-export function PricingCards({ chargeProduct, subscriptionPlans, userId }: PricingCardsProps) {
-  const router = useRouter();
-
-  const handleSubscription = async (priceId: string) => {
-    try {
-      if (!userId) {
-        console.error('No user ID provided');
-        return;
-      }
-
-      const checkoutUrl = await createSubscriptionCheckout({
-        priceId,
-        userId,
-        successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
-        cancelUrl: `${window.location.origin}/pricing?success=false`,
-      });
-
-      if (checkoutUrl) {
-        router.push(checkoutUrl);
-      }
-    } catch (error) {
-      console.error('Error al crear la suscripción:', error);
-    }
-  };
-
+export function PricingCards({ 
+  chargeProduct, 
+  subscriptionPlans, 
+  userId,
+  onSubscribe 
+}: PricingCardsProps) {
   return (
     <div className="grid gap-6 md:grid-cols-3">
-      {/* Primero los planes de suscripción */}
-      {subscriptionPlansClient.map(plan => (
+      {subscriptionPlans.map(plan => (
         <div key={plan.id} className="relative flex flex-col overflow-hidden border shadow-lg">
           <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
             <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
@@ -80,7 +60,7 @@ export function PricingCards({ chargeProduct, subscriptionPlans, userId }: Prici
             <Button 
               className="w-full"
               variant={plan.metadata?.recommended ? "default" : "outline"}
-              onClick={() => handleSubscription(plan.stripePriceIds.monthly)}
+              onClick={() => onSubscribe(plan.id)}
             >
               Suscribirse
             </Button>
@@ -88,7 +68,7 @@ export function PricingCards({ chargeProduct, subscriptionPlans, userId }: Prici
         </div>
       ))}
 
-      {/* Luego los planes de pago único */}
+      {/* Planes de pago único */}
       {chargeProduct?.map((offer) => (
         <PricingCard offer={offer} key={offer.id} />
       ))}
