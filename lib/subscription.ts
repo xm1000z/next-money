@@ -6,8 +6,7 @@ import { getCachedSubscription } from "@/lib/redis";
 import { env } from "@/env.mjs";
 import { subscriptionPlansClient } from "@/config/subscription-plans-client";
 
-export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
-  // Intentar obtener del caché primero
+export async function getUserSubscriptionPlan(userId: string) {
   const cachedSubscription = await getCachedSubscription(userId);
   
   if (cachedSubscription) {
@@ -20,39 +19,12 @@ export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
     };
   }
 
-  const subscription = await prisma.subscription.findFirst({
-    where: {
-      userId,
-      status: 'active',
-      currentPeriodEnd: {
-        gt: new Date()
-      }
-    }
-  });
-
-  if (!subscription) {
-    // Plan gratuito por defecto (starter)
-    return {
-      ...subscriptionPlansClient[0],
-      isPaid: false,
-      interval: null,
-      status: 'inactive'
-    };
-  }
-
-  const plan = subscriptionPlansClient.find(p => p.id === subscription.planId);
-  
-  if (!plan) {
-    throw new Error("Plan no encontrado");
-  }
-
-  const interval = subscription.stripePriceId?.includes('monthly') ? 'month' : 'year';
-
+  // Plan gratuito por defecto
   return {
-    ...plan,
-    ...subscription,
-    isPaid: true,
-    interval
+    ...subscriptionPlansClient[0],
+    isPaid: false,
+    interval: null,
+    status: 'inactive'
   };
 }
 
