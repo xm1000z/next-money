@@ -1,16 +1,45 @@
-import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
-
-import { env } from "@/env.mjs";
+import { Redis } from '@upstash/redis'
 
 export const redis = new Redis({
-  url: env.UPSTASH_REDIS_REST_URL,
-  token: env.UPSTASH_REDIS_REST_TOKEN,
-});
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+})
 
-// Create a new ratelimiter, that allows 30 requests per 10 seconds
-export const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(30, "10 s"),
-  analytics: true,
-});
+const CACHE_TTL = 60 * 5 // 5 minutos
+
+export async function getCachedSubscription(userId: string) {
+  const cacheKey = `subscription:${userId}`
+  
+  // Intentar obtener del caché
+  const cached = await redis.get(cacheKey)
+  if (cached) {
+    return JSON.parse(cached as string)
+  }
+
+  // Si no está en caché, obtener de la base de datos
+  const subscription = await prisma.subscription.findUnique({
+    where: { userId },
+    include: {
+      // Incluir relaciones necesarias
+      transactions: {
+        take: 5,
+        orderBy: { createdAt: 'desc' }
+      }
+    }
+  })
+
+  if (subscription) {
+    // Guardar en caché
+    await redis.set(cacheKey, JSON.stringify(subscription), {
+      ex: CACHE_TTL
+    })
+  }
+
+  return subscription
+}
+
+// Función para invalidar el caché cuando hay cambios
+export async function invalidateSubscriptionCache(userId: string) {
+  const cacheKey = `subscription:${userId}`
+  await redis.del(cacheKey)
+}

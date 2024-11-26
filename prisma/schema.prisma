@@ -227,3 +227,21 @@ model GlobalStats {
 
   @@map(name: "global_stats")
 }
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  planId               String    // starter, pro, etc
+  status               String    // active, canceled, past_due
+  credits              Int       @default(0)
+  stripeCustomerId     String?
+  stripePriceId        String?
+  stripeSubscriptionId String?   @unique
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([stripeSubscriptionId])
+}

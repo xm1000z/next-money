@@ -4,8 +4,22 @@ import { User } from "@clerk/nextjs/dist/types/server";
 import { pricingData } from "@/config/subscriptions";
 import { prisma } from "@/db/prisma";
 import { stripe } from "@/lib/stripe";
+import { getCachedSubscription } from "@/lib/redis";
 
 export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
+  // Intentar obtener del caché primero
+  const cachedSubscription = await getCachedSubscription(userId);
+  
+  if (cachedSubscription) {
+    const plan = pricingData.find(p => p.id === cachedSubscription.planId);
+    return {
+      ...plan,
+      ...cachedSubscription,
+      isPaid: true,
+      interval: cachedSubscription.stripePriceId?.includes('monthly') ? 'month' : 'year'
+    };
+  }
+
   let user = await prisma.userPaymentInfo.findFirst({
     where: {
       userId,
@@ -61,4 +75,66 @@ export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
     interval,
     isCanceled,
   };
+}
+
+interface ManageCreditsParams {
+  userId: string;
+  amount: number;
+  operation: 'add' | 'subtract';
+  description?: string;
+}
+
+export async function manageSubscriptionCredits({ 
+  userId, 
+  amount, 
+  operation,
+  description = '' 
+}: ManageCreditsParams) {
+  return await prisma.$transaction(async (tx) => {
+    const subscription = await tx.subscription.findUnique({
+      where: { userId },
+    });
+
+    if (!subscription) {
+      throw new Error("No active subscription found");
+    }
+
+    const updatedCredits = operation === 'add' 
+      ? subscription.credits + amount
+      : subscription.credits - amount;
+
+    if (updatedCredits < 0) {
+      throw new Error("Insufficient credits");
+    }
+
+    await tx.subscription.update({
+      where: { userId },
+      data: { credits: updatedCredits },
+    });
+
+    // Registrar la transacción
+    return tx.userCreditTransaction.create({
+      data: {
+        userId,
+        credit: operation === 'add' ? amount : -amount,
+        balance: updatedCredits,
+        type: operation === 'add' ? 'SubscriptionCredit' : 'SubscriptionDebit',
+        description
+      },
+    });
+  });
+}
+
+export async function hasActiveSubscription(userId: string) {
+  const subscription = await prisma.subscription.findFirst({
+    where: { 
+      userId,
+      status: 'active',
+      currentPeriodEnd: {
+        gt: new Date()
+      }
+    }
+  });
+
+  return !!subscription;
 }
