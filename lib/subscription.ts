@@ -118,27 +118,6 @@ export async function hasActiveSubscription(userId: string) {
   return !!subscription;
 }
 
-// Información pública de los planes
-export const subscriptionPlansClient = [
-  {
-    id: "starter",
-    name: "Starter",
-    description: "Perfecto para empezar",
-    price: {
-      monthly: 9.99,
-      yearly: 99.99
-    },
-    credits: 100,
-    features: [
-      "100 créditos mensuales",
-      "Renovación automática",
-      "Soporte básico",
-      "Acceso a todas las funciones"
-    ]
-  },
-  // ... otros planes
-];
-
 // Función del servidor para obtener los planes completos con IDs de Stripe
 export async function getSubscriptionPlans() {
   return subscriptionPlansClient.map(plan => ({
