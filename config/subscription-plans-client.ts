@@ -11,7 +11,8 @@ export const subscriptionPlansClient = [
     features: [
       "100 créditos mensuales",
       "Renovación automática",
-      "Soporte básico"
+      "Soporte básico",
+      "Acceso a todas las funciones"
     ],
     metadata: {
       recommended: false,

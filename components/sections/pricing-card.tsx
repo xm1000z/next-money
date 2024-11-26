@@ -1,7 +1,7 @@
 import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
 import { getChargeProduct } from "@/db/queries/charge-product";
-import { getServerSubscriptionPlans } from "@/config/subscription-plans";
+import { subscriptionPlans } from "@/config/subscription-plans";
 
 type Props = {
   locale: string;
@@ -9,11 +9,10 @@ type Props = {
 
 export default async function PricingCard(props: Props) {
   const { data: chargeProduct } = await getChargeProduct(props.locale);
-  const plans = await getServerSubscriptionPlans();
 
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
-      <PricingCards chargeProduct={chargeProduct as any[]} subscriptionPlans={plans} />
+      <PricingCards chargeProduct={chargeProduct as any[]} subscriptionPlans={subscriptionPlans} />
       <hr className="container" />
       <PricingFaq />
     </div>

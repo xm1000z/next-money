@@ -1,5 +1,20 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
+import { useReward } from "react-rewards";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { formatPrice } from "@/lib/utils";
+import { Icons } from "./shared/icons";
 import { subscriptionPlansClient } from "@/config/subscription-plans-client";
 
 interface PricingCardsProps {
@@ -11,7 +26,7 @@ export function PricingCards({ chargeProduct, subscriptionPlans }: PricingCardsP
   return (
     <div className="grid gap-6 md:grid-cols-3">
       {/* Primero los planes de suscripción */}
-      {subscriptionPlans.map(plan => (
+      {subscriptionPlansClient.map(plan => (
         <div key={plan.id} className="relative flex flex-col overflow-hidden border shadow-lg">
           <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
             <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
@@ -52,5 +67,44 @@ export function PricingCards({ chargeProduct, subscriptionPlans }: PricingCardsP
         <PricingCard offer={offer} key={offer.id} />
       ))}
     </div>
+  );
+}
+
+export function PricingCardDialog({
+  onClose,
+  isOpen,
+  chargeProduct,
+}: {
+  isOpen: boolean;
+  chargeProduct?: any[];
+  onClose: (isOpen: boolean) => void;
+}) {
+  const t = useTranslations("PricingPage");
+  const { isSm, isMobile } = useMediaQuery();
+  const product = useMemo(() => {
+    if (isSm || isMobile) {
+      return ([chargeProduct?.[1]] ?? []);
+    }
+    return chargeProduct ?? [];
+  }, [isSm, isMobile, chargeProduct]);
+
+  return (
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        onClose(open);
+      }}
+    >
+      <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px] bg-background/80 backdrop-blur-md">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold mb-6">{t("title")}</DialogTitle>
+          <div className="grid grid-cols-1 gap-8 bg-inherit py-5 lg:grid-cols-3">
+            {product?.map((offer) => (
+              <PricingCard offer={offer} key={offer.id} />
+            ))}
+          </div>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }
