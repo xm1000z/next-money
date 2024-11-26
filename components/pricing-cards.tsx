@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
@@ -16,6 +16,7 @@ import {
 import { formatPrice } from "@/lib/utils";
 import { Icons } from "./shared/icons";
 import { subscriptionPlansClient } from "@/config/subscription-plans-client";
+import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 
 interface PricingCardsProps {
   chargeProduct: any[];
@@ -23,6 +24,25 @@ interface PricingCardsProps {
 }
 
 export function PricingCards({ chargeProduct, subscriptionPlans }: PricingCardsProps) {
+  const router = useRouter();
+
+  const handleSubscription = async (priceId: string) => {
+    try {
+      const checkoutUrl = await createSubscriptionCheckout({
+        priceId,
+        userId: userId,
+        successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
+        cancelUrl: `${window.location.origin}/pricing?success=false`,
+      });
+
+      if (checkoutUrl) {
+        router.push(checkoutUrl);
+      }
+    } catch (error) {
+      console.error('Error al crear la suscripción:', error);
+    }
+  };
+
   return (
     <div className="grid gap-6 md:grid-cols-3">
       {/* Primero los planes de suscripción */}
