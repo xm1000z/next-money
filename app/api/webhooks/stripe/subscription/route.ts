@@ -190,11 +190,12 @@ export async function POST(req: Request) {
               channel: "subscriptions",
               event: "Cambio de Plan",
               user_id: subscription.userId,
-              description: `Actualización al plan ${plan.name}`,
+              description: `Actualización de plan ${subscription.planId} a ${plan.name}`,
               icon: "🔄",
               tags: {
-                oldPlan: subscription.planId,
-                newPlan: plan.id,
+                plan_type: plan.name,
+                status: session.status,
+                subscription_id: session.id
               },
             });
           }
