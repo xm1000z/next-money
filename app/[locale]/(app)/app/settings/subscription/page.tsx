@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
+import { CreditCard } from "lucide-react";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";
@@ -6,7 +7,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/shared/icons";
 
 export default async function SubscriptionPage() {
   const { userId } = auth();
@@ -25,7 +25,7 @@ export default async function SubscriptionPage() {
       />
       <div className="grid gap-8">
         <Alert>
-          <Icons.creditCard className="h-4 w-4" />
+          <CreditCard className="h-4 w-4" />
           <AlertTitle>Plan Actual</AlertTitle>
           <AlertDescription>
             {subscriptionPlan.isPaid ? (
