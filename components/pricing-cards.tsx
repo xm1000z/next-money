@@ -21,16 +21,22 @@ import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 interface PricingCardsProps {
   chargeProduct: any[];
   subscriptionPlans: any[];
+  userId?: string;
 }
 
-export function PricingCards({ chargeProduct, subscriptionPlans }: PricingCardsProps) {
+export function PricingCards({ chargeProduct, subscriptionPlans, userId }: PricingCardsProps) {
   const router = useRouter();
 
   const handleSubscription = async (priceId: string) => {
     try {
+      if (!userId) {
+        console.error('No user ID provided');
+        return;
+      }
+
       const checkoutUrl = await createSubscriptionCheckout({
         priceId,
-        userId: userId,
+        userId,
         successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
         cancelUrl: `${window.location.origin}/pricing?success=false`,
       });
