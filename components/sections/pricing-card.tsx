@@ -1,12 +1,15 @@
 import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
 import { subscriptionPlans } from "@/config/subscription-plans";
+import { getChargeProduct } from "@/db/queries/charge-product";
 
 interface PricingCardProps {
-  chargeProduct: any[];
+  locale: string;
 }
 
-export default function PricingCard({ chargeProduct }: PricingCardProps) {
+export default async function PricingCard({ locale }: PricingCardProps) {
+  const { data: chargeProduct = [] } = await getChargeProduct(locale);
+
   const plans = subscriptionPlans.map(plan => ({
     ...plan,
     stripePriceIds: {
