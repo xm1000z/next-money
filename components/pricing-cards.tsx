@@ -31,6 +31,7 @@ import { cn, formatPrice } from "@/lib/utils";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { subscriptionPlansClient } from "@/config/subscription-plans-client";
 
 interface PricingCardsProps {
   userId?: string;

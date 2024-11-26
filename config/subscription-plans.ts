@@ -1,86 +1,14 @@
 import { env } from "@/env.mjs";
+import { subscriptionPlansClient } from "./subscription-plans-client";
 
-export const subscriptionPlans = [
-  {
-    id: "starter",
-    name: "Starter",
-    description: "Perfecto para empezar",
-    price: {
-      monthly: 9.99,
-      yearly: 99.99
-    },
-    stripePriceIds: {
-      monthly: env.NEXT_PUBLIC_STRIPE_STARTER_MONTHLY_PRICE_ID,
-      yearly: env.NEXT_PUBLIC_STRIPE_STARTER_YEARLY_PRICE_ID
-    },
-    credits: 100,
-    features: [
-      "100 créditos mensuales",
-      "Renovación automática",
-      "Soporte básico",
-      "Acceso a todas las funciones"
-    ],
-    metadata: {
-      recommended: false,
-      popular: true
-    }
-  },
-  {
-    id: "pro",
-    name: "Profesional",
-    description: "Para uso profesional",
-    price: {
-      monthly: 19.99,
-      yearly: 199.99
-    },
-    stripePriceIds: {
-      monthly: env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID,
-      yearly: env.NEXT_PUBLIC_STRIPE_PRO_YEARLY_PRICE_ID
-    },
-    credits: 300,
-    features: [
-      "300 créditos mensuales",
-      "Renovación automática",
-      "Soporte prioritario",
-      "Acceso a todas las funciones",
-      "Sin marca de agua"
-    ],
-    metadata: {
-      recommended: true,
-      popular: false
-    }
-  },
-  {
-    id: "business",
-    name: "Business",
-    description: "Solución empresarial completa",
-    price: {
-      monthly: 49.99,
-      yearly: 499.99
-    },
-    stripePriceIds: {
-      monthly: env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PRICE_ID,
-      yearly: env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PRICE_ID
-    },
-    credits: 1000,
-    features: [
-      "1000 créditos mensuales",
-      "Renovación automática",
-      "Soporte prioritario 24/7",
-      "Acceso a todas las funciones",
-      "Sin marca de agua",
-      "API access",
-      "Multiple team members",
-      "Analytics dashboard",
-      "Custom integration support"
-    ],
-    metadata: {
-      recommended: false,
-      popular: false,
-      enterprise: true
-    }
+// Extender los planes con la información sensible solo en el servidor
+export const subscriptionPlans = subscriptionPlansClient.map(plan => ({
+  ...plan,
+  stripePriceIds: {
+    monthly: env[`NEXT_PUBLIC_STRIPE_${plan.id.toUpperCase()}_MONTHLY_PRICE_ID`],
+    yearly: env[`NEXT_PUBLIC_STRIPE_${plan.id.toUpperCase()}_YEARLY_PRICE_ID`]
   }
-];
+}));
 
 export const subscriptionConfig = {
   webhook: {
