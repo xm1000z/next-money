@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
-import { Switch } from "@/components/ui/switch";
 
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
@@ -28,16 +27,12 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
-import { createSubscriptionCheckout } from "@/lib/stripe-actions";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { subscriptionPlansClient } from "@/config/subscription-plans-client";
+import { subscriptionPlans } from "@/config/subscription-plans";
 
 interface PricingCardsProps {
   userId?: string;
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
-  subscriptionPlans: any[];
 }
 
 const PricingCard = ({
@@ -181,42 +176,20 @@ export function PricingCards({
   userId,
   chargeProduct,
   locale,
-  subscriptionPlans,
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const [hasSubscription, setHasSubscription] = useState<boolean>(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (userId) {
+      // Verificar si el usuario tiene suscripción activa
       fetch('/api/subscription/status')
         .then(res => res.json())
         .then(data => setHasSubscription(data.hasActiveSubscription));
     }
   }, [userId]);
-
-  const handleSubscription = async (priceId: string) => {
-    try {
-      if (!userId) {
-        return; // El usuario debe estar autenticado
-      }
-
-      const checkoutUrl = await createSubscriptionCheckout({
-        priceId,
-        userId,
-        successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
-        cancelUrl: `${window.location.origin}/pricing?success=false`,
-      });
-
-      if (checkoutUrl) {
-        router.push(checkoutUrl);
-      }
-    } catch (error) {
-      console.error('Error al crear la suscripción:', error);
-    }
-  };
 
   return (
     <MaxWidthWrapper className="py-20">
