@@ -25,7 +25,7 @@ export default async function SubscriptionPage() {
       />
       <div className="grid gap-8">
         <Alert>
-          <Icons.info className="h-4 w-4" />
+          <Icons.creditCard className="h-4 w-4" />
           <AlertTitle>Plan Actual</AlertTitle>
           <AlertDescription>
             {subscriptionPlan.isPaid ? (
