@@ -1,10 +1,10 @@
 //@ts-nocheck
 import { User } from "@clerk/nextjs/dist/types/server";
-import { subscriptionPlansClient } from "@/lib/subscription";
 import { prisma } from "@/db/prisma";
 import { stripe } from "@/lib/stripe";
 import { getCachedSubscription } from "@/lib/redis";
 import { env } from "@/env.mjs";
+import { subscriptionPlansClient } from "@/config/subscription-plans-client";
 
 export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
   // Intentar obtener del caché primero
