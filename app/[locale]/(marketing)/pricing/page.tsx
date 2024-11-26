@@ -5,6 +5,7 @@ import { PricingFaq } from "@/components/pricing-faq";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { subscriptionPlans } from "@/config/subscription-plans";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: { locale: string };
@@ -33,12 +34,16 @@ export default async function PricingPage({ params: { locale } }: Props) {
     const plan = subscriptionPlans.find(p => p.id === planId);
     if (!plan) return;
 
-    return await createSubscriptionCheckout({
+    const checkoutUrl = await createSubscriptionCheckout({
       priceId: plan.stripePriceIds.monthly,
       userId,
       successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/subscription?success=true`,
       cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?success=false`,
     });
+
+    if (checkoutUrl) {
+      redirect(checkoutUrl);
+    }
   };
 
   return (
