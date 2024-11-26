@@ -1,7 +1,6 @@
 //@ts-nocheck
 import { User } from "@clerk/nextjs/dist/types/server";
-
-import { pricingData } from "@/config/subscriptions";
+import { subscriptionPlans } from "@/config/subscription-plans";
 import { prisma } from "@/db/prisma";
 import { stripe } from "@/lib/stripe";
 import { getCachedSubscription } from "@/lib/redis";
@@ -11,7 +10,7 @@ export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
   const cachedSubscription = await getCachedSubscription(userId);
   
   if (cachedSubscription) {
-    const plan = pricingData.find(p => p.id === cachedSubscription.planId);
+    const plan = subscriptionPlans.find(p => p.id === cachedSubscription.planId);
     return {
       ...plan,
       ...cachedSubscription,
@@ -20,60 +19,39 @@ export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
     };
   }
 
-  let user = await prisma.userPaymentInfo.findFirst({
+  const subscription = await prisma.subscription.findFirst({
     where: {
       userId,
-    },
+      status: 'active',
+      currentPeriodEnd: {
+        gt: new Date()
+      }
+    }
   });
 
-  if (!user && !authUser) {
-    throw new Error("User not found");
-  } else if (authUser) {
-    user = {
-      ...user,
-      stripePriceId: null,
-      stripeSubscriptionId: null,
-      stripeCurrentPeriodEnd: null,
+  if (!subscription) {
+    // Plan gratuito por defecto (starter)
+    return {
+      ...subscriptionPlans[0],
+      isPaid: false,
+      interval: null,
+      status: 'inactive'
     };
   }
 
-  // Check if user is on a paid plan.
-  const isPaid =
-    user.stripePriceId &&
-    user.stripeCurrentPeriodEnd?.getTime() + 86_400_000 > Date.now()
-      ? true
-      : false;
-
-  // Find the pricing data corresponding to the user's plan
-  const userPlan =
-    pricingData.find((plan) => plan.stripeIds.monthly === user.stripePriceId) ||
-    pricingData.find((plan) => plan.stripeIds.yearly === user.stripePriceId);
-
-  const plan = isPaid && userPlan ? userPlan : pricingData[0];
-
-  const interval = isPaid
-    ? userPlan?.stripeIds.monthly === user.stripePriceId
-      ? "month"
-      : userPlan?.stripeIds.yearly === user.stripePriceId
-        ? "year"
-        : null
-    : null;
-
-  let isCanceled = false;
-  if (isPaid && user.stripeSubscriptionId) {
-    const stripePlan = await stripe.subscriptions.retrieve(
-      user.stripeSubscriptionId,
-    );
-    isCanceled = stripePlan.cancel_at_period_end;
+  const plan = subscriptionPlans.find(p => p.id === subscription.planId);
+  
+  if (!plan) {
+    throw new Error("Plan no encontrado");
   }
+
+  const interval = subscription.stripePriceId?.includes('monthly') ? 'month' : 'year';
 
   return {
     ...plan,
-    ...user,
-    stripeCurrentPeriodEnd: user.stripeCurrentPeriodEnd?.getTime(),
-    isPaid,
-    interval,
-    isCanceled,
+    ...subscription,
+    isPaid: true,
+    interval
   };
 }
 
