@@ -37,6 +37,10 @@ export async function POST(req: Request) {
             throw new Error("Missing subscription or customer data");
           }
 
+          const subscription = await stripe.subscriptions.retrieve(
+            session.subscription as string
+          );
+
           await prisma.subscription.create({
             data: {
               userId: session.metadata.userId,
@@ -46,8 +50,8 @@ export async function POST(req: Request) {
               planId: plan?.id || 'starter',
               status: 'active',
               credits: plan?.credits || 0,
-              currentPeriodStart: new Date(session.current_period_start * 1000),
-              currentPeriodEnd: new Date(session.current_period_end * 1000),
+              currentPeriodStart: new Date(subscription.current_period_start * 1000),
+              currentPeriodEnd: new Date(subscription.current_period_end * 1000),
             },
           });
 
