@@ -28,7 +28,6 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
-import { subscriptionPlans } from "@/config/subscription-plans";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -37,6 +36,7 @@ interface PricingCardsProps {
   userId?: string;
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
+  subscriptionPlans: any[];
 }
 
 const PricingCard = ({
@@ -180,6 +180,7 @@ export function PricingCards({
   userId,
   chargeProduct,
   locale,
+  subscriptionPlans,
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
