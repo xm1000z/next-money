@@ -13,26 +13,20 @@ import { Ticker } from "@/components/ticker";
 import { FooterCTA } from "@/components/footer-cta";
 import Features from "@/components/sections/features";
 import HeroLanding from "@/components/sections/hero-landing";
-import PricingCard from "@/components/sections/pricing-card";
+import { PricingCard } from "@/components/sections/pricing-card";
+import { getSubscriptionPlans } from "@/components/sections/subscription-plans";
 import { infos } from "@/config/landing";
 
 type Props = {
   params: { locale: string };
 };
 
-export default function IndexPage({ params: { locale } }: Props) {
-  // Enable static rendering
+export default async function IndexPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
 
   return (
     <>
       <Hero />
-      {/* <Powered />
-      {/* <BentoGrid /> */}
-      {/* <InfoLanding data={infos[0]} reverse={true} /> */}
-      {/* <InfoLanding data={infos[1]} /> */}
-      {/* <Screens /> */}
-      {/*<Features />*/}
       <SectionOne />
       <SectionTwo />
       <SectionThree />
