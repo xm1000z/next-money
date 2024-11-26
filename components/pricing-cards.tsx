@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
+import { Switch } from "@/components/ui/switch";
 
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
