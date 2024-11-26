@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { hasActiveSubscription } from "@/lib/subscription";
 
 export async function GET() {
