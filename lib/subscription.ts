@@ -1,16 +1,17 @@
 //@ts-nocheck
 import { User } from "@clerk/nextjs/dist/types/server";
-import { subscriptionPlans } from "@/config/subscription-plans";
+import { subscriptionPlansClient } from "@/lib/subscription";
 import { prisma } from "@/db/prisma";
 import { stripe } from "@/lib/stripe";
 import { getCachedSubscription } from "@/lib/redis";
+import { env } from "@/env.mjs";
 
 export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
   // Intentar obtener del caché primero
   const cachedSubscription = await getCachedSubscription(userId);
   
   if (cachedSubscription) {
-    const plan = subscriptionPlans.find(p => p.id === cachedSubscription.planId);
+    const plan = subscriptionPlansClient.find(p => p.id === cachedSubscription.planId);
     return {
       ...plan,
       ...cachedSubscription,
@@ -32,14 +33,14 @@ export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
   if (!subscription) {
     // Plan gratuito por defecto (starter)
     return {
-      ...subscriptionPlans[0],
+      ...subscriptionPlansClient[0],
       isPaid: false,
       interval: null,
       status: 'inactive'
     };
   }
 
-  const plan = subscriptionPlans.find(p => p.id === subscription.planId);
+  const plan = subscriptionPlansClient.find(p => p.id === subscription.planId);
   
   if (!plan) {
     throw new Error("Plan no encontrado");
@@ -115,4 +116,36 @@ export async function hasActiveSubscription(userId: string) {
   });
 
   return !!subscription;
+}
+
+// Información pública de los planes
+export const subscriptionPlansClient = [
+  {
+    id: "starter",
+    name: "Starter",
+    description: "Perfecto para empezar",
+    price: {
+      monthly: 9.99,
+      yearly: 99.99
+    },
+    credits: 100,
+    features: [
+      "100 créditos mensuales",
+      "Renovación automática",
+      "Soporte básico",
+      "Acceso a todas las funciones"
+    ]
+  },
+  // ... otros planes
+];
+
+// Función del servidor para obtener los planes completos con IDs de Stripe
+export async function getSubscriptionPlans() {
+  return subscriptionPlansClient.map(plan => ({
+    ...plan,
+    stripePriceIds: {
+      monthly: env[`NEXT_PUBLIC_STRIPE_${plan.id.toUpperCase()}_MONTHLY_PRICE_ID`],
+      yearly: env[`NEXT_PUBLIC_STRIPE_${plan.id.toUpperCase()}_YEARLY_PRICE_ID`]
+    }
+  }));
 }
