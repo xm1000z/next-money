@@ -6,7 +6,7 @@ interface PricingCardProps {
   chargeProduct: any[];
 }
 
-export function PricingCard({ chargeProduct }: PricingCardProps) {
+export default function PricingCard({ chargeProduct }: PricingCardProps) {
   const plans = subscriptionPlans.map(plan => ({
     ...plan,
     stripePriceIds: {
