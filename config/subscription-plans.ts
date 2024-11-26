@@ -1,3 +1,5 @@
+import { env } from "@/env.mjs";
+
 export const subscriptionPlans = [
   {
     id: "starter",
@@ -8,8 +10,8 @@ export const subscriptionPlans = [
       yearly: 99.99
     },
     stripePriceIds: {
-      monthly: process.env.NEXT_PUBLIC_STRIPE_STARTER_MONTHLY_PRICE_ID!,
-      yearly: process.env.NEXT_PUBLIC_STRIPE_STARTER_YEARLY_PRICE_ID!
+      monthly: env.NEXT_PUBLIC_STRIPE_STARTER_MONTHLY_PRICE_ID,
+      yearly: env.NEXT_PUBLIC_STRIPE_STARTER_YEARLY_PRICE_ID
     },
     credits: 100,
     features: [
@@ -32,8 +34,8 @@ export const subscriptionPlans = [
       yearly: 199.99
     },
     stripePriceIds: {
-      monthly: process.env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID!,
-      yearly: process.env.NEXT_PUBLIC_STRIPE_PRO_YEARLY_PRICE_ID!
+      monthly: env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID,
+      yearly: env.NEXT_PUBLIC_STRIPE_PRO_YEARLY_PRICE_ID
     },
     credits: 300,
     features: [
@@ -57,8 +59,8 @@ export const subscriptionPlans = [
       yearly: 499.99
     },
     stripePriceIds: {
-      monthly: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PRICE_ID!,
-      yearly: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PRICE_ID!
+      monthly: env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PRICE_ID,
+      yearly: env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PRICE_ID
     },
     credits: 1000,
     features: [
