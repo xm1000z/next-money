@@ -23,29 +23,6 @@ export default async function PricingPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const { userId } = auth();
 
-  const { data: chargeProduct = [] } = await getChargeProduct(locale);
-
-  // Manejar la suscripción en el servidor
-  const handleSubscribe = async (planId: string) => {
-    'use server';
-    
-    if (!userId) return;
-
-    const plan = subscriptionPlans.find(p => p.id === planId);
-    if (!plan) return;
-
-    const checkoutUrl = await createSubscriptionCheckout({
-      priceId: plan.stripePriceIds.monthly,
-      userId,
-      successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/subscription?success=true`,
-      cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?success=false`,
-    });
-
-    if (checkoutUrl) {
-      redirect(checkoutUrl);
-    }
-  };
-
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
       <PricingCards 

@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs/server";
 import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
 import { getChargeProduct } from "@/db/queries/charge-product";
@@ -7,10 +6,10 @@ import { handleSubscribe } from "@/lib/server-actions";
 
 type Props = {
   locale: string;
+  userId?: string | null;
 };
 
-export default async function PricingCard({ locale }: Props) {
-  const { userId } = auth();
+export default async function PricingCard({ locale, userId }: Props) {
   const { data: chargeProduct } = await getChargeProduct(locale);
 
   return (
