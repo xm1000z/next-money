@@ -53,7 +53,9 @@ export default async function PricingPage({ params: { locale } }: Props) {
         userId={userId || undefined}
         currentPlan={currentPlan}
         isCurrentPlanActive={isCurrentPlanActive}
-        onSubscribe={handleSubscribe}
+        onSubscribe={async (planId: string, interval: 'monthly' | 'yearly') => {
+          return handleSubscribe(userId ?? undefined, planId, interval);
+        }}
       />
       <hr className="container" />
       <PricingFaq />
