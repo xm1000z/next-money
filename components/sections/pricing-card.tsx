@@ -4,6 +4,7 @@ import { PricingFaq } from "@/components/pricing-faq";
 import { subscriptionPlans } from "@/config/subscription-plans";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { handleSubscribe } from "@/lib/server-actions";
+import { SubscriptionPlanClient } from "@/types/subscription";
 
 interface PricingCardProps {
   locale: string;
@@ -13,10 +14,8 @@ export default async function PricingCard({ locale }: PricingCardProps) {
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
   const { userId } = auth();
 
-
   const clientPlans = subscriptionPlans.map(plan => ({
     ...plan,
-    // No incluir stripePriceIds
     id: plan.id,
     name: plan.name,
     description: plan.description,
@@ -31,10 +30,10 @@ export default async function PricingCard({ locale }: PricingCardProps) {
       <PricingCards 
         chargeProduct={chargeProduct} 
         subscriptionPlans={clientPlans}
-        userId={userId || undefined}
+        userId={userId ?? undefined}
         onSubscribe={async (planId: string) => {
           'use server';
-          await handleSubscribe(userId, planId);
+          return handleSubscribe(userId ?? undefined, planId);
         }}
       />
       <hr className="container" />
