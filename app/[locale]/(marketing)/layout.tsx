@@ -17,7 +17,7 @@ export default function MarketingLayout({
   unstable_setRequestLocale(params.locale);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-[#fbfbfb] dark:bg-[#0C0C0C]">
       <Header/>
       <main className="flex-1">{children}</main>
       <Footer />
