@@ -1,4 +1,5 @@
 import { PricingCards } from "@/components/pricing-cards";
+import { auth } from "@clerk/nextjs/server";
 import { PricingFaq } from "@/components/pricing-faq";
 import { subscriptionPlans } from "@/config/subscription-plans";
 import { getChargeProduct } from "@/db/queries/charge-product";
