@@ -213,3 +213,42 @@ function PricingCardDialog() {
     </Dialog>
   );
 }
+
+export function PricingCardDialog({
+  onClose,
+  isOpen,
+  chargeProduct,
+}: {
+  isOpen: boolean;
+  chargeProduct?: ChargeProductSelectDto[];
+  onClose: (isOpen: boolean) => void;
+}) {
+  const t = useTranslations("PricingPage");
+  const { isSm, isMobile } = useMediaQuery();
+  const product = useMemo(() => {
+    if (isSm || isMobile) {
+      return ([chargeProduct?.[1]] ?? []) as ChargeProductSelectDto[];
+    }
+    return chargeProduct ?? ([] as ChargeProductSelectDto[]);
+  }, [isSm, isMobile]);
+
+  return (
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        onClose(open);
+      }}
+    >
+      <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px] bg-background/80 backdrop-blur-md">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold mb-6">{t("title")}</DialogTitle>
+          <div className="grid grid-cols-1 gap-8 bg-inherit py-5 lg:grid-cols-3">
+            {product?.map((offer) => (
+              <PricingCard offer={offer} key={offer.id} />
+            ))}
+          </div>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  );
+}
