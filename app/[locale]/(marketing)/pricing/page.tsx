@@ -4,6 +4,7 @@ import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { subscriptionPlans } from "@/config/subscription-plans";
+import { getChargeProduct } from "@/db/queries/charge-product";
 
 type Props = {
   params: { locale: string };
@@ -20,6 +21,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
 export default async function PricingPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const { userId } = auth();
+  const { data: chargeProduct = [] } = await getChargeProduct(locale);
 
   let currentPlan;
   let isCurrentPlanActive = false;
@@ -47,6 +49,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
         userId={userId || undefined}
         currentPlan={currentPlan}
         isCurrentPlanActive={isCurrentPlanActive}
+        chargeProduct={chargeProduct}
       />
       <hr className="container" />
       <PricingFaq />

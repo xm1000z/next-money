@@ -41,7 +41,6 @@ interface PricingCardsProps {
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
   subscriptionPlans: SubscriptionPlanClient[];
-  onSubscribe: (planId: string, interval: 'monthly' | 'yearly') => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
@@ -186,29 +185,51 @@ export function PricingCards({
   currentPlan,
   isCurrentPlanActive,
   subscriptionPlans,
-  onSubscribe
+  chargeProduct
 }: PricingCardsProps) {
   const [isYearly, setIsYearly] = useState(false);
-  const router = useRouter();
   const { toast } = useToast();
+  const t = useTranslations("PricingPage");
 
   const handleSubscriptionClick = async (planId: string) => {
     if (!userId) {
-      console.error('Usuario no autenticado');
+      toast({
+        title: "Error",
+        description: "Debes iniciar sesión para suscribirte",
+        variant: "destructive"
+      });
       return;
     }
 
     try {
-      const result = await onSubscribe(planId, isYearly ? 'yearly' : 'monthly');
-      if (result?.url) {
-        window.location.href = result.url;
+      const response = await fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId,
+          interval: isYearly ? 'yearly' : 'monthly'
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al procesar la suscripción');
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No se pudo crear la sesión de checkout');
       }
     } catch (error) {
       console.error('Error al procesar la suscripción:', error);
       toast({
-        variant: "destructive",
         title: "Error",
         description: "No se pudo procesar la suscripción. Por favor, inténtalo de nuevo.",
+        variant: "destructive"
       });
     }
   };

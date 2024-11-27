@@ -13,14 +13,13 @@ export async function POST(req: Request) {
     }
 
     const { planId, interval } = await req.json();
-
     const result = await handleSubscribe(userId, planId, interval);
 
     if (!result?.url) {
       throw new Error('No se pudo crear la sesión de checkout');
     }
 
-    return NextResponse.json({ url: result.url });
+    return NextResponse.json(result);
   } catch (error) {
     console.error('Error creating subscription:', error);
     return NextResponse.json(
