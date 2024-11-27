@@ -2,11 +2,8 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { auth } from "@clerk/nextjs/server";
 import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
-import { getChargeProduct } from "@/db/queries/charge-product";
-import { subscriptionPlans } from "@/config/subscription-plans";
-import { handleSubscribe } from "@/lib/server-actions";
 import { getUserSubscriptionPlan } from "@/lib/subscription";
-import { SubscriptionPlanClient } from "@/types/subscription";
+import { subscriptionPlans } from "@/config/subscription-plans";
 
 type Props = {
   params: { locale: string };
@@ -33,8 +30,6 @@ export default async function PricingPage({ params: { locale } }: Props) {
     isCurrentPlanActive = subscriptionPlan.status === 'active';
   }
 
-  const { data: chargeProduct = [] } = await getChargeProduct(locale);
-
   const clientPlans = subscriptionPlans.map(plan => ({
     id: plan.id,
     name: plan.name,
@@ -48,14 +43,10 @@ export default async function PricingPage({ params: { locale } }: Props) {
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
       <PricingCards 
-        chargeProduct={chargeProduct} 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
         currentPlan={currentPlan}
         isCurrentPlanActive={isCurrentPlanActive}
-        onSubscribe={async (planId: string, interval: 'monthly' | 'yearly') => {
-          return handleSubscribe(userId ?? undefined, planId, interval);
-        }}
       />
       <hr className="container" />
       <PricingFaq />
