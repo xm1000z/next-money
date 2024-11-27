@@ -4,9 +4,9 @@ import { subscriptionPlans } from "@/config/subscription-plans";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { handleSubscribe } from "@/lib/server-actions";
 
-type PricingCardProps = {
-  params: { locale: string };
-};
+interface PricingCardProps {
+  locale: string;
+}
 
 export default async function PricingCard({ locale }: PricingCardProps) {
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
