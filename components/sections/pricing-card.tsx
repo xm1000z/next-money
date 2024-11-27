@@ -10,6 +10,8 @@ interface PricingCardProps {
 
 export default async function PricingCard({ locale }: PricingCardProps) {
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
+  const { userId } = auth();
+
 
   const clientPlans = subscriptionPlans.map(plan => ({
     ...plan,
