@@ -6,8 +6,7 @@ import { DashboardShell } from "@/components/dashboard/shell";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { SubscriptionButton } from "@/components/subscription/subscription-button";
 
 export default async function SubscriptionPage() {
   const { userId } = auth();
@@ -17,24 +16,6 @@ export default async function SubscriptionPage() {
   }
 
   const subscriptionPlan = await getUserSubscriptionPlan(userId);
-  const router = useRouter();
-
-  const handleUpgrade = async () => {
-    router.push('/pricing');
-  };
-
-  const handleManageSubscription = async () => {
-    // Implementar portal de cliente de Stripe aquí
-    try {
-      const response = await fetch('/api/create-portal-session', {
-        method: 'POST',
-      });
-      const { url } = await response.json();
-      router.push(url);
-    } catch (error) {
-      console.error('Error al abrir el portal de gestión:', error);
-    }
-  };
 
   return (
     <DashboardShell>
@@ -95,22 +76,7 @@ export default async function SubscriptionPage() {
           </CardContent>
         </Card>
 
-        {subscriptionPlan.isPaid ? (
-          <Button 
-            variant="outline"
-            className="w-full"
-            onClick={handleManageSubscription}
-          >
-            Gestionar Suscripción
-          </Button>
-        ) : (
-          <Button 
-            className="w-full"
-            onClick={handleUpgrade}
-          >
-            Actualizar a Plan de Pago
-          </Button>
-        )}
+        <SubscriptionButton isPaid={subscriptionPlan.isPaid} />
       </div>
     </DashboardShell>
   );
