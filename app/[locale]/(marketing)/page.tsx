@@ -41,7 +41,7 @@ export default function IndexPage({ params: { locale } }: Props) {
       <SectionSeven />
       <SectionVideo />
       <Ticker />
-      <PricingCard locale={locale} />
+      <PricingCard />
       <FooterCTA />
     </>
   );
