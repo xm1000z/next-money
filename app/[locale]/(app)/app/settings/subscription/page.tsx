@@ -7,7 +7,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { createCustomerPortalSession } from "@/lib/stripe-actions";
 
 export default async function SubscriptionPage() {
   const { userId } = auth();
@@ -78,27 +77,20 @@ export default async function SubscriptionPage() {
         </Card>
 
         {subscriptionPlan.isPaid ? (
-          <form action={async () => {
-            "use server";
-            if (subscriptionPlan.stripeCustomerId) {
-              const url = await createCustomerPortalSession(subscriptionPlan.stripeCustomerId);
-              if (url) redirect(url);
-            }
-          }}>
-            <Button variant="outline" className="w-full">
-              Gestionar Suscripción
-            </Button>
-          </form>
+          <Button 
+            variant="outline"
+            className="w-full"
+            onClick={() => {/* Implementar gestión de suscripción */}}
+          >
+            Gestionar Suscripción
+          </Button>
         ) : (
-          <form action={async () => {
-            "use server";
-            const url = await createCheckoutSession(subscriptionPlan.stripePriceId);
-            if (url) redirect(url);
-          }}>
-            <Button className="w-full">
-              Actualizar a Plan de Pago
-            </Button>
-          </form>
+          <Button 
+            className="w-full"
+            onClick={() => {/* Implementar upgrade a plan de pago */}}
+          >
+            Actualizar a Plan de Pago
+          </Button>
         )}
       </div>
     </DashboardShell>

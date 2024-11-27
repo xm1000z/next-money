@@ -4,7 +4,6 @@ import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { subscriptionPlans } from "@/config/subscription-plans";
-import { handleSubscribe } from "@/lib/server-actions";
 
 type Props = {
   params: { locale: string };
@@ -44,8 +43,19 @@ export default async function PricingPage({ params: { locale } }: Props) {
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
         onSubscribe={async (planId: string) => {
-          'use server';
-          await handleSubscribe(userId, planId);
+          const response = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId, planId }),
+          });
+
+          if (response.ok) {
+            console.log('Subscription successful');
+          } else {
+            console.error('Subscription failed');
+          }
         }}
       />
       <hr className="container" />

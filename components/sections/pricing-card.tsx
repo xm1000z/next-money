@@ -3,7 +3,6 @@ import { auth } from "@clerk/nextjs/server";
 import { PricingFaq } from "@/components/pricing-faq";
 import { subscriptionPlans } from "@/config/subscription-plans";
 import { getChargeProduct } from "@/db/queries/charge-product";
-import { handleSubscribe } from "@/lib/server-actions";
 
 interface PricingCardProps {
   locale: string;
@@ -33,8 +32,19 @@ export default async function PricingCard({ locale }: PricingCardProps) {
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
         onSubscribe={async (planId: string) => {
-          'use server';
-          await handleSubscribe(userId, planId);
+          const response = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId, planId }),
+          });
+
+          if (response.ok) {
+            console.log('Subscription successful');
+          } else {
+            console.error('Subscription failed');
+          }
         }}
       />
       <hr className="container" />
