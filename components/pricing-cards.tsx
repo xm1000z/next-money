@@ -8,6 +8,15 @@ import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { Icons } from "@/components/shared/icons";
 import { cn, formatPrice } from "@/lib/utils";
 import { SubscriptionPlanClient } from "@/types/subscription";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface PricingCardsProps {
   userId?: string;
@@ -177,5 +186,30 @@ export function PricingCards({
         })}
       </div>
     </section>
+  );
+}
+
+function PricingCardDialog() {
+  const searchParams = useSearchParams();
+  const success = searchParams?.get("success");
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (success === "true") {
+      setIsOpen(true);
+    }
+  }, [success]);
+
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>¡Gracias por tu suscripción!</DialogTitle>
+          <DialogDescription>
+            Tu suscripción se ha procesado correctamente. Ahora puedes disfrutar de todos los beneficios de tu plan.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }
