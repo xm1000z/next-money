@@ -1,37 +1,46 @@
+"use server";
+
+import { auth } from "@clerk/nextjs/server";
 import { stripe } from "@/lib/stripe";
+import { absoluteUrl } from "@/lib/utils";
 
-export async function createSubscriptionCheckout({
-  priceId,
-  userId,
-  successUrl,
-  cancelUrl,
-}: {
-  priceId: string;
-  userId: string;
-  successUrl: string;
-  cancelUrl: string;
-}) {
-  try {
-    const checkoutSession = await stripe.checkout.sessions.create({
-      mode: "subscription",
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      metadata: {
-        userId,
-        priceId,
-      },
-      success_url: successUrl,
-      cancel_url: cancelUrl,
-    });
-
-    return checkoutSession.url;
-  } catch (error) {
-    console.error('Error creating checkout session:', error);
-    throw error;
+export async function createCheckoutSession(planId: string) {
+  const { userId } = auth();
+  
+  if (!userId) {
+    throw new Error("User not found");
   }
+
+  const billingUrl = absoluteUrl("/pricing");
+
+  const checkoutSession = await stripe.checkout.sessions.create({
+    success_url: `${billingUrl}?success=true`,
+    cancel_url: `${billingUrl}?success=false`,
+    payment_method_types: ["card"],
+    mode: "subscription",
+    billing_address_collection: "auto",
+    customer_email: userId,
+    line_items: [
+      {
+        price: planId,
+        quantity: 1,
+      },
+    ],
+    metadata: {
+      userId,
+    },
+  });
+
+  return checkoutSession.url;
+}
+
+export async function createCustomerPortalSession(customerId: string) {
+  const billingUrl = absoluteUrl("/app/settings/subscription");
+  
+  const portalSession = await stripe.billingPortal.sessions.create({
+    customer: customerId,
+    return_url: billingUrl,
+  });
+
+  return portalSession.url;
 } 
