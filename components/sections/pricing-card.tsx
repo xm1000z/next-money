@@ -31,9 +31,9 @@ export default async function PricingCard({ locale }: PricingCardProps) {
         chargeProduct={chargeProduct} 
         subscriptionPlans={clientPlans}
         userId={userId ?? undefined}
-        onSubscribe={async (planId: string) => {
+        onSubscribe={async (planId: string, interval: 'monthly' | 'yearly' = 'monthly') => {
           'use server';
-          return handleSubscribe(userId ?? undefined, planId);
+          return handleSubscribe(userId ?? undefined, planId, interval);
         }}
       />
       <hr className="container" />
