@@ -15,7 +15,6 @@ export default async function PricingCard({ locale }: PricingCardProps) {
   const { userId } = auth();
 
   const clientPlans = subscriptionPlans.map(plan => ({
-    ...plan,
     id: plan.id,
     name: plan.name,
     description: plan.description,
@@ -28,13 +27,9 @@ export default async function PricingCard({ locale }: PricingCardProps) {
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
       <PricingCards 
-        chargeProduct={chargeProduct} 
+        chargeProduct={chargeProduct}
         subscriptionPlans={clientPlans}
         userId={userId ?? undefined}
-        onSubscribe={async (planId: string, interval: 'monthly' | 'yearly') => {
-          'use server';
-          return handleSubscribe(userId ?? undefined, planId, interval);
-        }}
       />
       <hr className="container" />
       <PricingFaq />
