@@ -23,7 +23,6 @@ export default async function PricingPage({ params: { locale } }: Props) {
 
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
 
-  // Remover stripePriceIds y datos sensibles
   const clientPlans = subscriptionPlans.map(plan => ({
     id: plan.id,
     name: plan.name,

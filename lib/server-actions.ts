@@ -10,15 +10,16 @@ const subscribeSchema = z.object({
   planId: z.string().min(1)
 });
 
-export async function handleSubscribe(userId: string | null, planId: string) {
+export async function handleSubscribe(userId: string | undefined, planId: string): Promise<{ url: string } | void> {
+  if (!userId) {
+    console.error('Usuario no autenticado');
+    return;
+  }
+  
   try {
     const result = subscribeSchema.safeParse({ userId, planId });
     if (!result.success) {
       throw new Error('Invalid input data');
-    }
-
-    if (!userId) {
-      throw new Error('Authentication required');
     }
 
     const plan = subscriptionPlans.find(p => p.id === planId);
@@ -40,6 +41,5 @@ export async function handleSubscribe(userId: string | null, planId: string) {
     return { url: checkoutUrl };
   } catch (error) {
     console.error('Subscription error:', error);
-    throw new Error('Failed to process subscription');
   }
 } 

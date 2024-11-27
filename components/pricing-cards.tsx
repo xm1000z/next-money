@@ -36,8 +36,8 @@ interface PricingCardsProps {
   userId?: string;
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
-  subscriptionPlans: any[];
-  onSubscribe: (planId: string) => void;
+  subscriptionPlans: SubscriptionPlanClient[];
+  onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
@@ -199,8 +199,12 @@ export function PricingCards({
   }, [userId]);
 
   const handleSubscriptionClick = async (planId: string) => {
+    if (!userId) {
+      console.error('Usuario no autenticado');
+      return;
+    }
     try {
-      const result = await onSubscribe(planId);
+      const result = await onSubscribe(userId, planId);
       if (result?.url) {
         router.push(result.url);
       }
