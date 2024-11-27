@@ -1,23 +1,28 @@
 import { auth } from "@clerk/nextjs/server";
 import { hasActiveSubscription } from "@/lib/subscription";
+import { NextResponse } from "next/server";
 
 export async function GET() {
-  const { userId } = auth();
+  try {
+    const { userId } = auth();
 
-  if (!userId) {
-    return new Response(
-      JSON.stringify({ 
+    if (!userId) {
+      return NextResponse.json({ 
         hasActiveSubscription: false,
         error: "No autorizado" 
-      }), 
-      { status: 401 }
-    );
+      }, { status: 401 });
+    }
+
+    const isSubscribed = await hasActiveSubscription(userId);
+
+    return NextResponse.json({ 
+      hasActiveSubscription: isSubscribed 
+    }, { status: 200 });
+  } catch (error) {
+    console.error('Error checking subscription status:', error);
+    return NextResponse.json({ 
+      hasActiveSubscription: false,
+      error: "Error interno del servidor" 
+    }, { status: 500 });
   }
-
-  const isSubscribed = await hasActiveSubscription(userId);
-
-  return new Response(
-    JSON.stringify({ hasActiveSubscription: isSubscribed }), 
-    { status: 200 }
-  );
 } 

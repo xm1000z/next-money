@@ -22,9 +22,16 @@ export default async function PricingPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const { userId } = auth();
 
-  const { data: chargeProduct = [] } = await getChargeProduct(locale);
+  let currentPlan;
+  let isCurrentPlanActive = false;
 
-  const clientPlans: SubscriptionPlanClient[] = subscriptionPlans.map(plan => ({
+  if (userId) {
+    const subscriptionPlan = await getUserSubscriptionPlan(userId);
+    currentPlan = subscriptionPlan.id;
+    isCurrentPlanActive = subscriptionPlan.status === 'active';
+  }
+
+  const clientPlans = subscriptionPlans.map(plan => ({
     id: plan.id,
     name: plan.name,
     description: plan.description,
@@ -40,6 +47,8 @@ export default async function PricingPage({ params: { locale } }: Props) {
         chargeProduct={chargeProduct} 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
+        currentPlan={currentPlan}
+        isCurrentPlanActive={isCurrentPlanActive}
         onSubscribe={handleSubscribe}
       />
       <hr className="container" />
