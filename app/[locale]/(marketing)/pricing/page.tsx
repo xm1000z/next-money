@@ -17,17 +17,14 @@ export async function generateMetadata({ params: { locale } }: Props) {
     description: t("LocaleLayout.description"),
   };
 }
-
 export default async function PricingPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const { userId } = auth();
 
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
 
-  // Procesar los planes para el cliente (sin IDs de Stripe)
+  // Remover stripePriceIds y datos sensibles
   const clientPlans = subscriptionPlans.map(plan => ({
-    ...plan,
-    // No incluir stripePriceIds
     id: plan.id,
     name: plan.name,
     description: plan.description,
@@ -43,10 +40,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
         chargeProduct={chargeProduct} 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
-        onSubscribe={async (planId: string) => {
-          'use server';
-          await handleSubscribe(userId, planId);
-        }}
+        onSubscribe={handleSubscribe}
       />
       <hr className="container" />
       <PricingFaq />

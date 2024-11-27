@@ -198,24 +198,14 @@ export function PricingCards({
     }
   }, [userId]);
 
-  const handleSubscription = async (priceId: string) => {
+  const handleSubscriptionClick = async (planId: string) => {
     try {
-      if (!userId) {
-        return; // El usuario debe estar autenticado
-      }
-
-      const checkoutUrl = await createSubscriptionCheckout({
-        priceId,
-        userId,
-        successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
-        cancelUrl: `${window.location.origin}/pricing?success=false`,
-      });
-
-      if (checkoutUrl) {
-        router.push(checkoutUrl);
+      const result = await onSubscribe(planId);
+      if (result?.url) {
+        router.push(result.url);
       }
     } catch (error) {
-      console.error('Error al crear la suscripción:', error);
+      console.error('Error al procesar la suscripción');
     }
   };
 
@@ -296,7 +286,7 @@ export function PricingCards({
                     <Button 
                       className="w-full"
                       variant={plan.metadata?.recommended ? "default" : "outline"}
-                      onClick={() => onSubscribe(plan.id)}
+                      onClick={() => handleSubscriptionClick(plan.id)}
                     >
                       Suscribirse
                     </Button>
