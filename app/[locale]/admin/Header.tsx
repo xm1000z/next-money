@@ -64,13 +64,14 @@ const findMenu = (menus: MenuType[], path: string) => {
     return breadcrumbs;
   };
 
-  const breadcrumbs = findBreadcrumb(menuObject, path);
-
-  return breadcrumbs; // 返回清理后的面包屑数组
+  return findBreadcrumb(menuObject, path);
 };
-export default function () {
+
+export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  const breadcrumbItems = findMenu(menus, pathname);
 
   return (
     <header className="flex h-[--header-height] min-w-0 flex-shrink-0 items-center gap-x-4 border-b border-gray-200 px-4 dark:border-gray-800">
@@ -94,7 +95,7 @@ export default function () {
       </Drawer>
       <Breadcrumb
         className="!sm:hidden"
-        items={findMenu(menus, pathname)?.map((item, index) => {
+        items={breadcrumbItems.map((item, index) => {
           return {
             title: item.href ? (
               <Link href={item.href}>{item.name}</Link>
