@@ -1,26 +1,28 @@
 import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
-import { getChargeProduct } from "@/db/queries/charge-product";
 import { subscriptionPlans } from "@/config/subscription-plans";
-import { handleSubscribe } from "@/lib/server-actions";
+import { getChargeProduct } from "@/db/queries/charge-product";
 
-type Props = {
+interface PricingCardProps {
   locale: string;
-  userId?: string | null;
-};
+}
 
-export default async function PricingCard({ locale, userId }: Props) {
-  const { data: chargeProduct } = await getChargeProduct(locale);
+export default async function PricingCard({ locale }: PricingCardProps) {
+  const { data: chargeProduct = [] } = await getChargeProduct(locale);
+
+  const plans = subscriptionPlans.map(plan => ({
+    ...plan,
+    stripePriceIds: {
+      monthly: plan.stripePriceIds.monthly,
+      yearly: plan.stripePriceIds.yearly
+    }
+  }));
 
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
       <PricingCards 
-        chargeProduct={chargeProduct as any[]} 
-        subscriptionPlans={subscriptionPlans}
-        userId={userId || undefined}
-        onSubscribe={async (planId: string) => {
-          await handleSubscribe(userId, planId);
-        }}
+        chargeProduct={chargeProduct} 
+        subscriptionPlans={plans}
       />
       <hr className="container" />
       <PricingFaq />
