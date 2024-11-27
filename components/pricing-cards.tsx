@@ -393,3 +393,4 @@ export function PricingCardDialog({
       </DialogContent>
     </Dialog>
   );
+}
