@@ -1,214 +1,69 @@
 "use client";
 
-import { cloneElement, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
-
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import { useTranslations } from "next-intl";
-import { useReward } from "react-rewards";
-import { Switch } from "@/components/ui/switch";
-
-import { BillingFormButton } from "@/components/forms/billing-form-button";
-import { HeaderSection } from "@/components/shared/header-section";
-import { Icons } from "@/components/shared/icons";
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import SignBox from "@/components/sign-box";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import type { ChargeProductSelectDto } from "@/db/type";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { url } from "@/lib";
-import { usePathname } from "@/lib/navigation";
-import { cn, formatPrice } from "@/lib/utils";
-import { createSubscriptionCheckout } from "@/lib/stripe-actions";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { SubscriptionPlanClient } from "@/types/subscription";
+import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { Icons } from "@/components/shared/icons";
+import { cn, formatPrice } from "@/lib/utils";
+import { SubscriptionPlanClient } from "@/types/subscription";
 
 interface PricingCardsProps {
   userId?: string;
   currentPlan?: string;
   isCurrentPlanActive?: boolean;
-  locale?: string;
-  chargeProduct?: ChargeProductSelectDto[];
   subscriptionPlans: SubscriptionPlanClient[];
-  onSubscribe: (planId: string, interval: 'monthly' | 'yearly') => Promise<{ url: string } | void>;
-}
-
-const PricingCard = ({
-  userId,
-  offer,
-}: {
-  userId?: string;
-  offer: ChargeProductSelectDto;
-}) => {
-  const pathname = usePathname();
-  const t = useTranslations("PricingPage");
-
-  return (
-    <div
-      className={cn(
-        "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
-        "backdrop-blur-md bg-background/50 dark:bg-background/30",
-        offer.amount === 1990 
-          ? "border-primary/50 dark:border-primary/30 scale-105" 
-          : "hover:scale-102.5 hover:shadow-xl",
-      )}
-      key={offer.title}
-    >
-      <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
-        <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
-          {offer.title}
-        </p>
-
-        <div className="flex flex-col items-start">
-          <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-            {offer.originalAmount && offer.originalAmount > 0 ? (
-              <>
-                <span className="text-xl text-muted-foreground/70 line-through">
-                  {formatPrice(offer.originalAmount, "€")}
-                </span>
-                <span>{formatPrice(offer.amount, "€")}</span>
-              </>
-            ) : (
-              `${formatPrice(offer.amount, "€")}`
-            )}
-            <div className="text-base font-medium text-muted-foreground">
-              / {offer.credit} {t("worth")}
-            </div>
-          </div>
-        </div>
-        <div className="text-left text-sm text-muted-foreground/90">
-          <div>{t("description")}</div>
-        </div>
-      </div>
-
-      <div className="flex h-full flex-col justify-between gap-8 p-8">
-        <ul className="space-y-3 text-left text-sm font-medium leading-normal">
-          {offer.message &&
-            offer.message.split(",")?.map((feature) => (
-              <li className="flex items-start gap-x-3" key={feature}>
-                <Icons.check className="size-5 shrink-0 text-primary" />
-                <p>{feature}</p>
-              </li>
-            ))}
-        </ul>
-        <SignedIn>
-          <BillingFormButton 
-            offer={offer} 
-            btnText={t("action.buy")} 
-            className="w-full transition-all duration-300 hover:brightness-110"
-          />
-        </SignedIn>
-
-        <SignedOut>
-          <div className="flex justify-center">
-            <SignInButton mode="redirect" forceRedirectUrl={url(pathname).href}>
-              <Button
-                variant={offer.amount === 1990 ? "default" : "outline"}
-                className="w-full transition-all duration-300 hover:brightness-110"
-              >
-                {t("action.signin")}
-              </Button>
-            </SignInButton>
-          </div>
-        </SignedOut>
-      </div>
-    </div>
-  );
-};
-
-export function FreeCard() {
-  const t = useTranslations("PricingPage");
-
-  return (
-    <div
-      className={cn(
-        "relative col-span-3 flex flex-col overflow-hidden border shadow-lg transition-all duration-300 hover:shadow-xl",
-        "backdrop-blur-md bg-background/50 dark:bg-background/30 hover:scale-102.5",
-      )}
-    >
-      <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
-        <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
-          Free
-        </p>
-
-        <div className="flex flex-col items-start">
-          <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-            {`${formatPrice(0, "€")}`}
-            <div className="text-base font-medium text-muted-foreground">
-              / 5 {t("worth")}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex h-full flex-col justify-between gap-8 p-8">
-        <ul className="space-y-3 text-left text-sm font-medium leading-normal">
-          {["Limited models", "Max 5/month Flux.1 Schnell Images"]?.map(
-            (feature) => (
-              <li className="flex items-start gap-x-3" key={feature}>
-                <Icons.check className="size-5 shrink-0 text-primary" />
-                <p>{feature}</p>
-              </li>
-            ),
-          )}
-
-          {["Private Generations", "Commercial License"].map((feature) => (
-            <li
-              className="flex items-start text-muted-foreground"
-              key={feature}
-            >
-              <Icons.close className="mr-3 size-5 shrink-0" />
-              <p>{feature}</p>
-            </li>
-          ))}
-        </ul>
-        <SignBox>
-          <Button className="w-full transition-all duration-300 hover:brightness-110">Try Out</Button>
-        </SignBox>
-      </div>
-    </div>
-  );
 }
 
 export function PricingCards({
   userId,
   currentPlan,
   isCurrentPlanActive,
-  subscriptionPlans,
-  onSubscribe
+  subscriptionPlans
 }: PricingCardsProps) {
   const [isYearly, setIsYearly] = useState(false);
-  const router = useRouter();
   const { toast } = useToast();
 
   const handleSubscriptionClick = async (planId: string) => {
     if (!userId) {
-      console.error('Usuario no autenticado');
+      toast({
+        title: "Error",
+        description: "Debes iniciar sesión para suscribirte",
+        variant: "destructive"
+      });
       return;
     }
 
     try {
-      const result = await onSubscribe(planId, isYearly ? 'yearly' : 'monthly');
-      if (result?.url) {
-        window.location.href = result.url;
+      const response = await fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId,
+          interval: isYearly ? 'yearly' : 'monthly'
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al procesar la suscripción');
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No se pudo crear la sesión de checkout');
       }
     } catch (error) {
       console.error('Error al procesar la suscripción:', error);
       toast({
-        variant: "destructive",
         title: "Error",
-        description: "No se pudo procesar la suscripción. Por favor, inténtalo de nuevo.",
+        description: "No se pudo procesar la suscripción",
+        variant: "destructive"
       });
     }
   };
@@ -322,44 +177,5 @@ export function PricingCards({
         })}
       </div>
     </section>
-  );
-}
-
-export function PricingCardDialog({
-  onClose,
-  isOpen,
-  chargeProduct,
-}: {
-  isOpen: boolean;
-  chargeProduct?: ChargeProductSelectDto[];
-  onClose: (isOpen: boolean) => void;
-}) {
-  const t = useTranslations("PricingPage");
-  const { isSm, isMobile } = useMediaQuery();
-  const product = useMemo(() => {
-    if (isSm || isMobile) {
-      return ([chargeProduct?.[1]] ?? []) as ChargeProductSelectDto[];
-    }
-    return chargeProduct ?? ([] as ChargeProductSelectDto[]);
-  }, [isSm, isMobile]);
-
-  return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={(open) => {
-        onClose(open);
-      }}
-    >
-      <DialogContent className="w-[96vw] md:w-[960px] md:max-w-[960px] bg-background/80 backdrop-blur-md">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold mb-6">{t("title")}</DialogTitle>
-          <div className="grid grid-cols-1 gap-8 bg-inherit py-5 lg:grid-cols-3">
-            {product?.map((offer) => (
-              <PricingCard offer={offer} key={offer.id} />
-            ))}
-          </div>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
   );
 }
