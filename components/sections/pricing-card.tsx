@@ -4,11 +4,11 @@ import { subscriptionPlans } from "@/config/subscription-plans";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { handleSubscribe } from "@/lib/server-actions";
 
-type Props = {
+type PricingCardProps = {
   params: { locale: string };
 };
 
-export default async function PricingCard({ locale }: Props) {
+export default async function PricingCard({ locale }: PricingCardProps) {
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
 
   const clientPlans = subscriptionPlans.map(plan => ({
