@@ -5,6 +5,7 @@ import { PricingFaq } from "@/components/pricing-faq";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { subscriptionPlans } from "@/config/subscription-plans";
 import { handleSubscribe } from "@/lib/server-actions";
+import { getUserSubscriptionPlan } from "@/lib/subscription";
 import { SubscriptionPlanClient } from "@/types/subscription";
 
 type Props = {
@@ -18,6 +19,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
     description: t("LocaleLayout.description"),
   };
 }
+
 export default async function PricingPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const { userId } = auth();
@@ -30,6 +32,8 @@ export default async function PricingPage({ params: { locale } }: Props) {
     currentPlan = subscriptionPlan.id;
     isCurrentPlanActive = subscriptionPlan.status === 'active';
   }
+
+  const { data: chargeProduct = [] } = await getChargeProduct(locale);
 
   const clientPlans = subscriptionPlans.map(plan => ({
     id: plan.id,
