@@ -41,7 +41,7 @@ interface PricingCardsProps {
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
   subscriptionPlans: SubscriptionPlanClient[];
-  onSubscribe: (userId: string | undefined, planId: string, interval: 'monthly' | 'yearly') => Promise<{ url: string } | void>;
+  onSubscribe: (planId: string, interval: 'monthly' | 'yearly') => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
@@ -199,7 +199,7 @@ export function PricingCards({
     }
 
     try {
-      const result = await onSubscribe(userId, planId, isYearly ? 'yearly' : 'monthly');
+      const result = await onSubscribe(planId, isYearly ? 'yearly' : 'monthly');
       if (result?.url) {
         window.location.href = result.url;
       }
