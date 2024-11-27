@@ -37,6 +37,7 @@ interface PricingCardsProps {
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
   subscriptionPlans: any[];
+  onSubscribe: (planId: string) => void;
 }
 
 const PricingCard = ({
@@ -181,6 +182,7 @@ export function PricingCards({
   chargeProduct,
   locale,
   subscriptionPlans,
+  onSubscribe
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
@@ -294,9 +296,7 @@ export function PricingCards({
                     <Button 
                       className="w-full"
                       variant={plan.metadata?.recommended ? "default" : "outline"}
-                      onClick={() => handleSubscription(
-                        isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly
-                      )}
+                      onClick={() => onSubscribe(plan.id)}
                     >
                       Suscribirse
                     </Button>
