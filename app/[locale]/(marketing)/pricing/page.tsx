@@ -5,6 +5,7 @@ import { PricingFaq } from "@/components/pricing-faq";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { subscriptionPlans } from "@/config/subscription-plans";
 import { handleSubscribe } from "@/lib/server-actions";
+import { SubscriptionPlanClient } from "@/types/subscription";
 
 type Props = {
   params: { locale: string };
@@ -23,7 +24,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
 
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
 
-  const clientPlans = subscriptionPlans.map(plan => ({
+  const clientPlans: SubscriptionPlanClient[] = subscriptionPlans.map(plan => ({
     id: plan.id,
     name: plan.name,
     description: plan.description,
