@@ -29,8 +29,8 @@ export async function POST(req: Request) {
         
         if (session.mode === 'subscription' && session.metadata?.userId) {
           const plan = subscriptionPlans.find(
-            p => p.stripePriceIds.monthly === session.metadata?.priceId || 
-                p.stripePriceIds.yearly === session.metadata?.priceId
+            p => p.price.monthly === session.metadata?.priceId || 
+                 p.price.yearly === session.metadata?.priceId
           );
 
           if (!session.subscription || !session.customer) {
