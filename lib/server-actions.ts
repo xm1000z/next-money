@@ -33,18 +33,23 @@ export async function handleSubscribe(
 
     const priceId = interval === 'yearly' ? plan.price.yearly : plan.price.monthly;
 
-    const checkoutUrl = await createSubscriptionCheckout({
-      priceId,
-      userId,
-      successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/subscription?success=true`,
-      cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?success=false`,
-    });
+    try {
+      const checkoutUrl = await createSubscriptionCheckout({
+        priceId,
+        userId,
+        successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/subscription?success=true`,
+        cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?success=false`,
+      });
 
-    if (!checkoutUrl) {
-      throw new Error('Error al crear la sesión de checkout');
+      if (!checkoutUrl) {
+        throw new Error('Error al crear la sesión de checkout');
+      }
+
+      return { url: checkoutUrl };
+    } catch (error) {
+      console.error('Error al crear la sesión de pago:', error);
+      throw new Error('Error al crear la sesión de pago');
     }
-
-    return { url: checkoutUrl };
   } catch (error) {
     console.error('Error de suscripción:', error);
     throw error;
