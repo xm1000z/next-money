@@ -29,8 +29,8 @@ export async function POST(req: Request) {
         
         if (session.mode === 'subscription' && session.metadata?.userId) {
           const plan = subscriptionPlans.find(
-            p => p.price.monthly === session.metadata?.priceId || 
-                 p.price.yearly === session.metadata?.priceId
+            p => p.stripePriceIds.monthly === session.metadata?.priceId || 
+                p.stripePriceIds.yearly === session.metadata?.priceId
           );
 
           if (!session.subscription || !session.customer) {
@@ -171,8 +171,8 @@ export async function POST(req: Request) {
         if (subscription) {
           const newPriceId = session.items.data[0].price.id;
           const plan = subscriptionPlans.find(
-            p => p.price.monthly === newPriceId || 
-                 p.price.yearly === newPriceId
+            p => p.stripePriceIds.monthly === newPriceId || 
+                p.stripePriceIds.yearly === newPriceId
           );
 
           await prisma.subscription.update({

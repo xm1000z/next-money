@@ -1,5 +1,8 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import PricingCard from "@/components/sections/pricing-card";
+
+import { PricingCards } from "@/components/pricing-cards";
+import { PricingFaq } from "@/components/pricing-faq";
+import { getChargeProduct } from "@/db/queries/charge-product";
 
 type Props = {
   params: { locale: string };
@@ -15,6 +18,14 @@ export async function generateMetadata({ params: { locale } }: Props) {
 
 export default async function PricingPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
-  
-  return <PricingCard locale={locale} />;
+
+  const { data: chargeProduct = [] } = await getChargeProduct(locale);
+
+  return (
+    <div className="flex w-full flex-col gap-16 py-8 md:py-8">
+      <PricingCards chargeProduct={chargeProduct} />
+      <hr className="container" />
+      <PricingFaq />
+    </div>
+  );
 }

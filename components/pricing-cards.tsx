@@ -28,19 +28,14 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
+import { subscriptionPlans } from "@/config/subscription-plans";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { SubscriptionPlanClient } from "@/types/subscription";
-import { useToast } from "@/components/ui/use-toast";
 
 interface PricingCardsProps {
   userId?: string;
-  currentPlan?: string;
-  isCurrentPlanActive?: boolean;
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
-  subscriptionPlans: SubscriptionPlanClient[];
 }
 
 const PricingCard = ({
@@ -182,167 +177,185 @@ export function FreeCard() {
 
 export function PricingCards({
   userId,
-  currentPlan,
-  isCurrentPlanActive,
-  subscriptionPlans,
-  chargeProduct
+  chargeProduct,
+  locale,
 }: PricingCardsProps) {
-  const [isYearly, setIsYearly] = useState(false);
-  const { toast } = useToast();
   const t = useTranslations("PricingPage");
+  const [isYearly, setIsYearly] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const [hasSubscription, setHasSubscription] = useState<boolean>(false);
+  const router = useRouter();
 
-  const handleSubscriptionClick = async (planId: string) => {
-    if (!userId) {
-      toast({
-        title: "Error",
-        description: "Debes iniciar sesión para suscribirte",
-        variant: "destructive"
-      });
-      return;
+  useEffect(() => {
+    if (userId) {
+      fetch('/api/subscription/status')
+        .then(res => res.json())
+        .then(data => setHasSubscription(data.hasActiveSubscription));
     }
+  }, [userId]);
 
-    const selectedPlan = subscriptionPlans.find(plan => plan.id === planId);
-    const priceId = selectedPlan?.price.monthly;
-
+  const handleSubscription = async (priceId: string) => {
     try {
-      const response = await fetch('/api/create-subscription', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          priceId,
-        }),
-      });
-
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Error al procesar la suscripción');
+      if (!userId) {
+        return; // El usuario debe estar autenticado
       }
 
-      if (data.url) {
-        window.location.href = data.url;
+      const checkoutUrl = await createSubscriptionCheckout({
+        priceId,
+        userId,
+        successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
+        cancelUrl: `${window.location.origin}/pricing?success=false`,
+      });
+
+      if (checkoutUrl) {
+        router.push(checkoutUrl);
       }
     } catch (error) {
-      console.error('Error al procesar la suscripción:', error);
-      toast({
-        title: "Error",
-        description: "No se pudo procesar la suscripción",
-        variant: "destructive"
-      });
+      console.error('Error al crear la suscripción:', error);
     }
-  };
-
-  const getButtonConfig = (plan: SubscriptionPlanClient) => {
-    if (currentPlan === plan.id && isCurrentPlanActive) {
-      return {
-        text: "Plan Actual",
-        disabled: true,
-        variant: "outline" as const,
-      };
-    }
-
-    if (currentPlan) {
-      return {
-        text: "Cambiar Plan",
-        disabled: false,
-        variant: "default" as const,
-      };
-    }
-
-    return {
-      text: "Suscribirse",
-      disabled: false,
-      variant: plan.metadata?.recommended ? "default" as const : "outline" as const,
-    };
   };
 
   return (
-    <section className="container py-8 md:py-12 lg:py-24">
-      <div className="mx-auto mb-8 flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          Planes Simples, Sin Sorpresas
-        </h2>
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Elige el plan que mejor se adapte a tus necesidades
-        </p>
-      </div>
+    <MaxWidthWrapper className="py-20">
+      <section className="flex flex-col items-center text-center space-y-12">
+        <HeaderSection
+          label={t("label")}
+          title={t("title")}
+          className="text-4xl font-bold tracking-tight"
+        />
 
-      <div className="flex w-full flex-col gap-4 items-center justify-center mb-8">
-        <div className="flex items-center gap-2">
-          <span className={cn("text-sm", !isYearly && "text-primary font-medium")}>Mensual</span>
-          <Switch
-            checked={isYearly}
-            onCheckedChange={setIsYearly}
-          />
-          <span className={cn("text-sm", isYearly && "text-primary font-medium")}>
-            Anual <span className="text-xs text-muted-foreground">(2 meses gratis)</span>
-          </span>
-        </div>
-      </div>
+        {/* Planes de Suscripción */}
+        <div className="w-full">
+          <div className="flex items-center gap-4 justify-center mb-8">
+            <span className={cn(
+              "text-sm",
+              !isYearly && "text-primary font-medium"
+            )}>
+              Mensual
+            </span>
+            <Switch
+              checked={isYearly}
+              onCheckedChange={setIsYearly}
+            />
+            <span className={cn(
+              "text-sm",
+              isYearly && "text-primary font-medium"
+            )}>
+              Anual
+              <span className="ml-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">
+                Ahorra 20%
+              </span>
+            </span>
+          </div>
 
-      <div className="grid gap-8 md:grid-cols-3">
-        {subscriptionPlans.map((plan) => {
-          const buttonConfig = getButtonConfig(plan);
-          const price = isYearly ? plan.price.yearly : plan.price.monthly;
+          <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-2">
+            {subscriptionPlans.map((plan) => (
+              <div
+                key={plan.id}
+                className={cn(
+                  "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
+                  "backdrop-blur-md bg-background/50 dark:bg-background/30",
+                  plan.metadata?.recommended 
+                    ? "border-primary/50 dark:border-primary/30 scale-105" 
+                    : "hover:scale-102.5 hover:shadow-xl",
+                )}
+              >
+                <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
+                  <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
+                    {plan.name}
+                  </p>
 
-          return (
-            <div
-              key={plan.id}
-              className={cn(
-                "relative flex flex-col overflow-hidden rounded-lg border bg-background p-8",
-                plan.metadata?.recommended && "border-primary shadow-lg"
-              )}
-            >
-              {plan.metadata?.recommended && (
-                <div className="absolute top-0 right-0 mr-4 mt-4 rounded-full bg-primary px-3 py-1 text-xs text-primary-foreground">
-                  Recomendado
+                  <div className="flex flex-col items-start">
+                    <div className="flex items-baseline space-x-2 text-4xl font-semibold">
+                      {formatPrice(isYearly ? plan.price.yearly : plan.price.monthly, "€")}
+                      <div className="text-base font-medium text-muted-foreground">
+                        / {isYearly ? "año" : "mes"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-left text-sm text-muted-foreground/90">
+                    {plan.description}
+                  </div>
                 </div>
-              )}
-              
-              <div className="flex-1 space-y-4">
-                <h3 className="font-semibold text-lg">{plan.name}</h3>
-                <p className="text-sm text-muted-foreground">{plan.description}</p>
-                <div className="flex items-baseline">
-                  <span className="text-3xl font-bold">{formatPrice(price, "EUR")}</span>
-                  <span className="text-sm text-muted-foreground ml-1">
-                    /{isYearly ? 'año' : 'mes'}
-                  </span>
+
+                <div className="flex h-full flex-col justify-between gap-8 p-8">
+                  <ul className="space-y-3 text-left text-sm font-medium leading-normal">
+                    {plan.features.map((feature) => (
+                      <li className="flex items-start gap-x-3" key={feature}>
+                        <Icons.check className="size-5 shrink-0 text-primary" />
+                        <p>{feature}</p>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <SignedIn>
+                    <Button 
+                      className="w-full"
+                      variant={plan.metadata?.recommended ? "default" : "outline"}
+                      onClick={() => handleSubscription(
+                        isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly
+                      )}
+                    >
+                      Suscribirse
+                    </Button>
+                  </SignedIn>
+
+                  <SignedOut>
+                    <SignInButton mode="modal">
+                      <Button
+                        variant={plan.metadata?.recommended ? "default" : "outline"}
+                        className="w-full"
+                      >
+                        {t("action.signin")}
+                      </Button>
+                    </SignInButton>
+                  </SignedOut>
                 </div>
-                <ul className="space-y-2 text-sm">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <Icons.check className="mr-2 h-4 w-4 text-primary" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
               </div>
+            ))}
+          </div>
+        </div>
 
-              <SignedIn>
-                <Button
-                  className="mt-8 w-full"
-                  variant={buttonConfig.variant}
-                  disabled={buttonConfig.disabled}
-                  onClick={() => handleSubscriptionClick(plan.id)}
-                >
-                  {buttonConfig.text}
-                </Button>
-              </SignedIn>
-
-              <SignedOut>
-                <SignInButton mode="modal">
-                  <Button className="mt-8 w-full" variant={buttonConfig.variant}>
-                    Iniciar Sesión
-                  </Button>
-                </SignInButton>
-              </SignedOut>
+        {/* Planes de pago único - Solo visibles para usuarios suscritos */}
+        {hasSubscription ? (
+          <>
+            <div className="mt-8 text-center text-lg font-medium">
+              Compra créditos adicionales
             </div>
-          );
-        })}
-      </div>
-    </section>
+            <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
+              {chargeProduct?.map((offer) => (
+                <PricingCard offer={offer} key={offer.id} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
+            <h3 className="text-lg font-semibold mb-2">
+              ¿Necesitas más créditos?
+            </h3>
+            <p className="text-muted-foreground">
+              Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
+            </p>
+          </div>
+        )}
+
+        <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
+          {t("contact.title")}
+          <br />
+          <a
+            className="font-medium text-primary"
+            href="mailto:soporte@notas.ai"
+          >
+            soporte@notas.ai
+          </a>{" "}
+          {t("contact.description")}
+        </p>
+      </section>
+      <div
+        className="pointer-events-none fixed bottom-10 left-[50%] translate-x-[-50%]"
+        id="order-success"
+      />
+    </MaxWidthWrapper>
   );
 }
 

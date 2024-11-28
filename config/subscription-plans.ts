@@ -1,13 +1,15 @@
-import { env } from "@/env.mjs";
-
 export const subscriptionPlans = [
   {
     id: "starter",
     name: "Starter",
     description: "Perfecto para empezar",
     price: {
-      monthly: env.NEXT_PUBLIC_STRIPE_STARTER_MONTHLY_PRICE_ID,
-      yearly: env.NEXT_PUBLIC_STRIPE_STARTER_YEARLY_PRICE_ID
+      monthly: 9.99,
+      yearly: 99.99
+    },
+    stripePriceIds: {
+      monthly: process.env.NEXT_PUBLIC_STRIPE_STARTER_MONTHLY_PRICE_ID!,
+      yearly: process.env.NEXT_PUBLIC_STRIPE_STARTER_YEARLY_PRICE_ID!
     },
     credits: 100,
     features: [
@@ -26,8 +28,12 @@ export const subscriptionPlans = [
     name: "Profesional",
     description: "Para uso profesional",
     price: {
-      monthly: env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID,
-      yearly: env.NEXT_PUBLIC_STRIPE_PRO_YEARLY_PRICE_ID
+      monthly: 19.99,
+      yearly: 199.99
+    },
+    stripePriceIds: {
+      monthly: process.env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID!,
+      yearly: process.env.NEXT_PUBLIC_STRIPE_PRO_YEARLY_PRICE_ID!
     },
     credits: 300,
     features: [
@@ -47,8 +53,12 @@ export const subscriptionPlans = [
     name: "Business",
     description: "Solución empresarial completa",
     price: {
-      monthly: env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PRICE_ID,
-      yearly: env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PRICE_ID
+      monthly: 49.99,
+      yearly: 499.99
+    },
+    stripePriceIds: {
+      monthly: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PRICE_ID!,
+      yearly: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PRICE_ID!
     },
     credits: 1000,
     features: [

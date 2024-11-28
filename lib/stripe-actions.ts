@@ -32,6 +32,6 @@ export async function createSubscriptionCheckout({
     return checkoutSession.url;
   } catch (error) {
     console.error('Error creating checkout session:', error);
-    throw new Error(`Error al crear la sesión de pago: ${error.message}`);
+    throw error;
   }
 } 
