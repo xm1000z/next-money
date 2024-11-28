@@ -24,6 +24,7 @@ export const env = createEnv({
     S3_BUCKET: z.string().min(1),
 
     STRIPE_API_KEY: z.string().min(1),
+    STRIPE_SECRET_API_KEY: z.string().min(1),
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
     WEBHOOK_SECRET: z.string().min(1),
     CLERK_SECRET_KEY: z.string().min(1),
@@ -85,6 +86,7 @@ export const env = createEnv({
     S3_BUCKET: process.env.S3_BUCKET,
 
     STRIPE_API_KEY: process.env.STRIPE_API_KEY,
+    STRIPE_SECRET_API_KEY: process.env.STRIPE_SECRET_API_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     TASK_HEADER_KEY: process.env.TASK_HEADER_KEY,
     FLUX_HEADER_KEY: process.env.FLUX_HEADER_KEY,
