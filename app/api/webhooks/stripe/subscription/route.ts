@@ -171,8 +171,8 @@ export async function POST(req: Request) {
         if (subscription) {
           const newPriceId = session.items.data[0].price.id;
           const plan = subscriptionPlans.find(
-            p => p.stripePriceIds.monthly === newPriceId || 
-                p.stripePriceIds.yearly === newPriceId
+            p => p.price.monthly === newPriceId || 
+                 p.price.yearly === newPriceId
           );
 
           await prisma.subscription.update({
