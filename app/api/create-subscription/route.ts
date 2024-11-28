@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { handleSubscribe } from "@/lib/server-actions";
+import { stripe } from "@/lib/stripe";
+import { absoluteUrl } from "@/lib/utils";
 
 export async function POST(req: Request) {
   try {
@@ -12,18 +13,31 @@ export async function POST(req: Request) {
       );
     }
 
-    const { planId, interval } = await req.json();
-    const result = await handleSubscribe(userId, planId, interval);
+    const { priceId } = await req.json();
+    const billingUrl = absoluteUrl("/pricing");
 
-    if (!result?.url) {
-      throw new Error('No se pudo crear la sesión de checkout');
-    }
+    const session = await stripe.checkout.sessions.create({
+      success_url: billingUrl,
+      cancel_url: billingUrl,
+      payment_method_types: ["card"],
+      mode: "subscription",
+      billing_address_collection: "auto",
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        userId,
+      },
+    });
 
-    return NextResponse.json(result);
+    return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error('Error creating subscription:', error);
+    console.error(error);
     return NextResponse.json(
-      { error: "Error al crear la suscripción" },
+      { error: "Error al crear la sesión de pago" },
       { status: 500 }
     );
   }
