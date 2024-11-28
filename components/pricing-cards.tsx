@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
+import { Switch } from "@/components/ui/switch";
 
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
@@ -27,11 +28,19 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
+import { createSubscriptionCheckout } from "@/lib/stripe-actions";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { SubscriptionPlanClient } from "@/types/subscription";
+import { useToast } from "@/components/ui/use-toast";
 
 interface PricingCardsProps {
   userId?: string;
+  currentPlan?: string;
+  isCurrentPlanActive?: boolean;
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
+  subscriptionPlans: SubscriptionPlanClient[];
 }
 
 const PricingCard = ({
@@ -173,83 +182,167 @@ export function FreeCard() {
 
 export function PricingCards({
   userId,
-  chargeProduct,
-  locale,
+  currentPlan,
+  isCurrentPlanActive,
+  subscriptionPlans,
+  chargeProduct
 }: PricingCardsProps) {
+  const [isYearly, setIsYearly] = useState(false);
+  const { toast } = useToast();
   const t = useTranslations("PricingPage");
-  const isYearlyDefault = false;
-  const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
-  const searchParams = useSearchParams();
-  const toggleBilling = () => {
-    setIsYearly(!isYearly);
-  };
-  const { reward } = useReward("order-success", "confetti", {
-    position: "fixed",
-    elementCount: 360,
-    spread: 80,
-    elementSize: 8,
-    lifetime: 400,
-  });
 
-  useEffect(() => {
-    if (!searchParams.size) {
+  const handleSubscriptionClick = async (planId: string) => {
+    if (!userId) {
+      toast({
+        title: "Error",
+        description: "Debes iniciar sesión para suscribirte",
+        variant: "destructive"
+      });
       return;
     }
-    if (searchParams.get("success") === "true") {
-      setTimeout(() => {
-        reward();
-      }, 1000);
-    } else if (searchParams.get("success") === "false") {
-      console.log("Payment failed");
+
+    try {
+      const response = await fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId,
+          interval: isYearly ? 'yearly' : 'monthly'
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al procesar la suscripción');
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No se pudo crear la sesión de checkout');
+      }
+    } catch (error) {
+      console.error('Error al procesar la suscripción:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo procesar la suscripción. Por favor, inténtalo de nuevo.",
+        variant: "destructive"
+      });
     }
-  }, [searchParams]);
+  };
+
+  const getButtonConfig = (plan: SubscriptionPlanClient) => {
+    if (currentPlan === plan.id && isCurrentPlanActive) {
+      return {
+        text: "Plan Actual",
+        disabled: true,
+        variant: "outline" as const,
+      };
+    }
+
+    if (currentPlan) {
+      return {
+        text: "Cambiar Plan",
+        disabled: false,
+        variant: "default" as const,
+      };
+    }
+
+    return {
+      text: "Suscribirse",
+      disabled: false,
+      variant: plan.metadata?.recommended ? "default" as const : "outline" as const,
+    };
+  };
 
   return (
-    <MaxWidthWrapper className="py-20">
-      <section className="flex flex-col items-center text-center space-y-12">
-        <HeaderSection
-          label={t("label")}
-          title={t("title")}
-          className="text-4xl font-bold tracking-tight"
-        />
-        <div className="w-full">
-          <p className="mb-8 inline-flex items-center justify-center border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] px-4 py-2 text-sm text-primary dark:bg-[#1b1b1b]">
-            <span className="font-medium">
-              {t("tip.title")}
-              &nbsp;
-              <a
-                href="https://notas.ai/pricing"
-                className="font-semibold underline decoration-primary/70 hover:decoration-primary"
-              >
-                {t("tip.contact")}
-              </a>
-            </span>
-          </p>
-        </div>
-
-        <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
-          {chargeProduct?.map((offer) => (
-            <PricingCard offer={offer} key={offer.id} />
-          ))}
-        </div>
-
-        <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
-          {t("contact.title")}
-          <br />
-          <a
-            className="font-medium text-primary"
-            href="mailto:soporte@notas.ai"
-          >
-            soporte@notas.ai
-          </a>{" "}
-          {t("contact.description")}
+    <section className="container py-8 md:py-12 lg:py-24">
+      <div className="mx-auto mb-8 flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
+          Planes Simples, Sin Sorpresas
+        </h2>
+        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+          Elige el plan que mejor se adapte a tus necesidades
         </p>
-      </section>
-      <div
-        className="pointer-events-none fixed bottom-10 left-[50%] translate-x-[-50%]"
-        id="order-success"
-      />
-    </MaxWidthWrapper>
+      </div>
+
+      <div className="flex w-full flex-col gap-4 items-center justify-center mb-8">
+        <div className="flex items-center gap-2">
+          <span className={cn("text-sm", !isYearly && "text-primary font-medium")}>Mensual</span>
+          <Switch
+            checked={isYearly}
+            onCheckedChange={setIsYearly}
+          />
+          <span className={cn("text-sm", isYearly && "text-primary font-medium")}>
+            Anual <span className="text-xs text-muted-foreground">(2 meses gratis)</span>
+          </span>
+        </div>
+      </div>
+
+      <div className="grid gap-8 md:grid-cols-3">
+        {subscriptionPlans.map((plan) => {
+          const buttonConfig = getButtonConfig(plan);
+          const price = isYearly ? plan.price.yearly : plan.price.monthly;
+
+          return (
+            <div
+              key={plan.id}
+              className={cn(
+                "relative flex flex-col overflow-hidden rounded-lg border bg-background p-8",
+                plan.metadata?.recommended && "border-primary shadow-lg"
+              )}
+            >
+              {plan.metadata?.recommended && (
+                <div className="absolute top-0 right-0 mr-4 mt-4 rounded-full bg-primary px-3 py-1 text-xs text-primary-foreground">
+                  Recomendado
+                </div>
+              )}
+              
+              <div className="flex-1 space-y-4">
+                <h3 className="font-semibold text-lg">{plan.name}</h3>
+                <p className="text-sm text-muted-foreground">{plan.description}</p>
+                <div className="flex items-baseline">
+                  <span className="text-3xl font-bold">{formatPrice(price, "EUR")}</span>
+                  <span className="text-sm text-muted-foreground ml-1">
+                    /{isYearly ? 'año' : 'mes'}
+                  </span>
+                </div>
+                <ul className="space-y-2 text-sm">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center">
+                      <Icons.check className="mr-2 h-4 w-4 text-primary" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <SignedIn>
+                <Button
+                  className="mt-8 w-full"
+                  variant={buttonConfig.variant}
+                  disabled={buttonConfig.disabled}
+                  onClick={() => handleSubscriptionClick(plan.id)}
+                >
+                  {buttonConfig.text}
+                </Button>
+              </SignedIn>
+
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <Button className="mt-8 w-full" variant={buttonConfig.variant}>
+                    Iniciar Sesión
+                  </Button>
+                </SignInButton>
+              </SignedOut>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
