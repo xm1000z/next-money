@@ -31,7 +31,7 @@ export async function handleSubscribe(
       throw new Error('Plan no encontrado');
     }
 
-    const priceId = interval === 'yearly' ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly;
+    const priceId = interval === 'yearly' ? plan.price.yearly : plan.price.monthly;
 
     const checkoutUrl = await createSubscriptionCheckout({
       priceId,
