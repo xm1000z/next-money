@@ -221,14 +221,12 @@ export function PricingCards({
 
       if (data.url) {
         window.location.href = data.url;
-      } else {
-        throw new Error('No se pudo crear la sesión de checkout');
       }
     } catch (error) {
       console.error('Error al procesar la suscripción:', error);
       toast({
         title: "Error",
-        description: "No se pudo procesar la suscripción. Por favor, inténtalo de nuevo.",
+        description: "No se pudo procesar la suscripción",
         variant: "destructive"
       });
     }
