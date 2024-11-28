@@ -16,6 +16,13 @@ export async function POST(req: Request) {
     const { priceId } = await req.json();
     const billingUrl = absoluteUrl("/pricing");
 
+    if (!priceId) {
+      return NextResponse.json(
+        { error: "priceId es requerido" },
+        { status: 400 }
+      );
+    }
+
     const session = await stripe.checkout.sessions.create({
       success_url: billingUrl,
       cancel_url: billingUrl,
@@ -35,7 +42,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error(error);
+    console.error("Error al crear la sesión de pago:", error);
     return NextResponse.json(
       { error: "Error al crear la sesión de pago" },
       { status: 500 }
