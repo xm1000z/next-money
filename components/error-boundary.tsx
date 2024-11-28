@@ -12,8 +12,8 @@ export function ErrorBoundary({
   fallback
 }: ErrorBoundaryProps) {
   useEffect(() => {
-    const handleError = (error: Error) => {
-      console.error('Error capturado:', error);
+    const handleError = (event: ErrorEvent) => {
+      console.error('Error capturado:', event.error);
     };
 
     window.addEventListener('error', handleError);
