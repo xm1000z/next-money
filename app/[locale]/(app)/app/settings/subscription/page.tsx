@@ -6,6 +6,7 @@ import { DashboardShell } from "@/components/dashboard/shell";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatDate } from "@/lib/utils";
 
 export default async function SubscriptionPage() {
   const { userId } = auth();
