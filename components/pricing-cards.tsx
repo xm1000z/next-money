@@ -77,7 +77,7 @@ const PricingCard = ({
                 <span>{formatPrice(offer.amount, "€")}</span>
               </>
             ) : (
-              `${formatPrice(55, "€")}`
+              `55€`
             )}
             <div className="text-base font-medium text-muted-foreground">
               / {offer.credit} {t("worth")}
