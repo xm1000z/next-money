@@ -6,10 +6,6 @@ export const subscriptionPlans = [
     name: "Starter",
     description: "Perfecto para empezar",
     price: {
-      monthly: 9.99,
-      yearly: 99.99
-    },
-    stripePriceIds: {
       monthly: env.NEXT_PUBLIC_STRIPE_STARTER_MONTHLY_PRICE_ID,
       yearly: env.NEXT_PUBLIC_STRIPE_STARTER_YEARLY_PRICE_ID
     },
@@ -30,10 +26,6 @@ export const subscriptionPlans = [
     name: "Profesional",
     description: "Para uso profesional",
     price: {
-      monthly: 19.99,
-      yearly: 199.99
-    },
-    stripePriceIds: {
       monthly: env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID,
       yearly: env.NEXT_PUBLIC_STRIPE_PRO_YEARLY_PRICE_ID
     },
@@ -55,10 +47,6 @@ export const subscriptionPlans = [
     name: "Business",
     description: "Solución empresarial completa",
     price: {
-      monthly: 49.99,
-      yearly: 499.99
-    },
-    stripePriceIds: {
       monthly: env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PRICE_ID,
       yearly: env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PRICE_ID
     },

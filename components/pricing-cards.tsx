@@ -201,6 +201,9 @@ export function PricingCards({
       return;
     }
 
+    const selectedPlan = subscriptionPlans.find(plan => plan.id === planId);
+    const priceId = selectedPlan?.price.monthly;
+
     try {
       const response = await fetch('/api/create-subscription', {
         method: 'POST',
@@ -208,8 +211,7 @@ export function PricingCards({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          planId,
-          interval: isYearly ? 'yearly' : 'monthly'
+          priceId,
         }),
       });
 

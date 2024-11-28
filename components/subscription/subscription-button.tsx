@@ -1,56 +1,35 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
+import React from 'react';
 
 interface SubscriptionButtonProps {
   isPaid: boolean;
 }
 
-export function SubscriptionButton({ isPaid }: SubscriptionButtonProps) {
-  const router = useRouter();
-  const { toast } = useToast();
-
-  const handleUpgrade = () => {
-    router.push('/pricing');
-  };
-
-  const handleManageSubscription = async () => {
+export const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({ isPaid }) => {
+  const handleClick = async () => {
     try {
       const response = await fetch('/api/create-portal-session', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-      const { url } = await response.json();
-      window.location.href = url;
+
+      const data = await response.json();
+      if (response.ok) {
+        window.location.href = data.url; // Redirige al usuario al portal de Stripe
+      } else {
+        console.error('Error al crear la sesión del portal:', data.error);
+      }
     } catch (error) {
-      console.error('Error al abrir el portal de gestión:', error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "No se pudo abrir el portal de gestión. Por favor, inténtalo de nuevo.",
-      });
+      console.error('Error al procesar la solicitud:', error);
     }
   };
 
-  if (isPaid) {
-    return (
-      <Button 
-        variant="outline"
-        className="w-full"
-        onClick={handleManageSubscription}
-      >
-        Gestionar Suscripción
-      </Button>
-    );
-  }
-
   return (
-    <Button 
-      className="w-full"
-      onClick={handleUpgrade}
-    >
-      Actualizar a Plan de Pago
-    </Button>
+    <button onClick={handleClick} className="btn">
+      {isPaid ? "Gestionar Suscripción" : "Suscribirse"}
+    </button>
   );
-} 
+}; 
