@@ -28,14 +28,17 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
-import { subscriptionPlans } from "@/config/subscription-plans";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { SubscriptionPlanClient } from "@/types/subscription";
 
 interface PricingCardsProps {
   userId?: string;
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
+  subscriptionPlans: SubscriptionPlanClient[];
+  onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
@@ -179,6 +182,8 @@ export function PricingCards({
   userId,
   chargeProduct,
   locale,
+  subscriptionPlans,
+  onSubscribe
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
@@ -194,24 +199,18 @@ export function PricingCards({
     }
   }, [userId]);
 
-  const handleSubscription = async (priceId: string) => {
+  const handleSubscriptionClick = async (planId: string) => {
+    if (!userId) {
+      console.error('Usuario no autenticado');
+      return;
+    }
     try {
-      if (!userId) {
-        return; // El usuario debe estar autenticado
-      }
-
-      const checkoutUrl = await createSubscriptionCheckout({
-        priceId,
-        userId,
-        successUrl: `${window.location.origin}/app/settings/subscription?success=true`,
-        cancelUrl: `${window.location.origin}/pricing?success=false`,
-      });
-
-      if (checkoutUrl) {
-        router.push(checkoutUrl);
+      const result = await onSubscribe(userId, planId);
+      if (result?.url) {
+        router.push(result.url);
       }
     } catch (error) {
-      console.error('Error al crear la suscripción:', error);
+      console.error('Error al procesar la suscripción');
     }
   };
 
@@ -292,9 +291,7 @@ export function PricingCards({
                     <Button 
                       className="w-full"
                       variant={plan.metadata?.recommended ? "default" : "outline"}
-                      onClick={() => handleSubscription(
-                        isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly
-                      )}
+                      onClick={() => handleSubscriptionClick(plan.id)}
                     >
                       Suscribirse
                     </Button>
