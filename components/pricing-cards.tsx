@@ -266,7 +266,7 @@ export function PricingCards({
 
                   <div className="flex flex-col items-start">
                     <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-                      {formatPrice( plan.price.monthly, "€")}
+                      {formatPrice( plan.price.yearly, "€")}
                       <div className="text-base font-medium text-muted-foreground">
                         / {isYearly ? "año" : "mes"}
                       </div>
