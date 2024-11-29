@@ -40,7 +40,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
       <PricingCards 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
-        onSubscribe={(userId, planId) => handleSubscribe(userId, planId, false)}
+        onSubscribe={handleSubscribe}
       />
       <hr className="container" />
       <PricingFaq />
