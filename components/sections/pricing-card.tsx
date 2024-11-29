@@ -32,7 +32,7 @@ export default async function PricingCard({ locale }: PricingCardProps) {
         userId={userId ?? undefined}
         onSubscribe={async (planId: string) => {
           'use server';
-          return handleSubscribe(userId ?? undefined, planId);
+          return handleSubscribe(userId ?? undefined, planId, false);
         }}
       />
       <hr className="container" />
