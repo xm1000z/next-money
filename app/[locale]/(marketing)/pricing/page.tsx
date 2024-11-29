@@ -38,7 +38,6 @@ export default async function PricingPage({ params: { locale } }: Props) {
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
       <PricingCards 
-        chargeProduct={chargeProduct} 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
         onSubscribe={handleSubscribe}
