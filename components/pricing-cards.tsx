@@ -205,15 +205,7 @@ export function PricingCards({
       return;
     }
     try {
-      const plan = subscriptionPlans.find(p => p.id === planId);
-      if (!plan) {
-        console.error('Plan no encontrado');
-        return;
-      }
-
-      const priceId = isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly;
-
-      const result = await onSubscribe(userId, priceId);
+      const result = await onSubscribe(userId, planId);
       if (result?.url) {
         router.push(result.url);
       }
