@@ -77,7 +77,7 @@ const PricingCard = ({
                 <span>{formatPrice(offer.amount, "€")}</span>
               </>
             ) : (
-              `55€`
+              `${formatPrice(offer.amount, "€")}`
             )}
             <div className="text-base font-medium text-muted-foreground">
               / {offer.credit} {t("worth")}
@@ -205,7 +205,15 @@ export function PricingCards({
       return;
     }
     try {
-      const result = await onSubscribe(userId, planId);
+      const plan = subscriptionPlans.find(p => p.id === planId);
+      if (!plan) {
+        console.error('Plan no encontrado');
+        return;
+      }
+
+      const priceId = isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly;
+
+      const result = await onSubscribe(userId, priceId);
       if (result?.url) {
         router.push(result.url);
       }
@@ -226,20 +234,14 @@ export function PricingCards({
         {/* Planes de Suscripción */}
         <div className="w-full">
           <div className="flex items-center gap-4 justify-center mb-8">
-            <span className={cn(
-              "text-sm",
-              !isYearly && "text-primary font-medium"
-            )}>
+            <span className={cn("text-sm", !isYearly && "text-primary font-medium")}>
               Mensual
             </span>
             <Switch
               checked={isYearly}
               onCheckedChange={setIsYearly}
             />
-            <span className={cn(
-              "text-sm",
-              isYearly && "text-primary font-medium"
-            )}>
+            <span className={cn("text-sm", isYearly && "text-primary font-medium")}>
               Anual
               <span className="ml-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">
                 Ahorra 20%
@@ -249,21 +251,11 @@ export function PricingCards({
 
           <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-2">
             {subscriptionPlans.map((plan) => (
-              <div
-                key={plan.id}
-                className={cn(
-                  "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
-                  "backdrop-blur-md bg-background/50 dark:bg-background/30",
-                  plan.metadata?.recommended 
-                    ? "border-primary/50 dark:border-primary/30 scale-105" 
-                    : "hover:scale-102.5 hover:shadow-xl",
-                )}
-              >
+              <div key={plan.id} className={cn("relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300", "backdrop-blur-md bg-background/50 dark:bg-background/30")}>
                 <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
                   <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
                     {plan.name}
                   </p>
-
                   <div className="flex flex-col items-start">
                     <div className="flex items-baseline space-x-2 text-4xl font-semibold">
                       {formatPrice(isYearly ? plan.price.yearly : plan.price.monthly, "€")}
@@ -276,7 +268,6 @@ export function PricingCards({
                     {plan.description}
                   </div>
                 </div>
-
                 <div className="flex h-full flex-col justify-between gap-8 p-8">
                   <ul className="space-y-3 text-left text-sm font-medium leading-normal">
                     {plan.features.map((feature) => (
@@ -286,7 +277,6 @@ export function PricingCards({
                       </li>
                     ))}
                   </ul>
-
                   <SignedIn>
                     <Button 
                       className="w-full"
@@ -296,7 +286,6 @@ export function PricingCards({
                       Suscribirse
                     </Button>
                   </SignedIn>
-
                   <SignedOut>
                     <SignInButton mode="modal">
                       <Button
