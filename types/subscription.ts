@@ -6,6 +6,10 @@ export interface SubscriptionPlanClient {
     monthly: number;
     yearly: number;
   };
+  stripePriceIds: {
+    monthly: string;
+    yearly: string;
+  };
   credits: number;
   features: string[];
   metadata: {
