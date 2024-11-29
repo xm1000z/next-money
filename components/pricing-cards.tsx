@@ -266,7 +266,12 @@ export function PricingCards({
 
                   <div className="flex flex-col items-start">
                     <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-                      {formatPrice(isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly, "€")}
+                      {formatPrice(
+                        isYearly 
+                          ? parseFloat(plan.stripePriceIds.yearly)
+                          : parseFloat(plan.stripePriceIds.monthly),
+                        "€"
+                      )}
                       <div className="text-base font-medium text-muted-foreground">
                         / {isYearly ? "año" : "mes"}
                       </div>
