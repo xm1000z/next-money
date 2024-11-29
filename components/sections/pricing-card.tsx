@@ -28,7 +28,6 @@ export default async function PricingCard({ locale }: PricingCardProps) {
   return (
     <div className="flex w-full flex-col gap-16 py-8 md:py-8">
       <PricingCards 
-        chargeProduct={chargeProduct} 
         subscriptionPlans={clientPlans}
         userId={userId ?? undefined}
         onSubscribe={async (planId: string) => {
