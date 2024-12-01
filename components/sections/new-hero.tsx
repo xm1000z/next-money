@@ -58,7 +58,7 @@ export function Hero() {
         </p>
       </div>
 
-      <HeroImage />
+      <HeroImage className="no-container"/>
       <Metrics />
     </section>
   );
