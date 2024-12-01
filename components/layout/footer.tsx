@@ -9,8 +9,8 @@ export function Footer() {
       <div className="container">
         <div className="flex justify-between items-center border-border border-b-[1px] pb-10 md:pb-16 mb-12">
           <Link href="/" className="flex items-center gap-3">
-            <Image className="h-8 w-8" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
-            <span style={{ fontFamily: 'Apple Garamond'}} className="text-black dark:text-white text-lg">
+            <Image className="h-7 w-7" src="/apple-touch-icon.png" alt="NotasAI" width={24} height={24} />
+            <span style={{ fontFamily: 'Apple Garamond'}} className="text-black dark:text-white md:text-2xl">
               NotasAI
             </span>
           </Link>
