@@ -277,7 +277,7 @@ export function Header() {
                 onMouseEnter={() => setShowBlur(true)}
                 onMouseLeave={() => setShowBlur(false)}
               >
-                <span className="h-8 items-center justify-center text-[14px] font-medium transition-opacity hover:opacity-70 duration-200 px-3 py-2 inline-flex text-secondary-foreground cursor-pointer">
+                <span className="h-8 items-center justify-center text-[10px] font-medium transition-opacity hover:opacity-70 duration-200 px-3 py-2 inline-flex text-secondary-foreground cursor-pointer">
                   {title}
                 </span>
 

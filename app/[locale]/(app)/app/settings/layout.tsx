@@ -7,6 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         items={[
           { path: "/app/settings", label: "General" },
           { path: "/app/settings/subscription", label: "Suscripción" },
+          { path: "/app/settings/usage", label: "Uso" },
         ]}
       />
 
