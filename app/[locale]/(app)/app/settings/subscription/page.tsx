@@ -1,21 +1,20 @@
-import { auth } from "@clerk/nextjs/server";
-import { CreditCard } from "lucide-react";
-import { getUserSubscriptionPlan } from "@/lib/subscription";
-import { DashboardHeader } from "@/components/dashboard/header";
-import { DashboardShell } from "@/components/dashboard/shell";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-
 export default async function SubscriptionPage() {
   const { userId } = auth();
   
   if (!userId) {
-    return null;
+    return <div>No estás autenticado.</div>;
   }
 
-  const subscriptionPlan = await getUserSubscriptionPlan(userId);
+  let subscriptionPlan;
+  try {
+    subscriptionPlan = await getUserSubscriptionPlan(userId);
+    if (!subscriptionPlan) {
+      return <div>Error al obtener el plan de suscripción.</div>;
+    }
+  } catch (error) {
+    console.error("Error al obtener el plan de suscripción:", error);
+    return <div>Error al cargar la página de suscripción.</div>;
+  }
 
   return (
     <DashboardShell>
@@ -95,4 +94,4 @@ export default async function SubscriptionPage() {
       </div>
     </DashboardShell>
   );
-} 
+}
