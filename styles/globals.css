@@ -85,6 +85,13 @@
   --ui-foreground: var(--color-gray-200);
 }
 
+.no-container {
+  max-width: none; /* Elimina el ancho máximo */
+  width: 100%; /* Asegúrate de que ocupe todo el ancho */
+  padding: 0; /* Elimina el padding si es necesario */
+  margin: 0; /* Elimina el margin si es necesario */
+}
+
 .text-gradient_indigo-purple {
   background: linear-gradient(90deg, #6366f1 0%, rgb(168 85 247 / 0.8) 100%);
   -webkit-background-clip: text;

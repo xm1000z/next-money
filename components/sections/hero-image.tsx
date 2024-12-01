@@ -10,7 +10,7 @@ export function HeroImage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="scale-100 sm:scale-100 md:scale-[0.4] lg:scale-[0.25] xl:scale-100 mt-10 md:mt-0 lg:absolute -right-[150px] -top-[50px] 2xl:scale-[1] 2xl:-top-[20px]">
+    <div className="no-container scale-100 sm:scale-100 md:scale-[0.4] lg:scale-[0.25] xl:scale-100 mt-10 md:mt-0 lg:absolute -right-[150px] -top-[50px] 2xl:scale-[1] 2xl:-top-[20px]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}

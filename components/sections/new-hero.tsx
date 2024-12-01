@@ -6,8 +6,8 @@ import { WordAnimation } from "./word-animation";
 
 export function Hero() {
   return (
-    <section className="mt-[60px] lg:mt-[180px] min-h-[600px] relative lg:h-[calc(100vh-300px)] overflow-hidden">
-      <div className="container flex flex-col">
+    <section className="container mt-[60px] lg:mt-[180px] min-h-[600px] relative lg:h-[calc(100vh-300px)] overflow-hidden">
+      <div className="flex flex-col">
         <Link href="https://x.com/notas_ia">
           <Button
             variant="outline"
