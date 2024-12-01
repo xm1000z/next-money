@@ -11,13 +11,13 @@ export function Hero() {
         <Link href="https://x.com/notas_ia">
           <Button
             variant="outline"
-            className="rounded-full border-border flex space-x-1 items-center text-[10px]"
+            className="rounded-full border-border flex space-x-2 items-center text-[12px]"
           >
-            <span className="font-mono text-[10px]">Introducimos BETA</span>
+            <span className="font-mono text-[12px]">Introducimos BETA</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width={8}
-              height={8}
+              width={10}
+              height={10}
               fill="none"
             >
               <path
@@ -28,7 +28,7 @@ export function Hero() {
           </Button>
         </Link>
 
-        <h2 className="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[30px] font-medium break-words">
+        <h2 className="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[30px] font-medium">
         Revolucionemos la Inteligencia Artificial, esta vez en español, para <WordAnimation />
         </h2>
 
@@ -53,7 +53,7 @@ export function Hero() {
           </div>
         </div>
 
-        <p className="text-[12px] text-[#707070] mt-4 font-mono">
+        <p className="text-[13px] text-[#707070] mt-4 font-mono">
           Plan Profesional por 29€/m, solo durante BETA.
         </p>
       </div>
