@@ -105,27 +105,27 @@ export function Header() {
         {
           path: "https://writer.notas.ai",
           title: "Notas",
-          icon: <SquarePen size={20} />,
+          icon: <SquarePen size={12} />,
         },
         {
           path: "https://chat.notas.ai",
           title: "Chat",
-          icon: <MessageSquare size={20} />,
+          icon: <MessageSquare size={12} />,
         },
         {
           path: "https://search.notas.ai",
           title: "Search",
-          icon: <TrendingUp size={20} />,
+          icon: <TrendingUp size={12} />,
         },
         {
           path: "https://traductor.notas.ai",
           title: "Traductor",
-          icon: <Users size={20} />,
+          icon: <Users size={12} />,
         },
         {
           path: "https://studio.notas.ai",
           title: "Studio",
-          icon: <Eraser size={20} />,
+          icon: <Eraser size={12} />,
         },
       ],
     },
@@ -152,22 +152,22 @@ export function Header() {
         {
           path: "/startup",
           title: "Métricas",
-          icon: <Cpu size={20} />,
+          icon: <Cpu size={12} />,
         },
         {
           path: "https://notas.ai/beta",
           title: "Beta",
-          icon: <Bell size={20} />,
+          icon: <Bell size={12} />,
         },
         {
           path: "https://docs.notas.ai",
           title: "Documentación",
-          icon: <FileText size={20} />,
+          icon: <FileText size={12} />,
         },
         {
           path: "/talk",
           title: "Contactar",
-          icon: <MessageSquare size={20} />,
+          icon: <MessageSquare size={12} />,
         },
       ],
     },
@@ -193,9 +193,9 @@ export function Header() {
               <Image 
                 src="https://notas.ai/white.png" 
                 alt="NotasAI"
-                width={30}
-                height={30}
-                className="h-10 w-auto brightness-0 dark:brightness-200"
+                width={25}
+                height={25}
+                className="h-7 w-auto brightness-0 dark:brightness-200"
                 />
             </Link>
           </ContextMenuTrigger>
@@ -232,12 +232,12 @@ export function Header() {
                   } catch {}
                 }}
               >
-                <Copy size={20} />
+                <Copy size={12} />
                 <span className="font-medium text-sm">Copy Logo as SVG</span>
               </ContextMenuItem>
               <ContextMenuItem asChild>
                 <Link href="/branding" className="flex items-center space-x-2">
-                  <PaintBucket size={20} />
+                  <PaintBucket size={12} />
                   <span className="font-medium text-sm">Branding</span>
                 </Link>
               </ContextMenuItem>
@@ -246,7 +246,7 @@ export function Header() {
                   href="https://ui.midday.ai"
                   className="flex items-center space-x-2"
                 >
-                  <Palette size={20} />
+                  <Palette size={12} />
                   <span className="font-medium text-sm">Design System</span>
                 </a>
               </ContextMenuItem>
@@ -277,7 +277,7 @@ export function Header() {
                 onMouseEnter={() => setShowBlur(true)}
                 onMouseLeave={() => setShowBlur(false)}
               >
-                <span className="h-8 items-center justify-center text-sm font-medium transition-opacity hover:opacity-70 duration-200 px-3 py-2 inline-flex text-secondary-foreground cursor-pointer">
+                <span className="h-8 items-center justify-center text-[14px] font-medium transition-opacity hover:opacity-70 duration-200 px-3 py-2 inline-flex text-secondary-foreground cursor-pointer">
                   {title}
                 </span>
 

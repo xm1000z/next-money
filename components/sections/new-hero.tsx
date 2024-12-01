@@ -41,19 +41,19 @@ export function Hero() {
             >
               <Button
                 variant="outline"
-                className="border-transparent h-10 px-5 dark:bg-[#1D1D1D] bg-[#F2F1EF] text-[10px]"
+                className="border-transparent h-10 px-5 dark:bg-[#1D1D1D] bg-[#F2F1EF] text-[14px]"
               >
                 Contactar
               </Button>
             </Link>
 
             <a href="https://notas.ai/pricing">
-              <Button className="h-10 px-4 text-[10px]">Empezar ahora</Button>
+              <Button className="h-10 px-4 text-[14px]">Empezar ahora</Button>
             </a>
           </div>
         </div>
 
-        <p className="text-[10px] text-[#707070] mt-4 font-mono">
+        <p className="text-[12px] text-[#707070] mt-4 font-mono">
           Plan Profesional por 29€/m, solo durante BETA.
         </p>
       </div>
