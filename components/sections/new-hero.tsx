@@ -28,7 +28,7 @@ export function Hero() {
           </Button>
         </Link>
 
-        <h2 className="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[30px] font-medium">
+        <h2 className="mt-6 md:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[30px] font-medium break-words">
         Revolucionemos la Inteligencia Artificial, esta vez en español, para <WordAnimation />
         </h2>
 
@@ -54,7 +54,7 @@ export function Hero() {
         </div>
 
         <p className="text-[10px] text-[#707070] mt-4 font-mono">
-          Recibe una oferta de 49€/m, solo durante BETA.
+          Plan Profesional por 29€/m, solo durante BETA.
         </p>
       </div>
 
