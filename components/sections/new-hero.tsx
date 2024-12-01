@@ -11,9 +11,9 @@ export function Hero() {
         <Link href="https://x.com/notas_ia">
           <Button
             variant="outline"
-            className="rounded-full border-border flex space-x-1 items-center text-xs"
+            className="rounded-full border-border flex space-x-1 items-center text-[10px]"
           >
-            <span className="font-mono text-xs">Introducimos BETA</span>
+            <span className="font-mono text-[10px]">Introducimos BETA</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={8}
@@ -41,14 +41,14 @@ export function Hero() {
             >
               <Button
                 variant="outline"
-                className="border-transparent h-10 px-5 dark:bg-[#1D1D1D] bg-[#F2F1EF] text-xs"
+                className="border-transparent h-10 px-5 dark:bg-[#1D1D1D] bg-[#F2F1EF] text-[10px]"
               >
-                Hablar ya
+                Contactar
               </Button>
             </Link>
 
             <a href="https://notas.ai/pricing">
-              <Button className="h-10 px-4 text-xs">Empezar ahora</Button>
+              <Button className="h-10 px-4 text-[10px]">Empezar ahora</Button>
             </a>
           </div>
         </div>
