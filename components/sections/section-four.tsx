@@ -10,9 +10,9 @@ export function SectionFour() {
           Muy pronto
         </span>
         <div className="flex flex-col items-center justify-center flex-1">
-        <h4 className="font-medium text-lg md:text-xl mb-2 text-gray-900 dark:text-white">Lisa</h4>
-          <p className="text-gray-600 dark:text-[#878787] text-base md:text-lg text-center">
-            Estamos trabajando para ofrecerte la mejor solución de audio con lenguaje natural y conversacional en tiempo real.
+        <h4 className="font-medium text-xl md:text-xl mb-2 text-gray-900 dark:text-white">Lisa</h4>
+          <p className="text-gray-600 dark:text-[#878787] text-lg md:text-lg text-center">
+            La mejor solución de audio con lenguaje natural y conversacional en tiempo real.
           </p>
         </div>
       </div>
