@@ -233,12 +233,12 @@ export function Header() {
                 }}
               >
                 <Copy size={12} />
-                <span className="font-medium text-sm">Copy Logo as SVG</span>
+                <span className="font-medium text-[12px]">Copy Logo as SVG</span>
               </ContextMenuItem>
               <ContextMenuItem asChild>
                 <Link href="/branding" className="flex items-center space-x-2">
                   <PaintBucket size={12} />
-                  <span className="font-medium text-sm">Branding</span>
+                  <span className="font-medium text-[12px]">Branding</span>
                 </Link>
               </ContextMenuItem>
               <ContextMenuItem>
@@ -247,14 +247,14 @@ export function Header() {
                   className="flex items-center space-x-2"
                 >
                   <Palette size={12} />
-                  <span className="font-medium text-sm">Design System</span>
+                  <span className="font-medium text-[12px]">Design System</span>
                 </a>
               </ContextMenuItem>
             </div>
           </ContextMenuContent>
         </ContextMenu>
 
-        <ul className="space-x-2 font-medium text-sm hidden md:flex mx-3">
+        <ul className="space-x-2 font-medium text-[12px] hidden md:flex mx-3">
           {links.map(({ path, title, children, cover }) => {
             if (path) {
               return (
@@ -262,7 +262,7 @@ export function Header() {
                   <Link
                     onClick={handleOnClick}
                     href={path}
-                    className="h-8 items-center justify-center text-sm font-medium px-3 py-2 inline-flex text-secondary-foreground transition-opacity hover:opacity-70 duration-200"
+                    className="h-8 items-center justify-center text-[12px] font-medium px-3 py-2 inline-flex text-secondary-foreground transition-opacity hover:opacity-70 duration-200"
                   >
                     {title}
                   </Link>
@@ -277,7 +277,7 @@ export function Header() {
                 onMouseEnter={() => setShowBlur(true)}
                 onMouseLeave={() => setShowBlur(false)}
               >
-                <span className="h-8 items-center justify-center text-[10px] font-medium transition-opacity hover:opacity-70 duration-200 px-3 py-2 inline-flex text-secondary-foreground cursor-pointer">
+                <span className="h-8 items-center justify-center text-[12px] font-medium transition-opacity hover:opacity-70 duration-200 px-3 py-2 inline-flex text-secondary-foreground cursor-pointer">
                   {title}
                 </span>
 
@@ -298,7 +298,7 @@ export function Header() {
                               className="flex space-x-2 items-center transition-opacity hover:opacity-70 duration-200"
                             >
                               <span>{child.icon}</span>
-                              <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              <span className="text-[12px] font-medium text-gray-900 dark:text-white">
                                 {child.title}
                               </span>
                             </Link>
@@ -335,7 +335,7 @@ export function Header() {
         </button>
 
         <a
-          className="text-sm font-medium pr-2 border-l-[1px] border-border dark:border-border pl-4 hidden md:block text-gray-900 dark:text-white"
+          className="text-[12px] font-medium pr-2 border-l-[1px] border-border dark:border-border pl-4 hidden md:block text-gray-900 dark:text-white"
           href={isSignedIn ? "/app" : "/sign-in"}
         >
           {isSignedIn ? "Entrar" : "Iniciar sesión"}

@@ -11,9 +11,9 @@ export function Hero() {
         <Link href="https://x.com/notas_ia">
           <Button
             variant="outline"
-            className="rounded-full border-border flex space-x-2 items-center text-[12px]"
+            className="rounded-full border-border flex space-x-2 h-7 items-center text-[12px]"
           >
-            <span className="font-mono text-[12px]">Introducimos BETA</span>
+            <span className="font-mono text-[10px]">Introducimos BETA</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={10}
