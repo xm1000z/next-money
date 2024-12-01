@@ -32,7 +32,7 @@ export function CopyInput({ value, className }: Props) {
         className,
       )}
     >
-      <div className="pr-7 text-[#878787] text-sm">{value}</div>
+      <div className="pr-7 text-[#878787] text-xs">{value}</div>
       <button type="button" onClick={handleClipboard} className="block">
         <motion.div
           className="absolute right-4 top-2.5"
