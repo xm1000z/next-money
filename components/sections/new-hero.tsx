@@ -7,17 +7,17 @@ import { WordAnimation } from "./word-animation";
 export function Hero() {
   return (
     <section className="mt-[60px] lg:mt-[180px] min-h-[600px] relative lg:h-[calc(100vh-300px)] overflow-hidden">
-      <div className="flex flex-col px-4 md:px-8">
+      <div className="container flex flex-col">
         <Link href="https://x.com/notas_ia">
           <Button
             variant="outline"
-            className="rounded-full border-border flex space-x-2 items-center text-sm"
+            className="rounded-full border-border flex space-x-1 items-center text-xs"
           >
             <span className="font-mono text-xs">Introducimos BETA</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width={12}
-              height={12}
+              width={8}
+              height={8}
               fill="none"
             >
               <path
