@@ -21,7 +21,7 @@ const config = {
     },
     fontSize: {
       xs: ['0.8125rem', { lineHeight: '1.5rem' }],
-      sm: ['0.875rem'],
+      sm: ['0.875rem', { lineHeight: '1rem' }],
       base: ['1rem', { lineHeight: '1.75rem' }],
       lg: ['1.125rem', { lineHeight: '1.75rem' }],
       xl: ['1.25rem', { lineHeight: '2rem' }],
