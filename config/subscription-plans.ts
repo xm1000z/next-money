@@ -3,10 +3,7 @@ export const subscriptionPlans = [
     id: "starter",
     name: "Starter",
     description: "Perfecto para empezar",
-    price: {
-      monthly: process.env.NEXT_PUBLIC_STRIPE_STARTER_MONTHLY_PRICE_ID!,
-      yearly: process.env.NEXT_PUBLIC_STRIPE_STARTER_YEARLY_PRICE_ID!
-    },
+    price: 10, // Precio fijo en lugar de un objeto con monthly y yearly
     credits: 100,
     features: [
       "100 créditos mensuales",
@@ -23,11 +20,8 @@ export const subscriptionPlans = [
     id: "pro",
     name: "Profesional",
     description: "Para uso profesional",
-    price: {
-      monthly: process.env.NEXT_PUBLIC_STRIPE_PRO_MONTHLY_PRICE_ID!,
-      yearly: process.env.NEXT_PUBLIC_STRIPE_PRO_YEARLY_PRICE_ID!
-    },
-    credits: 300,
+    price: 25, // Precio fijo
+    credits: 500,
     features: [
       "300 créditos mensuales",
       "Renovación automática",
@@ -44,10 +38,7 @@ export const subscriptionPlans = [
     id: "business",
     name: "Business",
     description: "Solución empresarial completa",
-    price: {
-      monthly: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PRICE_ID!,
-      yearly: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PRICE_ID!
-    },
+    price: 90, // Precio fijo
     credits: 1000,
     features: [
       "1000 créditos mensuales",

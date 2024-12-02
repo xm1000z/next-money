@@ -28,10 +28,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
     id: plan.id,
     name: plan.name,
     description: plan.description,
-    price: {
-      monthly: Number(plan.price.monthly),
-      yearly: Number(plan.price.yearly),
-    },
+    price: plan.price,
     credits: plan.credits,
     features: plan.features,
     metadata: plan.metadata,

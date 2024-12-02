@@ -34,10 +34,11 @@ import Image from "next/image";
 import { SubscriptionPlanClient } from "@/types/subscription";
 
 interface PricingCardsProps {
-  subscriptionPlans: SubscriptionPlanClient[];
   userId?: string;
-  onSubscribe: (userId: string | undefined, planId: string, isYearly: boolean) => Promise<void | { url: string }>;
-  chargeProduct?: any[];
+  locale?: string;
+  chargeProduct?: ChargeProductSelectDto[];
+  subscriptionPlans: SubscriptionPlanClient[];
+  onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
@@ -177,9 +178,16 @@ export function FreeCard() {
   );
 }
 
-export function PricingCards({ subscriptionPlans, userId, onSubscribe, chargeProduct }: PricingCardsProps) {
+export function PricingCards({
+  userId,
+  chargeProduct,
+  locale,
+  subscriptionPlans,
+  onSubscribe
+}: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
+  const searchParams = useSearchParams();
   const [hasSubscription, setHasSubscription] = useState<boolean>(false);
   const router = useRouter();
 
@@ -191,9 +199,18 @@ export function PricingCards({ subscriptionPlans, userId, onSubscribe, chargePro
     }
   }, [userId]);
 
-  const handleSubscribeClick = (planId: string) => {
-    if (userId) {
-      onSubscribe(userId, planId, isYearly);
+  const handleSubscriptionClick = async (planId: string) => {
+    if (!userId) {
+      console.error('Usuario no autenticado');
+      return;
+    }
+    try {
+      const result = await onSubscribe(userId, planId);
+      if (result?.url) {
+        router.push(result.url);
+      }
+    } catch (error) {
+      console.error('Error al procesar la suscripción');
     }
   };
 
@@ -205,32 +222,51 @@ export function PricingCards({ subscriptionPlans, userId, onSubscribe, chargePro
           title={t("title")}
           className="text-4xl font-bold tracking-tight"
         />
+
+        {/* Planes de Suscripción */}
         <div className="w-full">
           <div className="flex items-center gap-4 justify-center mb-8">
-            <span className={cn("text-sm", !isYearly && "text-primary font-medium")}>
+            <span className={cn(
+              "text-sm",
+              !isYearly && "text-primary font-medium"
+            )}>
               Mensual
             </span>
             <Switch
               checked={isYearly}
               onCheckedChange={setIsYearly}
             />
-            <span className={cn("text-sm", isYearly && "text-primary font-medium")}>
+            <span className={cn(
+              "text-sm",
+              isYearly && "text-primary font-medium"
+            )}>
               Anual
               <span className="ml-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">
                 Ahorra 20%
               </span>
             </span>
           </div>
+
           <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-2">
             {subscriptionPlans.map((plan) => (
-              <div key={plan.id} className={cn("relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300", "backdrop-blur-md bg-background/50 dark:bg-background/30")}>
+              <div
+                key={plan.id}
+                className={cn(
+                  "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
+                  "backdrop-blur-md bg-background/50 dark:bg-background/30",
+                  plan.metadata?.recommended 
+                    ? "border-primary/50 dark:border-primary/30 scale-105" 
+                    : "hover:scale-102.5 hover:shadow-xl",
+                )}
+              >
                 <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
                   <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
                     {plan.name}
                   </p>
+
                   <div className="flex flex-col items-start">
                     <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-                      {formatPrice(isYearly ? plan.price.yearly : plan.price.monthly, "€")}
+                      {formatPrice(plan.price, "€")}
                       <div className="text-base font-medium text-muted-foreground">
                         / {isYearly ? "año" : "mes"}
                       </div>
@@ -240,6 +276,7 @@ export function PricingCards({ subscriptionPlans, userId, onSubscribe, chargePro
                     {plan.description}
                   </div>
                 </div>
+
                 <div className="flex h-full flex-col justify-between gap-8 p-8">
                   <ul className="space-y-3 text-left text-sm font-medium leading-normal">
                     {plan.features.map((feature) => (
@@ -249,15 +286,17 @@ export function PricingCards({ subscriptionPlans, userId, onSubscribe, chargePro
                       </li>
                     ))}
                   </ul>
+
                   <SignedIn>
                     <Button 
                       className="w-full"
                       variant={plan.metadata?.recommended ? "default" : "outline"}
-                      onClick={() => handleSubscribeClick(plan.id)}
+                      onClick={() => handleSubscriptionClick(plan.id)}
                     >
                       Suscribirse
                     </Button>
                   </SignedIn>
+
                   <SignedOut>
                     <SignInButton mode="modal">
                       <Button
@@ -273,7 +312,46 @@ export function PricingCards({ subscriptionPlans, userId, onSubscribe, chargePro
             ))}
           </div>
         </div>
+
+        {/* Planes de pago único - Solo visibles para usuarios suscritos */}
+        {hasSubscription ? (
+          <>
+            <div className="mt-8 text-center text-lg font-medium">
+              Compra créditos adicionales
+            </div>
+            <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
+              {chargeProduct?.map((offer) => (
+                <PricingCard offer={offer} key={offer.id} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
+            <h3 className="text-lg font-semibold mb-2">
+              ¿Necesitas más créditos?
+            </h3>
+            <p className="text-muted-foreground">
+              Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
+            </p>
+          </div>
+        )}
+
+        <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
+          {t("contact.title")}
+          <br />
+          <a
+            className="font-medium text-primary"
+            href="mailto:soporte@notas.ai"
+          >
+            soporte@notas.ai
+          </a>{" "}
+          {t("contact.description")}
+        </p>
       </section>
+      <div
+        className="pointer-events-none fixed bottom-10 left-[50%] translate-x-[-50%]"
+        id="order-success"
+      />
     </MaxWidthWrapper>
   );
 }

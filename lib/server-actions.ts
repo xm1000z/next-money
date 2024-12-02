@@ -10,7 +10,7 @@ const subscribeSchema = z.object({
   planId: z.string().min(1)
 });
 
-export async function handleSubscribe(userId: string | undefined, planId: string, isYearly: boolean): Promise<{ url: string } | void> {
+export async function handleSubscribe(userId: string | undefined, planId: string): Promise<{ url: string } | void> {
   if (!userId) {
     console.error('Usuario no autenticado');
     return;
@@ -28,7 +28,7 @@ export async function handleSubscribe(userId: string | undefined, planId: string
     }
 
     const checkoutUrl = await createSubscriptionCheckout({
-      priceId: isYearly ? plan.price.yearly : plan.price.monthly,
+      priceId: plan.price,
       userId,
       successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/subscription?success=true`,
       cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?success=false`,

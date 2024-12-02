@@ -2,10 +2,7 @@ export interface SubscriptionPlanClient {
   id: string;
   name: string;
   description: string;
-  price: {
-    monthly: number;
-    yearly: number;
-  };
+  price: number; // Cambiar a un solo número
   credits: number;
   features: string[];
   metadata: {
