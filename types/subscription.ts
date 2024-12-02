@@ -6,10 +6,6 @@ export interface SubscriptionPlanClient {
     monthly: number;
     yearly: number;
   };
-  price: {
-    monthly: string;
-    yearly: string;
-  };
   credits: number;
   features: string[];
   metadata: {
