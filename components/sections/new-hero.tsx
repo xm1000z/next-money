@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { HeroImage } from "./hero-image";
-import { Metrics } from "./metrics";
 import { WordAnimation } from "./word-animation";
 
 export function Hero() {
