@@ -3,7 +3,8 @@ export const subscriptionPlans = [
     id: "starter",
     name: "Starter",
     description: "Perfecto para empezar",
-    price: 10, // Precio fijo en lugar de un objeto con monthly y yearly
+    price: 10, // Precio fijo
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_STARTER_PRICE_ID!, // ID de precio de Stripe
     credits: 100,
     features: [
       "100 créditos mensuales",
@@ -21,6 +22,7 @@ export const subscriptionPlans = [
     name: "Profesional",
     description: "Para uso profesional",
     price: 25, // Precio fijo
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID!, // ID de precio de Stripe
     credits: 500,
     features: [
       "300 créditos mensuales",
@@ -39,6 +41,7 @@ export const subscriptionPlans = [
     name: "Business",
     description: "Solución empresarial completa",
     price: 90, // Precio fijo
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_BUSINESS_PRICE_ID!, // ID de precio de Stripe
     credits: 1000,
     features: [
       "1000 créditos mensuales",
