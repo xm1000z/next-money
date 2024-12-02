@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
-import { Switch } from "@/components/ui/switch";
 
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
@@ -28,17 +27,11 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
-import { createSubscriptionCheckout } from "@/lib/stripe-actions";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { SubscriptionPlanClient } from "@/types/subscription";
 
 interface PricingCardsProps {
   userId?: string;
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
-  subscriptionPlans: SubscriptionPlanClient[];
-  onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
@@ -141,7 +134,7 @@ export function FreeCard() {
 
         <div className="flex flex-col items-start">
           <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-            {`${formatPrice(10, "€")}`}
+            {`${formatPrice(0, "€")}`}
             <div className="text-base font-medium text-muted-foreground">
               / 5 {t("worth")}
             </div>
@@ -182,37 +175,34 @@ export function PricingCards({
   userId,
   chargeProduct,
   locale,
-  subscriptionPlans,
-  onSubscribe
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
-  const [isYearly, setIsYearly] = useState<boolean>(false);
+  const isYearlyDefault = false;
+  const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
   const searchParams = useSearchParams();
-  const [hasSubscription, setHasSubscription] = useState<boolean>(false);
-  const router = useRouter();
+  const toggleBilling = () => {
+    setIsYearly(!isYearly);
+  };
+  const { reward } = useReward("order-success", "confetti", {
+    position: "fixed",
+    elementCount: 360,
+    spread: 80,
+    elementSize: 8,
+    lifetime: 400,
+  });
 
   useEffect(() => {
-    if (userId) {
-      fetch('/api/subscription/status')
-        .then(res => res.json())
-        .then(data => setHasSubscription(data.hasActiveSubscription));
-    }
-  }, [userId]);
-
-  const handleSubscriptionClick = async (planId: string) => {
-    if (!userId) {
-      console.error('Usuario no autenticado');
+    if (!searchParams.size) {
       return;
     }
-    try {
-      const result = await onSubscribe(userId, planId);
-      if (result?.url) {
-        router.push(result.url);
-      }
-    } catch (error) {
-      console.error('Error al procesar la suscripción');
+    if (searchParams.get("success") === "true") {
+      setTimeout(() => {
+        reward();
+      }, 1000);
+    } else if (searchParams.get("success") === "false") {
+      console.log("Payment failed");
     }
-  };
+  }, [searchParams]);
 
   return (
     <MaxWidthWrapper className="py-20">
@@ -222,119 +212,26 @@ export function PricingCards({
           title={t("title")}
           className="text-4xl font-bold tracking-tight"
         />
-
-        {/* Planes de Suscripción */}
         <div className="w-full">
-          <div className="flex items-center gap-4 justify-center mb-8">
-            <span className={cn(
-              "text-sm",
-              !isYearly && "text-primary font-medium"
-            )}>
-              Mensual
-            </span>
-            <Switch
-              checked={isYearly}
-              onCheckedChange={setIsYearly}
-            />
-            <span className={cn(
-              "text-sm",
-              isYearly && "text-primary font-medium"
-            )}>
-              Anual
-              <span className="ml-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">
-                Ahorra 20%
-              </span>
-            </span>
-          </div>
-
-          <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-2">
-            {subscriptionPlans.map((plan) => (
-              <div
-                key={plan.id}
-                className={cn(
-                  "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
-                  "backdrop-blur-md bg-background/50 dark:bg-background/30",
-                  plan.metadata?.recommended 
-                    ? "border-primary/50 dark:border-primary/30 scale-105" 
-                    : "hover:scale-102.5 hover:shadow-xl",
-                )}
+          <p className="mb-8 inline-flex items-center justify-center border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] px-4 py-2 text-sm text-primary dark:bg-[#1b1b1b]">
+            <span className="font-medium">
+              {t("tip.title")}
+              &nbsp;
+              <a
+                href="https://notas.ai/pricing"
+                className="font-semibold underline decoration-primary/70 hover:decoration-primary"
               >
-                <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
-                  <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
-                    {plan.name}
-                  </p>
-
-                  <div className="flex flex-col items-start">
-                    <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-                    {`${formatPrice(10, "€")}`}
-                    <div className="text-base font-medium text-muted-foreground">
-                        / {isYearly ? "año" : "mes"}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-left text-sm text-muted-foreground/90">
-                    {plan.description}
-                  </div>
-                </div>
-
-                <div className="flex h-full flex-col justify-between gap-8 p-8">
-                  <ul className="space-y-3 text-left text-sm font-medium leading-normal">
-                    {plan.features.map((feature) => (
-                      <li className="flex items-start gap-x-3" key={feature}>
-                        <Icons.check className="size-5 shrink-0 text-primary" />
-                        <p>{feature}</p>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <SignedIn>
-                    <Button 
-                      className="w-full"
-                      variant={plan.metadata?.recommended ? "default" : "outline"}
-                      onClick={() => handleSubscriptionClick(plan.id)}
-                    >
-                      Suscribirse
-                    </Button>
-                  </SignedIn>
-
-                  <SignedOut>
-                    <SignInButton mode="modal">
-                      <Button
-                        variant={plan.metadata?.recommended ? "default" : "outline"}
-                        className="w-full"
-                      >
-                        {t("action.signin")}
-                      </Button>
-                    </SignInButton>
-                  </SignedOut>
-                </div>
-              </div>
-            ))}
-          </div>
+                {t("tip.contact")}
+              </a>
+            </span>
+          </p>
         </div>
 
-        {/* Planes de pago único - Solo visibles para usuarios suscritos */}
-        {hasSubscription ? (
-          <>
-            <div className="mt-8 text-center text-lg font-medium">
-              Compra créditos adicionales
-            </div>
-            <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
-              {chargeProduct?.map((offer) => (
-                <PricingCard offer={offer} key={offer.id} />
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
-            <h3 className="text-lg font-semibold mb-2">
-              ¿Necesitas más créditos?
-            </h3>
-            <p className="text-muted-foreground">
-              Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
-            </p>
-          </div>
-        )}
+        <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
+          {chargeProduct?.map((offer) => (
+            <PricingCard offer={offer} key={offer.id} />
+          ))}
+        </div>
 
         <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
           {t("contact.title")}
