@@ -5,6 +5,19 @@ import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { SubscriptionPlanClient } from "@/types/subscription";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import type { ChargeProductSelectDto } from "@/db/type";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { url } from "@/lib";
+import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
 
 interface PricingCardsProps {
