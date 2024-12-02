@@ -23,7 +23,7 @@ export enum PaymentChannelType {
 }
 
 export enum BillingType {
-  Refund = "Refund", // 退款
+  Refund = "Refund",
   Withdraw = "Withdraw",
 }
 
