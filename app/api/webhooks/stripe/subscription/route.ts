@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         
         if (session.mode === 'subscription' && session.metadata?.userId) {
           const plan = subscriptionPlans.find(
-            p => p.price === session.metadata.priceId
+            p => p.price.toString() === session.metadata.priceId
           );
 
           if (!session.subscription || !session.customer) {
