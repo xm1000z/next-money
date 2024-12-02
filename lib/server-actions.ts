@@ -10,7 +10,7 @@ const subscribeSchema = z.object({
   planId: z.string().min(1)
 });
 
-export async function handleSubscribe(userId: string | undefined, planId: string): Promise<{ url: string } | void> {
+export async function handleSubscribe(userId: string | undefined, planId: string, isYearly: boolean): Promise<{ url: string } | void> {
   if (!userId) {
     console.error('Usuario no autenticado');
     return;
