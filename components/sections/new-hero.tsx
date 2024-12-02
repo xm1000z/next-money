@@ -59,9 +59,7 @@ export function Hero() {
         </p>
       </div>
       <section className="flex flex-col md:flex-row">
-        <HeroImage className="block md:hidden" />
-        <Metrics />
-        <HeroImage className="hidden md:block" />
+        <HeroImage />
       </section>
     </section>
     </div>
