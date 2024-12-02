@@ -32,7 +32,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
     credits: plan.credits,
     features: plan.features,
     metadata: plan.metadata,
-    stripePriceIds: plan.stripePriceIds,
+    price: plan.price,
   }));
 
   return (

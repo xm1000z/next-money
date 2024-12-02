@@ -6,7 +6,7 @@ export interface SubscriptionPlanClient {
     monthly: number;
     yearly: number;
   };
-  stripePriceIds: {
+  price: {
     monthly: string;
     yearly: string;
   };
