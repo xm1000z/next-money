@@ -27,11 +27,12 @@ export async function POST(req: Request) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
         
-        if (session.mode === 'subscription' && session.metadata?.userId) {
+        if (session.mode === 'subscription' && session.metadata) {
+          const userId = session.metadata.userId;
           const priceId = session.metadata.priceId;
           
-          if (!priceId) {
-            throw new Error("Missing priceId in session metadata");
+          if (!userId || !priceId) {
+            throw new Error("Missing userId or priceId in session metadata");
           }
 
           const plan = subscriptionPlans.find(
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
 
           await prisma.subscription.create({
             data: {
-              userId: session.metadata.userId,
+              userId: userId,
               stripeSubscriptionId: session.subscription as string,
               stripePriceId: priceId,
               stripeCustomerId: session.customer as string,
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
           await logsnag.track({
             channel: "subscriptions",
             event: "Nueva Suscripción",
-            user_id: session.metadata.userId,
+            user_id: userId,
             description: `Nuevo suscriptor al plan ${plan?.name}`,
             icon: "🎉",
             tags: {
@@ -176,8 +177,7 @@ export async function POST(req: Request) {
         if (subscription) {
           const newPriceId = session.items.data[0].price.id;
           const plan = subscriptionPlans.find(
-            p => p.price.monthly === newPriceId || 
-                p.price.yearly === newPriceId
+            p => p.price.toString() === newPriceId
           );
 
           await prisma.subscription.update({
