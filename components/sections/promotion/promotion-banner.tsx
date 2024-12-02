@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
 import { toast } from "sonner";
 
-import { PricingCardDialog } from "@/components/pricing-cards";
 import SignBox from "@/components/sign-box";
 import { Button } from "@/components/ui/button";
 import { ChargeProductSelectDto } from "@/db/type";
@@ -137,11 +136,6 @@ export default function PromotionBanner({
             </Button>
           </div>
         </div>
-        <PricingCardDialog
-          onClose={setPricingCardOpen}
-          isOpen={pricingCardOpen}
-          chargeProduct={chargeProduct}
-        />
       </div>
       <div className="h-24" />
     </div>

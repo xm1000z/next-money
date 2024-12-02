@@ -34,7 +34,6 @@ import {
 import { cn, createRatio } from "@/lib/utils";
 
 import { DownloadAction } from "../history/download-action";
-import { PricingCardDialog } from "../pricing-cards";
 import { EmptyPlaceholder } from "../shared/empty-placeholder";
 import { Icons } from "../shared/icons";
 import Upload from "../upload";
@@ -377,11 +376,6 @@ export default function Playground({
           </div>
         </div>
       </div>
-      <PricingCardDialog
-        onClose={setPricingCardOpen}
-        isOpen={pricingCardOpen}
-        chargeProduct={chargeProduct}
-      />
     </div>
   );
 }

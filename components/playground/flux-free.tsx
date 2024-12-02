@@ -41,7 +41,6 @@ import { Link } from "@/lib/navigation";
 import { cn, createRatio } from "@/lib/utils";
 
 import { DownloadAction } from "../history/download-action";
-import { PricingCardDialog } from "../pricing-cards";
 import { EmptyPlaceholder } from "../shared/empty-placeholder";
 import { Icons } from "../shared/icons";
 import SignBox from "../sign-box";
@@ -342,11 +341,6 @@ export default function Playground({
             </div>
           </div>
         </div>
-        <PricingCardDialog
-          onClose={setPricingCardOpen}
-          isOpen={pricingCardOpen}
-          chargeProduct={chargeProduct}
-        />
       </div>
       {fluxId && (
         <Card id="result" className="mt-4">
