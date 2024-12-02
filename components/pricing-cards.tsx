@@ -34,11 +34,9 @@ import Image from "next/image";
 import { SubscriptionPlanClient } from "@/types/subscription";
 
 interface PricingCardsProps {
-  userId?: string;
-  locale?: string;
-  chargeProduct?: ChargeProductSelectDto[];
   subscriptionPlans: SubscriptionPlanClient[];
-  onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
+  userId?: string;
+  onSubscribe: (userId: string | undefined, planId: string, isYearly: boolean) => Promise<void | { url: string }>;
 }
 
 const PricingCard = ({
@@ -178,13 +176,7 @@ export function FreeCard() {
   );
 }
 
-export function PricingCards({
-  userId,
-  chargeProduct,
-  locale,
-  subscriptionPlans,
-  onSubscribe
-}: PricingCardsProps) {
+export function PricingCards({ subscriptionPlans, userId, onSubscribe }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
   const searchParams = useSearchParams();
@@ -199,18 +191,9 @@ export function PricingCards({
     }
   }, [userId]);
 
-  const handleSubscriptionClick = async (planId: string) => {
-    if (!userId) {
-      console.error('Usuario no autenticado');
-      return;
-    }
-    try {
-      const result = await onSubscribe(userId, planId);
-      if (result?.url) {
-        router.push(result.url);
-      }
-    } catch (error) {
-      console.error('Error al procesar la suscripción');
+  const handleSubscribeClick = (planId: string, isYearly: boolean) => {
+    if (userId) {
+      onSubscribe(userId, planId, isYearly);
     }
   };
 
@@ -291,7 +274,7 @@ export function PricingCards({
                     <Button 
                       className="w-full"
                       variant={plan.metadata?.recommended ? "default" : "outline"}
-                      onClick={() => handleSubscriptionClick(plan.id)}
+                      onClick={() => handleSubscribeClick(plan.id, isYearly)}
                     >
                       Suscribirse
                     </Button>
