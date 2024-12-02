@@ -64,7 +64,6 @@ export function Hero() {
         <HeroImage className="hidden md:block" />
       </section>
     </section>
-    <HeroImage/>
     </div>
   );
 }
