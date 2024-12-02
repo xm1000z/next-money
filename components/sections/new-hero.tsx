@@ -58,8 +58,11 @@ export function Hero() {
           Plan Profesional por 29€/m, solo durante BETA.
         </p>
       </div>
-
-      <Metrics />
+      <section className="flex flex-col md:flex-row">
+        <HeroImage className="block md:hidden" />
+        <Metrics />
+        <HeroImage className="hidden md:block" />
+      </section>
     </section>
     <HeroImage/>
     </div>
