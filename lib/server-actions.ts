@@ -1,6 +1,6 @@
 'use server';
 
-import { subscriptionPlans } from "@/config/subscription-plans";
+import { subscriptionPlans } from "@/config/constants";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 import { redirect } from "next/navigation";
 import { z } from "zod";

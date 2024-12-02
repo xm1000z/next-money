@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { PricingCards } from "@/components/pricing-cards";
 import { PricingFaq } from "@/components/pricing-faq";
 import { getChargeProduct } from "@/db/queries/charge-product";
-import { subscriptionPlans } from "@/config/subscription-plans";
+import { subscriptionPlans } from "@/config/constants";
 import { handleSubscribe } from "@/lib/server-actions";
 import { SubscriptionPlanClient } from "@/types/subscription";
 
@@ -29,10 +29,10 @@ export default async function PricingPage({ params: { locale } }: Props) {
     name: plan.name,
     description: plan.description,
     price: plan.price,
-    stripePriceId: plan.stripePriceId,
     credits: plan.credits,
     features: plan.features,
     metadata: plan.metadata,
+    stripePriceIds: plan.stripePriceIds,
   }));
 
   return (

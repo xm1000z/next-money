@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { User } from "@clerk/nextjs/dist/types/server";
-import { subscriptionPlans } from "@/config/subscription-plans";
+import { subscriptionPlans } from "@/config/constants";
 import { prisma } from "@/db/prisma";
 import { stripe } from "@/lib/stripe";
 import { getCachedSubscription } from "@/lib/redis";

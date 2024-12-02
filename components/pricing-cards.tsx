@@ -42,10 +42,13 @@ interface PricingCardsProps {
 }
 
 const PricingCard = ({
-  plan,
+  userId,
+  offer,
 }: {
-  plan: SubscriptionPlanClient;
+  userId?: string;
+  offer: ChargeProductSelectDto;
 }) => {
+  const pathname = usePathname();
   const t = useTranslations("PricingPage");
 
   return (
@@ -53,48 +56,55 @@ const PricingCard = ({
       className={cn(
         "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
         "backdrop-blur-md bg-background/50 dark:bg-background/30",
-        plan.metadata?.recommended 
+        offer.amount === 1990 
           ? "border-primary/50 dark:border-primary/30 scale-105" 
           : "hover:scale-102.5 hover:shadow-xl",
       )}
-      key={plan.id}
+      key={offer.title}
     >
       <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
         <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
-          {plan.name}
+          {offer.title}
         </p>
 
         <div className="flex flex-col items-start">
           <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-            {formatPrice(plan.price, "€")}
+            {offer.originalAmount && offer.originalAmount > 0 ? (
+              <>
+                <span className="text-xl text-muted-foreground/70 line-through">
+                  {formatPrice(offer.originalAmount, "€")}
+                </span>
+                <span>{formatPrice(offer.amount, "€")}</span>
+              </>
+            ) : (
+              `${formatPrice(offer.amount, "€")}`
+            )}
             <div className="text-base font-medium text-muted-foreground">
-              / mes
+              / {offer.credit} {t("worth")}
             </div>
           </div>
         </div>
         <div className="text-left text-sm text-muted-foreground/90">
-          {plan.description}
+          <div>{t("description")}</div>
         </div>
       </div>
 
       <div className="flex h-full flex-col justify-between gap-8 p-8">
         <ul className="space-y-3 text-left text-sm font-medium leading-normal">
-          {plan.features.map((feature) => (
-            <li className="flex items-start gap-x-3" key={feature}>
-              <Icons.check className="size-5 shrink-0 text-primary" />
-              <p>{feature}</p>
-            </li>
-          ))}
+          {offer.message &&
+            offer.message.split(",")?.map((feature) => (
+              <li className="flex items-start gap-x-3" key={feature}>
+                <Icons.check className="size-5 shrink-0 text-primary" />
+                <p>{feature}</p>
+              </li>
+            ))}
         </ul>
-
         <SignedIn>
-          <Button 
-            className="w-full"
-            variant={plan.metadata?.recommended ? "default" : "outline"}
-            onClick={() => handleSubscriptionClick(plan.id)}
-          >
-            Suscribirse
-          </Button>
+          <BillingFormButton 
+            offer={offer} 
+            btnText={t("action.buy")} 
+            className="w-full transition-all duration-300 hover:brightness-110"
+          />
         </SignedIn>
 
         <SignedOut>
@@ -176,6 +186,8 @@ export function PricingCards({
   onSubscribe
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
+  const [isYearly, setIsYearly] = useState<boolean>(false);
+  const searchParams = useSearchParams();
   const [hasSubscription, setHasSubscription] = useState<boolean>(false);
   const router = useRouter();
 
@@ -213,9 +225,90 @@ export function PricingCards({
 
         {/* Planes de Suscripción */}
         <div className="w-full">
+          <div className="flex items-center gap-4 justify-center mb-8">
+            <span className={cn(
+              "text-sm",
+              !isYearly && "text-primary font-medium"
+            )}>
+              Mensual
+            </span>
+            <Switch
+              checked={isYearly}
+              onCheckedChange={setIsYearly}
+            />
+            <span className={cn(
+              "text-sm",
+              isYearly && "text-primary font-medium"
+            )}>
+              Anual
+              <span className="ml-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">
+                Ahorra 20%
+              </span>
+            </span>
+          </div>
+
           <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-2">
             {subscriptionPlans.map((plan) => (
-              <PricingCard plan={plan} key={plan.id} />
+              <div
+                key={plan.id}
+                className={cn(
+                  "relative flex flex-col overflow-hidden border shadow-lg transition-all duration-300",
+                  "backdrop-blur-md bg-background/50 dark:bg-background/30",
+                  plan.metadata?.recommended 
+                    ? "border-primary/50 dark:border-primary/30 scale-105" 
+                    : "hover:scale-102.5 hover:shadow-xl",
+                )}
+              >
+                <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
+                  <p className="font-urban text-lg font-bold uppercase tracking-wider text-primary/80 dark:text-primary/70">
+                    {plan.name}
+                  </p>
+
+                  <div className="flex flex-col items-start">
+                    <div className="flex items-baseline space-x-2 text-4xl font-semibold">
+                      {formatPrice(isYearly ? plan.price.yearly : plan.price.monthly, "€")}
+                      <div className="text-base font-medium text-muted-foreground">
+                        / {isYearly ? "año" : "mes"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-left text-sm text-muted-foreground/90">
+                    {plan.description}
+                  </div>
+                </div>
+
+                <div className="flex h-full flex-col justify-between gap-8 p-8">
+                  <ul className="space-y-3 text-left text-sm font-medium leading-normal">
+                    {plan.features.map((feature) => (
+                      <li className="flex items-start gap-x-3" key={feature}>
+                        <Icons.check className="size-5 shrink-0 text-primary" />
+                        <p>{feature}</p>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <SignedIn>
+                    <Button 
+                      className="w-full"
+                      variant={plan.metadata?.recommended ? "default" : "outline"}
+                      onClick={() => handleSubscriptionClick(plan.id)}
+                    >
+                      Suscribirse
+                    </Button>
+                  </SignedIn>
+
+                  <SignedOut>
+                    <SignInButton mode="modal">
+                      <Button
+                        variant={plan.metadata?.recommended ? "default" : "outline"}
+                        className="w-full"
+                      >
+                        {t("action.signin")}
+                      </Button>
+                    </SignInButton>
+                  </SignedOut>
+                </div>
+              </div>
             ))}
           </div>
         </div>

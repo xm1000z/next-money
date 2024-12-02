@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/db/prisma";
-import { subscriptionPlans } from "@/config/subscription-plans";
+import { subscriptionPlans } from "@/config/constants";
 import { logsnag } from "@/lib/log-snag";
 import { invalidateSubscriptionCache } from "@/lib/redis";
 
@@ -27,16 +27,10 @@ export async function POST(req: Request) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
         
-        if (session.mode === 'subscription' && session.metadata) {
-          const userId = session.metadata.userId;
-          const priceId = session.metadata.priceId;
-          
-          if (!userId || !priceId) {
-            throw new Error("Missing userId or priceId in session metadata");
-          }
-
+        if (session.mode === 'subscription' && session.metadata?.userId) {
           const plan = subscriptionPlans.find(
-            p => p.price.toString() === priceId
+            p => p.stripePriceIds.monthly === session.metadata?.priceId || 
+                p.stripePriceIds.yearly === session.metadata?.priceId
           );
 
           if (!session.subscription || !session.customer) {
@@ -49,9 +43,9 @@ export async function POST(req: Request) {
 
           await prisma.subscription.create({
             data: {
-              userId: userId,
+              userId: session.metadata.userId,
               stripeSubscriptionId: session.subscription as string,
-              stripePriceId: priceId,
+              stripePriceId: session.metadata.priceId || '',
               stripeCustomerId: session.customer as string,
               planId: plan?.id || 'starter',
               status: 'active',
@@ -64,12 +58,12 @@ export async function POST(req: Request) {
           await logsnag.track({
             channel: "subscriptions",
             event: "Nueva Suscripción",
-            user_id: userId,
+            user_id: session.metadata.userId,
             description: `Nuevo suscriptor al plan ${plan?.name}`,
             icon: "🎉",
             tags: {
               plan: plan?.name || 'starter',
-              interval: 'mensual',
+              interval: session.metadata.priceId?.includes('monthly') ? 'mensual' : 'anual',
             },
           });
         }
@@ -177,7 +171,8 @@ export async function POST(req: Request) {
         if (subscription) {
           const newPriceId = session.items.data[0].price.id;
           const plan = subscriptionPlans.find(
-            p => p.price.toString() === newPriceId
+            p => p.stripePriceIds.monthly === newPriceId || 
+                p.stripePriceIds.yearly === newPriceId
           );
 
           await prisma.subscription.update({

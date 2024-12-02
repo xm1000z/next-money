@@ -2,8 +2,14 @@ export interface SubscriptionPlanClient {
   id: string;
   name: string;
   description: string;
-  price: number; // Precio numérico
-  stripePriceId: string; // ID de precio de Stripe
+  price: {
+    monthly: number;
+    yearly: number;
+  };
+  stripePriceIds: {
+    monthly: string;
+    yearly: string;
+  };
   credits: number;
   features: string[];
   metadata: {

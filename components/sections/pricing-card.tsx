@@ -1,7 +1,7 @@
 import { PricingCards } from "@/components/pricing-cards";
 import { auth } from "@clerk/nextjs/server";
 import { PricingFaq } from "@/components/pricing-faq";
-import { subscriptionPlans } from "@/config/subscription-plans";
+import { subscriptionPlans } from "@/config/constants";
 import { getChargeProduct } from "@/db/queries/charge-product";
 import { handleSubscribe } from "@/lib/server-actions";
 import { SubscriptionPlanClient } from "@/types/subscription";
@@ -20,7 +20,7 @@ export default async function PricingCard({ locale }: PricingCardProps) {
     name: plan.name,
     description: plan.description,
     price: plan.price,
-    stripePriceId: plan.stripePriceId, // Asegúrate de incluir stripePriceId
+    stripePriceId: plan.stripePriceId,
     credits: plan.credits,
     features: plan.features,
     metadata: plan.metadata
