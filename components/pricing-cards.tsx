@@ -103,3 +103,17 @@ export function PricingCards({
     </div>
   );
 }
+
+export function PricingCardDialog({
+  onClose,
+  isOpen,
+  chargeProduct,
+}: {
+  isOpen: boolean;
+  chargeProduct?: ChargeProductSelectDto[];
+  onClose: (isOpen: boolean) => void;
+}) {
+  // ... implementación del componente
+}
+
+export { PricingCardDialog };
