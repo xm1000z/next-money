@@ -14,16 +14,15 @@ export default async function PricingCard({ locale }: PricingCardProps) {
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
   const { userId } = auth();
 
-  const clientPlans = subscriptionPlans.map(plan => ({
-    ...plan,
+  const clientPlans: SubscriptionPlanClient[] = subscriptionPlans.map(plan => ({
     id: plan.id,
     name: plan.name,
     description: plan.description,
     price: plan.price,
-    stripePriceId: plan.stripePriceId,
+    stripePriceId: isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly,
     credits: plan.credits,
     features: plan.features,
-    metadata: plan.metadata
+    metadata: plan.metadata,
   }));
 
   return (
