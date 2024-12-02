@@ -37,6 +37,7 @@ interface PricingCardsProps {
   subscriptionPlans: SubscriptionPlanClient[];
   userId?: string;
   onSubscribe: (userId: string | undefined, planId: string, isYearly: boolean) => Promise<void | { url: string }>;
+  chargeProduct?: any[];
 }
 
 const PricingCard = ({
@@ -176,7 +177,7 @@ export function FreeCard() {
   );
 }
 
-export function PricingCards({ subscriptionPlans, userId, onSubscribe }: PricingCardsProps) {
+export function PricingCards({ subscriptionPlans, userId, onSubscribe, chargeProduct }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
   const searchParams = useSearchParams();

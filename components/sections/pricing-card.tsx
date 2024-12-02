@@ -37,6 +37,7 @@ export default async function PricingCard({ locale }: PricingCardProps) {
           'use server';
           return handleSubscribe(userId ?? undefined, planId, isYearly);
         }}
+        chargeProduct={chargeProduct}
       />
       <hr className="container" />
       <PricingFaq />
