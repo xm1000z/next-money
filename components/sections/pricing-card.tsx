@@ -20,6 +20,7 @@ export default async function PricingCard({ locale }: PricingCardProps) {
     name: plan.name,
     description: plan.description,
     price: plan.price,
+    stripePriceId: plan.stripePriceId, // Asegúrate de incluir stripePriceId
     credits: plan.credits,
     features: plan.features,
     metadata: plan.metadata
