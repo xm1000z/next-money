@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import DynamicImage from '../DynamicImage';
+
+import { motion } from "framer-motion";
+import heroImageLight from "@/public/chat.png";
+import heroImageDark from "@/public/chat.png";
+import { DynamicImage } from "./dynamic-image";
 
 interface HeroImageProps {
   className?: string;
