@@ -28,7 +28,7 @@ export async function handleSubscribe(userId: string | undefined, planId: string
     }
 
     const checkoutUrl = await createSubscriptionCheckout({
-      priceId: plan.stripePriceId,
+      priceId: plan.stripePriceIds.monthly,
       userId,
       successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/subscription?success=true`,
       cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?success=false`,
