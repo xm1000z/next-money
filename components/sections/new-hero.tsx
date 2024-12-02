@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { HeroImage } from "./hero-image";
+import { Metrics } from "./metrics";
 import { WordAnimation } from "./word-animation";
 
 export function Hero() {
@@ -58,7 +59,9 @@ export function Hero() {
         </p>
       </div>
       <section className="flex flex-col md:flex-row">
-        <HeroImage />
+        <HeroImage className="block md:hidden" />
+        <Metrics />
+        <HeroImage className="hidden md:block" />
       </section>
     </section>
     </div>
