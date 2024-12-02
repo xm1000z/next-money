@@ -14,7 +14,7 @@ export default async function PricingCard({ locale }: PricingCardProps) {
   const { data: chargeProduct = [] } = await getChargeProduct(locale);
   const { userId } = auth();
 
-  const clientPlans: SubscriptionPlanClient[] = subscriptionPlans.map(plan => ({
+  const clientPlans: subscriptionPlans[] = subscriptionPlans.map(plan => ({
     id: plan.id,
     name: plan.name,
     description: plan.description,
