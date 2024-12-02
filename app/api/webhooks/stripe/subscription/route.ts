@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         
         if (session.mode === 'subscription' && session.metadata?.userId) {
           const plan = subscriptionPlans.find(
-            p => p.price
+            p => p.price === session.metadata.priceId
           );
 
           if (!session.subscription || !session.customer) {
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
             icon: "🎉",
             tags: {
               plan: plan?.name || 'starter',
-              interval: session.metadata.priceId?.includes('monthly') ? 'mensual' : 'anual',
+              interval: 'mensual',
             },
           });
         }
