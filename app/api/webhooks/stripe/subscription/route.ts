@@ -28,8 +28,14 @@ export async function POST(req: Request) {
         const session = event.data.object as Stripe.Checkout.Session;
         
         if (session.mode === 'subscription' && session.metadata?.userId) {
+          const priceId = session.metadata.priceId;
+          
+          if (!priceId) {
+            throw new Error("Missing priceId in session metadata");
+          }
+
           const plan = subscriptionPlans.find(
-            p => p.price.toString() === session.metadata.priceId
+            p => p.price.toString() === priceId
           );
 
           if (!session.subscription || !session.customer) {
@@ -44,7 +50,7 @@ export async function POST(req: Request) {
             data: {
               userId: session.metadata.userId,
               stripeSubscriptionId: session.subscription as string,
-              stripePriceId: session.metadata.priceId || '',
+              stripePriceId: priceId,
               stripeCustomerId: session.customer as string,
               planId: plan?.id || 'starter',
               status: 'active',
