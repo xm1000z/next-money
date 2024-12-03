@@ -155,9 +155,9 @@ export function DashboardSidebar({ links }: DashboardSidebarProps) {
                                     target={item.external ? "_blank" : undefined}
                                     rel={item.external ? "noopener noreferrer" : undefined}
                                     className={cn(
-                                      "flex items-center gap-3 py-3 text-sm font-medium hover:bg-[#ececec] hover:border border-[rgba(27, 27, 27, 0.18)] dark:hover:bg-[#1b1b1b] dark:hover:border-[rgba(185, 185, 185, 0.17)]",
+                                      "flex items-center gap-3 py-3 text-sm font-medium hover:bg-[#ececec] border hover:border border-[rgba(27, 27, 27, 0.18)] dark:hover:bg-[#1b1b1b] dark:hover:border-[rgba(185, 185, 185, 0.17)]",
                                       path === item.href
-                                        ? "border border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
+                                        ? "border-[rgba(27, 27, 27, 0.18)] dark:border-[rgba(185, 185, 185, 0.17)] bg-[#ececec] dark:bg-[#1b1b1b]"
                                         : "text-black dark:text-white hover:text-accent-foreground",
                                       item.disabled &&
                                         "cursor-not-allowed opacity-80 hover:bg-transparent hover:text-black hover:dark:text-white",
