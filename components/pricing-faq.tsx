@@ -55,7 +55,7 @@ export function PricingFaq() {
         {pricingFaqData.map((faqItem) => (
           <AccordionItem key={faqItem.id} value={faqItem.id}>
             <AccordionTrigger>{t(`faq.${faqItem.question}`)}</AccordionTrigger>
-            <AccordionContent className="text-xs text-muted-foreground sm:text-[15px]">
+            <AccordionContent className="text-[12px] text-muted-foreground sm:text-[15px]">
               {t(`faq.${faqItem.answer}`)}
             </AccordionContent>
           </AccordionItem>
