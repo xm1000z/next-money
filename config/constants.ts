@@ -104,9 +104,7 @@ export const subscriptionPlans = [
     credits: 100,
     features: [
       "100 créditos mensuales",
-      "Renovación automática",
-      "Soporte básico",
-      "Acceso a todas las funciones"
+      "Renovación automática"
     ],
     metadata: {
       recommended: false,
@@ -130,8 +128,7 @@ export const subscriptionPlans = [
       "300 créditos mensuales",
       "Renovación automática",
       "Soporte prioritario",
-      "Acceso a todas las funciones",
-      "Sin marca de agua"
+      "Acceso a todas las funciones"
     ],
     metadata: {
       recommended: true,
@@ -155,12 +152,7 @@ export const subscriptionPlans = [
       "1000 créditos mensuales",
       "Renovación automática",
       "Soporte prioritario 24/7",
-      "Acceso a todas las funciones",
-      "Sin marca de agua",
-      "API access",
-      "Multiple team members",
-      "Analytics dashboard",
-      "Custom integration support"
+      "Acceso a todas las funciones"
     ],
     metadata: {
       recommended: false,
