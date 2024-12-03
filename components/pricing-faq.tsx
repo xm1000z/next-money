@@ -46,7 +46,7 @@ export function PricingFaq() {
   const t = useTranslations("PricingPage");
 
   return (
-    <section className="container max-w-xl py-2">
+    <section className="container max-w-2xl py-2">
       <HeaderSection
         title={t("faq.title")}
       />
@@ -55,7 +55,7 @@ export function PricingFaq() {
         {pricingFaqData.map((faqItem) => (
           <AccordionItem key={faqItem.id} value={faqItem.id}>
             <AccordionTrigger>{t(`faq.${faqItem.question}`)}</AccordionTrigger>
-            <AccordionContent className="text-[12px] text-muted-foreground sm:text-[15px]">
+            <AccordionContent className="text-[14px] text-muted-foreground sm:text-[15px]">
               {t(`faq.${faqItem.answer}`)}
             </AccordionContent>
           </AccordionItem>
