@@ -98,7 +98,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
         }}
       />
     </div>
-    <div className="container  max-w-[800px]">
+    <div className="container mt-5 max-w-[800px]">
           <div className="-mt-[200px] ">
             <div className="text-center">
               <h4 className="text-4xl">Frequently asked questions</h4>
