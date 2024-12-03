@@ -218,7 +218,6 @@ export function PricingCards({
     <MaxWidthWrapper className="py-20">
       <section className="flex mb-8 flex-col items-center text-center space-y-12">
         <HeaderSection
-          label={t("label")}
           title={t("title")}
           className="text-xl tracking-tight"
         />
@@ -301,7 +300,7 @@ export function PricingCards({
                   </SignedIn>
 
                   <SignedOut>
-                    <SignInButton mode="modal">
+                    <SignInButton mode="redirect" forceRedirectUrl={url(pathname).href}>
                       <Button
                         variant={plan.metadata?.recommended ? "default" : "outline"}
                         className="w-full"
@@ -334,7 +333,7 @@ export function PricingCards({
               ¿Necesitas un plan personalizado?
             </h3>
             <p className="text-muted-foreground">
-              Contactanos a sales@notas.ai y cuéntanos tu situación.
+              sales@notas.ai, cuéntanos tu situación.
             </p>
           </div>
         )}

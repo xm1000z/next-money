@@ -101,9 +101,8 @@ export default async function PricingPage({ params: { locale } }: Props) {
     <div className="container mt-5 max-w-[800px]">
           <div className="-mt-[200px] ">
             <div className="text-center">
-              <h4 className="text-4xl">Frequently asked questions</h4>
+              <h4 className="text-4xl">Preguntas frecuentes</h4>
             </div>
-
             <Accordion type="single" collapsible className="w-full mt-10 mb-48">
               <AccordionItem value="item-1">
                 <AccordionTrigger>
