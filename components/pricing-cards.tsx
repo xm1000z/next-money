@@ -247,7 +247,7 @@ export function PricingCards({
             </span>
           </div>
 
-          <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3 md:grid-cols-[repeat(3,1fr)]">
+          <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3 md:max-w-[calc(100%/3-2rem)]">
             {subscriptionPlans.map((plan) => (
               <div
                 key={plan.id}
