@@ -42,6 +42,8 @@ import {
   Play,
   Volume2,
   VolumeX,
+  Share,
+  Twitter,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -71,6 +73,8 @@ export const Icons = {
   Languages,
   HomeIcon,
   LayoutGrid,
+  Share,
+  Twitter,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
