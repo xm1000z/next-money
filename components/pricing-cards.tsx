@@ -177,23 +177,26 @@ export function FreeCard() {
 
 export function PricingCards({
   userId,
-  chargeProduct,
   subscriptionPlans,
   onSubscribe
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
-  const searchParams = useSearchParams();
-  const [hasSubscription, setHasSubscription] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (userId) {
-      // Verificar si el usuario tiene suscripción activa
-      fetch('/api/subscription/status')
-        .then(res => res.json())
-        .then(data => setHasSubscription(data.hasActiveSubscription));
+  const handleSubscription = async (priceId: string) => {
+    if (!userId) {
+      console.error('Usuario no autenticado');
+      return;
     }
-  }, [userId]);
+    try {
+      const result = await onSubscribe(userId, priceId);
+      if (result?.url) {
+        window.location.href = result.url; // Redirigir al usuario a la URL de checkout
+      }
+    } catch (error) {
+      console.error('Error al procesar la suscripción:', error);
+    }
+  };
 
   return (
     <MaxWidthWrapper className="py-20">
@@ -297,27 +300,14 @@ export function PricingCards({
         </div>
 
         {/* Planes de pago único - Solo visibles para usuarios suscritos */}
-        {hasSubscription ? (
-          <>
-            <div className="mt-8 text-center text-lg font-medium">
-              Compra créditos adicionales
-            </div>
-            <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
-              {chargeProduct?.map((offer) => (
-                <PricingCard offer={offer} key={offer.id} />
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
-            <h3 className="text-lg font-semibold mb-2">
-              ¿Necesitas más créditos?
-            </h3>
-            <p className="text-muted-foreground">
-              Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
-            </p>
-          </div>
-        )}
+        <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
+          <h3 className="text-lg font-semibold mb-2">
+            ¿Necesitas más créditos?
+          </h3>
+          <p className="text-muted-foreground">
+            Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
+          </p>
+        </div>
 
         <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
           {t("contact.title")}
