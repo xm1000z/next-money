@@ -28,6 +28,7 @@ import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
 import { subscriptionPlans } from "@/config/constants";
+import { SubscriptionPlanClient } from "@/types/subscription";
 
 interface PricingCardsProps {
   userId?: string;
