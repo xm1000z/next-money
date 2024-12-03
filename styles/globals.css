@@ -217,3 +217,7 @@
   color: #000 !important;
   text-shadow: -1px 1px 0 #fff,1px 1px 0 #fff,1px -1px 0 #fff,-1px -1px 0 #fff !important;
   }
+
+.mb25 {
+  margin-bottom: 7rem;
+}

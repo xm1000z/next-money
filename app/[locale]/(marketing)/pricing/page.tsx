@@ -88,7 +88,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
             </div>
           </div>
         </div>
-    <div className="flex w-full flex-col gap-16 py-8 md:py-8 mb-25 items-center">
+    <div className="flex w-full flex-col gap-16 py-8 md:py-8 mb25 items-center">
       <PricingCards 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
