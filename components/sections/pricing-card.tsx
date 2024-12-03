@@ -30,7 +30,7 @@ export default async function PricingCard({ locale }: PricingCardProps) {
       <PricingCards 
         subscriptionPlans={clientPlans}
         userId={userId ?? undefined}
-        onSubscribe={async (planId: string, isYearly: boolean) => {
+        onSubscribe={async (userId: string | undefined, planId: string, isYearly: boolean) => {
           'use server';
           return handleSubscribe(userId ?? undefined, planId, isYearly);
         }}
