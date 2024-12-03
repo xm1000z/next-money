@@ -97,7 +97,6 @@ export default async function PricingPage({ params: { locale } }: Props) {
           return handleSubscribe(userId ?? undefined, planId, isYearly);
         }}
       />
-      <hr className="container" />
     </div>
     <div className="container  max-w-[800px]">
           <div className="-mt-[200px] ">
