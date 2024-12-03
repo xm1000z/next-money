@@ -50,17 +50,17 @@ export default async function PricingPage({ params: { locale } }: Props) {
     <>
       <div className="container">
         <div className="min-h-[950px]">
-          <h1 className="mt-24 font-medium text-center text-[100px] md:text-[170px] mb-2 leading-none">
+          <h1 className="mt-24 font-medium text-center text-[50px] md:text-[100px] mb-2 leading-none">
             Free
           </h1>
 
-          <h3 className="font-medium text-center text-[100px] md:text-[170px] mb-2 text-stroke leading-none">
+          <h3 className="font-medium text-center text-[50px] md:text-[100px] mb-2 text-stroke leading-none">
             while in beta
           </h3>
 
           <div className="flex items-center flex-col text-center relative">
             <div className="mt-12 mb-12" />
-            <p className="text-xl mt-4">Claim $49/mo deal</p>
+            <p className="text-lg mt-4">Claim $49/mo deal</p>
 
             <div className="mt-8">
               <div className="flex items-center space-x-4">
@@ -88,7 +88,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
             </div>
           </div>
         </div>
-    <div className="flex w-full flex-col gap-16 py-8 md:py-8">
+    <div className="flex w-full mb-5 flex-col gap-16 py-8 md:py-8">
       <PricingCards 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
