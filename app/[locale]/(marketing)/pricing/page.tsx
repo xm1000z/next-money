@@ -49,7 +49,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
   return (
     <>
       <div className="container">
-        <div className="min-h-[250px]">
+        <div className="min-h-[450px]">
           <h1 className="mt-24 font-medium text-center text-[80px] md:text-[130px] mb-2 leading-none">
             Al -50%
           </h1>
