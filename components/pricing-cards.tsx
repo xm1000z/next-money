@@ -247,7 +247,7 @@ export function PricingCards({
             </span>
           </div>
 
-          <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
+          <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3 px-4">
             {subscriptionPlans.map((plan) => (
               <div
                 key={plan.id}
@@ -257,7 +257,7 @@ export function PricingCards({
                   plan.metadata?.recommended 
                     ? "border-primary/50 dark:border-primary/30 scale-105" 
                     : "hover:scale-102.5 hover:shadow-xl",
-                  "max-w-xs"
+                  "max-w-sm"
                 )}
               >
                 <div className="min-h-[180px] items-start space-y-6 bg-muted/30 dark:bg-muted/10 p-8">
