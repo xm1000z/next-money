@@ -300,7 +300,7 @@ export function PricingCards({
                   </SignedIn>
 
                   <SignedOut>
-                    <SignInButton mode="redirect" forceRedirectUrl={url(pathname).href}>
+                    <SignInButton mode="redirect">
                       <Button
                         variant={plan.metadata?.recommended ? "default" : "outline"}
                         className="w-full"
