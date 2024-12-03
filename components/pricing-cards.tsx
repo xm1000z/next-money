@@ -216,16 +216,16 @@ export function PricingCards({
 
   return (
     <MaxWidthWrapper className="py-20">
-      <section className="flex flex-col items-center text-center space-y-12">
+      <section className="flex mb-8 flex-col items-center text-center space-y-12">
         <HeaderSection
           label={t("label")}
           title={t("title")}
-          className="text-4xl font-bold tracking-tight"
+          className="text-xl tracking-tight"
         />
 
         {/* Planes de Suscripción */}
         <div className="w-full">
-          <div className="flex items-center gap-4 justify-center mb-8">
+          <div className="flex items-center gap-4 justify-center mb-10">
             <span className={cn(
               "text-sm",
               !isYearly && "text-primary font-medium"
@@ -331,25 +331,13 @@ export function PricingCards({
         ) : (
           <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
             <h3 className="text-lg font-semibold mb-2">
-              ¿Necesitas más créditos?
+              ¿Necesitas un plan personalizado?
             </h3>
             <p className="text-muted-foreground">
-              Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
+              Contactanos a sales@notas.ai y cuéntanos tu situación.
             </p>
           </div>
         )}
-
-        <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
-          {t("contact.title")}
-          <br />
-          <a
-            className="font-medium text-primary"
-            href="mailto:soporte@notas.ai"
-          >
-            soporte@notas.ai
-          </a>{" "}
-          {t("contact.description")}
-        </p>
       </section>
       <div
         className="pointer-events-none fixed bottom-10 left-[50%] translate-x-[-50%]"
