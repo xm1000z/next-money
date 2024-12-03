@@ -51,11 +51,11 @@ export default async function PricingPage({ params: { locale } }: Props) {
       <div className="container">
         <div className="min-h-[950px]">
           <h1 className="mt-24 font-medium text-center text-[80px] md:text-[130px] mb-2 leading-none">
-            Free
+            Al -50%
           </h1>
 
           <h3 className="font-medium text-center text-[80px] md:text-[130px] mb-2 text-stroke leading-none">
-            while in beta
+            durante la beta
           </h3>
 
           <div className="flex items-center flex-col text-center relative">
