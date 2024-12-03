@@ -329,7 +329,7 @@ export function PricingCards({
             </div>
           </>
         ) : (
-          <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
+          <div className="mt-8 p-6 mb-5 bg-muted/30 rounded-lg text-center">
             <h3 className="text-lg font-semibold mb-2">
               ¿Necesitas un plan personalizado?
             </h3>
