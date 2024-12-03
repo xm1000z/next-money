@@ -49,7 +49,7 @@ export default async function PricingPage({ params: { locale } }: Props) {
   return (
     <>
       <div className="container">
-        <div className="min-h-[50px]">
+        <div className="min-h-[250px]">
           <h1 className="mt-24 font-medium text-center text-[80px] md:text-[130px] mb-2 leading-none">
             Al -50%
           </h1>
@@ -60,12 +60,12 @@ export default async function PricingPage({ params: { locale } }: Props) {
 
           <div className="flex items-center flex-col text-center relative">
             <div className="mt-12 mb-12" />
-            <p className="text-lg mt-4">Claim $49/mo deal</p>
+            <p className="text-lg mt-4">Reclama plan 49€/m todo incluido</p>
 
             <div className="mt-8">
               <div className="flex items-center space-x-4">
                 <Link
-                  href="https://cal.com/pontus-midday/15min"
+                  href="https://cal.com/notasai/15min"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -73,16 +73,16 @@ export default async function PricingPage({ params: { locale } }: Props) {
                     variant="outline"
                     className="border border-primary h-12 px-6"
                   >
-                    Talk to us
+                    Contactar
                   </Button>
                 </Link>
 
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  href="https://app.midday.ai"
+                  href="https://app.notas.ai/sign-up"
                 >
-                  <Button className="h-12 px-5">Get Started</Button>
+                  <Button className="h-12 px-5">Reclamar</Button>
                 </a>
               </div>
             </div>
