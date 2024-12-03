@@ -77,6 +77,11 @@ export const dashboardConfig: DashboardConfig = {
           href: "/app/order",
           icon: "billing",
         },
+        {
+          title: "Ajustes",
+          href: "/app/settings",
+          icon: "settings",
+        },
       ],
     },
   ],
