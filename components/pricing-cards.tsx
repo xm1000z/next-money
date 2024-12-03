@@ -31,8 +31,8 @@ import { subscriptionPlans } from "@/config/constants";
 
 interface PricingCardsProps {
   userId?: string;
-  locale?: string;
-  chargeProduct?: ChargeProductSelectDto[];
+  subscriptionPlans: SubscriptionPlanClient[];
+  onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
