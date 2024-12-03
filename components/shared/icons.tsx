@@ -44,6 +44,7 @@ import {
   VolumeX,
   Share,
   Twitter,
+  ChevronUp,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -75,6 +76,7 @@ export const Icons = {
   LayoutGrid,
   Share,
   Twitter,
+  ChevronUp,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
