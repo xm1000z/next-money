@@ -33,6 +33,7 @@ import { SubscriptionPlanClient } from "@/types/subscription";
 interface PricingCardsProps {
   userId?: string;
   subscriptionPlans: SubscriptionPlanClient[];
+  chargeProduct?: ChargeProductSelectDto[];
   onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
 }
 
@@ -176,7 +177,8 @@ export function FreeCard() {
 export function PricingCards({
   userId,
   chargeProduct,
-  locale,
+  subscriptionPlans,
+  onSubscribe
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
