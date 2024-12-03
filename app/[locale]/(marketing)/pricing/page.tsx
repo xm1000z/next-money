@@ -205,7 +205,6 @@ export default async function PricingPage({ params: { locale } }: Props) {
         </div>
       </div>
 
-      <Testimonials />
     </>
   );
 }
