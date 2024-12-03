@@ -49,14 +49,13 @@ export function PricingFaq() {
     <section className="container max-w-2xl py-2">
       <HeaderSection
         title={t("faq.title")}
-        subtitle={t("faq.subtitle")}
       />
 
       <Accordion type="single" collapsible className="my-12 w-full">
         {pricingFaqData.map((faqItem) => (
           <AccordionItem key={faqItem.id} value={faqItem.id}>
             <AccordionTrigger>{t(`faq.${faqItem.question}`)}</AccordionTrigger>
-            <AccordionContent className="text-sm text-muted-foreground sm:text-[15px]">
+            <AccordionContent className="text-xs text-muted-foreground sm:text-[15px]">
               {t(`faq.${faqItem.answer}`)}
             </AccordionContent>
           </AccordionItem>
