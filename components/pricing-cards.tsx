@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import { useReward } from "react-rewards";
+import { Switch } from "@/components/ui/switch";
 
 import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
@@ -27,14 +28,16 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { url } from "@/lib";
 import { usePathname } from "@/lib/navigation";
 import { cn, formatPrice } from "@/lib/utils";
-import { subscriptionPlans } from "@/config/constants";
+import { createSubscriptionCheckout } from "@/lib/stripe-actions";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { SubscriptionPlanClient } from "@/types/subscription";
-import { Switch } from "@/components/ui/switch";
 
 interface PricingCardsProps {
   userId?: string;
-  subscriptionPlans: SubscriptionPlanClient[];
+  locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
+  subscriptionPlans: SubscriptionPlanClient[];
   onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
 }
 
@@ -138,7 +141,7 @@ export function FreeCard() {
 
         <div className="flex flex-col items-start">
           <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-            {`${formatPrice(0, "€")}`}
+            {`${formatPrice(10, "€")}`}
             <div className="text-base font-medium text-muted-foreground">
               / 5 {t("worth")}
             </div>
@@ -177,24 +180,37 @@ export function FreeCard() {
 
 export function PricingCards({
   userId,
+  chargeProduct,
+  locale,
   subscriptionPlans,
   onSubscribe
 }: PricingCardsProps) {
   const t = useTranslations("PricingPage");
   const [isYearly, setIsYearly] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const [hasSubscription, setHasSubscription] = useState<boolean>(false);
+  const router = useRouter();
 
-  const handleSubscription = async (priceId: string) => {
+  useEffect(() => {
+    if (userId) {
+      fetch('/api/subscription/status')
+        .then(res => res.json())
+        .then(data => setHasSubscription(data.hasActiveSubscription));
+    }
+  }, [userId]);
+
+  const handleSubscriptionClick = async (planId: string) => {
     if (!userId) {
       console.error('Usuario no autenticado');
       return;
     }
     try {
-      const result = await onSubscribe(userId, priceId);
+      const result = await onSubscribe(userId, planId);
       if (result?.url) {
-        window.location.href = result.url; // Redirigir al usuario a la URL de checkout
+        router.push(result.url);
       }
     } catch (error) {
-      console.error('Error al procesar la suscripción:', error);
+      console.error('Error al procesar la suscripción');
     }
   };
 
@@ -250,8 +266,8 @@ export function PricingCards({
 
                   <div className="flex flex-col items-start">
                     <div className="flex items-baseline space-x-2 text-4xl font-semibold">
-                      {formatPrice(isYearly ? plan.price.yearly : plan.price.monthly, "€")}
-                      <div className="text-base font-medium text-muted-foreground">
+                    {`${formatPrice(10, "€")}`}
+                    <div className="text-base font-medium text-muted-foreground">
                         / {isYearly ? "año" : "mes"}
                       </div>
                     </div>
@@ -275,9 +291,7 @@ export function PricingCards({
                     <Button 
                       className="w-full"
                       variant={plan.metadata?.recommended ? "default" : "outline"}
-                      onClick={() => handleSubscription(
-                        isYearly ? plan.stripePriceIds.yearly : plan.stripePriceIds.monthly
-                      )}
+                      onClick={() => handleSubscriptionClick(plan.id)}
                     >
                       Suscribirse
                     </Button>
@@ -300,14 +314,27 @@ export function PricingCards({
         </div>
 
         {/* Planes de pago único - Solo visibles para usuarios suscritos */}
-        <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-2">
-            ¿Necesitas más créditos?
-          </h3>
-          <p className="text-muted-foreground">
-            Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
-          </p>
-        </div>
+        {hasSubscription ? (
+          <>
+            <div className="mt-8 text-center text-lg font-medium">
+              Compra créditos adicionales
+            </div>
+            <div className="grid gap-8 bg-inherit w-full max-w-6xl mx-auto md:grid-cols-3">
+              {chargeProduct?.map((offer) => (
+                <PricingCard offer={offer} key={offer.id} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="mt-8 p-6 bg-muted/30 rounded-lg text-center">
+            <h3 className="text-lg font-semibold mb-2">
+              ¿Necesitas más créditos?
+            </h3>
+            <p className="text-muted-foreground">
+              Suscríbete a uno de nuestros planes para acceder a la compra de créditos adicionales.
+            </p>
+          </div>
+        )}
 
         <p className="mt-8 max-w-2xl text-center text-base text-muted-foreground">
           {t("contact.title")}
