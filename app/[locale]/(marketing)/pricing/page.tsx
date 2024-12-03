@@ -18,6 +18,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
     description: t("LocaleLayout.description"),
   };
 }
+
 export default async function PricingPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const { userId } = auth();
@@ -40,7 +41,10 @@ export default async function PricingPage({ params: { locale } }: Props) {
       <PricingCards 
         subscriptionPlans={clientPlans}
         userId={userId || undefined}
-        onSubscribe={handleSubscribe}
+        onSubscribe={async (planId: string, isYearly: boolean) => {
+          'use server';
+          return handleSubscribe(userId ?? undefined, planId, isYearly);
+        }}
       />
       <hr className="container" />
       <PricingFaq />

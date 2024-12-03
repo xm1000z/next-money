@@ -38,7 +38,7 @@ interface PricingCardsProps {
   locale?: string;
   chargeProduct?: ChargeProductSelectDto[];
   subscriptionPlans: SubscriptionPlanClient[];
-  onSubscribe: (userId: string | undefined, planId: string) => Promise<{ url: string } | void>;
+  onSubscribe: (userId: string | undefined, planId: string, isYearly: boolean) => Promise<{ url: string } | void>;
 }
 
 const PricingCard = ({
@@ -205,7 +205,7 @@ export function PricingCards({
       return;
     }
     try {
-      const result = await onSubscribe(userId, planId);
+      const result = await onSubscribe(userId, planId, isYearly);
       if (result?.url) {
         router.push(result.url);
       }
