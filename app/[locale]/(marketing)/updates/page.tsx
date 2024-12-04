@@ -1,5 +1,5 @@
 import { getBlogPosts } from "@/lib/blog";
-import { Article } from "@/components/article";
+import Article from "@/components/article";
 import { UpdatesToolbar } from "@/components/updates-toolbar";
 
 export default async function Page() {
