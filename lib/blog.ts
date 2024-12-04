@@ -49,7 +49,7 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-  const postsDir = path.join(process.cwd(), "app", "updates", "posts");
+  const postsDir = path.join(process.cwd(), "app", "[locale]", "(marketing)", "updates", "posts");
 
   // Verifica si el directorio existe
   if (!fs.existsSync(postsDir)) {
