@@ -7,9 +7,11 @@ import Link from "next/link";
 interface Post {
   slug: string;
   metadata: {
-    tag: string;
     title: string;
+    publishedAt: string;
+    summary: string;
     image?: string;
+    tag: string;
   };
   content: string;
 }
