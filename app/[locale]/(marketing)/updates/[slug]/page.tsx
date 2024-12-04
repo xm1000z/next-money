@@ -57,43 +57,31 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
   };
 }
 
-export default async function Page(props: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function Page(props: { params: Promise<{ locale: string; slug: string }> }) {
   const params = await props.params;
+  const { locale, slug } = params;
 
-  const { slug } = params;
-
-  const post = getBlogPosts().find((post) => post.slug === slug);
+  const post = getBlogPosts(locale).find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
   }
 
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+  } = post.metadata;
+
   return (
     <div className="container max-w-[1140px] flex justify-center">
-
       <article className="max-w-[680px] pt-[80px] md:pt-[150px] w-full">
-        <PostStatus status={post.metadata.tag} />
-
-        <h2 className="font-medium text-2xl mb-6">{post.metadata.title}</h2>
-
-        <div className="updates">
-          {post.metadata.image && (
-            <Image
-              src={post.metadata.image}
-              alt={post.metadata.title}
-              width={680}
-              height={442}
-              className="mb-12"
-            />
-          )}
-          <div className="prose">{post.content}</div>
-        </div>
-
-        <div className="mt-10">
-          <PostAuthor author="pontus" />
-        </div>
+        <h2 className="font-medium text-2xl mb-6">{title}</h2>
+        <p className="text-gray-600">{description}</p>
+        <p className="text-sm text-gray-400">Publicado el: {publishedTime}</p>
+        {image && <img src={image} alt={title} className="mb-12" />}
+        <div className="prose">{post.content}</div>
       </article>
     </div>
   );
