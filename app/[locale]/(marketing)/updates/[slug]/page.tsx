@@ -1,6 +1,6 @@
 import { PostAuthor } from "@/components/post-author";
 import { PostStatus } from "@/components/post-status";
-import { getBlogPosts } from "@/lib/blog";
+import { getBlogPosts as fetchBlogPosts } from "@/lib/blog";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -14,8 +14,8 @@ interface Post {
 
 // Modifica la función getBlogPosts para que devuelva un array de Post
 export function getBlogPosts(): Post[] {
-  const posts = getMDXData(path.join(process.cwd(), "src", "app", "updates", "posts"));
-  
+  const posts = fetchBlogPosts();
+
   return posts.map((post) => ({
     slug: post.metadata.slug, // Asegúrate de que slug esté en metadata
     metadata: post.metadata,
