@@ -39,16 +39,11 @@ function readMDXFile(filePath: string) {
 }
 
 function getMDXData(dir: string) {
-  const mdxFiles = getMDXFiles(dir);
+  const mdxFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
   return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
-
-    return {
-      metadata,
-      slug,
-      content,
-    };
+    const filePath = path.join(dir, file);
+    const rawContent = fs.readFileSync(filePath, "utf-8");
+    return parseFrontmatter(rawContent);
   });
 }
 
