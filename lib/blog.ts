@@ -49,8 +49,7 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-  const postsDir = path.join(process.cwd(), "app", "updates", "posts");
-  const posts = getMDXData(postsDir);
+const postsDir = path.join(process.cwd(), "app", "updates", "posts");  const posts = getMDXData(postsDir);
   return posts.map((post) => ({
     slug: post.metadata.slug,
     metadata: post.metadata,
