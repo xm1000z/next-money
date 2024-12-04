@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const locales = ["en", "es"];
-  const allPosts = [];
+  const allPosts: { slug: string }[] = [];
 
   for (const locale of locales) {
     const posts = getBlogPosts(locale);
