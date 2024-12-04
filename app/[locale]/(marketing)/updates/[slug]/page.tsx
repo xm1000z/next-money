@@ -1,8 +1,7 @@
 import { getBlogPosts } from "@/lib/blog";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata(props): Promise<Metadata | undefined> {
-  const params = await props.params;
+export async function generateMetadata({ params }): Promise<Metadata | undefined> {
   const { slug } = params;
 
   const post = getBlogPosts().find((post) => post.slug === slug);
@@ -40,3 +39,20 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
     },
   };
 }
+
+export default function Page({ params }) {
+  const { slug } = params;
+
+  const post = getBlogPosts().find((post) => post.slug === slug);
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <div>
+      <h1>{post.metadata.title}</h1>
+      <p>{post.metadata.summary}</p>
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    </div>
+  );
+} 
