@@ -15,7 +15,11 @@ export const posts = [
       <p>Aquí hay un poco de código:</p>
       <pre><code>console.log("Hola, mundo!");</code></pre>
       <p>Y aquí hay una imagen:</p>
-      <img src="https://notas.ai/ab.jpeg" alt="Descripción de la imagen" />
+      <img 
+        src="https://notas.ai/ab.jpeg" 
+        alt="Descripción de la imagen" 
+        className="w-full h-auto"
+      />
     `,
   },
   {
