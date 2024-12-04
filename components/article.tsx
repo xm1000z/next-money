@@ -25,7 +25,7 @@ const Article: React.FC<ArticleProps> = ({ post, firstPost }) => {
   return (
     <ArticleInView slug={post.slug}>
          <PostStatus status={post.metadata.tag} />
-          <h2 className="font-medium text-2xl mb-6">{post.metadata.title}</h2>
+          <h2 className="font-medium text-xl mb-6">{post.metadata.title}</h2>
       <div className={`article ${firstPost ? "first-post" : ""} mb-6 p-4`}>
         <h2 className="text-lg font-bold">{post.metadata.title}</h2>
         <p className="text-black dark:text-white text-xs">{post.metadata.publishedAt}</p>
