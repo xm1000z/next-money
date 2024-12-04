@@ -27,6 +27,9 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
     image,
   } = post.metadata;
 
+  // Proporcionar un valor predeterminado si image es undefined
+  const imageUrl = image || '/path/to/default/image.jpg'; // Cambia esto a la ruta de tu imagen predeterminada
+
   return {
     title,
     description,
@@ -35,10 +38,10 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       description,
       type: "article",
       publishedTime,
-      url: `/blog/${post.slug}`,
+      url: `/updates/${post.slug}`,
       images: [
         {
-          url: image,
+          url: imageUrl, // Usa imageUrl aquí
         },
       ],
     },
@@ -46,7 +49,7 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
+      images: [imageUrl], // Usa imageUrl aquí
     },
   };
 }
