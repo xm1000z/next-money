@@ -7,8 +7,14 @@ import { notFound } from "next/navigation";
 
 // Define la interfaz para el tipo de post
 interface Post {
-  slug: string; // Asegúrate de que slug esté definido
-  metadata: Metadata;
+  slug: string;
+  metadata: {
+    title: string;
+    publishedAt: string;
+    summary: string;
+    image?: string;
+    tag: string;
+  };
   content: string;
 }
 
@@ -17,7 +23,7 @@ function getBlogPosts(): Post[] {
   const posts = fetchBlogPosts();
 
   return posts.map((post) => ({
-    slug: post.metadata.slug, // Asegúrate de que slug esté en metadata
+    slug: post.metadata.slug,
     metadata: post.metadata,
     content: post.content,
   }));
@@ -28,7 +34,7 @@ export async function generateStaticParams() {
   const posts = getBlogPosts();
 
   return posts.map((post) => ({
-    slug: post.slug, // Ahora debería funcionar correctamente
+    slug: post.slug,
   }));
 }
 
