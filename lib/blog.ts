@@ -49,5 +49,12 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "src", "app", "updates", "posts"));
+  const posts = getMDXData(path.join(process.cwd(), "src", "app", "updates", "posts"));
+  console.log(posts);
+
+  return posts.map((post) => ({
+    slug: post.metadata.slug,
+    metadata: post.metadata,
+    content: post.content,
+  }));
 }
