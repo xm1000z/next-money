@@ -3,11 +3,15 @@ import { prisma } from "@/db/prisma";
 import { FluxTaskStatus } from "@/db/type";
 import { FluxHashids } from "@/db/dto/flux.dto";
 
+import { getBlogPosts } from "@/lib/blog";
 import { allPosts } from "contentlayer/generated";
 
 import { defaultLocale, locales, pathnames } from "@/config";
 import { env } from "@/env.mjs";
 import { getPathname } from "@/lib/navigation";
+
+export const baseUrl = "https://app.notas.ai";
+
 
 const getFluxUrl = async () => {
   const fluxs = await prisma.fluxData.findMany({
@@ -25,6 +29,17 @@ const getFluxUrl = async () => {
 }
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const keys = Object.keys(pathnames) as Array<keyof typeof pathnames>;
+  const blogs = getBlogPosts().map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.metadata.publishedAt,
+  }));
+
+  const routes = ["", "/updates"].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
+
+  return [...routes, ...blogs];
   const posts = await Promise.all(
     allPosts
       .filter((post) => post.published && post.language === defaultLocale)

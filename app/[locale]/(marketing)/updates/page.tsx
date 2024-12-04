@@ -1,23 +1,39 @@
+import { Article } from "@/components/article";
+import { UpdatesToolbar } from "@/components/updates-toolbar";
 import { getBlogPosts } from "@/lib/blog";
+import type { Metadata } from "next";
 
-export default function UpdatesPage() {
-  const posts = getBlogPosts();
+export const metadata: Metadata = {
+  title: "Updates",
+  description: "Keep up to date with product updates and announcments.",
+};
+
+export default async function Page() {
+  const data = getBlogPosts();
+
+  const posts = data
+    .sort((a, b) => {
+      if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+        return -1;
+      }
+      return 1;
+    })
+    .map((post, index) => (
+      <Article data={post} firstPost={index === 0} key={post.slug} />
+    ));
 
   return (
-    <div className="container max-w-[1140px] mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">Actualizaciones</h1>
-      <div className="space-y-6">
-        {posts.map((post) => (
-          <div key={post.slug} className="border p-4 rounded-md">
-            <h2 className="text-2xl font-semibold">{post.metadata.title}</h2>
-            <p className="text-gray-600">{post.metadata.summary}</p>
-            <p className="text-sm text-gray-400">Publicado el: {post.metadata.publishedAt}</p>
-            <a href={`/updates/${post.slug}`} className="text-blue-500 hover:underline">
-              Leer más
-            </a>
-          </div>
-        ))}
+    <div className="container flex justify-center scroll-smooth">
+      <div className="max-w-[680px] pt-[80px] md:pt-[150px] w-full">
+        {posts}
       </div>
+
+      <UpdatesToolbar
+        posts={data.map((post) => ({
+          slug: post.slug,
+          title: post.metadata.title,
+        }))}
+      />
     </div>
   );
 }

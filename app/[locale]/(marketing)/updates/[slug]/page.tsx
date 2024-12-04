@@ -13,6 +13,44 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata(props): Promise<Metadata | undefined> {
+  const params = await props.params;
+  const post = getBlogPosts().find((post) => post.slug === params.slug);
+  if (!post) {
+    return;
+  }
+
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+  } = post.metadata;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url: `/blog/${post.slug}`,
+      images: [
+        {
+          url: image,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
