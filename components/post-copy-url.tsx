@@ -4,7 +4,11 @@ import { Icons } from "@/components/shared/icons";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export function PostCopyURL() {
+type Props = {
+  slug: string;
+};
+
+export function PostCopyURL({ slug }: Props) {
   const [isCopied, setCopied] = useState(false);
 
   const handleClipboard = async () => {
