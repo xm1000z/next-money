@@ -48,13 +48,12 @@ function getMDXData(dir: string) {
   });
 }
 
-export function getBlogPosts() {
-    const posts = getMDXData(path.join(process.cwd(), "src", "app", "[locale]", "(marketing)", "updates", "posts"));
-    console.log(posts); // Para verificar que los datos se están extrayendo correctamente
-
-    return posts.map((post) => ({
-      slug: post.metadata.slug,
-      metadata: post.metadata as Metadata,
-      content: post.content,
-    }));
-  }
+export function getBlogPosts(locale: string) {
+  const postsDir = path.join(process.cwd(), "src", "app", locale, "(marketing)", "updates", "posts");
+  const posts = getMDXData(postsDir);
+  return posts.map((post) => ({
+    slug: post.metadata.slug,
+    metadata: post.metadata,
+    content: post.content,
+  }));
+}

@@ -6,11 +6,15 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  const posts = getBlogPosts();
+  const locales = ["en", "es"];
+  const allPosts = [];
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  for (const locale of locales) {
+    const posts = getBlogPosts(locale);
+    allPosts.push(...posts.map(post => ({ slug: post.slug })));
+  }
+
+  return allPosts;
 }
 
 export async function generateMetadata(props): Promise<Metadata | undefined> {
