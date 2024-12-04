@@ -3,11 +3,15 @@ import { prisma } from "@/db/prisma";
 import { FluxTaskStatus } from "@/db/type";
 import { FluxHashids } from "@/db/dto/flux.dto";
 
+import { getBlogPosts } from "@/lib/blog";
 import { allPosts } from "contentlayer/generated";
 
 import { defaultLocale, locales, pathnames } from "@/config";
 import { env } from "@/env.mjs";
 import { getPathname } from "@/lib/navigation";
+
+export const baseUrl = "https://app.notas.ai";
+
 
 const getFluxUrl = async () => {
   const fluxs = await prisma.fluxData.findMany({
