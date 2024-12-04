@@ -11,11 +11,11 @@ export default async function Page() {
 
   return (
     <div className="container max-w-[1140px] mx-auto py-10">
-      <UpdatesToolbar />
+      <UpdatesToolbar posts={sortedPosts} />
       <h1 className="text-3xl font-bold mb-6">Actualizaciones</h1>
       <div className="space-y-6">
         {sortedPosts.map((post) => (
-          <Article key={post.slug} post={post} /> // Asegúrate de que el componente Article esté recibiendo el post correctamente
+          <Article key={post.slug} post={post} />
         ))}
       </div>
     </div>

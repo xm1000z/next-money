@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils'
 import {
@@ -19,6 +20,10 @@ import {
 import { usePathname } from "next/navigation";
 import { Twitter } from "lucide-react";
 import { CopyInput } from "./copy-input";
+
+interface UpdatesToolbarProps {
+  posts: any[]; // Define el tipo de los posts según tu estructura
+}
 
 const popupCenter = ({ url, title, w, h }) => {
   const dualScreenLeft =
@@ -55,7 +60,7 @@ const popupCenter = ({ url, title, w, h }) => {
   return newWindow;
 };
 
-export function UpdatesToolbar({ posts }) {
+export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts }) => {
   const pathname = usePathname();
   const currentIndex = posts.findIndex((a) => pathname.endsWith(a.slug)) ?? 0;
 
