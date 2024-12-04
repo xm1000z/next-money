@@ -85,6 +85,13 @@ export default async function Page(props: {
     notFound();
   }
 
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+  } = post.metadata;
+
   return (
     <div className="container max-w-[1140px] flex justify-center">
       <script
