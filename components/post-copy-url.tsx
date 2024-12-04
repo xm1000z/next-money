@@ -42,7 +42,7 @@ export function PostCopyURL({ slug }: Props) {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}
       >
-        <Icons.Check />
+        <Icons.check />
       </motion.div>
 
       <span className="text-xs">Copy link</span>
