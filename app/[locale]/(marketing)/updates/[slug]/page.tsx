@@ -1,35 +1,11 @@
+import { baseUrl } from "@/app/sitemap";
 import { PostAuthor } from "@/components/post-author";
 import { PostStatus } from "@/components/post-status";
-import { getBlogPosts as fetchBlogPosts } from "@/lib/blog";
+import { getBlogPosts } from "@/lib/blog";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-// Define la interfaz para el tipo de post
-interface Post {
-  slug: string;
-  metadata: {
-    title: string;
-    publishedAt: string;
-    summary: string;
-    image?: string;
-    tag: string;
-  };
-  content: string;
-}
-
-// No exportes getBlogPosts aquí, solo úsala internamente
-function getBlogPosts(): Post[] {
-  const posts = fetchBlogPosts();
-
-  return posts.map((post) => ({
-    slug: post.metadata.slug,
-    metadata: post.metadata,
-    content: post.content,
-  }));
-}
-
-// Actualiza la función generateStaticParams
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 
@@ -38,7 +14,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// Función para generar metadatos
 export async function generateMetadata(props): Promise<Metadata | undefined> {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
@@ -61,10 +36,10 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       description,
       type: "article",
       publishedTime,
-      url: `/updates/${post.slug}`,
+      url: `${baseUrl}/blog/${post.slug}`,
       images: [
         {
-          url: image || '',
+          url: image,
         },
       ],
     },
@@ -72,12 +47,11 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       card: "summary_large_image",
       title,
       description,
-      images: [image || ''],
+      images: [image],
     },
   };
 }
 
-// Exporta la función de la página
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
@@ -90,13 +64,6 @@ export default async function Page(props: {
   if (!post) {
     notFound();
   }
-
-  const {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata;
 
   return (
     <div className="container max-w-[1140px] flex justify-center">
@@ -111,8 +78,8 @@ export default async function Page(props: {
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
             description: post.metadata.summary,
-            image: `${post.metadata.image}`,
-            url: `/updates/${post.slug}`,
+            image: `${baseUrl}${post.metadata.image}`,
+            url: `${baseUrl}/updates/${post.slug}`,
           }),
         }}
       />

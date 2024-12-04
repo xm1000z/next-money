@@ -25,6 +25,17 @@ const getFluxUrl = async () => {
 }
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const keys = Object.keys(pathnames) as Array<keyof typeof pathnames>;
+  const blogs = getBlogPosts().map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.metadata.publishedAt,
+  }));
+
+  const routes = ["", "/updates"].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
+
+  return [...routes, ...blogs];
   const posts = await Promise.all(
     allPosts
       .filter((post) => post.published && post.language === defaultLocale)
