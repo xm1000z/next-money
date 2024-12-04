@@ -20,7 +20,7 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
 
   const post = getBlogPosts().find((post) => post.slug === slug);
   if (!post) {
-    return;
+    notFound();
   }
 
   const {
@@ -58,7 +58,7 @@ export default async function Page(props: { params: Promise<{ locale: string; sl
   const params = await props.params;
   const { locale, slug } = params;
 
-  const post = getBlogPosts(locale).find((post) => post.slug === slug);
+  const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
