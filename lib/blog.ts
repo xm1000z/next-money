@@ -48,8 +48,8 @@ function getMDXData(dir: string) {
   });
 }
 
-export function getBlogPosts(locale: string) {
-  const postsDir = path.join(process.cwd(), "src", "app", locale, "(marketing)", "updates", "posts");
+export function getBlogPosts() {
+  const postsDir = path.join(process.cwd(), "src", "app", "updates", "posts");
   const posts = getMDXData(postsDir);
   return posts.map((post) => ({
     slug: post.metadata.slug,
