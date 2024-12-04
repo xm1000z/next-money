@@ -17,13 +17,13 @@ interface Post {
 }
 
 interface ArticleProps {
-  firstPost: boolean;
   post: Post;
+  firstPost?: boolean;
 }
 
-export function Article({ post, firstPost }: ArticleProps) {
+const Article: React.FC<ArticleProps> = ({ post, firstPost }) => {
   return (
-    <article key={post.slug} className="pt-28 mb-20 -mt-28" id={post.slug}>
+    <article key={post.slug} className={`pt-28 mb-20 -mt-28 ${firstPost ? "first-post" : ""}`} id={post.slug}>
       <ArticleInView slug={post.slug} firstPost={firstPost} />
 
       <PostStatus status={post.metadata.tag} />
@@ -45,4 +45,6 @@ export function Article({ post, firstPost }: ArticleProps) {
       </div>
     </article>
   );
-}
+};
+
+export default Article;
