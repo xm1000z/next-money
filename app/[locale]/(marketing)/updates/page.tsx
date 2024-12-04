@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { getBlogPosts } from "@/lib/blog";
 import Article from "@/components/article";
@@ -18,7 +20,6 @@ export default function Page() {
   return (
     <div className="container max-w-[1140px] mx-auto py-10">
       <UpdatesToolbar posts={sortedPosts} currentIndex={currentIndex} onNavigate={handleNavigate} />
-      <h1 className="text-3xl font-bold mb-6">Actualizaciones</h1>
       <div className="space-y-6">
         <Article key={sortedPosts[currentIndex].slug} post={sortedPosts[currentIndex]} firstPost={currentIndex === 0} />
       </div>

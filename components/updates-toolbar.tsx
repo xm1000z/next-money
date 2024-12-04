@@ -104,7 +104,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
                 sideOffset={25}
                 side="right"
               >
-                <span className="text-xs">Share</span>
+                <span className="text-xs">Compartir</span>
               </TooltipContent>
             </Tooltip>
 
@@ -124,7 +124,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
                   sideOffset={25}
                   side="right"
                 >
-                  <span className="text-xs">Previous post</span>
+                  <span className="text-xs">Previo</span>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -144,7 +144,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
                   sideOffset={25}
                   side="right"
                 >
-                  <span className="text-xs">Next post</span>
+                  <span className="text-xs">Siguiente</span>
                 </TooltipContent>
               </Tooltip>
             </div>
