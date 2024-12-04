@@ -1,14 +1,15 @@
 "use client";
 
+import React from "react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-type Props = {
-  firstPost: boolean;
+interface ArticleInViewProps {
   slug: string;
-};
+  children: React.ReactNode;
+}
 
-export function ArticleInView({ slug, firstPost }: Props) {
+export const ArticleInView: React.FC<ArticleInViewProps> = ({ slug, children }) => {
   const inView = true;
 
   const pathname = usePathname();
@@ -18,7 +19,11 @@ export function ArticleInView({ slug, firstPost }: Props) {
     if (inView && pathname !== fullSlug) {
       window.history.pushState({ urlPath: fullSlug }, "", fullSlug);
     }
-  }, [inView, fullSlug, firstPost]);
+  }, [inView, fullSlug]);
 
-  return <div />;
-}
+  return (
+    <div className="article-in-view">
+      {children}
+    </div>
+  );
+};
