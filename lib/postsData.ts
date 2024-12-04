@@ -5,7 +5,7 @@ export const posts = [
       title: "Ejemplo de Post",
       publishedAt: "2024-09-29",
       summary: "Este es un ejemplo de un post.",
-      image: "/images/example.jpg",
+      image: "https://notas.ai/ab.jpeg",
       tag: "Startups",
     },
     content: `
