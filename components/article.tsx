@@ -43,7 +43,7 @@ const Article: React.FC<ArticleProps> = ({ post, firstPost }) => {
               className="mb-12"
             />
           )}
-          <div className="prose">{post.content}</div>
+          <div className="text-black dark:text-white text-xs">{post.content}</div>
         </div>
       </div>
     </ArticleInView>
