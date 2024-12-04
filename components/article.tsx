@@ -1,4 +1,5 @@
 import { ArticleInView } from "@/components/article-in-view";
+import { PostStatus } from "@/components/post-status";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,6 +21,7 @@ export function Article({ data, firstPost }: Props) {
     <article key={data.slug} className="pt-28 mb-20 -mt-28" id={data.slug}>
       <ArticleInView slug={data.slug} firstPost={firstPost} />
 
+      <PostStatus status={data.metadata.tag} />
       <Link className="mb-6 block" href={`/updates/${data.slug}`}>
         <h2 className="font-medium text-2xl mb-6">{data.metadata.title}</h2>
       </Link>
@@ -34,7 +36,7 @@ export function Article({ data, firstPost }: Props) {
             className="mb-12"
           />
         )}
-
+        <div className="prose">{data.content}</div>
       </div>
     </article>
   );
