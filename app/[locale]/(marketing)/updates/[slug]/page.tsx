@@ -6,13 +6,10 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  const locales = ["en", "es"];
   const allPosts: { slug: string }[] = [];
 
-  for (const locale of locales) {
-    const posts = getBlogPosts(locale);
-    allPosts.push(...posts.map(post => ({ slug: post.slug })));
-  }
+  const posts = getBlogPosts();
+  allPosts.push(...posts.map(post => ({ slug: post.slug })));
 
   return allPosts;
 }
