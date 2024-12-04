@@ -23,6 +23,8 @@ import { CopyInput } from "./copy-input";
 
 interface UpdatesToolbarProps {
   posts: any[]; // Define el tipo de los posts según tu estructura
+  currentIndex: number; // Índice del post actual
+  onNavigate: (index: number) => void; // Función para manejar la navegación
 }
 
 const popupCenter = ({ url, title, w, h }) => {
@@ -60,39 +62,25 @@ const popupCenter = ({ url, title, w, h }) => {
   return newWindow;
 };
 
-export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts }) => {
+export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIndex, onNavigate }) => {
   const pathname = usePathname();
-  const currentIndex = posts.findIndex((a) => pathname.endsWith(a.slug)) ?? 0;
-
-  const currentPost = posts[currentIndex];
 
   const handlePrev = () => {
     if (currentIndex > 0) {
-      const nextPost = posts[currentIndex - 1];
-
-      const element = document.getElementById(nextPost?.slug);
-      element?.scrollIntoView({
-        behavior: "smooth",
-      });
+      onNavigate(currentIndex - 1);
     }
   };
 
   const handleNext = () => {
     if (currentIndex !== posts.length - 1) {
-      const nextPost = posts[currentIndex + 1];
-
-      const element = document.getElementById(nextPost?.slug);
-
-      element?.scrollIntoView({
-        behavior: "smooth",
-      });
+      onNavigate(currentIndex + 1);
     }
   };
 
   const handleOnShare = () => {
     const popup = popupCenter({
-      url: `https://twitter.com/intent/tweet?text=${currentPost.title} https://midday.ai/updates/${currentPost.slug}`,
-      title: currentPost.title,
+      url: `https://twitter.com/intent/tweet?text=${posts[currentIndex].title} https://app.notas.ai/updates/${posts[currentIndex].slug}`,
+      title: posts[currentIndex].title,
       w: 800,
       h: 400,
     });
