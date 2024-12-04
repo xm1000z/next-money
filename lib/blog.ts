@@ -49,12 +49,12 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-  const posts = getMDXData(path.join(process.cwd(), "src", "app", "updates", "posts"));
-  console.log(posts);
+    const posts = getMDXData(path.join(process.cwd(), "src", "app", "updates", "posts"));
+    console.log(posts); // Para verificar que los datos se están extrayendo correctamente
 
-  return posts.map((post) => ({
-    slug: post.metadata.slug,
-    metadata: post.metadata as Metadata,
-    content: post.content,
-  }));
-}
+    return posts.map((post) => ({
+      slug: post.metadata.slug,
+      metadata: post.metadata as Metadata,
+      content: post.content,
+    }));
+  }
