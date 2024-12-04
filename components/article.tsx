@@ -24,15 +24,15 @@ interface ArticleProps {
 const Article: React.FC<ArticleProps> = ({ post, firstPost }) => {
   return (
     <ArticleInView slug={post.slug}>
-         <PostStatus status={post.metadata.tag} />
+      <div className={`article ${firstPost ? "first-post" : ""} mb-6 p-4 border rounded-lg shadow-md`}>
+        <h2 className="text-xl font-bold">{post.metadata.title}</h2>
+        <p className="text-gray-500 text-sm">{post.metadata.publishedAt}</p>
+        <p className="text-gray-700">{post.metadata.summary}</p>
+        <PostStatus status={post.metadata.tag} />
         <Link className="mb-6 block" href={`/updates/${post.slug}`}>
           <h2 className="font-medium text-2xl mb-6">{post.metadata.title}</h2>
         </Link>
-      <div className={`article ${firstPost ? "first-post" : ""} mb-6 p-4`}>
-        <h2 className="text-lg font-bold">{post.metadata.title}</h2>
-        <p className="text-black dark:text-white text-xs">{post.metadata.publishedAt}</p>
-        <p className="text-black dark:text-white">{post.metadata.summary}</p>
-    
+
         <div className="updates">
           {post.metadata.image && (
             <Image
@@ -43,7 +43,7 @@ const Article: React.FC<ArticleProps> = ({ post, firstPost }) => {
               className="mb-12"
             />
           )}
-          <div className="text-black dark:text-white text-xs">{post.content}</div>
+          <div className="prose">{post.content}</div>
         </div>
       </div>
     </ArticleInView>
