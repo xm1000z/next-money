@@ -1,4 +1,3 @@
-import { baseUrl } from "@/app/sitemap";
 import { PostAuthor } from "@/components/post-author";
 import { PostStatus } from "@/components/post-status";
 import { getBlogPosts } from "@/lib/blog";
@@ -14,46 +13,6 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(props): Promise<Metadata | undefined> {
-  const params = await props.params;
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
-  if (!post) {
-    return;
-  }
-
-  const {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata;
-
-  // Proporcionar un valor predeterminado si image es undefined
-  const imageUrl = image || '/path/to/default/image.jpg'; // Cambia esto a la ruta de tu imagen predeterminada
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime,
-      url: `/updates/${post.slug}`,
-      images: [
-        {
-          url: imageUrl, // Usa imageUrl aquí
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [imageUrl], // Usa imageUrl aquí
-    },
-  };
-}
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -70,22 +29,6 @@ export default async function Page(props: {
 
   return (
     <div className="container max-w-[1140px] flex justify-center">
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: `${baseUrl}${post.metadata.image}`,
-            url: `${baseUrl}/updates/${post.slug}`,
-          }),
-        }}
-      />
 
       <article className="max-w-[680px] pt-[80px] md:pt-[150px] w-full">
         <PostStatus status={post.metadata.tag} />
