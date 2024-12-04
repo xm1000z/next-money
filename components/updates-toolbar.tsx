@@ -159,7 +159,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
           </DialogHeader>
 
           <div className="grid gap-6 py-4">
-            <CopyInput value={`https://midday.ai${pathname}`} />
+            <CopyInput value={`https://app.notas.ai${pathname}`} />
             <Button
               className="w-full flex items-center space-x-2 h-10"
               onClick={handleOnShare}
