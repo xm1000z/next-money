@@ -54,7 +54,7 @@ export function getBlogPosts() {
 
   return posts.map((post) => ({
     slug: post.metadata.slug,
-    metadata: post.metadata,
+    metadata: post.metadata as Metadata,
     content: post.content,
   }));
 }
