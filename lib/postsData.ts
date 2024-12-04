@@ -15,7 +15,7 @@ export const posts = [
       <p>Aquí hay un poco de código:</p>
       <pre><code>console.log("Hola, mundo!");</code></pre>
       <p>Y aquí hay una imagen:</p>
-      <img src="https//:notas.ai/ab.jpeg" alt="Descripción de la imagen" />
+      <img src="https://notas.ai/ab.jpeg" alt="Descripción de la imagen" />
     `,
   },
   {
@@ -24,7 +24,7 @@ export const posts = [
       title: "Otro Post",
       publishedAt: "2024-09-30",
       summary: "Este es otro ejemplo de un post.",
-      image: "https//:notas.ai/ab.jpeg",
+      image: "https://notas.ai/ab.jpeg",
       tag: "BETA",
     },
     content: `
