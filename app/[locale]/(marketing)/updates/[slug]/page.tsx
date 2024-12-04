@@ -5,11 +5,29 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+// Define la interfaz para el tipo de post
+interface Post {
+  slug: string; // Asegúrate de que slug esté definido
+  metadata: Metadata;
+  content: string;
+}
+
+// Modifica la función getBlogPosts para que devuelva un array de Post
+export function getBlogPosts(): Post[] {
+  const posts = getMDXData(path.join(process.cwd(), "src", "app", "updates", "posts"));
+  
+  return posts.map((post) => ({
+    slug: post.metadata.slug, // Asegúrate de que slug esté en metadata
+    metadata: post.metadata,
+    content: post.content,
+  }));
+}
+
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 
   return posts.map((post) => ({
-    slug: post.slug,
+    slug: post.slug, // Ahora debería funcionar correctamente
   }));
 }
 
