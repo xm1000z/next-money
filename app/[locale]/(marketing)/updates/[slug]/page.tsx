@@ -10,34 +10,10 @@ export async function generateMetadata({ params }): Promise<Metadata | undefined
     notFound();
   }
 
-  const {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata;
-
   return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime,
-      url: `/updates/${post.slug}`,
-      images: [
-        {
-          url: image || '/path/to/default/image.jpg',
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image || '/path/to/default/image.jpg'],
-    },
+    title: post.metadata.title,
+    description: post.metadata.summary,
+    // Otros metadatos...
   };
 }
 

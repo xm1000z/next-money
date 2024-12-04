@@ -1,4 +1,4 @@
-import { posts } from "./postsData"; // Asegúrate de que la ruta sea correcta
+import { posts } from "./postsData";
 
 export function getBlogPosts() {
   return posts; // Retorna los posts directamente desde el archivo
