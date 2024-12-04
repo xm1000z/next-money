@@ -49,7 +49,15 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-const postsDir = path.join(process.cwd(), "app", "updates", "posts");  const posts = getMDXData(postsDir);
+  const postsDir = path.join(process.cwd(), "app", "updates", "posts");
+
+  // Verifica si el directorio existe
+  if (!fs.existsSync(postsDir)) {
+    console.error(`El directorio ${postsDir} no existe.`);
+    return []; // Retorna un array vacío si no existe
+  }
+
+  const posts = getMDXData(postsDir);
   return posts.map((post) => ({
     slug: post.metadata.slug,
     metadata: post.metadata,
