@@ -18,7 +18,7 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-[1140px] mx-auto py-10">
+    <div className="max-w-[1140px] mx-auto py-10 pl-4">
       <UpdatesToolbar posts={sortedPosts} currentIndex={currentIndex} onNavigate={handleNavigate} />
       <div className="space-y-6">
         <Article key={sortedPosts[currentIndex].slug} post={sortedPosts[currentIndex]} firstPost={currentIndex === 0} />
