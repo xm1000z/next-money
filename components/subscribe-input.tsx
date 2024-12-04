@@ -59,14 +59,14 @@ export function SubscribeInput({ group }: { group: string }) {
           >
             <fieldset className="relative">
               <input
-                placeholder="Ingrese su email"
+                placeholder="Email"
                 type="email"
                 name="email"
                 id="email"
                 autoComplete="email"
                 aria-label="Email"
                 required
-                className="bg-transparent font-sm text-gray-600 dark:text-primary outline-none py-1 px-3 w-[360px] placeholder-gray-400 dark:placeholder-[#606060] h-11 border border-gray-200 dark:border-border"
+                className="bg-transparent font-xs text-gray-600 dark:text-primary outline-none py-1 px-3 w-[360px] placeholder-gray-400 dark:placeholder-[#606060] h-11 border border-gray-200 dark:border-border"
               />
               <SubmitButton />
             </fieldset>
