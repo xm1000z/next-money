@@ -1,5 +1,6 @@
 import { getBlogPosts } from "@/lib/blog";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 export async function generateMetadata({ params }): Promise<Metadata | undefined> {
   const { slug } = params;
