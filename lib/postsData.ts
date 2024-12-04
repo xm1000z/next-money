@@ -6,7 +6,7 @@ export const posts = [
       publishedAt: "2024-09-29",
       summary: "Este es un ejemplo de un post.",
       image: "/images/example.jpg",
-      tag: "Ejemplo",
+      tag: "Startups",
     },
     content: `
       <h1>Este es un Título</h1>
@@ -25,7 +25,7 @@ export const posts = [
       publishedAt: "2024-09-30",
       summary: "Este es otro ejemplo de un post.",
       image: "/images/another.jpg",
-      tag: "Otro",
+      tag: "BETA",
     },
     content: `
       <h1>Otro Título</h1>

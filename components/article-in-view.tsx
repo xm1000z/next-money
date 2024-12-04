@@ -13,7 +13,7 @@ export const ArticleInView: React.FC<ArticleInViewProps> = ({ slug, children }) 
   const inView = true;
 
   const pathname = usePathname();
-  const fullSlug = `/updates/${slug}`;
+  const fullSlug = `/updates/`;
 
   useEffect(() => {
     if (inView && pathname !== fullSlug) {
