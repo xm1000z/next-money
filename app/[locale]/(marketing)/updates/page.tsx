@@ -8,15 +8,14 @@ export const metadata: Metadata = {
   description: "Keep up to date with product updates and announcments.",
 };
 
-export default async function Page() {
-  const data = getBlogPosts();
+export default async function Page({ params }: { params: { locale: string } }) {
+  const { locale } = params;
+
+  const data = getBlogPosts(locale);
 
   const posts = data
     .sort((a, b) => {
-      if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
-        return -1;
-      }
-      return 1;
+      return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
     })
     .map((post, index) => (
       <Article data={post} firstPost={index === 0} key={post.slug} />
