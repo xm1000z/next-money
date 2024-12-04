@@ -12,8 +12,8 @@ interface Post {
   content: string;
 }
 
-// Modifica la función getBlogPosts para que devuelva un array de Post
-export function getBlogPosts(): Post[] {
+// No exportes getBlogPosts aquí, solo úsala internamente
+function getBlogPosts(): Post[] {
   const posts = fetchBlogPosts();
 
   return posts.map((post) => ({
@@ -23,6 +23,7 @@ export function getBlogPosts(): Post[] {
   }));
 }
 
+// Actualiza la función generateStaticParams
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 
@@ -31,6 +32,7 @@ export async function generateStaticParams() {
   }));
 }
 
+// Función para generar metadatos
 export async function generateMetadata(props): Promise<Metadata | undefined> {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
@@ -69,6 +71,7 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
   };
 }
 
+// Exporta la función de la página
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
