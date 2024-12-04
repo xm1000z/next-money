@@ -15,10 +15,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(props): Promise<Metadata | undefined> {
-  const { params } = await props;
-  const { locale, slug } = params;
+  const params = await props.params;
+  const { slug } = params;
 
-  const post = getBlogPosts(locale).find((post) => post.slug === slug);
+  const post = getBlogPosts().find((post) => post.slug === slug);
   if (!post) {
     return;
   }
