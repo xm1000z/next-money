@@ -18,8 +18,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(props): Promise<Metadata | undefined> {
-  const params = await props.params;
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+  const { params } = await props;
+  const { locale, slug } = params;
+
+  const post = getBlogPosts(locale).find((post) => post.slug === slug);
   if (!post) {
     return;
   }
@@ -30,9 +32,6 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
     summary: description,
     image,
   } = post.metadata;
-
-  // Proporcionar un valor predeterminado si image es undefined
-  const imageUrl = image || '/path/to/default/image.jpg'; // Cambia esto a la ruta de tu imagen predeterminada
 
   return {
     title,
@@ -45,7 +44,7 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       url: `/updates/${post.slug}`,
       images: [
         {
-          url: imageUrl, // Usa imageUrl aquí
+          url: image || '/path/to/default/image.jpg',
         },
       ],
     },
@@ -53,7 +52,7 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       card: "summary_large_image",
       title,
       description,
-      images: [imageUrl], // Usa imageUrl aquí
+      images: [image || '/path/to/default/image.jpg'],
     },
   };
 }
