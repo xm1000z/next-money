@@ -52,6 +52,20 @@ export async function POST(req: Request) {
             },
           });
 
+          await prisma.userCredit.update({
+            where: { userId: subscription.userId },
+            data: { credit: plan?.credits || 0 },
+          });
+
+          await prisma.userCreditTransaction.create({
+            data: {
+              userId: subscription.userId,
+              credit: plan?.credits || 0,
+              balance: plan?.credits || 0,
+              type: 'SubscriptionCredit',
+            },
+          });
+
           await logsnag.track({
             channel: "subscriptions",
             event: "Nueva Suscripción",
