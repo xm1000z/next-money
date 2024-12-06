@@ -5,7 +5,7 @@ import { prisma } from "@/db/prisma";
 import { subscriptionPlans } from "@/config/constants";
 import { logsnag } from "@/lib/log-snag";
 import { invalidateSubscriptionCache } from "@/lib/redis";
-import { OrderPhase, PaymentChannelType } from '@/types/orders';
+import { OrderPhase, PaymentChannelType } from '@/db/type';
 
 export async function POST(req: Request) {
   const body = await req.text();
