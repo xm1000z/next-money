@@ -4,6 +4,7 @@ import { subscriptionPlans } from "@/config/constants";
 import { createSubscriptionCheckout } from "@/lib/stripe-actions";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { prisma } from "@/db/prisma";
 
 const subscribeSchema = z.object({
   userId: z.string().min(1),
@@ -40,8 +41,25 @@ export async function handleSubscribe(userId: string | undefined, planId: string
       throw new Error('Failed to create checkout session');
     }
 
+    // Establecer créditos al usuario y registrar la transacción
+    await prisma.$transaction([
+      prisma.userCredit.upsert({
+        where: { userId },
+        update: { credit: plan.credits },
+        create: { userId, credit: plan.credits },
+      }),
+      prisma.userCreditTransaction.create({
+        data: {
+          userId,
+          credit: plan.credits,
+          balance: plan.credits,
+          type: 'SubscriptionCredit',
+        },
+      }),
+    ]);
+
     return { url: checkoutUrl };
   } catch (error) {
-    console.error('Subscription error:', error);
+    console.error('Error al procesar la suscripción:', error);
   }
-} 
+}
