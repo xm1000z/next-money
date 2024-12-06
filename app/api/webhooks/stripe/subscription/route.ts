@@ -53,7 +53,7 @@ export async function POST(req: Request) {
           });
 
           const userCredit = await prisma.userCredit.findFirst({
-            where: { userId: subscription.userId }
+            where: { userId: session.metadata.userId }
           });
 
           if (userCredit) {
@@ -65,7 +65,7 @@ export async function POST(req: Request) {
 
           await prisma.userCreditTransaction.create({
             data: {
-              userId: subscription.userId,
+              userId: session.metadata.userId,
               credit: plan?.credits || 0,
               balance: plan?.credits || 0,
               type: 'SubscriptionCredit',
