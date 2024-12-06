@@ -98,6 +98,14 @@ export async function POST(req: Request) {
               p => p.id === subscription.planId
             );
 
+            const userCredit = await prisma.userCredit.findFirst({
+              where: { userId: subscription.userId }
+            });
+
+            if (!userCredit) {
+              throw new Error("User credit not found");
+            }
+
             await prisma.$transaction([
               prisma.subscription.update({
                 where: { id: subscription.id },
@@ -108,7 +116,7 @@ export async function POST(req: Request) {
                 },
               }),
               prisma.userCredit.update({
-                where: { userId: subscription.userId },
+                where: { id: userCredit.id },
                 data: { credit: plan?.credits || 0 },
               }),
               prisma.userCreditTransaction.create({
@@ -212,6 +220,14 @@ export async function POST(req: Request) {
                 p.stripePriceIds.yearly === newPriceId
           );
 
+          const userCredit = await prisma.userCredit.findFirst({
+            where: { userId: subscription.userId }
+          });
+
+          if (!userCredit) {
+            throw new Error("User credit not found");
+          }
+
           await prisma.$transaction([
             prisma.subscription.update({
               where: { id: subscription.id },
@@ -223,7 +239,7 @@ export async function POST(req: Request) {
               },
             }),
             prisma.userCredit.update({
-              where: { userId: subscription.userId },
+              where: { id: userCredit.id },
               data: { credit: plan?.credits || 0 },
             }),
             prisma.userCreditTransaction.create({
