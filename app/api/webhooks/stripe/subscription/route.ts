@@ -136,7 +136,6 @@ export async function POST(req: Request) {
                   credit: 0,
                   channel: PaymentChannelType.Stripe,
                   currency: 'eur',
-                  stripeInvoiceId: session.id,
                 },
               }),
             ]);
@@ -262,7 +261,6 @@ export async function POST(req: Request) {
                 credit: 0,
                 channel: PaymentChannelType.Stripe,
                 currency: 'eur',
-                stripeInvoiceId: session.id,
               },
             }),
           ]);
