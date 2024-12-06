@@ -52,10 +52,16 @@ export async function POST(req: Request) {
             },
           });
 
-          await prisma.userCredit.update({
-            where: { userId: subscription.userId },
-            data: { credit: plan?.credits || 0 },
+          const userCredit = await prisma.userCredit.findFirst({
+            where: { userId: subscription.userId }
           });
+
+          if (userCredit) {
+            await prisma.userCredit.update({
+              where: { id: userCredit.id },
+              data: { credit: plan?.credits || 0 },
+            });
+          }
 
           await prisma.userCreditTransaction.create({
             data: {
