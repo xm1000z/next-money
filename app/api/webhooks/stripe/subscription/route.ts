@@ -5,6 +5,7 @@ import { prisma } from "@/db/prisma";
 import { subscriptionPlans } from "@/config/constants";
 import { logsnag } from "@/lib/log-snag";
 import { invalidateSubscriptionCache } from "@/lib/redis";
+import { OrderPhase, PaymentChannelType } from '@/types/orders';
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -131,7 +132,10 @@ export async function POST(req: Request) {
                 data: {
                   userId: subscription.userId,
                   amount: session.amount_paid,
-                  status: 'paid',
+                  phase: OrderPhase.Paid,
+                  credit: 0,
+                  channel: PaymentChannelType.Stripe,
+                  currency: 'eur',
                   stripeInvoiceId: session.id,
                 },
               }),
@@ -254,7 +258,10 @@ export async function POST(req: Request) {
               data: {
                 userId: subscription.userId,
                 amount: session.amount_paid,
-                status: 'paid',
+                phase: OrderPhase.Paid,
+                credit: 0,
+                channel: PaymentChannelType.Stripe,
+                currency: 'eur',
                 stripeInvoiceId: session.id,
               },
             }),
