@@ -24,7 +24,7 @@ export function Article({ data, firstPost }: Props) {
 
       <PostStatus status={data.metadata.tag} />
       <Link className="mb-6 block" href={`/updates/${data.slug}`}>
-        <h2 className="font-medium text-2xl mb-6">{data.metadata.title}</h2>
+        <h2 className="font-medium text-xl mb-6">{data.metadata.title}</h2>
       </Link>
 
       <div className="updates">
