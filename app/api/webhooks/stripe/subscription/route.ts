@@ -248,8 +248,11 @@ export async function POST(req: Request) {
               data: { 
                 status: session.status,
                 stripePriceId: newPriceId,
+                stripeCustomerId: session.customer as string,
                 planId: plan?.id || subscription.planId,
                 credits: plan?.credits || subscription.credits,
+                currentPeriodStart: new Date(session.current_period_start * 1000),
+                currentPeriodEnd: new Date(session.current_period_end * 1000),
               },
             }),
             prisma.userCredit.update({
@@ -261,7 +264,7 @@ export async function POST(req: Request) {
                 userId: subscription.userId,
                 credit: plan?.credits || 0,
                 balance: plan?.credits || 0,
-                type: 'SubscriptionCredit',
+                type: 'Suscripción',
               },
             }),
             prisma.chargeOrder.create({
