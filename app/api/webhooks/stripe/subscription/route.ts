@@ -24,9 +24,10 @@ export async function POST(req: Request) {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
+        const metadata = session.metadata;
         
         // Verificación temprana de metadata y campos requeridos
-        if (!session.metadata?.userId || !session.metadata?.priceId || 
+        if (!metadata?.userId || !metadata?.priceId || 
             session.mode !== 'subscription' || !session.subscription || 
             !session.customer) {
           console.error("Faltan datos requeridos en la sesión de checkout");
@@ -34,8 +35,8 @@ export async function POST(req: Request) {
         }
 
         const plan = subscriptionPlans.find(
-          p => p.stripePriceIds.monthly === session.metadata.priceId || 
-              p.stripePriceIds.yearly === session.metadata.priceId
+          p => p.stripePriceIds.monthly === metadata.priceId || 
+              p.stripePriceIds.yearly === metadata.priceId
         );
 
         // Recuperar la información completa de la suscripción
@@ -48,12 +49,12 @@ export async function POST(req: Request) {
           // 1. Crear o actualizar la suscripción
           await tx.subscription.upsert({
             where: {
-              userId: session.metadata.userId,
+              userId: metadata.userId,
             },
             create: {
-              userId: session.metadata.userId,
+              userId: metadata.userId,
               stripeSubscriptionId: session.subscription as string,
-              stripePriceId: session.metadata.priceId,
+              stripePriceId: metadata.priceId,
               stripeCustomerId: session.customer as string,
               planId: plan?.id || 'starter',
               status: 'active',
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
             },
             update: {
               stripeSubscriptionId: session.subscription as string,
-              stripePriceId: session.metadata.priceId,
+              stripePriceId: metadata.priceId,
               stripeCustomerId: session.customer as string,
               planId: plan?.id || 'starter',
               status: 'active',
@@ -76,10 +77,10 @@ export async function POST(req: Request) {
           // 2. Actualizar o crear UserCredit
           const userCredit = await tx.userCredit.upsert({
             where: { 
-              userId: session.metadata.userId 
+              userId: metadata.userId 
             },
             create: {
-              userId: session.metadata.userId,
+              userId: metadata.userId,
               credit: plan?.credits || 0
             },
             update: {
@@ -90,7 +91,7 @@ export async function POST(req: Request) {
           // 3. Registrar la transacción de créditos
           await tx.userCreditTransaction.create({
             data: {
-              userId: session.metadata.userId,
+              userId: metadata.userId,
               credit: plan?.credits || 0,
               balance: plan?.credits || 0,
               type: 'SubscriptionCredit',
@@ -101,12 +102,12 @@ export async function POST(req: Request) {
         await logsnag.track({
           channel: "subscriptions",
           event: "Nueva Suscripción",
-          user_id: session.metadata.userId,
+          user_id: metadata.userId,
           description: `Nuevo suscriptor al plan ${plan?.name}`,
           icon: "🎉",
           tags: {
             plan: plan?.name || 'starter',
-            interval: session.metadata.priceId?.includes('monthly') ? 'mensual' : 'anual',
+            interval: metadata.priceId?.includes('monthly') ? 'mensual' : 'anual',
           },
         });
         break;
