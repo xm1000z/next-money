@@ -6,42 +6,26 @@ import { prisma } from "@/db/prisma";
 export default function SettingsPage() {
   const { userId } = useAuth();
 
-  const { data: userSubscription } = useQuery(
-    ["userSubscription", userId],
-    async () => {
+  const { data: userSubscription } = useQuery({
+    queryKey: ["userSubscription", userId],
+    queryFn: async () => {
       if (!userId) return null;
       return await prisma.subscription.findFirst({
         where: { userId },
       });
     },
-    {
-      enabled: !!userId,
-    }
-  );
+    enabled: !!userId,
+  });
 
-  const { data: userCredits } = useQuery(
-    ["userCredits", userId],
-    async () => {
+  const { data: userCredits } = useQuery({
+    queryKey: ["userCredits", userId],
+    queryFn: async () => {
       if (!userId) return null;
       return await prisma.userCredit.findFirst({
         where: { userId },
       });
     },
-    {
-      enabled: !!userId,
-    }
-  );
-
-  const { data: subscription } = useQuery({
-    queryKey: ['subscription', userId],
-    queryFn: async () => {
-      const response = await fetch('/api/subscription');
-      if (!response.ok) {
-        throw new Error('Error fetching subscription');
-      }
-      return response.json();
-    },
-    enabled: !!userId
+    enabled: !!userId,
   });
 
   const currentPlan = userSubscription?.planId || "Sin Plan";
