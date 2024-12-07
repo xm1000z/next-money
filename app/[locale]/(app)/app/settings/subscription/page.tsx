@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
+import Link from 'next/link';
 
 export default function SubscriptionSettings() {
   const { userId } = useAuth();
@@ -33,18 +34,6 @@ export default function SubscriptionSettings() {
     enabled: !!userId,
   });
 
-  const handleUpgrade = async (newPlanId: string) => {
-    if (!userId) return;
-    try {
-      const response = await handleSubscribe(userId, newPlanId, false);
-      if (response?.url) {
-        window.location.href = response.url;
-      }
-    } catch (error) {
-      console.error('Error upgrading plan:', error);
-    }
-  };
-
   const currentPlan = userSubscription?.planId || "Sin Plan";
   const credits = userCredits?.credit || 0;
 
@@ -62,15 +51,18 @@ export default function SubscriptionSettings() {
         <p className="text-sm text-muted-foreground">{currentPlan}</p>
         <p className="text-sm text-muted-foreground">Créditos disponibles: {credits}</p>
         <div className="mt-4 space-x-4">
-          <button 
-            onClick={() => handleUpgrade('pro')}
+          <Link 
+            href="/pricing"
             className="px-4 py-2 border rounded-md hover:bg-accent"
           >
-            Actualizar Plan
-          </button>
-          <button className="px-4 py-2 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] hover:bg-accent hover:border-[#DCDAD2] hover:dark:border-[#2C2C2C] rounded-md">
+            Ver Planes
+          </Link>
+          <Link 
+            href="/pricing#credits"
+            className="px-4 py-2 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] hover:bg-accent hover:border-[#DCDAD2] hover:dark:border-[#2C2C2C] rounded-md"
+          >
             Comprar Créditos
-          </button>
+          </Link>
         </div>
       </div>
     </div>
