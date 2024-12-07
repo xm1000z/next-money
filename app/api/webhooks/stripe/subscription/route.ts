@@ -132,9 +132,9 @@ export async function POST(req: Request) {
                 data: {
                   userId: subscription.userId,
                   userInfo: {
-                    email: session.customer_email,
-                    name: session.customer_name,
-                    customerId: session.customer,
+                    email: session.customer_email || null,
+                    name: session.customer_name || null,
+                    customerId: session.customer?.toString() || null,
                   },
                   amount: session.amount_due,
                   phase: OrderPhase.Paid,
@@ -268,8 +268,8 @@ export async function POST(req: Request) {
               data: {
                 userId: subscription.userId,
                 userInfo: {
-                  customerId: session.customer,
-                  subscriptionId: session.id,
+                  customerId: session.customer?.toString() || null,
+                  subscriptionId: session.id || null,
                 },
                 amount: Math.round((session.items.data[0].price.unit_amount || 0) * (session.items.data[0].quantity || 1)),
                 credit: 0,
