@@ -131,12 +131,18 @@ export async function POST(req: Request) {
               prisma.chargeOrder.create({
                 data: {
                   userId: subscription.userId,
+                  userInfo: session.customer_details || null,
                   amount: session.amount_due,
                   phase: OrderPhase.Paid,
                   credit: 0,
                   channel: PaymentChannelType.Stripe,
                   currency: session.currency,
-                  result: { invoiceId: session.id },
+                  paymentAt: new Date(session.status_transitions?.paid_at ? session.status_transitions.paid_at * 1000 : Date.now()),
+                  result: {
+                    invoiceId: session.id,
+                    paymentIntent: session.payment_intent,
+                    chargeId: session.charge,
+                  },
                 },
               }),
             ]);
@@ -257,12 +263,18 @@ export async function POST(req: Request) {
             prisma.chargeOrder.create({
               data: {
                 userId: subscription.userId,
+                userInfo: session.customer_details || null,
                 amount: Math.round((session.items.data[0].price.unit_amount || 0) * (session.items.data[0].quantity || 1)),
-                phase: OrderPhase.Paid,
                 credit: 0,
+                phase: OrderPhase.Paid,
                 channel: PaymentChannelType.Stripe,
                 currency: session.currency || 'eur',
-                result: { invoiceId: session.latest_invoice?.toString() || null },
+                paymentAt: new Date(),
+                result: {
+                  subscriptionId: session.id,
+                  invoiceId: session.latest_invoice?.toString() || null,
+                  priceId: session.items.data[0].price.id,
+                },
               },
             }),
           ]);
