@@ -1,10 +1,10 @@
 import React from 'react';
-import { auth } from "@clerk/nextjs/server";
+import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { prisma } from "@/db/prisma";
 
-export default function SubscriptionPage() {
-  const { userId } = auth();
+export default function SettingsPage() {
+  const { userId } = useAuth();
 
   const { data: userSubscription } = useQuery(
     ["userSubscription", userId],
@@ -14,7 +14,9 @@ export default function SubscriptionPage() {
         where: { userId },
       });
     },
-    { enabled: !!userId }
+    {
+      enabled: !!userId,
+    }
   );
 
   const { data: userCredits } = useQuery(
@@ -25,7 +27,9 @@ export default function SubscriptionPage() {
         where: { userId },
       });
     },
-    { enabled: !!userId }
+    {
+      enabled: !!userId,
+    }
   );
 
   const { data: subscription } = useQuery({
