@@ -1,7 +1,8 @@
+'use client';
+
 import React from 'react';
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
-import { prisma } from "@/db/prisma";
 
 export default function SettingsPage() {
   const { userId } = useAuth();
@@ -10,9 +11,11 @@ export default function SettingsPage() {
     queryKey: ["userSubscription", userId],
     queryFn: async () => {
       if (!userId) return null;
-      return await prisma.subscription.findFirst({
-        where: { userId },
-      });
+      const response = await fetch('/api/subscription/details');
+      if (!response.ok) {
+        throw new Error('Error al obtener los detalles de la suscripción');
+      }
+      return response.json();
     },
     enabled: !!userId,
   });
@@ -21,9 +24,11 @@ export default function SettingsPage() {
     queryKey: ["userCredits", userId],
     queryFn: async () => {
       if (!userId) return null;
-      return await prisma.userCredit.findFirst({
-        where: { userId },
-      });
+      const response = await fetch('/api/account');
+      if (!response.ok) {
+        throw new Error('Error al obtener los créditos');
+      }
+      return response.json();
     },
     enabled: !!userId,
   });
