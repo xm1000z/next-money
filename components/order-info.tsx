@@ -149,7 +149,7 @@ export function OrderInfo() {
                             {item.userInfo?.fullName}
                           </div>
                           <div className="hidden text-sm text-muted-foreground md:inline">
-                            {item.userInfo?.planName || 'Suscripción'}
+                           Plan {item.userInfo?.planName || 'Suscripción'}
                           </div>
                         </TableCell>
                         <TableCell>
