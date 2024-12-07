@@ -156,10 +156,10 @@ export async function POST(req: Request) {
                 data: {
                   userId: subscription.userId,
                   userInfo: {
+                    planName: plan?.name || 'Starter',
                     email: session.customer_email || null,
                     name: session.customer_name || null,
                     customerId: session.customer?.toString() || null,
-                    planName: plan?.name || 'Starter',
                   },
                   amount: session.amount_due,
                   phase: OrderPhase.Paid,
