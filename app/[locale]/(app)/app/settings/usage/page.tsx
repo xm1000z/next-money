@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { AreaChartStacked } from "@/components/charts/area-chart-stacked";
 import { BarChartMixed } from "@/components/charts/bar-chart-mixed";
@@ -12,7 +13,15 @@ import { RadialShapeChart } from "@/components/charts/radial-shape-chart";
 import { RadialStackedChart } from "@/components/charts/radial-stacked-chart";
 import { RadialTextChart } from "@/components/charts/radial-text-chart";
 
-export function UsageClient({ userId }: { userId: string }) {
+export default function UsagePage() {
+  const { userId } = useAuth();
+  
+  if (!userId) return null;
+  
+  return <UsageClient userId={userId} />;
+}
+
+function UsageClient({ userId }: { userId: string }) {
   const { data: userSubscription } = useQuery({
     queryKey: ["userSubscription", userId],
     queryFn: async () => {
