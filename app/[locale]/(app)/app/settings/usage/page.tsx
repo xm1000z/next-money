@@ -1,6 +1,7 @@
+'use client';
+
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
-import { prisma } from "@/db/prisma";
 import { AreaChartStacked } from "@/components/charts/area-chart-stacked";
 import { BarChartMixed } from "@/components/charts/bar-chart-mixed";
 import { InteractiveBarChart } from "@/components/charts/interactive-bar-chart";
@@ -18,9 +19,8 @@ export default function UsagePage() {
     queryKey: ["userSubscription", userId],
     queryFn: async () => {
       if (!userId) return null;
-      return await prisma.subscription.findFirst({
-        where: { userId },
-      });
+      const response = await fetch(`/api/subscription?userId=${userId}`);
+      return response.json();
     },
     enabled: !!userId,
   });
@@ -29,9 +29,8 @@ export default function UsagePage() {
     queryKey: ["userCredits", userId],
     queryFn: async () => {
       if (!userId) return null;
-      return await prisma.userCredit.findFirst({
-        where: { userId },
-      });
+      const response = await fetch(`/api/account`);
+      return response.json();
     },
     enabled: !!userId,
   });
