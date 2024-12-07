@@ -42,9 +42,13 @@ export async function handleSubscribe(userId: string | undefined, planId: string
     }
 
     // Establecer créditos al usuario y registrar la transacción
+    const existingUserCredit = await prisma.userCredit.findFirst({
+      where: { userId }
+    });
+
     await prisma.$transaction([
       prisma.userCredit.upsert({
-        where: { userId },
+        where: { id: existingUserCredit?.id ?? -1 },
         update: { credit: plan.credits },
         create: { userId, credit: plan.credits },
       }),
