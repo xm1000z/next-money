@@ -24,26 +24,26 @@ export async function POST(req: Request) {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
+        const metadata = session.metadata;
         
         if (
           session.mode === 'subscription' && 
-          session.metadata?.userId && 
-          session.metadata?.priceId && 
+          metadata?.userId && 
+          metadata?.priceId && 
           session.subscription && 
           session.customer
         ) {
+          const { userId, priceId } = metadata;
+          
           const plan = subscriptionPlans.find(
-            p => p.stripePriceIds.monthly === session.metadata.priceId || 
-                p.stripePriceIds.yearly === session.metadata.priceId
+            p => p.stripePriceIds.monthly === priceId || 
+                p.stripePriceIds.yearly === priceId
           );
 
           // Recuperar la información completa de la suscripción
           const subscription = await stripe.subscriptions.retrieve(
             session.subscription as string
           );
-
-          const userId = session.metadata.userId;
-          const priceId = session.metadata.priceId;
 
           // Realizar todas las operaciones en una transacción
           await prisma.$transaction(async (tx) => {
@@ -99,12 +99,12 @@ export async function POST(req: Request) {
           await logsnag.track({
             channel: "subscriptions",
             event: "Nueva Suscripción",
-            user_id: session.metadata.userId,
+            user_id: userId,
             description: `Nuevo suscriptor al plan ${plan?.name}`,
             icon: "🎉",
             tags: {
               plan: plan?.name || 'starter',
-              interval: session.metadata.priceId?.includes('monthly') ? 'mensual' : 'anual',
+              interval: priceId.includes('monthly') ? 'mensual' : 'anual',
             },
           });
         }
