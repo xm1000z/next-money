@@ -14,6 +14,5 @@ export async function GET() {
   }
 
   const subscription = await getUserSubscriptionPlan(userId);
-
   return NextResponse.json(subscription);
 }

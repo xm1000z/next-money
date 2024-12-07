@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { AreaChartStacked } from "@/components/charts/area-chart-stacked";
@@ -67,6 +68,9 @@ export default function UsagePage() {
     queryFn: async () => {
       if (!userId) return null;
       const response = await fetch(`/api/account`);
+      if (!response.ok) {
+        throw new Error('Error al obtener los créditos');
+      }
       return response.json();
     },
     enabled: !!userId,
@@ -80,7 +84,7 @@ export default function UsagePage() {
       <div>
         <h3 className="text-lg font-medium">Uso de Créditos</h3>
         <p className="text-sm text-muted-foreground">
-          Visualiza el uso de tus créditos frente al balance original de tu plan de suscripción.
+          Visualiza el uso de tus créditos
         </p>
       </div>
 
@@ -90,6 +94,7 @@ export default function UsagePage() {
         <p className="text-sm text-muted-foreground">Créditos disponibles: {credits}</p>
       </div>
 
+      {/* Sección de Gráficos */}
       <div className="w-full flex flex-col gap-5 pt-5">
         <div className="w-full grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-4">
           <RadialTextChart />
