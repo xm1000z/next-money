@@ -43,11 +43,18 @@ export async function handleSubscribe(userId: string | undefined, planId: string
 
     // Establecer créditos al usuario y registrar la transacción
     await prisma.$transaction(async (tx) => {
-      // Update user credits
+      // Solución 1: Si userId es único en UserCredit
       await tx.userCredit.upsert({
-        where: { userId },
-        update: { credit: plan.credits },
-        create: { userId, credit: plan.credits },
+        where: { 
+          userId: userId 
+        },
+        update: { 
+          credit: plan.credits 
+        },
+        create: { 
+          userId: userId, 
+          credit: plan.credits 
+        }
       });
 
       // Record credit transaction
