@@ -12,7 +12,7 @@ export async function GET() {
   try {
     const subscription = await prisma.subscription.findFirst({
       where: { 
-        user_id: userId  // Cambiar userId por user_id para que coincida con la columna
+        userId: userId  // Usar userId en lugar de user_id
       },
     });
 
