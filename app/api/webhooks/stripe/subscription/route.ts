@@ -92,12 +92,37 @@ export async function POST(req: Request) {
             });
 
             // 3. Registrar la transacción de créditos
-            await tx.userCreditTransaction.create({
+            const creditTransaction = await tx.userCreditTransaction.create({
               data: {
                 userId,
                 credit: plan?.credits || 0,
                 balance: plan?.credits || 0,
                 type: 'SubscriptionCredit',
+              },
+            });
+
+            // 4. Crear registro de ChargeOrder para la facturación
+            await tx.chargeOrder.create({
+              data: {
+                userId,
+                userInfo: {
+                  email: session.customer_details?.email || null,
+                  name: session.customer_details?.name || null,
+                  customerId: session.customer?.toString() || null,
+                  planName: plan?.name || 'Starter',
+                  subscriptionId: session.subscription as string,
+                },
+                amount: session.amount_total || 0,
+                phase: OrderPhase.Paid,
+                credit: plan?.credits || 0,
+                channel: PaymentChannelType.Stripe,
+                currency: session.currency || 'eur',
+                paymentAt: new Date(),
+                result: {
+                  checkoutId: session.id,
+                  subscriptionId: session.subscription as string,
+                  priceId: priceId,
+                },
               },
             });
           });
