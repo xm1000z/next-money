@@ -53,7 +53,7 @@ export default function UsagePage() {
     queryKey: ["userSubscription", userId],
     queryFn: async () => {
       if (!userId) return null;
-      const response = await fetch(`/api/subscription/status`);
+      const response = await fetch(`/api/subscription/details`);
       if (!response.ok) {
         throw new Error('Error al obtener los detalles de la suscripción');
       }
