@@ -33,11 +33,6 @@ export async function handleSubscribe(userId: string | undefined, planId: string
     const checkoutUrl = await createSubscriptionCheckout({
       priceId,
       userId,
-      metadata: {
-        userId,
-        planId,
-        priceId,
-      },
       successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/app/settings/subscription?success=true`,
       cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?success=false`,
     });
@@ -45,6 +40,27 @@ export async function handleSubscribe(userId: string | undefined, planId: string
     if (!checkoutUrl) {
       throw new Error('Failed to create checkout session');
     }
+
+    // Establecer créditos al usuario y registrar la transacción
+    const existingUserCredit = await prisma.userCredit.findFirst({
+      where: { userId }
+    });
+
+    await prisma.$transaction([
+      prisma.userCredit.upsert({
+        where: { id: existingUserCredit?.id ?? -1 },
+        update: { credit: plan.credits },
+        create: { userId, credit: plan.credits },
+      }),
+      prisma.userCreditTransaction.create({
+        data: {
+          userId,
+          credit: plan.credits,
+          balance: plan.credits,
+          type: 'SubscriptionCredit',
+        },
+      }),
+    ]);
 
     return { url: checkoutUrl };
   } catch (error) {

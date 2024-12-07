@@ -12,13 +12,13 @@ export async function GET() {
   try {
     const subscription = await prisma.subscription.findFirst({
       where: { 
-        userId: userId  // Usar userId en lugar de user_id
+        userId: userId
       },
     });
 
-    return NextResponse.json(subscription || { planId: "free" }); // Proporcionar un valor por defecto
+    return NextResponse.json(subscription || { planId: "Gratuito" });
   } catch (error) {
     console.error('Error al obtener la suscripción:', error);
-    return NextResponse.json({ planId: "free" }, { status: 200 }); // Fallback seguro
+    return NextResponse.json({ planId: "free" }, { status: 200 });
   }
 }
