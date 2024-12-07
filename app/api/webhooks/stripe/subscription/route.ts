@@ -144,8 +144,8 @@ export async function POST(req: Request) {
                   paymentAt: new Date(session.status_transitions?.paid_at ? session.status_transitions.paid_at * 1000 : Date.now()),
                   result: {
                     invoiceId: session.id,
-                    paymentIntent: session.payment_intent,
-                    chargeId: session.charge,
+                    paymentIntent: typeof session.payment_intent === 'string' ? session.payment_intent : null,
+                    chargeId: typeof session.charge === 'string' ? session.charge : null,
                   },
                 },
               }),
@@ -279,7 +279,7 @@ export async function POST(req: Request) {
                 paymentAt: new Date(),
                 result: {
                   subscriptionId: session.id,
-                  invoiceId: session.latest_invoice?.toString() || null,
+                  invoiceId: typeof session.latest_invoice === 'string' ? session.latest_invoice : session.latest_invoice?.toString() || null,
                   priceId: session.items.data[0].price.id,
                 },
               },
