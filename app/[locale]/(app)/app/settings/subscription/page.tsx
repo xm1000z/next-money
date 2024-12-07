@@ -31,10 +31,12 @@ export default function SubscriptionPage() {
 
   const { data: subscription } = useQuery(
     ['subscription', userId],
-    () => {
-      return axios.get('/api/subscription').then((res) => {
-        return res.data;
-      });
+    async () => {
+      const response = await fetch('/api/subscription');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
     },
     { enabled: !!userId }
   );
