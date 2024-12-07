@@ -14,31 +14,27 @@ import { RadialTextChart } from "@/components/charts/radial-text-chart";
 export default function UsagePage() {
   const { userId } = useAuth();
 
-  const { data: userSubscription } = useQuery(
-    ["userSubscription", userId],
-    async () => {
+  const { data: userSubscription } = useQuery({
+    queryKey: ["userSubscription", userId],
+    queryFn: async () => {
       if (!userId) return null;
       return await prisma.subscription.findFirst({
         where: { userId },
       });
     },
-    {
-      enabled: !!userId,
-    }
-  );
+    enabled: !!userId,
+  });
 
-  const { data: userCredits } = useQuery(
-    ["userCredits", userId],
-    async () => {
+  const { data: userCredits } = useQuery({
+    queryKey: ["userCredits", userId],
+    queryFn: async () => {
       if (!userId) return null;
       return await prisma.userCredit.findFirst({
         where: { userId },
       });
     },
-    {
-      enabled: !!userId,
-    }
-  );
+    enabled: !!userId,
+  });
 
   const currentPlan = userSubscription?.planId || "Sin Plan";
   const credits = userCredits?.credit || 0;
