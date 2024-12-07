@@ -4,7 +4,7 @@ import React from 'react';
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 
-export default function SettingsPage() {
+export default function SubscriptionSettings() {
   const { userId } = useAuth();
 
   const { data: userSubscription } = useQuery({
