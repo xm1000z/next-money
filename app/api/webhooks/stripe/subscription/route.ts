@@ -73,9 +73,15 @@ export async function POST(req: Request) {
               },
             });
 
-            // 2. Actualizar o crear UserCredit
-            const userCredit = await tx.userCredit.upsert({
-              where: { userId },
+            // 2. Buscar o crear UserCredit
+            const existingCredit = await tx.userCredit.findFirst({
+              where: { userId }
+            });
+
+            await tx.userCredit.upsert({
+              where: { 
+                id: existingCredit?.id || -1  // Si no existe, usamos un ID inválido para forzar create
+              },
               create: {
                 userId,
                 credit: plan?.credits || 0
