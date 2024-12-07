@@ -194,8 +194,11 @@ model UserCreditTransaction {
   type      String   @db.VarChar
   createdAt DateTime @default(now()) @map(name: "created_at") @db.Timestamp(6)
   updatedAt DateTime @default(now()) @map(name: "updated_at") @db.Timestamp(6)
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+  subscriptionId String?
 
   @@map(name: "user_credit_transaction")
+  @@index([subscriptionId])
 }
 
 model UserPaymentInfo {
@@ -244,4 +247,7 @@ model Subscription {
 
   @@index([userId])
   @@index([stripeSubscriptionId])
+  @@index([planId])
+  @@index([status])
+  @@map(name: "subscriptions")
 }

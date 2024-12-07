@@ -42,25 +42,24 @@ export async function handleSubscribe(userId: string | undefined, planId: string
     }
 
     // Establecer créditos al usuario y registrar la transacción
-    const existingUserCredit = await prisma.userCredit.findFirst({
-      where: { userId }
-    });
-
-    await prisma.$transaction([
-      prisma.userCredit.upsert({
-        where: { id: existingUserCredit?.id ?? -1 },
+    await prisma.$transaction(async (tx) => {
+      // Update user credits
+      await tx.userCredit.upsert({
+        where: { userId },
         update: { credit: plan.credits },
         create: { userId, credit: plan.credits },
-      }),
-      prisma.userCreditTransaction.create({
+      });
+
+      // Record credit transaction
+      await tx.userCreditTransaction.create({
         data: {
           userId,
           credit: plan.credits,
           balance: plan.credits,
           type: 'SubscriptionCredit',
         },
-      }),
-    ]);
+      });
+    });
 
     return { url: checkoutUrl };
   } catch (error) {

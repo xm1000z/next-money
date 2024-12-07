@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { AreaChartStacked } from "@/components/charts/area-chart-stacked";
 import { BarChartMixed } from "@/components/charts/bar-chart-mixed";
@@ -12,68 +11,28 @@ import { RadialChartGrid } from "@/components/charts/radial-chart-grid";
 import { RadialShapeChart } from "@/components/charts/radial-shape-chart";
 import { RadialStackedChart } from "@/components/charts/radial-stacked-chart";
 import { RadialTextChart } from "@/components/charts/radial-text-chart";
-import { auth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
-import { prisma } from "@/db/prisma";
-import { getCachedSubscription } from "@/lib/redis";
 
-export async function GET() {
-  const { userId } = auth();
-
-  if (!userId) {
-    return NextResponse.json(
-      { error: "No autorizado" },
-      { status: 401 }
-    );
-  }
-
-  // Intentar obtener del caché primero
-  const cachedSubscription = await getCachedSubscription(userId);
-  if (cachedSubscription) {
-    return NextResponse.json(cachedSubscription);
-  }
-
-  // Si no está en caché, obtener de la base de datos
-  const subscription = await prisma.subscription.findFirst({
-    where: {
-      userId,
-      status: 'active',
-      currentPeriodEnd: {
-        gt: new Date()
-      }
-    }
-  });
-
-  return NextResponse.json(subscription || { planId: "Sin Plan" });
-}
-
-export default function UsagePage() {
-  const { userId } = useAuth();
-
+export function UsageClient({ userId }: { userId: string }) {
   const { data: userSubscription } = useQuery({
     queryKey: ["userSubscription", userId],
     queryFn: async () => {
-      if (!userId) return null;
       const response = await fetch(`/api/subscription/details`);
       if (!response.ok) {
         throw new Error('Error al obtener los detalles de la suscripción');
       }
       return response.json();
     },
-    enabled: !!userId,
   });
 
   const { data: userCredits } = useQuery({
     queryKey: ["userCredits", userId],
     queryFn: async () => {
-      if (!userId) return null;
       const response = await fetch(`/api/account`);
       if (!response.ok) {
         throw new Error('Error al obtener los créditos');
       }
       return response.json();
     },
-    enabled: !!userId,
   });
 
   const currentPlan = userSubscription?.planId || "Sin Plan";
