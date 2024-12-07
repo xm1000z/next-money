@@ -30,7 +30,7 @@ export async function getUserSubscriptionPlan(userId: string, authUser?: User) {
   });
 
   if (!subscription) {
-    // Plan gratuito por defecto (starter)
+    // Plan gratuito por defecto (free)
     return {
       ...subscriptionPlans[0],
       isPaid: false,

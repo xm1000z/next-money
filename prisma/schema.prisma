@@ -250,5 +250,4 @@ model Subscription {
   @@index([stripeSubscriptionId])
   @@index([planId])
   @@index([status])
-  @@map(name: "subscriptions")
 }
