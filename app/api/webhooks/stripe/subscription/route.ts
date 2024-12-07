@@ -125,7 +125,7 @@ export async function POST(req: Request) {
                   userId: subscription.userId,
                   credit: plan?.credits || 0,
                   balance: plan?.credits || 0,
-                  type: 'SubscriptionCredit',
+                  type: 'SuscripciónUpdate',
                 },
               }),
               prisma.chargeOrder.create({
