@@ -1,8 +1,7 @@
 import React from 'react';
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import { prisma } from "@/db/prisma";
-import axios from 'axios';
 
 export default function SubscriptionPage() {
   const { userId } = useAuth();
@@ -29,17 +28,17 @@ export default function SubscriptionPage() {
     { enabled: !!userId }
   );
 
-  const { data: subscription } = useQuery(
-    ['subscription', userId],
-    async () => {
+  const { data: subscription } = useQuery({
+    queryKey: ['subscription', userId],
+    queryFn: async () => {
       const response = await fetch('/api/subscription');
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Error fetching subscription');
       }
       return response.json();
     },
-    { enabled: !!userId }
-  );
+    enabled: !!userId
+  });
 
   const currentPlan = userSubscription?.planId || "Sin Plan";
   const credits = userCredits?.credit || 0;
