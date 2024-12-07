@@ -106,10 +106,10 @@ export async function POST(req: Request) {
               data: {
                 userId,
                 userInfo: {
+                  planName: plan?.name || 'Starter',
                   email: session.customer_details?.email || null,
                   name: session.customer_details?.name || null,
                   customerId: session.customer?.toString() || null,
-                  planName: plan?.name || 'Starter',
                   subscriptionId: session.subscription as string,
                 },
                 amount: session.amount_total || 0,
