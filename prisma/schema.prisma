@@ -244,6 +244,7 @@ model Subscription {
   currentPeriodEnd     DateTime
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
+  transactions         UserCreditTransaction[]
 
   @@index([userId])
   @@index([stripeSubscriptionId])
