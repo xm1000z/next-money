@@ -25,88 +25,90 @@ export async function POST(req: Request) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
         
-        if (session.mode === 'subscription' && session.metadata?.userId) {
-          const plan = subscriptionPlans.find(
-            p => p.stripePriceIds.monthly === session.metadata?.priceId || 
-                p.stripePriceIds.yearly === session.metadata?.priceId
-          );
+        // Verificación temprana de metadata y campos requeridos
+        if (!session.metadata?.userId || !session.metadata?.priceId || 
+            session.mode !== 'subscription' || !session.subscription || 
+            !session.customer) {
+          console.error("Faltan datos requeridos en la sesión de checkout");
+          return;
+        }
 
-          if (!session.subscription || !session.customer) {
-            throw new Error("Missing subscription or customer data");
-          }
+        const plan = subscriptionPlans.find(
+          p => p.stripePriceIds.monthly === session.metadata.priceId || 
+              p.stripePriceIds.yearly === session.metadata.priceId
+        );
 
-          // Recuperar la información completa de la suscripción
-          const subscription = await stripe.subscriptions.retrieve(
-            session.subscription as string
-          );
+        // Recuperar la información completa de la suscripción
+        const subscription = await stripe.subscriptions.retrieve(
+          session.subscription as string
+        );
 
-          // Realizar todas las operaciones en una transacción
-          await prisma.$transaction(async (tx) => {
-            // 1. Crear o actualizar la suscripción
-            await tx.subscription.upsert({
-              where: {
-                userId: session.metadata.userId,
-              },
-              create: {
-                userId: session.metadata.userId,
-                stripeSubscriptionId: session.subscription as string,
-                stripePriceId: session.metadata.priceId,
-                stripeCustomerId: session.customer as string,
-                planId: plan?.id || 'starter',
-                status: 'active',
-                credits: plan?.credits || 0,
-                currentPeriodStart: new Date(subscription.current_period_start * 1000),
-                currentPeriodEnd: new Date(subscription.current_period_end * 1000),
-              },
-              update: {
-                stripeSubscriptionId: session.subscription as string,
-                stripePriceId: session.metadata.priceId,
-                stripeCustomerId: session.customer as string,
-                planId: plan?.id || 'starter',
-                status: 'active',
-                credits: plan?.credits || 0,
-                currentPeriodStart: new Date(subscription.current_period_start * 1000),
-                currentPeriodEnd: new Date(subscription.current_period_end * 1000),
-              },
-            });
-
-            // 2. Actualizar o crear UserCredit
-            const userCredit = await tx.userCredit.upsert({
-              where: { 
-                userId: session.metadata.userId 
-              },
-              create: {
-                userId: session.metadata.userId,
-                credit: plan?.credits || 0
-              },
-              update: {
-                credit: plan?.credits || 0
-              }
-            });
-
-            // 3. Registrar la transacción de créditos
-            await tx.userCreditTransaction.create({
-              data: {
-                userId: session.metadata.userId,
-                credit: plan?.credits || 0,
-                balance: plan?.credits || 0,
-                type: 'SubscriptionCredit',
-              },
-            });
-          });
-
-          await logsnag.track({
-            channel: "subscriptions",
-            event: "Nueva Suscripción",
-            user_id: session.metadata.userId,
-            description: `Nuevo suscriptor al plan ${plan?.name}`,
-            icon: "🎉",
-            tags: {
-              plan: plan?.name || 'starter',
-              interval: session.metadata.priceId?.includes('monthly') ? 'mensual' : 'anual',
+        // Realizar todas las operaciones en una transacción
+        await prisma.$transaction(async (tx) => {
+          // 1. Crear o actualizar la suscripción
+          await tx.subscription.upsert({
+            where: {
+              userId: session.metadata.userId,
+            },
+            create: {
+              userId: session.metadata.userId,
+              stripeSubscriptionId: session.subscription as string,
+              stripePriceId: session.metadata.priceId,
+              stripeCustomerId: session.customer as string,
+              planId: plan?.id || 'starter',
+              status: 'active',
+              credits: plan?.credits || 0,
+              currentPeriodStart: new Date(subscription.current_period_start * 1000),
+              currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+            },
+            update: {
+              stripeSubscriptionId: session.subscription as string,
+              stripePriceId: session.metadata.priceId,
+              stripeCustomerId: session.customer as string,
+              planId: plan?.id || 'starter',
+              status: 'active',
+              credits: plan?.credits || 0,
+              currentPeriodStart: new Date(subscription.current_period_start * 1000),
+              currentPeriodEnd: new Date(subscription.current_period_end * 1000),
             },
           });
-        }
+
+          // 2. Actualizar o crear UserCredit
+          const userCredit = await tx.userCredit.upsert({
+            where: { 
+              userId: session.metadata.userId 
+            },
+            create: {
+              userId: session.metadata.userId,
+              credit: plan?.credits || 0
+            },
+            update: {
+              credit: plan?.credits || 0
+            }
+          });
+
+          // 3. Registrar la transacción de créditos
+          await tx.userCreditTransaction.create({
+            data: {
+              userId: session.metadata.userId,
+              credit: plan?.credits || 0,
+              balance: plan?.credits || 0,
+              type: 'SubscriptionCredit',
+            },
+          });
+        });
+
+        await logsnag.track({
+          channel: "subscriptions",
+          event: "Nueva Suscripción",
+          user_id: session.metadata.userId,
+          description: `Nuevo suscriptor al plan ${plan?.name}`,
+          icon: "🎉",
+          tags: {
+            plan: plan?.name || 'starter',
+            interval: session.metadata.priceId?.includes('monthly') ? 'mensual' : 'anual',
+          },
+        });
         break;
       }
 
