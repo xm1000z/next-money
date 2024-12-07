@@ -35,42 +35,64 @@ export async function POST(req: Request) {
             throw new Error("Missing subscription or customer data");
           }
 
+          // Recuperar la información completa de la suscripción
           const subscription = await stripe.subscriptions.retrieve(
             session.subscription as string
           );
 
-          await prisma.subscription.create({
-            data: {
-              userId: session.metadata.userId,
-              stripeSubscriptionId: session.subscription as string,
-              stripePriceId: session.metadata.priceId || '',
-              stripeCustomerId: session.customer as string,
-              planId: plan?.id || 'starter',
-              status: 'active',
-              credits: plan?.credits || 0,
-              currentPeriodStart: new Date(subscription.current_period_start * 1000),
-              currentPeriodEnd: new Date(subscription.current_period_end * 1000),
-            },
-          });
-
-          const userCredit = await prisma.userCredit.findFirst({
-            where: { userId: session.metadata.userId }
-          });
-
-          if (userCredit) {
-            await prisma.userCredit.update({
-              where: { id: userCredit.id },
-              data: { credit: plan?.credits || 0 },
+          // Realizar todas las operaciones en una transacción
+          await prisma.$transaction(async (tx) => {
+            // 1. Crear o actualizar la suscripción
+            await tx.subscription.upsert({
+              where: {
+                userId: session.metadata.userId,
+              },
+              create: {
+                userId: session.metadata.userId,
+                stripeSubscriptionId: session.subscription as string,
+                stripePriceId: session.metadata.priceId,
+                stripeCustomerId: session.customer as string,
+                planId: plan?.id || 'starter',
+                status: 'active',
+                credits: plan?.credits || 0,
+                currentPeriodStart: new Date(subscription.current_period_start * 1000),
+                currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+              },
+              update: {
+                stripeSubscriptionId: session.subscription as string,
+                stripePriceId: session.metadata.priceId,
+                stripeCustomerId: session.customer as string,
+                planId: plan?.id || 'starter',
+                status: 'active',
+                credits: plan?.credits || 0,
+                currentPeriodStart: new Date(subscription.current_period_start * 1000),
+                currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+              },
             });
-          }
 
-          await prisma.userCreditTransaction.create({
-            data: {
-              userId: session.metadata.userId,
-              credit: plan?.credits || 0,
-              balance: plan?.credits || 0,
-              type: 'SubscriptionCredit',
-            },
+            // 2. Actualizar o crear UserCredit
+            const userCredit = await tx.userCredit.upsert({
+              where: { 
+                userId: session.metadata.userId 
+              },
+              create: {
+                userId: session.metadata.userId,
+                credit: plan?.credits || 0
+              },
+              update: {
+                credit: plan?.credits || 0
+              }
+            });
+
+            // 3. Registrar la transacción de créditos
+            await tx.userCreditTransaction.create({
+              data: {
+                userId: session.metadata.userId,
+                credit: plan?.credits || 0,
+                balance: plan?.credits || 0,
+                type: 'SubscriptionCredit',
+              },
+            });
           });
 
           await logsnag.track({
