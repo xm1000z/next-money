@@ -22,7 +22,9 @@ export default function UsagePage() {
         where: { userId },
       });
     },
-    { enabled: !!userId }
+    {
+      enabled: !!userId,
+    }
   );
 
   const { data: userCredits } = useQuery(
@@ -33,7 +35,9 @@ export default function UsagePage() {
         where: { userId },
       });
     },
-    { enabled: !!userId }
+    {
+      enabled: !!userId,
+    }
   );
 
   const currentPlan = userSubscription?.planId || "Sin Plan";
@@ -42,7 +46,7 @@ export default function UsagePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">Uso</h3>
+        <h3 className="text-lg font-medium">Plan de Suscripción</h3>
         <p className="text-sm text-muted-foreground">
           Gestiona la configuración general de tu cuenta
         </p>
@@ -52,6 +56,14 @@ export default function UsagePage() {
         <h4 className="text-md font-medium">Tu Plan Actual</h4>
         <p className="text-sm text-muted-foreground">{currentPlan}</p>
         <p className="text-sm text-muted-foreground">Créditos disponibles: {credits}</p>
+        <div className="mt-4 space-x-4">
+          <button className="px-4 py-2 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] hover:bg-accent hover:border-[#DCDAD2] hover:dark:border-[#2C2C2C] rounded-md">
+            Actualizar Plan
+          </button>
+          <button className="px-4 py-2 border border-[#DCDAD2] dark:border-[#2C2C2C] bg-[#ececec] dark:bg-[#1b1b1b] hover:bg-accent hover:border-[#DCDAD2] hover:dark:border-[#2C2C2C] rounded-md">
+            Comprar Créditos
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-col gap-5 pt-5">
