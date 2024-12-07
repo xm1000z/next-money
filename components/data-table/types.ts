@@ -32,3 +32,13 @@ export interface DataTableFilterOption<TData> {
   filterOperator?: string;
   isMulti?: boolean;
 }
+
+export interface UserSubscriptionPlan {
+  id: string;
+  name: string;
+  description: string;
+  stripePriceId: string;
+  price: number;
+  features: string[];
+  isActive: boolean;
+}

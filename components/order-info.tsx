@@ -151,6 +151,9 @@ export function OrderInfo() {
                           <div className="hidden text-sm text-muted-foreground md:inline">
                             {item.userInfo?.email}
                           </div>
+                          <div className="hidden text-sm text-muted-foreground md:inline">
+                            {item.userSubscriptionPlan?.name || 'Sin plan'}
+                          </div>
                         </TableCell>
                         <TableCell>
                           <Badge variant={OrderBadge[item.phase]}>
