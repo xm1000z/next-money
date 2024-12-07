@@ -237,7 +237,7 @@ model Subscription {
   planId               String    // starter, pro, etc
   status               String    // active, canceled, past_due
   credits              Int       @default(0)
-  stripeCustomerId     String?
+  stripeCustomerId     String?   @unique
   stripePriceId        String?
   stripeSubscriptionId String?   @unique
   currentPeriodStart   DateTime
