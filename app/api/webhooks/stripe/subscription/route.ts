@@ -131,7 +131,11 @@ export async function POST(req: Request) {
               prisma.chargeOrder.create({
                 data: {
                   userId: subscription.userId,
-                  userInfo: session.customer_details || null,
+                  userInfo: {
+                    email: session.customer_email,
+                    name: session.customer_name,
+                    customerId: session.customer,
+                  },
                   amount: session.amount_due,
                   phase: OrderPhase.Paid,
                   credit: 0,
@@ -263,7 +267,10 @@ export async function POST(req: Request) {
             prisma.chargeOrder.create({
               data: {
                 userId: subscription.userId,
-                userInfo: session.customer_details || null,
+                userInfo: {
+                  customerId: session.customer,
+                  subscriptionId: session.id,
+                },
                 amount: Math.round((session.items.data[0].price.unit_amount || 0) * (session.items.data[0].quantity || 1)),
                 credit: 0,
                 phase: OrderPhase.Paid,
