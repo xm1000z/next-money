@@ -262,7 +262,7 @@ export async function POST(req: Request) {
                 credit: 0,
                 channel: PaymentChannelType.Stripe,
                 currency: session.currency || 'eur',
-                result: { invoiceId: session.latest_invoice },
+                result: { invoiceId: session.latest_invoice?.toString() || null },
               },
             }),
           ]);
