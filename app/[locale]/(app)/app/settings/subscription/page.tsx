@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAuth } from "@/lib/auth";
+import { auth } from "@clerk/nextjs/server";
 import { useQuery } from "@tanstack/react-query";
 import { prisma } from "@/db/prisma";
 
 export default function SubscriptionPage() {
-  const { userId } = useAuth();
+  const { userId } = auth();
 
   const { data: userSubscription } = useQuery(
     ["userSubscription", userId],
