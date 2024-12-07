@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { prisma } from "@/db/prisma";
+import axios from 'axios';
 
 export default function SubscriptionPage() {
   const { userId } = useAuth();
@@ -23,6 +24,16 @@ export default function SubscriptionPage() {
       if (!userId) return null;
       return await prisma.userCredit.findFirst({
         where: { userId },
+      });
+    },
+    { enabled: !!userId }
+  );
+
+  const { data: subscription } = useQuery(
+    ['subscription', userId],
+    () => {
+      return axios.get('/api/subscription').then((res) => {
+        return res.data;
       });
     },
     { enabled: !!userId }
