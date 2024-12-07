@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
+import { handleSubscribe } from "@/lib/server-actions"; // Añadir esta importación
 
 export default function SubscriptionSettings() {
   const { userId } = useAuth();
