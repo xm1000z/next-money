@@ -339,12 +339,12 @@
       "description": "Aún no hay registros de pago."
     },
     "table": {
-      "customer": "Datos",
+      "customer": "Plan",
       "amount": "Precio",
       "status": "Estado",
       "credit": "Créditos",
       "channel": "Canal",
-      "createdAt": "Creado el",
+      "createdAt": "Fecha",
       "total": "Total",
       "records": "Órdenes"
     },
