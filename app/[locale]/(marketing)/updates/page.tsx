@@ -1,28 +1,39 @@
-"use client";
-
-import { useState } from "react";
-import { getBlogPosts } from "@/lib/blog";
-import Article from "@/components/article";
+import { Article } from "@/components/article";
 import { UpdatesToolbar } from "@/components/updates-toolbar";
+import { getBlogPosts } from "@/lib/blog";
+import type { Metadata } from "next";
 
-export default function Page() {
-  const posts = getBlogPosts(); // Llama a getBlogPosts para obtener los posts
-  const [currentIndex, setCurrentIndex] = useState(0); // Estado para el índice actual
+export const metadata: Metadata = {
+  title: "Updates",
+  description: "Keep up to date with product updates and announcments.",
+};
 
-  const sortedPosts = posts.sort((a, b) => {
-    return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
-  });
+export default async function Page() {
+  const data = getBlogPosts();
 
-  const handleNavigate = (index: number) => {
-    setCurrentIndex(index); // Actualiza el índice actual
-  };
+  const posts = data
+    .sort((a, b) => {
+      if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+        return -1;
+      }
+      return 1;
+    })
+    .map((post, index) => (
+      <Article data={post} firstPost={index === 0} key={post.slug} />
+    ));
 
   return (
-    <div className="container max-w-[1140px] mx-auto py-10">
-      <UpdatesToolbar posts={sortedPosts} currentIndex={currentIndex} onNavigate={handleNavigate} />
-      <div className="space-y-6">
-        <Article key={sortedPosts[currentIndex].slug} post={sortedPosts[currentIndex]} firstPost={currentIndex === 0} />
+    <div className="container flex justify-center scroll-smooth">
+      <div className="max-w-[680px] pt-[80px] md:pt-[150px] w-full">
+        {posts}
       </div>
+
+      <UpdatesToolbar
+        posts={data.map((post) => ({
+          slug: post.slug,
+          title: post.metadata.title,
+        }))}
+      />
     </div>
   );
 }

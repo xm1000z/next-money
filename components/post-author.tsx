@@ -4,9 +4,9 @@ import { PostCopyURL } from "./post-copy-url";
 const getAuthor = (id: string) =>
   ({
     pontus: {
-      name: "Pontus",
-      src: "https://pbs.twimg.com/profile_images/1755611130368770048/JwLEqyeo_400x400.jpg",
-      tagline: "Engineering",
+      name: "CEO",
+      src: "https://avatars.githubusercontent.com/u/74680137?v=4&size=64",
+      tagline: "founder-mode",
     },
   })[id];
 

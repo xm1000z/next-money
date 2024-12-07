@@ -18,14 +18,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { usePathname } from "next/navigation";
+import { useHotkeys } from "react-hotkeys-hook";
 import { Twitter } from "lucide-react";
 import { CopyInput } from "./copy-input";
 
-interface UpdatesToolbarProps {
-  posts: any[]; // Define el tipo de los posts según tu estructura
-  currentIndex: number; // Índice del post actual
-  onNavigate: (index: number) => void; // Función para manejar la navegación
-}
 
 const popupCenter = ({ url, title, w, h }) => {
   const dualScreenLeft =
@@ -62,25 +58,42 @@ const popupCenter = ({ url, title, w, h }) => {
   return newWindow;
 };
 
-export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIndex, onNavigate }) => {
+export function UpdatesToolbar({ posts }) {
   const pathname = usePathname();
+  const currentIndex = posts.findIndex((a) => pathname.endsWith(a.slug)) ?? 0;
+
+  const currentPost = posts[currentIndex];
 
   const handlePrev = () => {
     if (currentIndex > 0) {
-      onNavigate(currentIndex - 1);
+      const nextPost = posts[currentIndex - 1];
+
+      const element = document.getElementById(nextPost?.slug);
+      element?.scrollIntoView({
+        behavior: "smooth",
+      });
     }
   };
 
   const handleNext = () => {
     if (currentIndex !== posts.length - 1) {
-      onNavigate(currentIndex + 1);
+      const nextPost = posts[currentIndex + 1];
+
+      const element = document.getElementById(nextPost?.slug);
+
+      element?.scrollIntoView({
+        behavior: "smooth",
+      });
     }
   };
 
+  useHotkeys("arrowRight", () => handleNext(), [handleNext]);
+  useHotkeys("arrowLeft", () => handlePrev(), [handlePrev]);
+
   const handleOnShare = () => {
     const popup = popupCenter({
-      url: `https://twitter.com/intent/tweet?text=${posts[currentIndex].title} https://app.notas.ai/updates/${posts[currentIndex].slug}`,
-      title: posts[currentIndex].title,
+      url: `https://twitter.com/intent/tweet?text=${currentPost.title} https://notas.ai/updates/${currentPost.slug}`,
+      title: currentPost.title,
       w: 800,
       h: 400,
     });
@@ -104,7 +117,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
                 sideOffset={25}
                 side="right"
               >
-                <span className="text-xs">Compartir</span>
+                <span className="text-xs">Share</span>
               </TooltipContent>
             </Tooltip>
 
@@ -124,7 +137,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
                   sideOffset={25}
                   side="right"
                 >
-                  <span className="text-xs">Previo</span>
+                  <span className="text-xs">Previous post</span>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -144,7 +157,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
                   sideOffset={25}
                   side="right"
                 >
-                  <span className="text-xs">Siguiente</span>
+                  <span className="text-xs">Next post</span>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -159,7 +172,7 @@ export const UpdatesToolbar: React.FC<UpdatesToolbarProps> = ({ posts, currentIn
           </DialogHeader>
 
           <div className="grid gap-6 py-4">
-            <CopyInput value={`https://app.notas.ai${pathname}`} />
+            <CopyInput value={`https://notas.ai${pathname}`} />
             <Button
               className="w-full flex items-center space-x-2 h-10"
               onClick={handleOnShare}
