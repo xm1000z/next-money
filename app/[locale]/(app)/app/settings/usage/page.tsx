@@ -12,7 +12,7 @@ import { RadialShapeChart } from "@/components/charts/radial-shape-chart";
 import { RadialStackedChart } from "@/components/charts/radial-stacked-chart";
 import { RadialTextChart } from "@/components/charts/radial-text-chart";
 
-function UsageClient({ userId }: { userId: string }) {
+export function UsageClient({ userId }: { userId: string }) {
   const { data: userSubscription } = useQuery({
     queryKey: ["userSubscription", userId],
     queryFn: async () => {
@@ -76,5 +76,3 @@ function UsageClient({ userId }: { userId: string }) {
     </div>
   );
 }
-
-export default UsageClient;
