@@ -4,8 +4,8 @@ import { getBlogPosts } from "@/lib/blog";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Updates",
-  description: "Keep up to date with product updates and announcments.",
+  title: "Novedades",
+  description: "Manténgase al día con las actualizaciones y anuncios del producto.",
 };
 
 export default async function Page() {
@@ -24,7 +24,7 @@ export default async function Page() {
 
   return (
     <div className="container flex justify-center scroll-smooth">
-      <div className="max-w-[680px] pt-[80px] md:pt-[150px] w-full">
+      <div className="max-w-[500px] pt-[80px] md:pt-[150px] w-full">
         {posts}
       </div>
 
