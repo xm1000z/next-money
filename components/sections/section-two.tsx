@@ -1,5 +1,5 @@
 import Image from "next/image";
-import computer from "@/public/ab.jpeg";
+import computer from "@/public/branding.jpg";
 
 export function SectionTwo() {
   return (
