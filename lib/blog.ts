@@ -1,4 +1,4 @@
-import fs from 'fs-extra'; // Necesitarás instalar: npm i fs-extra @types/fs-extra
+import fs from 'fs-extra';
 import path from 'path';
 
 type Metadata = {
