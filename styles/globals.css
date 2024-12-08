@@ -221,7 +221,9 @@
 .mb25 {
   margin-bottom: 7rem;
 }
-
+.mb2 {
+  margin-bottom: 2rem;
+}
 .updates p {
   font-size: 13px;
   min-height: 1.87em;

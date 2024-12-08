@@ -20,7 +20,7 @@ export function PostAuthor({ author }: Props) {
   if (!authorData) return null;
 
   return (
-    <div className="flex items-center pt-4 border-t-[1px] border-border w-full">
+    <div className="flex items-center pt-4 border-t-[1px] border-border w-full mb2">
       <div className="flex items-center space-x-2">
         <Image
           src={authorData.src}
@@ -33,7 +33,7 @@ export function PostAuthor({ author }: Props) {
         <span className="font-medium text-xs">{authorData.name}</span>
         <span className="text-xs text-[#878787]">{authorData.tagline}</span>
       </div>
-      <div className="ml-auto">
+      <div className="w-5 ml-auto">
         <PostCopyURL slug={author} />
       </div>
     </div>
