@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs-extra'; // Necesitarás instalar: npm i fs-extra @types/fs-extra
 import path from 'path';
 
 type Metadata = {
@@ -42,50 +42,41 @@ function readMDXFile(filePath: string) {
 }
 
 export function getBlogPosts() {
-  // Usar path.join para asegurar rutas consistentes
   const postsDirectory = path.join(process.cwd(), 'app', '[locale]', '(marketing)', 'updates', 'posts');
   
   try {
-    // Verificar si estamos en producción
+    // En producción, verificar y copiar si es necesario
     if (process.env.NODE_ENV === 'production') {
-      // En producción, usar una ruta alternativa
       const prodPostsDirectory = path.join(process.cwd(), '.next', 'server', 'app', '[locale]', '(marketing)', 'updates', 'posts');
       
-      if (!fs.existsSync(prodPostsDirectory)) {
-        console.warn('Production posts directory not found:', prodPostsDirectory);
-        // Intentar con la ruta de desarrollo como fallback
-        if (!fs.existsSync(postsDirectory)) {
-          console.warn('Development posts directory not found:', postsDirectory);
-          return [];
-        }
+      // Si no existe el directorio en prod, copiarlo
+      if (!fs.existsSync(prodPostsDirectory) && fs.existsSync(postsDirectory)) {
+        console.log('Copiando posts a directorio de producción...');
+        fs.copySync(postsDirectory, prodPostsDirectory);
       }
-      
+
+      // Usar el directorio que exista
       const directory = fs.existsSync(prodPostsDirectory) ? prodPostsDirectory : postsDirectory;
-      console.log('Using posts directory:', directory);
-      
+      console.log('📂 Usando directorio:', directory);
+
       const mdxFiles = getMDXFiles(directory);
+      console.log('📑 Archivos MDX encontrados:', mdxFiles);
+      
       return mdxFiles.map((file) => {
         const { metadata, content } = readMDXFile(path.join(directory, file));
-        const slug = path.basename(file, path.extname(file));
-        return { metadata, slug, content };
+        console.log(`✅ Post procesado: ${file}`, metadata);
+        return { metadata, slug: path.basename(file, '.mdx'), content };
       });
     }
 
-    // En desarrollo, usar la ruta normal
-    if (!fs.existsSync(postsDirectory)) {
-      console.warn('Posts directory not found:', postsDirectory);
-      return [];
-    }
-
-    const mdxFiles = getMDXFiles(postsDirectory);
-    return mdxFiles.map((file) => {
+    // En desarrollo usar la ruta normal
+    return getMDXFiles(postsDirectory).map((file) => {
       const { metadata, content } = readMDXFile(path.join(postsDirectory, file));
-      const slug = path.basename(file, path.extname(file));
-      return { metadata, slug, content };
+      return { metadata, slug: path.basename(file, '.mdx'), content };
     });
 
   } catch (error) {
-    console.error('Error reading blog posts:', error);
+    console.error('❌ Error leyendo posts:', error);
     return [];
   }
 }

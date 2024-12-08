@@ -39,6 +39,9 @@ const nextConfig = {
 
   experimental: {
     taint: true,
+    outputFileTracingIncludes: {
+      '/**/*.mdx': ['./app/**/posts/**/*.mdx'],
+    },
   },
 
   redirects() {
@@ -73,6 +76,15 @@ const nextConfig = {
     ];
   },
   webpack: (config, { webpack }) => {
+    config.module.rules.push({
+      test: /\.mdx?$/,
+      use: [
+        {
+          loader: '@mdx-js/loader',
+        }
+      ],
+    });
+
     // config.plugins.push(
     //   new webpack.IgnorePlugin({
     //     resourceRegExp: /^pg-native$|^cloudflare:sockets$|^onnxruntime-node$/,
