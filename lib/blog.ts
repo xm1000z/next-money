@@ -30,7 +30,10 @@ function parseFrontmatter(fileContent: string) {
 }
 
 function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx');
+  console.log('Reading directory:', dir);
+  const files = fs.readdirSync(dir);
+  console.log('Found files:', files);
+  return files.filter((file) => path.extname(file) === '.mdx');
 }
 
 function readMDXFile(filePath: string) {
@@ -39,25 +42,48 @@ function readMDXFile(filePath: string) {
 }
 
 export function getBlogPosts() {
+  // Usar path.join para asegurar rutas consistentes
   const postsDirectory = path.join(process.cwd(), 'app', '[locale]', '(marketing)', 'updates', 'posts');
   
-  // Verificar si el directorio existe
-  if (!fs.existsSync(postsDirectory)) {
-    console.warn('Posts directory does not exist:', postsDirectory);
-    return []; // Retornar array vacío si no existe
-  }
-
   try {
+    // Verificar si estamos en producción
+    if (process.env.NODE_ENV === 'production') {
+      // En producción, usar una ruta alternativa
+      const prodPostsDirectory = path.join(process.cwd(), '.next', 'server', 'app', '[locale]', '(marketing)', 'updates', 'posts');
+      
+      if (!fs.existsSync(prodPostsDirectory)) {
+        console.warn('Production posts directory not found:', prodPostsDirectory);
+        // Intentar con la ruta de desarrollo como fallback
+        if (!fs.existsSync(postsDirectory)) {
+          console.warn('Development posts directory not found:', postsDirectory);
+          return [];
+        }
+      }
+      
+      const directory = fs.existsSync(prodPostsDirectory) ? prodPostsDirectory : postsDirectory;
+      console.log('Using posts directory:', directory);
+      
+      const mdxFiles = getMDXFiles(directory);
+      return mdxFiles.map((file) => {
+        const { metadata, content } = readMDXFile(path.join(directory, file));
+        const slug = path.basename(file, path.extname(file));
+        return { metadata, slug, content };
+      });
+    }
+
+    // En desarrollo, usar la ruta normal
+    if (!fs.existsSync(postsDirectory)) {
+      console.warn('Posts directory not found:', postsDirectory);
+      return [];
+    }
+
     const mdxFiles = getMDXFiles(postsDirectory);
     return mdxFiles.map((file) => {
       const { metadata, content } = readMDXFile(path.join(postsDirectory, file));
       const slug = path.basename(file, path.extname(file));
-      return {
-        metadata,
-        slug,
-        content,
-      };
+      return { metadata, slug, content };
     });
+
   } catch (error) {
     console.error('Error reading blog posts:', error);
     return [];
