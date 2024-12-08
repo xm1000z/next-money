@@ -45,17 +45,16 @@ export function getBlogPosts() {
   const postsDirectory = path.join(process.cwd(), 'app', '[locale]', '(marketing)', 'updates', 'posts');
   
   try {
-    // En producción, verificar y copiar si es necesario
     if (process.env.NODE_ENV === 'production') {
       const prodPostsDirectory = path.join(process.cwd(), '.next', 'server', 'app', '[locale]', '(marketing)', 'updates', 'posts');
       
-      // Si no existe el directorio en prod, copiarlo
+      // fs-extra tiene mejor manejo de operaciones asíncronas y errores
       if (!fs.existsSync(prodPostsDirectory) && fs.existsSync(postsDirectory)) {
         console.log('Copiando posts a directorio de producción...');
-        fs.copySync(postsDirectory, prodPostsDirectory);
+        fs.ensureDirSync(prodPostsDirectory); // Asegura que el directorio existe
+        fs.copySync(postsDirectory, prodPostsDirectory); // Copia recursiva
       }
 
-      // Usar el directorio que exista
       const directory = fs.existsSync(prodPostsDirectory) ? prodPostsDirectory : postsDirectory;
       console.log('📂 Usando directorio:', directory);
 
@@ -70,6 +69,11 @@ export function getBlogPosts() {
     }
 
     // En desarrollo usar la ruta normal
+    if (!fs.existsSync(postsDirectory)) {
+      console.warn('Directorio de posts no encontrado:', postsDirectory);
+      return [];
+    }
+
     return getMDXFiles(postsDirectory).map((file) => {
       const { metadata, content } = readMDXFile(path.join(postsDirectory, file));
       return { metadata, slug: path.basename(file, '.mdx'), content };
