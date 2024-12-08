@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'fs';
+import path from 'path';
 
 type Metadata = {
   title: string;
@@ -29,10 +29,8 @@ function parseFrontmatter(fileContent: string) {
   return { metadata: metadata as Metadata, content };
 }
 
-const postsDirectory = path.join(process.cwd(), 'app/[locale]/(marketing)/updates/posts');
-
 function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+  return fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx');
 }
 
 function readMDXFile(filePath: string) {
@@ -40,20 +38,28 @@ function readMDXFile(filePath: string) {
   return parseFrontmatter(rawContent);
 }
 
-function getMDXData(dir: string) {
-  const mdxFiles = getMDXFiles(dir);
-  return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
-
-    return {
-      metadata,
-      slug,
-      content,
-    };
-  });
-}
-
 export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "app", "[locale]", "(marketing)", "updates", "posts"));
+  const postsDirectory = path.join(process.cwd(), 'app', '[locale]', '(marketing)', 'updates', 'posts');
+  
+  // Verificar si el directorio existe
+  if (!fs.existsSync(postsDirectory)) {
+    console.warn('Posts directory does not exist:', postsDirectory);
+    return []; // Retornar array vacío si no existe
+  }
+
+  try {
+    const mdxFiles = getMDXFiles(postsDirectory);
+    return mdxFiles.map((file) => {
+      const { metadata, content } = readMDXFile(path.join(postsDirectory, file));
+      const slug = path.basename(file, path.extname(file));
+      return {
+        metadata,
+        slug,
+        content,
+      };
+    });
+  } catch (error) {
+    console.error('Error reading blog posts:', error);
+    return [];
+  }
 }
