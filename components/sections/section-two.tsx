@@ -19,7 +19,7 @@ export function SectionTwo() {
             Inteligencia Artificial
           </h3>
 
-          <p className="text-gray-600 dark:text-[#878787] mb-3 text-xs">
+          <p className="text-[#878787] dark:text-[#878787] mb-3 text-xs">
             Una nueva revolución que depara cambios sociales y económicos. 
             La lengua española no debe quedarse atrás y para eso Notas AI trabaja 
             en el desarrollo constante de nuestro idioma en el sector. 

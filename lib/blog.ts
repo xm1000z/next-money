@@ -1,5 +1,5 @@
-import fs from 'fs-extra';
-import path from 'path';
+import fs from "node:fs";
+import path from "node:path";
 
 type Metadata = {
   title: string;
@@ -29,11 +29,10 @@ function parseFrontmatter(fileContent: string) {
   return { metadata: metadata as Metadata, content };
 }
 
+const postsDirectory = path.join(process.cwd(), 'app/posts');
+
 function getMDXFiles(dir: string) {
-  console.log('Reading directory:', dir);
-  const files = fs.readdirSync(dir);
-  console.log('Found files:', files);
-  return files.filter((file) => path.extname(file) === '.mdx');
+  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
 }
 
 function readMDXFile(filePath: string) {
@@ -41,46 +40,20 @@ function readMDXFile(filePath: string) {
   return parseFrontmatter(rawContent);
 }
 
+function getMDXData(dir: string) {
+  const mdxFiles = getMDXFiles(dir);
+  return mdxFiles.map((file) => {
+    const { metadata, content } = readMDXFile(path.join(dir, file));
+    const slug = path.basename(file, path.extname(file));
+
+    return {
+      metadata,
+      slug,
+      content,
+    };
+  });
+}
+
 export function getBlogPosts() {
-  const postsDirectory = path.join(process.cwd(), 'app', '[locale]', '(marketing)', 'updates', 'posts');
-  
-  try {
-    if (process.env.NODE_ENV === 'production') {
-      const prodPostsDirectory = path.join(process.cwd(), '.next', 'server', 'app', '[locale]', '(marketing)', 'updates', 'posts');
-      
-      // fs-extra tiene mejor manejo de operaciones asíncronas y errores
-      if (!fs.existsSync(prodPostsDirectory) && fs.existsSync(postsDirectory)) {
-        console.log('Copiando posts a directorio de producción...');
-        fs.ensureDirSync(prodPostsDirectory); // Asegura que el directorio existe
-        fs.copySync(postsDirectory, prodPostsDirectory); // Copia recursiva
-      }
-
-      const directory = fs.existsSync(prodPostsDirectory) ? prodPostsDirectory : postsDirectory;
-      console.log('📂 Usando directorio:', directory);
-
-      const mdxFiles = getMDXFiles(directory);
-      console.log('📑 Archivos MDX encontrados:', mdxFiles);
-      
-      return mdxFiles.map((file) => {
-        const { metadata, content } = readMDXFile(path.join(directory, file));
-        console.log(`✅ Post procesado: ${file}`, metadata);
-        return { metadata, slug: path.basename(file, '.mdx'), content };
-      });
-    }
-
-    // En desarrollo usar la ruta normal
-    if (!fs.existsSync(postsDirectory)) {
-      console.warn('Directorio de posts no encontrado:', postsDirectory);
-      return [];
-    }
-
-    return getMDXFiles(postsDirectory).map((file) => {
-      const { metadata, content } = readMDXFile(path.join(postsDirectory, file));
-      return { metadata, slug: path.basename(file, '.mdx'), content };
-    });
-
-  } catch (error) {
-    console.error('❌ Error leyendo posts:', error);
-    return [];
-  }
+  return getMDXData(path.join(process.cwd(), "app", "posts"));
 }
