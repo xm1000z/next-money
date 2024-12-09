@@ -92,7 +92,7 @@ export function UpdatesToolbar({ posts }) {
 
   const handleOnShare = () => {
     const popup = popupCenter({
-      url: `https://twitter.com/intent/tweet?text=${currentPost.title} https://notas.ai/updates/${currentPost.slug}`,
+      url: `https://twitter.com/intent/tweet?text=${currentPost.title} https://app.notas.ai/updates/${currentPost.slug}`,
       title: currentPost.title,
       w: 800,
       h: 400,
@@ -117,7 +117,7 @@ export function UpdatesToolbar({ posts }) {
                 sideOffset={25}
                 side="right"
               >
-                <span className="text-xs">Share</span>
+                <span className="text-xs">Compartir</span>
               </TooltipContent>
             </Tooltip>
 
@@ -137,7 +137,7 @@ export function UpdatesToolbar({ posts }) {
                   sideOffset={25}
                   side="right"
                 >
-                  <span className="text-xs">Previous post</span>
+                  <span className="text-xs">Anterior</span>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -157,7 +157,7 @@ export function UpdatesToolbar({ posts }) {
                   sideOffset={25}
                   side="right"
                 >
-                  <span className="text-xs">Next post</span>
+                  <span className="text-xs">Siguiente</span>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -168,16 +168,16 @@ export function UpdatesToolbar({ posts }) {
       <DialogContent className="sm:max-w-[425px]">
         <div className="p-6">
           <DialogHeader>
-            <DialogTitle>Share</DialogTitle>
+            <DialogTitle>Compartir</DialogTitle>
           </DialogHeader>
 
           <div className="grid gap-6 py-4">
-            <CopyInput value={`https://notas.ai${pathname}`} />
+            <CopyInput value={`https://app.notas.ai${pathname}`} />
             <Button
               className="w-full flex items-center space-x-2 h-10"
               onClick={handleOnShare}
             >
-              <span>Share on</span>
+              <span>Compartir en</span>
               <Twitter />
             </Button>
           </div>

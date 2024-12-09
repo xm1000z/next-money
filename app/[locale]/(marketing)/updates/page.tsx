@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Novedades",
-  description: "Manténgase al día con las actualizaciones y anuncios del producto.",
+  description: "Actualizaciones y anuncios de productos.",
 };
 
 export default async function Page() {
