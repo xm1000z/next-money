@@ -34,7 +34,7 @@ export function PostCopyURL({ slug }: Props) {
         initial={{ opacity: 1, scale: 1 }}
         animate={{ opacity: isCopied ? 0 : 1, scale: isCopied ? 0 : 1 }}
       >
-        <Icons.copy />
+        <Icons.copy className="w-4 h-4" />
       </motion.div>
 
       <motion.div
@@ -42,10 +42,10 @@ export function PostCopyURL({ slug }: Props) {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}
       >
-        <Icons.check />
+        <Icons.check className="w-4 h-4" />
       </motion.div>
 
-      <span className="px-2 text-xs">Copy link</span>
+      <span className="px-2 text-xs text-[#878787]">Copy link</span>
     </button>
   );
 }
