@@ -45,7 +45,7 @@ export function PostCopyURL({ slug }: Props) {
         <Icons.check />
       </motion.div>
 
-      <span className="text-xs">Copy link</span>
+      <span className="px-2 text-xs">Copy link</span>
     </button>
   );
 }

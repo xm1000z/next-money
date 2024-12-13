@@ -4,9 +4,9 @@ import { PostCopyURL } from "./post-copy-url";
 const getAuthor = (id: string) =>
   ({
     pontus: {
-      name: "CEO",
+      name: "Marc Furriols",
       src: "https://avatars.githubusercontent.com/u/74680137?v=4&size=64",
-      tagline: "founder-mode",
+      tagline: "CEO",
     },
   })[id];
 
@@ -33,7 +33,7 @@ export function PostAuthor({ author }: Props) {
         <span className="font-medium text-xs">{authorData.name}</span>
         <span className="text-xs text-[#878787]">{authorData.tagline}</span>
       </div>
-      <div className="w-5 ml-auto">
+      <div className="ml-auto">
         <PostCopyURL slug={author} />
       </div>
     </div>
