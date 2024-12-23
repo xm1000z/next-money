@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { get } from "@vercel/edge-config";
 import createMiddleware from "next-intl/middleware";
-import { Request, Response, NextFunction } from 'express';
-import { isPaid } from './lib/subscription';
 
 import { kvKeys } from "@/config/kv";
 import { env } from "@/env.mjs";
@@ -32,16 +30,6 @@ const nextIntlMiddleware = createMiddleware({
   locales,
   localePrefix,
 });
-
-export async function checkPaidSubscription(req: Request, res: Response, next: NextFunction) {
-  const userId = req.user.id; // Asumiendo que el ID del usuario está disponible en req.user
-
-  if (await isPaid(userId)) {
-    next();
-  } else {
-    res.status(403).send('Access denied. Please subscribe to access this page.');
-  }
-}
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId, redirectToSignIn } = auth();
